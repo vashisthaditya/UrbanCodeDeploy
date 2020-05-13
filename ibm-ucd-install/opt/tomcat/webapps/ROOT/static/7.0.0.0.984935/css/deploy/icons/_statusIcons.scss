@@ -1,0 +1,166 @@
+@import '../carbon/globals/import-once';
+
+@mixin statusIcons {
+    .statusIcon {
+        background-image: url('../../images/icons/statuses_spritesheet.png');
+        background-repeat: no-repeat;
+        display: block;
+    }
+    
+    .statusIcon-Glyph_checkmark__support-02 {
+        @extend .statusIcon;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -5px;
+    }
+    
+    .statusIcon-Glyph_error__support-01 {
+        @extend .statusIcon;
+        width: 16px;
+        height: 16px;
+        background-position: -31px -5px;
+    }
+    
+    .statusIcon-Glyph_info__support-04 {
+        @extend .statusIcon;
+        width: 16px;
+        height: 16px;
+        background-position: -57px -5px;
+    }
+    
+    .statusIcon-Glyph_warning__support-03 {
+        @extend .statusIcon;
+        width: 16px;
+        height: 14px;
+        background-position: -5px -31px;
+    }
+    
+    .statusIcon-Icon_checkmark--outline__support-02 {
+        @extend .statusIcon;
+        width: 24px;
+        height: 24px;
+        background-position: -31px -31px;
+    }
+    
+    .statusIcon-Icon_error__support-01 {
+        @extend .statusIcon;
+        width: 24px;
+        height: 24px;
+        background-position: -65px -31px;
+    }
+    
+    .statusIcon-Icon_info__support-04 {
+        @extend .statusIcon;
+        width: 24px;
+        height: 24px;
+        background-position: -5px -65px;
+    }
+    
+    .statusIcon-Icon_locked__support-02 {
+        @extend .statusIcon;
+        width: 18px;
+        height: 24px;
+        background-position: -39px -65px;
+    }
+    
+    .statusIcon-Icon_unlocked__support-01 {
+        @extend .statusIcon;
+        width: 18px;
+        height: 24px;
+        background-position: -67px -65px;
+    }
+    
+    .statusIcon-Icon_warning__support-03 {
+        @extend .statusIcon;
+        width: 24px;
+        height: 21px;
+        background-position: -99px -5px;
+    }
+    
+    @media (min-resolution: 144dppx),
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (min--moz-device-pixel-ratio: 1.5),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min-device-pixel-ratio: 1.5),
+    (min-resolution: 1.5dppx) {
+        .statusIcon-retina {
+            background-image: url('../../images/icons/statuses_2x_spritesheet.png');
+            background-repeat: no-repeat;
+            display: block;
+            background-size: 108px 79px;
+        }
+        .statusIcon-Glyph_checkmark__support-02 {
+            @extend .statusIcon-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -5px * 0.5;
+        }
+    
+        .statusIcon-Glyph_error__support-01 {
+            @extend .statusIcon-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -47px * 0.5 -5px * 0.5;
+        }
+    
+        .statusIcon-Glyph_info__support-04 {
+            @extend .statusIcon-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -89px * 0.5 -5px * 0.5;
+        }
+    
+        .statusIcon-Glyph_warning__support-03 {
+            @extend .statusIcon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -5px * 0.5 -47px * 0.5;
+        }
+    
+        .statusIcon-Icon_checkmark--outline__support-02 {
+            @extend .statusIcon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -47px * 0.5 -47px * 0.5;
+        }
+    
+        .statusIcon-Icon_error__support-01 {
+            @extend .statusIcon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -105px * 0.5 -47px * 0.5;
+        }
+    
+        .statusIcon-Icon_info__support-04 {
+            @extend .statusIcon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -105px * 0.5;
+        }
+    
+        .statusIcon-Icon_locked__support-02 {
+            @extend .statusIcon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -63px * 0.5 -105px * 0.5;
+        }
+    
+        .statusIcon-Icon_unlocked__ui-05 {
+            @extend .statusIcon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -109px * 0.5 -105px * 0.5;
+        }
+    
+        .statusIcon-Icon_warning__support-03 {
+            @extend .statusIcon-retina;
+            width: 48px * 0.5;
+            height: 42px * 0.5;
+            background-position: -163px * 0.5 -5px * 0.5;
+        }
+    }
+}
+
+@include exports('statusIcons') {
+    @include statusIcons;
+}

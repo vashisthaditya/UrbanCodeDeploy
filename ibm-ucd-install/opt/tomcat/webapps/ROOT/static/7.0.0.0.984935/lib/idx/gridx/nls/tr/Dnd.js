@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/tr/Dnd",{moveRow:"${0} Sat\u0131r Ta\u015f\u0131",moveColumn:"${0} S\u00fctun Ta\u015f\u0131",copyRow:"${0} Sat\u0131r Kopyala",copyColumn:"${0} S\u00fctun Kopyala",moveOneRow:"1 Sat\u0131r Ta\u015f\u0131",moveOneColumn:"1 S\u00fctun Ta\u015f\u0131",copyOneRow:"1 Sat\u0131r Kopyala",copyOneColumn:"1 S\u00fctun Kopyala"});

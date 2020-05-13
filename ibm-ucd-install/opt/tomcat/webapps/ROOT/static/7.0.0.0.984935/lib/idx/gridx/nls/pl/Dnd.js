@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/pl/Dnd",{moveRow:"Przenie\u015b ${0} wiersze/-y",moveColumn:"Przenie\u015b ${0} kolumn(y)",copyRow:"Skopiuj ${0} wiersze/-y",copyColumn:"Skopiuj ${0} kolumn(y)",moveOneRow:"Przenie\u015b 1 wiersz",moveOneColumn:"Przenie\u015b 1 kolumn\u0119",copyOneRow:"Skopiuj 1 wiersz",copyOneColumn:"Skopiuj 1 kolumn\u0119"});

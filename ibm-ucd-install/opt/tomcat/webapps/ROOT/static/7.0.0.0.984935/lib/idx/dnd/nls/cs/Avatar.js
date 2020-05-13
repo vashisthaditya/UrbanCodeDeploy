@@ -1,0 +1,2 @@
+//>>built
+define("idx/dnd/nls/cs/Avatar",{copyText:"Kop\u00edrovat polo\u017eky (po\u010det: ${num})",moveText:"P\u0159esunout polo\u017eky (po\u010det: ${num})",copyOneText:"Kop\u00edrovat 1 polo\u017eku",moveOneText:"P\u0159esunout 1 polo\u017eku"});

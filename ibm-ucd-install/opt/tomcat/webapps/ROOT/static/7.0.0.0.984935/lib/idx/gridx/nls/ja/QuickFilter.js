@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/ja/QuickFilter",{filter:"\u30d5\u30a3\u30eb\u30bf\u30fc",clear:"\u30d5\u30a3\u30eb\u30bf\u30fc\u306e\u30af\u30ea\u30a2",apply:"\u30d5\u30a3\u30eb\u30bf\u30fc\u306e\u9069\u7528"});

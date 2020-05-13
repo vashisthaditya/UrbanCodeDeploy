@@ -1,0 +1,118 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin dijitTextBox-small {
+    height: 32px;
+
+    .dijitInputContainer {
+        margin-left: 10px;
+        margin-right: 10px;
+
+        .dijitInputInner {
+            line-height: 32px;
+            height: 32px;
+        }
+
+        .dijitPlaceHolder {
+            line-height: 32px;
+            height: 32px;
+        }
+    }
+
+    .dijitArrowButtonContainer {
+        margin: 9px 10px 9px 0px;
+    }
+
+    .clear-container {
+        padding: 2px 1px 3px 3px;
+    }
+}
+
+@mixin dijitTextArea-small {
+    height: inherit;
+}
+
+@mixin textinput {
+    .dijitTextBox {
+        background: rgba(61, 112, 178, .1);
+        border: none;
+        position: relative;
+        height: 40px;
+    
+        .dijitInputContainer {
+            @include font-family;
+            font-size: 14px;
+            color: #152935;
+            line-height: 18px;
+            margin-left: 16px;
+            margin-right: 16px;
+            height: inherit;
+    
+            &.dijitDisabled {
+                cursor: not-allowed;
+            }
+    
+            .dijitInputInner {
+                @include font-family;
+                line-height: 40px;
+                height: 40px;
+
+                @include placeholder() {
+                    color: $text-02;
+                }
+            }
+    
+            .dijitPlaceHolder {
+                @include font-family;
+                color: $text-02;
+                line-height: 40px;
+                height: 40px;
+            }
+        }
+
+        .dijitArrowButtonContainer {
+            margin: 15px 10px 15px 0px;
+        }
+    }
+
+    .dijitValidationTextBox {
+        position: relative;
+
+        .dijitValidationContainer {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: $support-01;
+            bottom: -1px;
+
+            input {
+                display: none;
+            }
+        }
+    }
+    
+    .dijitTextArea {
+            font-family: $font-family-mono;
+            font-size: 14px;
+            color: #152935;
+            line-height: 18px;
+            padding: 16px;
+            height: inherit;
+    }
+    
+    .dijitTextBoxReadOnly, .dijitTextBoxDisabled {
+        color: gray;
+        opacity: 0.5;
+    }
+
+    .dj_safari .dijitTextBoxReadOnly, .dijitTextBoxDisabled input {
+        color: #222222 !important;
+    }
+
+    textarea {
+      font-family: $font-family-mono;
+    }
+}
+
+@include exports('textinput') {
+    @include textinput;
+}

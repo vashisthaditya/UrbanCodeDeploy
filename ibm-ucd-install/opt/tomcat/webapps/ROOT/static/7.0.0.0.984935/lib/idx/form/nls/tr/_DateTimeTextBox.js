@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/tr/_DateTimeTextBox",{idxTimeIconTitle:"Saat se\u00e7iciyi a\u00e7mak i\u00e7in t\u0131klat\u0131n",idxDateIconTitle:"Tarih se\u00e7iciyi a\u00e7mak i\u00e7in t\u0131klat\u0131n"});

@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/sk/Dnd",{moveRow:"Presun\u00fa\u0165 ${0} riadkov",moveColumn:"Presun\u00fa\u0165 ${0} st\u013apcov",copyRow:"Kop\u00edrova\u0165 ${0} riadkov",copyColumn:"Kop\u00edrova\u0165 ${0} st\u013apcov",moveOneRow:"Presun\u00fa\u0165 1 riadok",moveOneColumn:"Presun\u00fa\u0165 1 st\u013apec",copyOneRow:"Kop\u00edrova\u0165 1 riadok",copyOneColumn:"Kop\u00edrova\u0165 1 st\u013apec"});

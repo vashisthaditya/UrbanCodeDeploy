@@ -1,0 +1,48 @@
+@import '../../carbon/globals/import-once';
+
+@mixin tooltip {
+    .dijitTooltip {
+    
+        position: absolute;
+        z-index:2000;
+        display:block;
+        overflow:visible;
+        left: 0;
+        top: -10000px;
+    
+        .dijitTooltipDialog {
+            background: transparent;
+        }
+    }
+    
+    .dijitTooltipRight {
+        padding: 5px 5px 5px 9px;
+    }
+    .dijitTooltipLeft {
+        padding: 5px 9px 5px 5px;
+    }
+    .dijitTooltipTop {
+        padding: 9px 5px 5px 5px;
+    }
+    .dijitTooltipBottom {
+        padding: 5px 5px 9px 5px;
+    }
+    
+    .dijitTooltipContainer {
+        @include layer(overlay);
+        font-size: 14px;
+        line-height: 21px;
+        max-width: 400px;
+        background-color: $ui-01;
+        border: 1px solid $ui-04;
+        padding: 24px;
+    }
+    
+    .dijitTooltipConnector {
+        display: none;
+    }
+}
+
+@include exports('tooltip') {
+    @include tooltip;
+}

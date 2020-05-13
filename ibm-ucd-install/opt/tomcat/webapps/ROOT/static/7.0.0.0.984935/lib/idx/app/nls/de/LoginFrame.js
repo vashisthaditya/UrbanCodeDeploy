@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/de/LoginFrame",{loginTitle:"Anmeldung",labelUserName:"Benutzername",labelPassword:"Kennwort",invalidMessageTitle:"Ung\u00fcltiger Anmeldeversuch",invalidMessage:"Es wurde nicht in beiden erforderlichen Feldern ein g\u00fcltiger Wert eingegeben."});

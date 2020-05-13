@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/tr/SingleMessage",{viewAll:"T\u00fcm\u00fcn\u00fc G\u00f6r\u00fcnt\u00fcle ({num})",viewDetails:"Di\u011fer Ayr\u0131nt\u0131lar",refresh:"Yenile",showDetails:"Ayr\u0131nt\u0131lar\u0131 G\u00f6ster",hideDetails:"Ayr\u0131nt\u0131lar\u0131 Gizle"});

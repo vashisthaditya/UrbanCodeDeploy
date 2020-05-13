@@ -1,0 +1,2 @@
+//>>built
+define("idx/nls/ko/dialogs",{information:"\uc815\ubcf4",warning:"\uacbd\uace0",error:"\uc624\ub958",confirmation:"\ud655\uc778",progress:"\uc9c4\ud589 \uc0c1\ud0dc",loading:"\ub85c\ub529",close:"\ub2eb\uae30"});

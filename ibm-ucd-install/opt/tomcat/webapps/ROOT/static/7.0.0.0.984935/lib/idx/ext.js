@@ -1,0 +1,2 @@
+//>>built
+define("idx/ext","dojo/_base/lang,idx/main,./widgets,./containers,./trees,./form/formWidgets,./form/buttons,./form/comboButtons,./form/dropDownButtons,./grid/treeGrids,dijit/_base/manager".split(","),function(a,b){return a.getObject("ext",!0,b)});

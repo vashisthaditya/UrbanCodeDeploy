@@ -1,0 +1,2 @@
+//>>built
+define("idx/dnd/nls/sl/Avatar",{copyText:"Kopiraj \u0161t. elementov: ${num}",moveText:"Premakni \u0161t. elementov: ${num}",copyOneText:"Kopiraj 1 element",moveOneText:"Premakni 1 element"});

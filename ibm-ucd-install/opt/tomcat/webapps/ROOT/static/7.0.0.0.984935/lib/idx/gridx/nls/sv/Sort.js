@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/sv/Sort",{helpMsg:"${0} - Klicka om du vill sortera eller Ctrl-klicka om du vill l\u00e4gga till till sorteringen",singleHelpMsg:"${0} - Klicka om du vill sortera",priorityOrder:"sorteringsprioritet ${0}"});

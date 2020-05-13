@@ -1,0 +1,13 @@
+@import "../component/componentList";
+@import '../../../carbon/globals/import-once';
+
+@mixin applicationComponents {
+    
+    #applicationComponents {
+        @extend %statCards;
+    }
+}
+
+@include exports('applicationComponents') {
+    @include applicationComponents;
+}

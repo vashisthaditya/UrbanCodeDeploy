@@ -1,0 +1,2 @@
+//>>built
+define("idx/templates/nls/tr/ConsoleLayout",{about:"\u00dcr\u00fcn Bilgisi",help:"Yard\u0131m",logout:"Oturumu kapat",login:"Oturum a\u00e7",userNameMessage:"Ho\u015f Geldiniz ${username}"});

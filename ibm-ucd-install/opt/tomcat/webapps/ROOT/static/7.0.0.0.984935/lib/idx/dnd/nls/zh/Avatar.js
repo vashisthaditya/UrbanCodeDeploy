@@ -1,0 +1,2 @@
+//>>built
+define("idx/dnd/nls/zh/Avatar",{copyText:"\u590d\u5236 ${num} \u4e2a\u9879\u76ee",moveText:"\u79fb\u52a8 ${num} \u4e2a\u9879\u76ee",copyOneText:"\u590d\u5236 1 \u4e2a\u9879\u76ee",moveOneText:"\u79fb\u52a8 1 \u4e2a\u9879\u76ee"});

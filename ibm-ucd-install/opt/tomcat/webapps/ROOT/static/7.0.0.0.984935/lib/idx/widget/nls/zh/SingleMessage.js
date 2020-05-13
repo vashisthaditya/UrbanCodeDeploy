@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/zh/SingleMessage",{viewAll:"\u67e5\u770b\u5168\u90e8 ({num})",viewDetails:"\u66f4\u591a\u8be6\u7ec6\u4fe1\u606f",refresh:"\u5237\u65b0",showDetails:"\u663e\u793a\u8be6\u7ec6\u4fe1\u606f",hideDetails:"\u9690\u85cf\u8be6\u7ec6\u4fe1\u606f"});

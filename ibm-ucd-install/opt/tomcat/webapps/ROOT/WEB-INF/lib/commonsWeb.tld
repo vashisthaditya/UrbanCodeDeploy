@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<taglib version="2.0"
+        xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd ">
+  <tlib-version>1.0</tlib-version>
+  <short-name>uc-commons-web</short-name>
+  <uri>http://www.urbancode.com/commons/web.tld</uri>
+  <display-name>Commons Web Tag Library</display-name>
+  <description>This tag library is designed to provide common functionality</description>
+
+  <!--
+  <tag>
+    <description>Apply Base64 encoding to the body of the tag.</description>
+    <name>encodeBase64</name>
+    <tag-class>com.urbancode.anthill3.web.tags.EncodeBase64Tag</tag-class>
+    <body-content>JSP</body-content>
+  </tag>
+
+  <function>
+    <description>Returns the character based on the escape code ("\n" for "n", etc)</description>
+    <name>ch</name>
+    <function-class>com.urbancode.anthill3.web.functions.Functions</function-class>
+    <function-signature>java.lang.String ch(java.lang.String)</function-signature>
+  </function>
+  -->
+
+  <tag>
+    <description>Invoke a method</description>
+    <name>invoke</name>
+    <tag-class>com.urbancode.commons.web.tags.InvokeTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+        <description>The instance to invoke (Class object for static methods)</description>
+        <name>object</name>
+        <type>java.lang.Object</type>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>
+Name of the method
+        </description>
+        <name>method</name>
+        <type>java.lang.String</type>
+        <required>true</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>
+Name of the exported scoped variable for the
+resource's content. The type of the scoped
+variable is String.
+        </description>
+        <name>var</name>
+        <type>java.lang.String</type>
+        <required>false</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>
+Scope for var.
+        </description>
+        <name>scope</name>
+        <type>java.lang.String</type>
+        <required>false</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <description>
+        Adds a parameter to a containing 'invoke' method.
+    </description>
+    <name>param</name>
+    <tag-class>com.urbancode.commons.web.tags.ParamTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+        <description>
+Value of the parameter.
+        </description>
+        <name>value</name>
+        <type>java.lang.Object</type>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+</taglib>

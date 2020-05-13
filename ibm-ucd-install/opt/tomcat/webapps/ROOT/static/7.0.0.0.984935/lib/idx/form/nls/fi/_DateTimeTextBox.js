@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/fi/_DateTimeTextBox",{idxTimeIconTitle:"Avaa ajan valitsin napsauttamalla t\u00e4t\u00e4",idxDateIconTitle:"Avaa p\u00e4iv\u00e4m\u00e4\u00e4r\u00e4n valitsin napsauttamalla t\u00e4t\u00e4"});

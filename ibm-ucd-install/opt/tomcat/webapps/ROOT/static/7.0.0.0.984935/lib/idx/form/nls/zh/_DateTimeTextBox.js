@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/zh/_DateTimeTextBox",{idxTimeIconTitle:"\u5355\u51fb\u4ee5\u6253\u5f00\u65f6\u95f4\u9009\u62e9\u5668",idxDateIconTitle:"\u5355\u51fb\u4ee5\u6253\u5f00\u65e5\u671f\u9009\u62e9\u5668"});

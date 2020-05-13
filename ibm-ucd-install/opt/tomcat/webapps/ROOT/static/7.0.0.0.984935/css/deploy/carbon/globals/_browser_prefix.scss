@@ -1,0 +1,44 @@
+@mixin display-flex {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex($arg) {
+  -ms-flex: $arg;
+      flex: $arg;
+}
+
+@mixin display-inline-flex {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+@mixin flex-direction($arg) {
+  -ms-flex-direction: $arg;
+      flex-direction: $arg;
+}
+
+@mixin align-items($arg) {
+  -ms-flex-align: $arg;
+     align-items: $arg;
+}
+
+@mixin order($arg) {
+  -ms-flex-order: $arg;
+           order: $arg;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-ms-input-placeholder {
+    @content;
+  }
+  &::placeholder {
+    @content;
+  }
+}

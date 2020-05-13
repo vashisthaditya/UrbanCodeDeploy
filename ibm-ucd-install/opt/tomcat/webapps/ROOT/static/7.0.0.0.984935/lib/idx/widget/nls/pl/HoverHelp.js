@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/pl/HoverHelp",{defaultHrefLabel:"Dodatkowe informacje",defaultMessage:"[Nie zdefiniowano tekstu pomocy]\u200e",defaultTitle:"Aby wy\u015bwietli\u0107 pomoc, kliknij lub umie\u015b\u0107 wska\u017anik myszy nad elementem"});

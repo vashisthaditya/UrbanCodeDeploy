@@ -1,0 +1,45 @@
+@import '../../../../carbon/globals/import-once';
+
+@mixin authTokenRestriction {
+    .authTokenRestriction {
+        display: inline-block;
+    }
+    
+    .authTokenRestriction .removeIcon {
+        margin-left: 120px;
+        margin-top: 12px;
+    }
+    
+    .authTokenRestriction .removeIcon {
+        background-image: url('../../images/wizard/environment/remove.png');
+        width: 16px;
+        height: 16px;
+        margin-top: 4px;
+        background-repeat: none;
+        float: left;
+    }
+    
+    .authTokenRestriction .removeIcon:hover {
+        cursor:pointer;
+    }
+    
+    .authTokenRestriction-mode {
+        width: 95px;
+        float: left;
+        margin-right: 5px
+    }
+    
+    .authTokenRestriction-url {
+        width: 305px;
+        float: left;
+        margin-right: 5px
+    }
+    
+    .authTokenRestriction-mode .dijitButtonContents {
+        width: 69px
+    }
+}
+
+@include exports('authTokenRestriction') {
+    @include authTokenRestriction;
+}

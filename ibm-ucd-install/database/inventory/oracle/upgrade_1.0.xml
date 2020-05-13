@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<change-set release="1.0">
+  <change number="1">
+    <description>Added resource configuration inventory</description>
+    <sql separator=";">
+      create table inv_resource_config_inventory (
+          id varchar2(36) not null primary key,
+          version numeric default 0 not null,
+          resource_id varchar2(36) not null,
+          prop_sheet_path varchar2(255) not null,
+          prop_sheet_version numeric not null,
+          date_created numeric not null,
+          deployment_request_id varchar2(36) not null
+      );
+    </sql>
+  </change>
+  <change number="2">
+    <description>Added indexes on all relevant columns</description>
+    <sql separator=";">
+      create index inv_res_inv_resource_id on inv_resource_inventory(resource_id);
+      create index inv_res_inv_version_id on inv_resource_inventory(version_id);
+      create index inv_res_inv_component_id on inv_resource_inventory(component_id);
+      create index inv_res_inv_request_id on inv_resource_inventory(deployment_request_id);
+
+      create index inv_des_inv_environment_id on inv_desired_inventory(environment_id);
+      create index inv_des_inv_version_id on inv_desired_inventory(version_id);
+      create index inv_des_inv_component_id on inv_desired_inventory(component_id);
+      create index inv_des_inv_request_id on inv_desired_inventory(deployment_request_id);
+
+      create index inv_env_prop_environment_id on inv_env_prop_inventory(environment_id);
+      create index inv_env_prop_component_id on inv_env_prop_inventory(component_id);
+      create index inv_env_prop_request_id on inv_env_prop_inventory(deployment_request_id);
+
+      create index inv_res_conf_resource_id on inv_resource_config_inventory(resource_id);
+      create index inv_res_conf_prop_sheet_path on inv_resource_config_inventory(prop_sheet_path);
+      create index inv_res_conf_request_id on inv_resource_config_inventory(deployment_request_id);
+    </sql>
+  </change>
+  <change number="3">
+    <description>Added ghosted dates to inventory entries</description>
+    <sql separator=";">
+      alter table inv_desired_inventory add ghosted_date numeric default 0 not null;
+      alter table inv_env_prop_inventory add ghosted_date numeric default 0 not null;
+      alter table inv_resource_config_inventory add ghosted_date numeric default 0 not null;
+      alter table inv_resource_inventory add ghosted_date numeric default 0 not null;
+
+      create unique index inv_desired_inventory_ghost on inv_desired_inventory(id, ghosted_date);
+      create unique index inv_env_prop_inventory_ghost on inv_env_prop_inventory(id, ghosted_date);
+      create unique index inv_resource_config_ghost on inv_resource_config_inventory(id, ghosted_date);
+      create unique index inv_resource_inventory_ghost on inv_resource_inventory(id, ghosted_date);
+    </sql>
+  </change>
+  <change number="4">
+  <description>Reduce 256 char columns to 255 char</description>
+    <sql separator=";">
+      alter table inv_resource_inventory modify status varchar2(255);
+      alter table inv_desired_inventory modify status varchar2(255);
+    </sql>
+  </change>
+  <change number="5">
+    <description>No changes for this database server.</description>
+  </change>
+  <change number="6">
+    <description>Allow Desired Inventory without a request</description>
+    <sql separator=";">
+      alter table inv_desired_inventory modify deployment_request_id null;
+    </sql>
+  </change>
+  <change number="7">
+    <description>Changes to indices to help with database performance</description>
+    <sql separator=";">
+        drop index inv_des_inv_environment_id;
+        create index inv_des_inv_environment_id on inv_desired_inventory(environment_id, ghosted_date, date_created desc);
+    </sql>
+  </change>
+  <change number="8">
+    <description>Add index to resource config inventory</description>
+    <sql separator=";">
+      create index inv_res_conf_resprop on inv_resource_config_inventory(ghosted_date, resource_id, prop_sheet_path);
+    </sql>
+  </change>
+  <change number="9">
+    <description>Add index to resource inventory</description>
+    <sql separator=";">
+      create index inv_res_inv_comp_res on inv_resource_inventory(ghosted_date, component_id, resource_id);
+    </sql>
+  </change>
+  <change number="10">
+    <description>Update role_id to non-null</description>
+    <sql separator=";">
+      update inv_desired_inventory set role_id = 'URBANCODE_NULL' where role_id is null;
+      alter table inv_desired_inventory modify role_id varchar(36) not null;
+    </sql>
+  </change>
+  <change number="11">
+    <description>Add unique index to desired inventory</description>
+    <groovy file="all/upgrade_011_add_desired_inventory_unique_constraint_oracle.groovy" />
+  </change>
+</change-set>

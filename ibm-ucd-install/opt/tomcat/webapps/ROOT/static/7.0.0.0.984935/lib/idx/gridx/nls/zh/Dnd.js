@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/zh/Dnd",{moveRow:"\u79fb\u52a8 ${0} \u884c",moveColumn:"\u79fb\u52a8 ${0} \u5217",copyRow:"\u590d\u5236 ${0} \u884c",copyColumn:"\u590d\u5236 ${0} \u5217",moveOneRow:"\u79fb\u52a8 1 \u884c",moveOneColumn:"\u79fb\u52a8 1 \u5217",copyOneRow:"\u590d\u5236 1 \u884c",copyOneColumn:"\u590d\u5236 1 \u5217"});

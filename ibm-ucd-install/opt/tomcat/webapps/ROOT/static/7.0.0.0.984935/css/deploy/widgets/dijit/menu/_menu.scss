@@ -1,0 +1,126 @@
+@import "../../../carbon/globals/colors";
+@import '../../../carbon/globals/import-once';
+
+@mixin menu {
+    
+    :not(.oneuiHeaderGlobalActionsMenu) > .dijitPopup {
+        &.dijitMenuPopup {
+            border: 1px solid $color__blue-51;
+            overflow-x: hidden;
+        }
+    
+        .dijitMenu:not(.oneuiHeaderGlobalActionsMenu) {
+            @include reset;
+            @include font-family;
+            @include font-smoothing;
+            @include letter-spacing;
+        
+            border: 1px solid transparent;
+            background-color: $color__white;
+    
+            .dijitMenuItemSelected {
+                background-color: $color__white;
+            }
+        
+            .dijitMenuItemIconCell {
+                display: none;
+            }
+    
+            .dijitMenuArrowCell {
+                display:none;
+            }
+            
+            .dijitMenuItem {
+                color: black;
+                text-indent: 6px;
+            }
+        
+            .dijitMenuItem:hover {
+                color: $color__white;
+                background-color: $color__blue-51 !important;
+            }
+        
+            .dijitSelectSelectedOption {
+                .dijitMenuItemLabel {
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+    
+    
+    .dijitComboBoxMenuPopup {
+        @include reset;
+        @include font-family;
+        @include font-smoothing;
+        @include letter-spacing;
+    
+        border: 1px solid $color__blue-51;
+    
+        background-color: $color__white;
+    
+        .dijitMenuItemIconCell {
+            display: none;
+        }
+    
+        .dijitMenuArrowCell {
+            display:none;
+        }
+        
+        .dijitMenuItem {
+            color: black;
+            text-indent: 6px;
+    
+            .dijitCheckBox {
+                margin-bottom: 2px;
+                margin-right: 6px;
+            }
+        }
+    
+        .dijitMenuItem:hover {
+            color: $color__white;
+            background-color: $color__blue-51 !important;
+        }
+    
+        .dijitSelectSelectedOption {
+            .dijitMenuItemLabel {
+                font-weight: normal;
+            }
+        }
+    }
+    
+    .dijitMenuTable .dijitMenuItemActive,
+    .dijitMenuTable .dijitMenuItemFocused,
+    .dijitMenuTable .dijitMenuItemSelected,
+    .dijitMenuTable .dijitMenuItemChecked {
+      background: white;
+    }
+    
+    .dijitComboBoxMenu .dijitMenuItem, .dijitPopup.dijitMenuPopup .dijitMenuTable .dijitMenuItem td {
+        border: none;
+        height: 38px;
+        line-height: 38px;
+    }
+    .dijitPopup.dijitMenuPopup .dijitSelectMenu .dijitMenuItem .dijitMenuItemLabel {
+        padding: 0px 10px;
+    }
+    .dijitMenuItem td {
+        border-bottom: none;
+    }
+    
+    .menu-item-none-item {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    td.dijitMenuItemIconCell {
+        border: none;
+    }
+    .dijitMenuItem .dijitMenuArrowCell {
+        border: none;
+    }
+}
+
+@include exports('menu') {
+    @include menu;
+}

@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/ko/Dnd",{moveRow:"${0}\uac1c \ud589 \uc774\ub3d9",moveColumn:"${0}\uac1c \uc5f4 \uc774\ub3d9",copyRow:"${0}\uac1c \ud589 \ubcf5\uc0ac",copyColumn:"${0}\uac1c \uc5f4 \ubcf5\uc0ac",moveOneRow:"1\uac1c \ud589 \uc774\ub3d9",moveOneColumn:"1\uac1c \uc5f4 \uc774\ub3d9",copyOneRow:"1\uac1c \ud589 \ubcf5\uc0ac",copyOneColumn:"1\uac1c \uc5f4 \ubcf5\uc0ac"});

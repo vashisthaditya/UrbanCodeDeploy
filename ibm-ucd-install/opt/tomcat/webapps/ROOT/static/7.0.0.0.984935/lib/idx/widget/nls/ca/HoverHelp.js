@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/ca/HoverHelp",{defaultHrefLabel:"Apr\u00e8n-ne m\u00e9s",defaultMessage:"[No s'ha definit text d'ajuda]\u200e",defaultTitle:"Passa el ratol\u00ed pel damunt o fes clic per visualitzar l'ajuda"});

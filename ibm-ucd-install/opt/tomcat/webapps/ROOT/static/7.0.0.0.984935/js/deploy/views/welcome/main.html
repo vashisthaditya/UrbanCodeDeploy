@@ -1,0 +1,41 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="innerContainer">
+      <div id="fdw-welcome"></div>
+      <div id="first-day-wizard">
+          <div id="fdw-title-paginator">
+              <span id="fdw-light-title" class="fdw-create-an-app-title"></span>
+              <span id="fdw-paginator"></span>
+          </div>
+          <div id="fdw-wizard"></div>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "dojo/dom-construct",
+        "deploy/widgets/firstDayWizard/WelcomePage"
+        ],
+    function(
+        domConstruct,
+        WelcomePage
+    ) {
+        var welcomePage = new WelcomePage();
+        welcomePage.placeAt("fdw-welcome");
+    });
+    /* ]]> */
+</script>
+

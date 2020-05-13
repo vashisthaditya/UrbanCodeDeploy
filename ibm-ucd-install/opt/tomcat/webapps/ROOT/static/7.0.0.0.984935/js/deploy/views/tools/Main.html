@@ -1,0 +1,71 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="containerLabel" id="mainLabel1"></div>
+  <div class="innerContainer">
+    <table cellpadding="10" border="0" cellspacing="20" width="100%">
+      <tbody>
+        <tr class="row-odd">
+          <td><span id="agentLink"></span></td>
+          <td><span id="agentDescription"></span></td>
+        </tr>
+        <tr class="row-odd">
+          <td><span id="agentRelayLink"></span></td>
+          <td><span id="agentRelayDescription"></span></td>
+        </tr>
+        <tr class="row-even">
+          <td><span id="udClientLink"></span></td>
+          <td><span id="udClientDescription"></span></td>
+        </tr>
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    /* Set content */
+    dojo.addOnLoad(function() {
+        dojo.byId("mainLabel1").innerHTML = i18n("Tools");
+        dojo.byId("agentDescription").innerHTML = i18n("Click the link to download a zip containing the Deploy agent.");
+        dojo.byId("agentRelayDescription").innerHTML = i18n("Click the link to download a zip containing the Deploy agent relay.");
+        dojo.byId("udClientDescription").innerHTML = i18n("Click the link to download the Deploy Client zip. This zip contains the command line executable for use with UrbanCode Deploy.");
+
+        var agentLink = util.createDownloadAnchor({
+            "style": {
+                "fontWeight": "bold"
+            },
+            "innerHTML": i18n("UrbanCode Deploy Agent"),
+            "href": bootstrap.baseUrl + "tools/ucd-agent.zip"
+        });
+        dojo.byId("agentLink").appendChild(agentLink);
+
+        var relayLink = util.createDownloadAnchor({
+            "style": {
+                "fontWeight": "bold"
+            },
+            "innerHTML": i18n("UrbanCode Deploy Agent Relay"),
+            "href": bootstrap.baseUrl + "tools/agent-relay.zip"
+        });
+        dojo.byId("agentRelayLink").appendChild(relayLink);
+
+        var clientLink = util.createDownloadAnchor({
+            "style": {
+                "fontWeight": "bold"
+            },
+            "innerHTML": i18n("UrbanCode Deploy Client"),
+            "href": bootstrap.baseUrl + "tools/udclient.zip"
+        });
+        dojo.byId("udClientLink").appendChild(clientLink);
+
+    });
+    /* ]]> */
+</script>

@@ -1,0 +1,14 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin requestConfigurationChanges {
+    .tableHeaderCheckBoxLabel {
+      position: relative;
+      top: 2px;
+      left: 2px;
+      margin-right: 5px;
+    }
+}
+
+@include exports('requestConfigurationChanges') {
+    @include requestConfigurationChanges;
+}

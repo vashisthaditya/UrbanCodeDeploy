@@ -1,0 +1,69 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="innerContainer">
+    <div class="listTopButtons" id="repeatRequest"></div>
+  </div>
+  
+  <div class="containerLabel" id="requestVersionsLabel"></div>
+  <div id="versionWarning" class="versionWarning"></div>
+  <div class="innerContainer">
+    <div id="requestVersions"></div>
+    
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "deploy/widgets/applicationProcessRequest/RequestVersions",
+        "dijit/form/Button",
+        "dojo/_base/xhr",
+        "dojo/dom",
+        "js/webext/widgets/GenericConfirm"
+        ],
+    function(
+        RequestVersions,
+        Button,
+        xhr,
+        dom,
+        GenericConfirm
+    ) {
+        dom.byId("requestVersionsLabel").innerHTML = i18n("Versions Included in Request");
+        var repeatRequestDiv = dom.byId("repeatRequest");
+        var repeatButton = new Button({
+            label: i18n("Repeat Request"),
+            showTitle: false,
+            onClick: function() {
+                var confirm = new GenericConfirm({
+                    message: i18n("Are you sure you want to repeat this application process request?"),
+                    action: function() {
+                        xhr.put({
+                            url: bootstrap.restUrl+"deploy/applicationProcessRequest/"+appState.applicationProcessRequest.id+"/repeat",
+                            handleAs: "json",
+                            load: function(data) {
+                                navBar.setHash("applicationProcessRequest/"+data.requestId+"/log", false, true);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        repeatButton.domNode.style.margin = "0px 3px";
+        repeatButton.domNode.style.fontSize = "11px";
+        repeatButton.placeAt(repeatRequestDiv);
+        var requestVersions = new RequestVersions();
+        requestVersions.placeAt("requestVersions");
+    });
+    /* ]]> */
+</script>

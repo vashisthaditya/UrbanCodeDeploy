@@ -1,0 +1,358 @@
+@import '../../carbon/globals/import-once';
+
+@mixin tags {
+    .tagIconSizer {
+      width: 16px;
+      height: 20px;
+      margin-bottom: -10px;
+      margin-left: 4px;
+      top: -3px;
+    }
+    .tagIcon {
+      @extend .glyph-Glyph_tag__ui-05;
+      height: 0px;
+      margin-bottom: -7px;
+      transform: rotateY(180deg);
+    
+      &:hover {
+        @extend .glyph-Glyph_tag__brand-01;
+      }
+    }
+    
+    .webextTable tr:hover .tagIcon.tagSelector {
+      height: 16px;
+    }
+    
+    
+    .tagSelector {
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .tagSelector .columnForm .underField {
+      margin: 24px -4px -4px !important
+    }
+    
+    .tagSelect, .versionSelect {
+      @include smallInputs;
+      position: absolute;
+      top: -8px;
+      z-index: 999;
+      background-color: #ffffff;
+      border: 1px solid #CCC;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      box-shadow: 0 3px 20px -3px #333;
+      white-space: nowrap;
+      width: max-content;
+    }
+    
+    .tagSelect {
+        .dijitInputContainer {
+            @include smallInputs;
+    
+            .dijitInputField {
+                @include smallInputs;
+    
+                .dijitInputInner {
+                    @include smallInputs;
+                }
+            }
+        }
+    }
+    
+    .versionSelect {
+      position: relative;
+      top: 0;
+      padding: 10px;
+    }
+    
+    .latest-version-link {
+      padding-left: 10px;
+      vertical-align: top;
+    }
+    
+    .tagSelect .tag-select-drop-down {
+      vertical-align: top;
+      padding: 8px;
+      border-right: 1px solid #CCC;
+    }
+    .new-tag-link {
+      vertical-align: top;
+      padding: 17px 14px;
+      margin-left: -1px;
+      border-left: 1px solid #CCC;
+    }
+    .appComponentSelector .tagBox,
+    .versionSelector .tagDisplay .tagBox,
+    .roleSelector .tagDisplay .tagBox,
+    tr.dojoDndAvatarItem .tagDisplay .tagBox {
+      background-color: #C1E6FE;
+    }
+    
+    tr.dojoDndAvatarItem .tagDisplay .tagDelete {
+      display: none;
+    }
+    
+    .roleSelector {
+      max-width: 400px;
+      margin-top: 2px;
+    }
+    .roleSelector .tagDisplay .tagBox {
+      margin-bottom: 3px;
+    }
+    .roleSelector .showTeam {
+      margin-top: 2px;
+    }
+    
+    .versionSelectorComponent {
+      display: inline-block;
+    }
+    
+    .teamSelectorComponent {
+      display:inline-block;
+      margin-bottom: -9px;
+    }
+    
+    .team-selector {
+        margin: 5px 10px 15px;
+    }
+
+    .team-selector, .webext-multi-select {
+        .selected-items-list {
+          .selected-item-container {
+            display: block;
+          }
+        }
+        
+        .selected-item-container {
+            @extend .tagBox;
+            @include font-family;
+            line-height: 16px;
+            width: 100%;
+            color: #152935;
+            font-size: 12px;
+            white-space: nowrap;
+    
+            .remove-selected-item {
+                padding: 0px 4px;
+                float: right;
+                cursor: pointer;
+    
+                &:hover {
+                    color: $ui-01
+                }
+            }
+    
+            .selected-item-label {
+                margin: 0px 4px;
+                color: $text-01;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+    
+    .team-selector-buttons {
+        text-align: right;
+        padding: 8px 5px 3px;
+        margin: 5px -5px 0;
+        border-top: 1px solid #CCC;
+    }
+    
+    .version-secetion-checkbox-option {
+        margin: 8px 0 0;
+    }
+    .version-secetion-checkbox-option .labelsAndValues-helpCell {
+        margin: -2px 40px 0 10px;
+    }
+    .version-selection-dialog {
+        width: 800px;
+    }
+    @media only screen and (max-width: 800px) {
+        .version-selection-dialog {
+            width: 100%;
+            left: 0;
+        }
+    }
+    
+    .dojoDndItemBefore,
+    .dojoDndItemAfter {
+      border-top: 0px;
+    }
+    
+    .tagDisplay {
+      display: inline-block;
+    
+      .tagContainer {
+        display: inline-block;
+        margin-left: 20px;
+      }
+    }
+    
+    .tagBox {
+      display: inline-block;
+      position: relative;
+      white-space: nowrap;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      height: 20px;
+      line-height: 20px;
+      margin-right: 4px;
+    
+      &.darkColor {
+          color: #EEE
+      }
+    
+      .tagName {
+        @include font-family;
+        font-size: 12px;
+        display: inline-block;
+        padding: 0px 2px 0px 5px;
+        margin-right: 4px;
+      }
+    
+      .tagDelete {
+        @include font-family;
+        font-size: 12px;
+        padding: 0px 2px;
+        margin-right: 4px;
+    
+        &:hover {
+            color: $ui-01;
+            cursor: pointer;
+        }
+      }
+    }
+    
+    .darkColor .tagDelete:hover {
+        color: $text-01;
+    }
+    
+    .resourceVarianceDiff {
+      display:none;
+    }
+    
+    .webextTable > table > tbody > tr.resourceVarianceChildChanged,
+    .table-compare-children-changed {
+      background-color:#FFF69B;
+    }
+    
+    .webextTable > table > tbody > tr.resourceVarianceChanged,
+    .table-compare-changed {
+      background-color:#FABE79;
+    }
+    
+    .webextTable > table > tbody > tr.resourceVarianceError,
+    .table-compare-error {
+      background-color:#AD1F25;
+      color: #FFFFFF;
+    }
+    
+    .webextTable > table > tbody > tr.resourceVarianceAdded,
+    .table-compare-added {
+      background-color:#B3D66D;
+    }
+    
+    .webextTable > table > tbody > tr.resourceVarianceRemoved,
+    .table-compare-removed {
+      background-color:#F2BCBC;
+    }
+    
+    .webextTable tr:hover .resourceVarianceDiff  {
+      display:inline-block;
+    }
+    
+    .resource-compare-tree .resource-compare-placeholder-cell * {
+      display: none;
+    }
+    
+    .tagRequirementSelector .webext-select {
+        margin-bottom: 5px;
+    }
+    
+    .tagRequirementList {
+        margin-top: -5px;
+        max-width: 500px;
+    }
+    
+    .tagRequirementSelector .webext-select .dijit.dijitReset.dijitInline.dijitTextBox.dijitComboBox.dijitValidationTextBox {
+        width: 250px;
+    }
+    
+    .selectAttach .webext-select
+    .dijit.dijitReset.dijitInline.dijitLeft.dijitTextBox.dijitComboBox.dijitValidationTextBox {
+        width: 200px;
+    }
+    
+    .appComponentSelector .componentList .tagBox,
+    .tagRequirementList .tagRequirement {
+        float: left;
+        margin-top:5px;
+        margin-right:5px;
+        display: table;
+    }
+    
+    .appComponentSelector .componentList .tagBox .tagName {
+      display: inline-block;
+      margin: 5px 8px;
+      top: -1px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 640px;
+    }
+    
+    .appComponentSelector .componentList .tagDelete{
+        float: right;
+        border-left-color:black;
+        border-left-width:1px;
+        border-left-style:solid;
+        padding-bottom:5px;
+        padding-left:5px;
+        padding-right:5px;
+        padding-top:5px;
+        font-weight:bold;
+    }
+    
+    .tagRequirement .tagDelete {
+        border-left-color:black;
+        border-left-width:1px;
+        border-left-style:solid;
+        padding-bottom:2px;
+        padding-left:5px;
+        padding-right:5px;
+        font-weight:bold;
+    }
+    
+    .tagRequirement .requirementType {
+        background: white;
+        border-color: transparent;
+        margin-left: 3px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    .tagRequirement.ieTagRequirement .requirementType {
+        display: inline-block;
+    }
+    
+    .tagRequirement .requirementValue {
+        width: 30px;
+        text-align: center;
+        background: white;
+        border-color: transparent;
+        margin-left: 3px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    .tagRequirement.ieTagRequirement .requirementValue {
+        display: inline-block;
+    }
+}
+
+@include exports('tags') {
+    @include tags;
+}

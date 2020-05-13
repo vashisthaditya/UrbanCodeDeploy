@@ -1,0 +1,2 @@
+//>>built
+define("idx/nls/zh-tw/dialogs",{information:"\u8cc7\u8a0a",warning:"\u8b66\u544a",error:"\u932f\u8aa4",confirmation:"\u78ba\u8a8d",progress:"\u9032\u5ea6",loading:"\u6b63\u5728\u8f09\u5165",close:"\u95dc\u9589"});

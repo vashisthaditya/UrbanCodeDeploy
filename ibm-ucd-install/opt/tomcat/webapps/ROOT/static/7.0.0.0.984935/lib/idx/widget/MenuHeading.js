@@ -1,0 +1,3 @@
+//>>built
+require({cache:{"url:idx/widget/templates/MenuHeading.html":'<tr class="dijitReset oneuiMenuHeading" role="presentation" tabindex="-1">\r\n\t<td class="dijitReset oneuiMenuHeadingLabel" colspan="4" data-dojo-attach-point="containerNode"></td>\r\n</tr>'}});
+define("idx/widget/MenuHeading",["dojo/_base/declare","dojo/_base/lang","dijit/MenuSeparator","dojo/text!./templates/MenuHeading.html"],function(a,b,c,d){return b.getObject("idx.oneui",!0).MenuHeading=a("idx.widget.MenuHeading",[c],{label:"",_setLabelAttr:{node:"containerNode",type:"innerHTML"},templateString:d,baseClass:"oneuiMenuHeading"})});

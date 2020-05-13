@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/ro/_DateTimeTextBox",{idxTimeIconTitle:"Face\u0163i clic pentru a deschide selectorul de or\u0103",idxDateIconTitle:"Face\u0163i clic pentru a deschide selectorul de dat\u0103"});

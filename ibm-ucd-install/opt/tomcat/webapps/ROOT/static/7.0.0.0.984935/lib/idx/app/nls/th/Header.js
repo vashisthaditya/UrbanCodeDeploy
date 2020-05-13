@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/th/Header",{ibmlogo:"IBM&reg;",actionShare:"\u0e41\u0e1a\u0e48\u0e07\u0e43\u0e0a\u0e49",actionHelp:"\u0e27\u0e34\u0e18\u0e35\u0e43\u0e0a\u0e49",searchEntry:"\u0e04\u0e49\u0e19\u0e2b\u0e32",searchSubmit:"\u0e04\u0e49\u0e19\u0e2b\u0e32"});

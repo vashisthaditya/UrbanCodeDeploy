@@ -1,0 +1,2 @@
+//>>built
+define("idx/grid/nls/fr/cells",{rowCheckBoxLabel:"S\u00e9lectionner/D\u00e9s\u00e9lectionner cette ligne",headerCheckBoxLabel:"S\u00e9lectionner/D\u00e9s\u00e9lectionner toutes les lignes"});

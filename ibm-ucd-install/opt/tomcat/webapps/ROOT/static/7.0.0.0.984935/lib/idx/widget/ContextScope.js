@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/ContextScope",["dojo/_base/declare","dijit/_Widget"],function(b,d){return b("idx.widget.ContextScope",[d],{constructor:function(){this._idx_scopedVariables=[];this._idx_scopedValues=[]},_idx_hasContextAttribute:function(a){return null==a?!0:this._idx_scopedVariables[""+a]},_idx_getContextAttribute:function(a){return null==a?this:this._idx_scopedValues[""+a]},_idx_setContextAttribute:function(a,b){if(null!=a){var c=""+a;this._idx_scopedVariables[c]=!0;this._idx_scopedValues[c]=b}}})});

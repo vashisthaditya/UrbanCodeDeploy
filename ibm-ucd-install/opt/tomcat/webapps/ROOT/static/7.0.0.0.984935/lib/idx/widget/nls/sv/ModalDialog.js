@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/sv/ModalDialog",{Error:"Fel",Warning:"Varning",Information:"Information",Success:"Slutf\u00f6rt",Confirmation:"Bekr\u00e4ftelse",Question:"Fr\u00e5ga",closeButtonLabel:"St\u00e4ng",cancelButtonLabel:"Avbryt",executeButtonLabel:"OK",checked:"Fr\u00e5ga inte igen"});

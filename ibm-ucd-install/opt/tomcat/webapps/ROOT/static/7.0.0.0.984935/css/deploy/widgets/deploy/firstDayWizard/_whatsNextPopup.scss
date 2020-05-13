@@ -1,0 +1,53 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin whatsNextPopup {
+    .whats-next-popup {
+        width: 900px;
+    }
+    
+    .whats-next-popup .dijitDialogTitleBar {
+        border: none;
+    }
+    
+    .whats-next-popup ul li {
+      font-size: 1em;
+      font-weight: 200;
+      list-style: disc
+    }
+    
+    .whats-next-popup ul {
+      margin-left: 3em;
+    }
+    
+    .whats-next-popup .content {
+      font-size: 1.3em;
+      font-weight: 300;
+    }
+    
+    .whats-next-popup .linkPointer {
+      font-weight: 500;
+      color:#248d91
+    }
+    
+    .whats-next-popup .message {
+        margin-top: 40px;
+        font-size: 0.8em;
+        font-weight: 300;
+        text-align:center;
+    }
+    
+    .whats-next-popup .title {
+        text-align: center;
+        font-weight: 400;
+        line-height: 1em;
+        font-size: 30px;
+    }
+    
+    .whats-next-popup .dijitDialogPaneContent {
+        padding: 20px;
+    }
+}
+
+@include exports('whatsNextPopup') {
+    @include whatsNextPopup;
+}

@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/ca/Sort",{helpMsg:"${0} - Fes clic per ordenar o control-clic per afegir a l'ordenaci\u00f3",singleHelpMsg:"${0} - Fes clic per ordenar",priorityOrder:"prioritat d'ordenaci\u00f3 ${0}"});

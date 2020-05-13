@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.2.3.x.
+-->
+
+<change-set release="n1_6.2.4">
+  <library name="workflow"
+           release="1.0"
+           base-dir="../workflow"
+           file="../workflow/mysql/upgrade_sql_1.0.xml"
+           version-table="wf_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="security"
+           release="1.0"
+           base-dir="../security"
+           file="../security/mysql/upgrade_1.0.xml"
+           version-table="sec_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="vc"
+           release="1.0"
+           base-dir="../vc"
+           file="../vc/mysql/upgrade_sql_1.0.xml"
+           version-table="vc_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="property-sheets"
+           release="1.0"
+           base-dir="../property-sheets"
+           file="../property-sheets/mysql/upgrade_sql_1.0.xml"
+           version-table="ps_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="inventory"
+           release="1.0"
+           base-dir="../inventory"
+           file="../inventory/mysql/upgrade_1.0.xml"
+           version-table="inv_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <change number="1">
+    <description>Create index ds_cmp_to_tag_comp_id</description>
+    <sql separator=";">
+        create index ds_cmp_to_tag_comp_id on ds_component_to_tag(component_id);
+     </sql>
+  </change>
+  <change number="2">
+    <description>Add no permissions user</description>
+    <groovy file="all/upgrade-scripts-624/upgrade_002_add_no_perm_user.groovy" />
+  </change>
+  <change number="3">
+    <description>Add unique index to desired inventory</description>
+    <changeref library="inventory" change="11"/>
+  </change>
+  <change number="4">
+    <description>Add two indicies to increase access to deployment tables based on submitted time</description>
+    <sql separator=";">
+      create index rt_apr_submitted_time on rt_app_process_request(submitted_time);
+      create index rt_cpr_submitted_time on rt_comp_process_request(component_id, submitted_time);
+    </sql>
+  </change>
+<!--
+- REMINDER: Upgrades for product version 6.2.4.x. Place additions above this comment.
+-->
+</change-set>

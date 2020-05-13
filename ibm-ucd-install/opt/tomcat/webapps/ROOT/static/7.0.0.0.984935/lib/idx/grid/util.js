@@ -1,0 +1,3 @@
+//>>built
+define("idx/grid/util",["dojo/_base/lang","../resources","dojo/i18n!../nls/base","dojo/i18n!./nls/base","dojo/i18n!./nls/GridMessages"],function(d,e){var b=d.getObject("idx.grid.util",!0),c=e.getResources("idx/grid/GridMessages");b.formatCellValid=function(a){return 1==Math.abs(a)?"<div class='idxGridIconPassed'>"+c.idxGridIconTextValid+"</div>":"<div class='idxGridIconFailed'>"+c.idxGridIconTextInvalid+"</div>"};b.formatCellEdit=function(a){return"<div class='idxGridIconEdit'>"+a+"</div>"};b.formatCellCritical=
+function(a,b,c){1==Math.abs(a)&&c.customClasses.push("idxGridIconFlag");return""};b.formatCellDataHierarchical=function(a){return a};return b});

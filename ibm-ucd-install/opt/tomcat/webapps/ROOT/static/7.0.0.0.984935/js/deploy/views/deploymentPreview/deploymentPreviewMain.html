@@ -1,0 +1,53 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+    <div class="containerLabel" id="mainLabel1"></div>
+    <div class="innerContainer">
+        <div id="resourceChanges"></div>
+    </div>
+    
+    <div class="containerLabel" id="releaseSummaryComponentChangesLabel"></div>
+    <div class="innerContainer">
+        <div id="componentChanges"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "deploy/widgets/deploymentPreview/ComponentChanges",
+        "deploy/widgets/deploymentPreview/ResourceChanges",
+        "dojo/dom"
+        ],
+    function(
+        ComponentChanges,
+        ResourceChanges,
+        dom
+    ) {
+        dom.byId("mainLabel1").innerHTML = i18n("Changes Per Resource");
+        dom.byId("releaseSummaryComponentChangesLabel").innerHTML = i18n("Changes Per Component");
+        var resourceChanges = new ResourceChanges({
+            snapshot: appState.snapshot,
+            environment: appState.environment,
+            applicationProcess: appState.applicationProcess
+        });
+        resourceChanges.placeAt("resourceChanges");
+        var componentChanges = new ComponentChanges({
+            snapshot: appState.snapshot,
+            environment: appState.environment,
+            applicationProcess: appState.applicationProcess
+        });
+        componentChanges.placeAt("componentChanges");
+    });
+    /* ]]> */
+</script>

@@ -1,0 +1,192 @@
+    [unzip] Expanding: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\conf.zip into C:\Users\NCBAdmin\AppData\Local\Temp\2\install-3963444522899414519.tmp
+     [echo] Found sub-installer UCDeployInstaller.groovy
+(1/37) "Enter" for the next page, or "F" to print the full license: 
+     [echo] Do you accept the license? [y,n]
+     [echo] 
+Installing IBM UrbanCode Deploy version 7.0.0.0.984935
+
+     [echo] Enter the directory where the IBM UrbanCode Deploy should be installed. [Default: C:\Program Files\ibm-ucd\server]
+     [echo] 
+Installing IBM UrbanCode Deploy to: C:\Program Files\ibm-ucd\server
+
+     [echo] JVM Version detected: 1.8.0_251
+     [echo] JAVA_HOME: C:\Program Files\Java\jre1.8.0_251
+
+     [echo] Will this server be used as a node in a high availability cluster? y,N [Default: N]
+     [echo] Where should the server store application data such as logs, plugins, and keystores? [Default: C:\Program Files\ibm-ucd\server/appdata]
+     [echo] What host name will users access the Web UI at? [Default: NCBWIN.dn0uyrh341wezdtxaqyxkaffih.bx.internal.cloudapp.net]
+     [echo] Do you want the Web UI to always use secure connections using SSL? Y,n [Default: Y]
+     [echo] Enter the port on which the Web UI should listen for HTTP requests. [Default: 8080]
+     [echo] Enter the initial password for the admin user.
+     [echo] Please type password again.
+     [echo] Enter the port to use for JMS agent communication. [Default: 7918]
+     [echo] Do you want the Server and Agent communication to require mutual authentication? This requires a manual key exchange between the server and each agent. See the documentation for more details. y,N [Default: N]
+     [echo] UCD's web-based replacement for JMS agent communication requires a URL that is used to set a listening port and to allow servers to exchange agent messages.
+     [echo] The URL has the following requirements:
+     [echo] 1) The URL must have the form "wss://<host-or-ip>:<port>". Example: wss://ucd1.example.org:7919
+     [echo] 2) The URL port must not conflict with ports for the UI or JMS.
+     [echo] 3) Each server must have a distinct URL.
+     [echo] 4) Every server in an HA cluster must be able to connect directly to this server with the URL.
+     [echo] 5) Agents and relays must be able to connect to one or more servers at their respective URL port.
+     [echo] Agents and relays may be configured to use a common URL shared by all servers (for example, one provided by a load balancer), but servers must be configured with direct URLs.
+     [echo] Enter the web agent communication URL for this server. [Default: wss://NCBWIN.dn0uyrh341wezdtxaqyxkaffih.bx.internal.cloudapp.net:7919]
+     [echo] Enter the port and hostname of a Rational License Key Server containing product licenses for UrbanCode Deploy, in the form of port@hostname. (e.g. 27000@licenses.example.com) Alternatively, you may leave this blank to begin a 60-day evaluation period. [Default: none]
+     [echo] When installing a server as a part of an existing cluster or when using a pre-populated database, it is not necessary to create the database schema. This step must be performed when installing a standalone server to a fresh database or when installing the first server in a cluster.
+     [echo] Create database schema? (For high availability servers, this should only be done for the first server in the cluster) Y,n [Default: Y]
+     [echo] The following database types are supported: derby, mysql, oracle, sqlserver, db2, db2zos.
+     [echo] Enter the database type to use. [Default: derby]
+     [echo] Enter the database username. [Default: ucd]
+     [echo] Enter the database password. [Default: password]
+     [copy] Copying 2 files to D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\bin\server
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\bin
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\conf\server
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\endorsed
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\lib
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\licenses
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\native
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\extensions
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\var\log
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\var\temp
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\appdata\patches
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\appdata\var
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\appdata\conf\server
+     [copy] Copying 1 file to C:\Program Files\ibm-ucd\server\conf
+     [sync] Copying 209 files to C:\Program Files\ibm-ucd\server\lib
+     [sync] Copying 4 files to C:\Program Files\ibm-ucd\server\native
+     [sync] Copying 9165 files to C:\Program Files\ibm-ucd\server\opt\tomcat
+     [copy] Copying 1 file to C:\Program Files\ibm-ucd\server\bin
+     [copy] Copying 1 file to C:\Program Files\ibm-ucd\server\opt\tomcat\conf
+    [mkdir] Created dir: C:\Program Files\ibm-ucd\server\bin\service
+     [copy] Copying 6 files to C:\Program Files\ibm-ucd\server\bin
+     [copy] Copying 1 file to C:\Program Files\ibm-ucd\server\bin
+     [copy] Copying 1 file to C:\Program Files\ibm-ucd\server\bin
+     [copy] Copying 3 files to C:\Program Files\ibm-ucd\server\bin
+     [copy] Copying 2 files to C:\Program Files\ibm-ucd\server\bin\service
+    [unzip] Expanding: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\udconf.zip into C:\Users\NCBAdmin\AppData\Local\Temp\2\install-7082917913240098879.tmp
+     [copy] Copying 9 files to C:\Program Files\ibm-ucd\server\conf
+     [copy] Copied 1 empty directory to 1 empty directory under C:\Program Files\ibm-ucd\server\conf
+     [copy] Copying 12 files to C:\Program Files\ibm-ucd\server\appdata\conf
+     [copy] Copying 272 files to C:\Program Files\ibm-ucd\server\database
+     [copy] Copying 1 file to C:\Program Files\ibm-ucd\server\database
+     [copy] Copying 13 files to C:\Program Files\ibm-ucd\server
+     [copy] Copying 28 files to C:\Program Files\ibm-ucd\server\appdata
+     [copy] Copying 4 files to C:\Program Files\ibm-ucd\server\bin
+[propertyfile] Updating property file: C:\Program Files\ibm-ucd\server\conf\server\installed.properties
+     [copy] Copying 1 file to C:\Program Files\ibm-ucd\server\appdata\conf\server
+     [echo] OS: windows
+     [echo] Architecture: x64
+   [delete] Deleting directory C:\Users\NCBAdmin\AppData\Local\Temp\2\install-7082917913240098879.tmp
+     [echo] Creating new AES encryption key.
+[propertyfile] Updating property file: C:\Program Files\ibm-ucd\server\conf\server\installed.properties
+     [echo] Starting embedded database ...
+     [echo] Database Started
+     [echo] Creating Versioned Configuration Database Schema ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\vc\derby\vc-schema.ddl
+      [sql] 10 of 10 SQL statements executed successfully
+     [echo] Creating Versioned Configuration Foreign Keys ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\vc\vc-foreign-keys.ddl
+      [sql] 16 of 16 SQL statements executed successfully
+     [echo] Seeding Versioned Configuration Database ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\vc\vc-seed-data.sql
+      [sql] 2 of 2 SQL statements executed successfully
+     [echo] Creating Property Database Schema ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\property-sheets\derby\property-schema.ddl
+      [sql] 10 of 10 SQL statements executed successfully
+     [echo] Creating Property Database Foreign Keys ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\property-sheets\ps-foreign-keys.ddl
+      [sql] 22 of 22 SQL statements executed successfully
+     [echo] Seeding Property Database ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\property-sheets\ps-seed-data.sql
+      [sql] 1 of 1 SQL statements executed successfully
+     [echo] Creating Inventory Database Schema ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\inventory\derby\inv-schema.ddl
+      [sql] 5 of 5 SQL statements executed successfully
+     [echo] Creating Inventory Foreign Keys ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\inventory\inv-foreign-keys.ddl
+      [sql] 17 of 17 SQL statements executed successfully
+     [echo] Seeding Inventory Database ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\inventory\inv-seed-data.sql
+      [sql] 1 of 1 SQL statements executed successfully
+     [echo] Creating Workflow Engine Database Schema ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\workflow\derby\wf-schema.ddl
+      [sql] 6 of 6 SQL statements executed successfully
+     [echo] Creating Workflow Engine Foreign Keys ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\workflow\wf-foreign-keys.ddl
+      [sql] 7 of 7 SQL statements executed successfully
+     [echo] Seeding Workflow Engine Database ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\workflow\wf-seed-data.sql
+      [sql] 1 of 1 SQL statements executed successfully
+     [echo] Creating Agent Topology Database Schema ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\agent-topology\derby\top-schema.ddl
+      [sql] 6 of 6 SQL statements executed successfully
+     [echo] Creating Agent Topology Foreign Keys ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\agent-topology\top-foreign-keys.ddl
+      [sql] 8 of 8 SQL statements executed successfully
+     [echo] Seeding Agent Topology Database ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\agent-topology\top-seed-data.sql
+      [sql] 2 of 2 SQL statements executed successfully
+     [echo] Creating HA Lock Database Schema ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\halock\derby\hlk-schema.ddl
+      [sql] 2 of 2 SQL statements executed successfully
+     [echo] Creating HA Lock Foreign Keys ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\halock\hlk-foreign-keys.ddl
+      [sql] 0 of 0 SQL statements executed successfully
+     [echo] Seeding HA Lock Database ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\halock\hlk-seed-data.sql
+      [sql] 2 of 2 SQL statements executed successfully
+     [echo] Creating UrbanCode Deploy Database Schema ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\deploy\derby\ud-schema.ddl
+      [sql] 121 of 121 SQL statements executed successfully
+     [echo] Running UrbanCode Deploy Database Schema extensions...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\deploy\derby\schema-extensions.ddl
+      [sql] 1 of 1 SQL statements executed successfully
+     [echo] Creating UrbanCode Deploy Foreign Keys ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\deploy\ud-foreign-keys.ddl
+      [sql] 324 of 324 SQL statements executed successfully
+     [echo] Seeding UrbanCode Deploy Database ...
+      [sql] Executing resource: D:\installer\UBCD_7.0.0_TRIAL\ibm-ucd-install\database\deploy\ud-seed-data.sql
+      [sql] 328 of 328 SQL statements executed successfully
+     [echo] Seeding UCD Version Stamp ...
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+     [echo] Updating External URLS ...
+      [sql] Executing commands
+      [sql] 2 of 2 SQL statements executed successfully
+     [echo] Updating License Server URL ...
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+     [echo] Setting up admin login credentials ...
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+      [sql] Executing commands
+      [sql] 1 of 1 SQL statements executed successfully
+     [echo] Stopping embedded database ...
+     [java] Sun Apr 26 14:58:38 UTC 2020 : Apache Derby Network Server - 10.8.3.1 - (1476465) shutdown
+[propertyfile] Updating property file: C:\Program Files\ibm-ucd\server\conf\server\installed.properties
+[propertyfile] Updating property file: C:\Program Files\ibm-ucd\server\conf\server\secured-installed.properties
+[propertyfile] Updating property file: C:\Program Files\ibm-ucd\server\conf\server\installed.properties
+[propertyfile] Updating property file: C:\Program Files\ibm-ucd\server\conf\server\secured-installed.properties
+     [copy] Copying 1 file to C:\Program Files\ibm-ucd\server
+     [echo] Do you want to install the Server as Windows service? y,N [Default: N]
+     [echo] Enter a unique service name. No spaces allowed. [Default: ibm-urbancode-deploy]
+     [echo] Enter the user account name including domain path to run the service as (for local use '.\' before login). The local system account will be used by default. [Default: .\localsystem]
+     [echo] Do you want to start the 'ibm-urbancode-deploy' service automatically? y,N [Default: N]
+     [exec] Checking if service with given name is already installed...
+     [exec] Service 'ibm-urbancode-deploy' is not installed. Installing...
+     [exec] Service 'ibm-urbancode-deploy' has been successfully installed.
+     [exec] Service ibm-urbancode-deploy started successfully
+[propertyfile] Updating property file: C:\Program Files\ibm-ucd\server\conf\server\installed.properties
+   [delete] Deleting: C:\Program Files\ibm-ucd\server\bin\service\srvc.properties
+[propertyfile] Updating property file: C:\Program Files\ibm-ucd\server\conf\server\installed.properties
+[propertyfile] Creating new property file: C:\Program Files\ibm-ucd\server\conf\installed.version
+[propertyfile] Creating new property file: C:\Program Files\ibm-ucd\server\appdata\conf\installed.version
+     [echo] After starting the server, you may access the web UI by pointing your web-browser at
+     [echo] http://ncbdevops.eastus.cloudapp.azure.com:80 to complete the Installation.
+     [echo] Installer Complete. (press return to exit installer)
+   [delete] Deleting directory C:\Users\NCBAdmin\AppData\Local\Temp\2\install-3963444522899414519.tmp

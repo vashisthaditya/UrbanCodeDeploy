@@ -1,0 +1,219 @@
+{
+    identifier: "clazz",
+    label: "clazz",
+    items: [{
+        clazz: ["idx.form.TextBox", "dijit.form.ValidationTextBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite TextBox",
+            declaration: "<input data-dojo-type='idx/form/TextBox' data-dojo-props='\"label\":\"idx.form.TextBox\",\"labelWidth\":120,\"labelAlignment\":\"vertical\",\"hint\":\"One UI toolkit\"'></input>"
+        },{
+			_type: "widgetPoprs",
+			description: "Dijit ValidationTextBox (base widget)",
+			declaration: "<div><label>dijit.form.ValidationTextBox</label></div><input data-dojo-type='dijit/form/ValidationTextBox' data-dojo-props='\"value\":\"Dojo toolkit\"'></input>"
+		},{
+            _type: "widgetProps",
+            description: "Composite TextBox with hint outside",
+            declaration: "<input data-dojo-type='idx/form/TextBox' data-dojo-props='\"label\":\"idx.form.TextBox\",\"labelWidth\":120,\"labelAlignment\":\"vertical\",\"hintPosition\":\"outside\",\"hint\":\"One UI toolkit\"'></input>"
+        }]
+    }, {
+        clazz: ["idx.form.CheckBox", "dijit.form.CheckBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite CheckBox",
+            declaration: "<div data-dojo-type='idx/form/CheckBox' data-dojo-props='\"label\":\"idx.form.CheckBox\",\"checked\":true'></div>"
+        },{
+			_type: "widgetPoprs",
+			description: "Dijit CheckBox (base widget)",
+			declaration: "<div data-dojo-type='dijit/form/CheckBox' data-dojo-props='\"checked\":true'></div><label>dijit.form.CheckBox</label>"
+		}]
+    }, {
+        clazz: ["idx.form.CheckBoxList", "dijit.form.CheckBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite CheckBoxList",
+			declaration: "<div data-dojo-type='idx/form/CheckBoxList' data-dojo-props='\"label\":\"idx.form.CheckBoxList\",\"labelWidth\":170,\"groupAlignment\":\"horizontal\",\"options\":[{\"value\":\"TN\",\"selected\":\"selected\",\"label\":\"Tennessee\"},{\"value\":\"VA\",\"label\":\"Virginia\"},{\"value\":\"WA\",\"label\":\"Washington\"},{\"value\":\"FL\",\"label\":\"Florida\"},{\"value\":\"CA\",\"label\":\"California\"}]'></div>"
+        },{
+			_type: "widgetPoprs",
+			description: "5 Dijit CheckBoxes (base widget)",
+			declaration: "<div><label>dijit.form.CheckBox * 5</label><div data-dojo-type='dijit/form/CheckBox' data-dojo-props='\"checked\":true'></div><label>Tennessee</label><div data-dojo-type='dijit/form/CheckBox' data-dojo-props='\"checked\":true'></div><label>Virginia</label><div data-dojo-type='dijit/form/CheckBox' data-dojo-props='\"checked\":true'></div><label>Washington</label><div data-dojo-type='dijit/form/CheckBox' data-dojo-props='\"checked\":true'></div><label>Florida</label><div data-dojo-type='dijit/form/CheckBox' data-dojo-props='\"checked\":true'></div><label>California</label>"
+		},{
+            _type: "widgetProps",
+            description: "Vertical CheckBoxList",
+			declaration: "<div data-dojo-type='idx/form/CheckBoxList' data-dojo-props='\"label\":\"idx.form.CheckBoxList\",\"labelWidth\":170,\"options\":[{\"value\":\"TN\",\"selected\":\"selected\",\"label\":\"Tennessee\"},{\"value\":\"VA\",\"label\":\"Virginia\"},{\"value\":\"WA\",\"label\":\"Washington\"},{\"value\":\"FL\",\"label\":\"Florida\"},{\"value\":\"CA\",\"label\":\"California\"}]'></div>"
+        },{
+            _type: "widgetProps",
+            description: "CheckBoxList with data store",
+			declaration:"<div data-dojo-type='idx/form/CheckBoxList' data-dojo-props='\"label\":\"idx.form.CheckBoxList\",\"labelWidth\":170,\"store\":testStoreShort'></div>"
+        }]
+    }, {
+        clazz: ["idx.form.CheckBoxSelect", "dijit.form.Select"],
+        templates: [{
+            _type: "widgetProps",
+            description: "CheckBoxSelect",
+			declaration: "<div data-dojo-type='idx/form/CheckBoxSelect' data-dojo-props='\"label\":\"idx.form.CheckBoxSelect\",\"labelAlignment\":\"vertical\",\"labelWidth\":170,\"options\":[{\"value\":\"TN\",\"selected\":\"selected\",\"label\":\"Tennessee\"},{\"value\":\"VA\",\"label\":\"Virginia\"},{\"value\":\"WA\",\"label\":\"Washington\"},{\"value\":\"FL\",\"label\":\"Florida\"},{\"value\":\"CA\",\"label\":\"California\"}]'></div>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit Select (base widget)",
+			declaration: "<div><label>dijit.form.Select</label></div><div data-dojo-type='dijit/form/Select' data-dojo-props='\"options\":[{\"value\":\"TN\",\"selected\":\"selected\",\"label\":\"Tennessee\"},{\"value\":\"VA\",\"label\":\"Virginia\"},{\"value\":\"WA\",\"label\":\"Washington\"},{\"value\":\"FL\",\"label\":\"Florida\"},{\"value\":\"CA\",\"label\":\"California\"}]'></div>"
+		},{
+            _type: "widgetProps",
+            description: "CheckBoxSelect with data store",
+			declaration: "<div data-dojo-type='idx/form/CheckBoxSelect' data-dojo-props='\"label\":\"idx.form.CheckBoxSelect\",\"labelWidth\":170,\"store\":testStoreShort'></div>"
+        }]
+    }, {
+        clazz: ["idx.form.ComboBox", "dijit.form.ComboBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite ComboBox",
+			declaration: "<div data-dojo-type='idx/form/ComboBox' data-dojo-props='\"label\":\"idx.form.ComboBox\",\"labelAlignment\":\"vertical\",\"store\":testStoreLong,\"searchAttr\":\"name\",\"value\":\"New York\"'></div>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit ComboBox (base widget)",
+			declaration: "<div><label>dijit.form.ComboBox</label></div><div data-dojo-type='dijit/form/ComboBox' data-dojo-props='\"store\":testStoreLong,\"searchAttr\":\"name\",\"value\":\"New York\"'></div>"
+		}]
+    }, {
+        clazz: ["idx.form.CurrencyTextBox", "dijit.form.CurrencyTextBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite CurrencyTextBox",
+            declaration: "<input data-dojo-type='idx/form/CurrencyTextBox' data-dojo-props='\"label\":\"idx.form.CurrencyTextBox\",\"labelAlignment\":\"vertical\",\"currency\":\"USD\",\"value\":\"100\"'></input>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit CurrencyTextBox (base widget)",
+			declaration: "<div><label>dijit.form.CurrencyTextBox</label></div><input data-dojo-type='dijit/form/CurrencyTextBox' data-dojo-props='\"currency\":\"USD\",\"value\":100'></input>"
+		}]
+    }, {
+        clazz: ["idx.form.DateTextBox", "dijit.form.DateTextBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite DateTextBox",
+            declaration: "<input data-dojo-type='idx/form/DateTextBox' data-dojo-props='\"label\":\"idx.form.DateTextBox\",\"labelAlignment\":\"vertical\",\"displayedValue\":\"4/1/2012\"'></input>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit DateTextBox (base widget)",
+			declaration: "<div><label>dijit.form.DateTextBox</label></div><input data-dojo-type='dijit/form/DateTextBox' data-dojo-props='\"displayedValue\":\"4/1/2012\"'></input>"
+		}]
+    }, {
+        clazz: ["idx.form.FilteringSelect", "dijit.form.FilteringSelect"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite FilteringSelect",
+            declaration: "<div data-dojo-type='idx/form/FilteringSelect' data-dojo-props='\"label\":\"idx.form.FilteringSelect\",\"labelAlignment\":\"vertical\",\"store\":testStoreLong,\"searchAttr\":\"name\",\"value\":\"New York\"'></div>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit FilteringSelect (base widget)",
+			declaration: "<div><label>dijit.form.FilteringSelect</label></div><div data-dojo-type='dijit/form/FilteringSelect' data-dojo-props='\"store\":testStoreLong,\"searchAttr\":\"name\",\"value\":\"New York\"'></div>"
+		}]
+    }, {
+        clazz: ["idx.form.NumberSpinner", "dijit.form.NumberSpinner"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite NumberSpinner",
+            declaration: "<div data-dojo-type='idx/form/NumberSpinner' data-dojo-props='\"label\":\"idx.form.NumberSpinner\",\"labelAlignment\":\"vertical\",\"value\":100'></div>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit NumberSpinner (base widget)",
+			declaration: "<div><label>dijit.form.NumberSpinner</label></div><div data-dojo-type='dijit/form/NumberSpinner' data-dojo-props='\"value\":100'></div>"
+		}]
+    }, {
+        clazz: ["idx.form.NumberTextBox", "dijit.form.NumberTextBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite NumberTextBox",
+            declaration: "<input data-dojo-type='idx/form/NumberTextBox' data-dojo-props='\"label\":\"idx.form.NumberTextBox\",\"labelAlignment\":\"vertical\",\"value\":100'></input>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit NumberTextBox (base widget)",
+			declaration: "<div><label>dijit.form.NumberTextBox</label></div><div data-dojo-type='dijit/form/NumberTextBox' data-dojo-props='\"value\":100'></div>"
+		}]
+    }, {
+        clazz: ["idx.form.RadioButtonSet", "dijit.form.RadioButton"],
+        templates: [{
+            _type: "widgetProps",
+            description: "RadioButtonSet",
+            declaration: "<div data-dojo-type='idx/form/RadioButtonSet' data-dojo-props='\"label\":\"idx.form.RadioButtonSet\",\"labelWidth\":170,\"options\":[{\"value\":\"TN\",\"selected\":\"selected\",\"label\":\"Tennessee\"},{\"value\":\"VA\",\"label\":\"Virginia\"},{\"value\":\"WA\",\"label\":\"Washington\"},{\"value\":\"FL\",\"label\":\"Florida\"},{\"value\":\"CA\",\"label\":\"California\"}]'></div>"
+        },{
+			_type: "widgetProps",
+			description: "5 Dijit RadioButtons (base widget)",
+			declaration: "<div><label>dijit.form.RadioButton * 5</label></div><input data-dojo-type='dijit/form/RadioButton' data-dojo-props='\"name\":\"dijitRadio\"'></input><label>Tennessee</label><br><input data-dojo-type='dijit/form/RadioButton' data-dojo-props='\"name\":\"dijitRadio\"'></input><label>Virginia</label><br><input data-dojo-type='dijit/form/RadioButton' data-dojo-props='\"name\":\"dijitRadio\"'></input><label>Washington</label><br><input data-dojo-type='dijit/form/RadioButton' data-dojo-props='\"name\":\"dijitRadio\"'></input><label>Florida</label><br><input data-dojo-type='dijit/form/RadioButton' data-dojo-props='\"name\":\"dijitRadio\"'></input><label>California</label><br>"
+		},{
+            _type: "widgetProps",
+            description: "RadioButtonSet with data store",
+            declaration: "<div data-dojo-type='idx/form/RadioButtonSet' data-dojo-props='\"label\":\"idx.form.RadioButtonSet\",\"labelWidth\":170,\"store\":testStoreShort'></div>"
+        }]
+    }, {
+        clazz: ["idx.form.Select", "dijit.form.Select"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite Select",
+            declaration: "<div data-dojo-type='idx/form/Select' data-dojo-props='\"label\":\"idx.form.Select\",\"labelAlignment\":\"vertical\",\"options\":[{\"value\":\"TN\",\"selected\":\"selected\",\"label\":\"Tennessee\"},{\"value\":\"VA\",\"label\":\"Virginia\"},{\"value\":\"WA\",\"label\":\"Washington\"},{\"value\":\"FL\",\"label\":\"Florida\"},{\"value\":\"CA\",\"label\":\"California\"}]'></div>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit Select (base widget)",
+			declaration: "<div><label>dijit.form.Select</label></div><div data-dojo-type='dijit/form/Select' data-dojo-props='\"options\":[{\"value\":\"TN\",\"selected\":\"selected\",\"label\":\"Tennessee\"},{\"value\":\"VA\",\"label\":\"Virginia\"},{\"value\":\"WA\",\"label\":\"Washington\"},{\"value\":\"FL\",\"label\":\"Florida\"},{\"value\":\"CA\",\"label\":\"California\"}]'></div>"
+		},{
+            _type: "widgetProps",
+            description: "Composite Select with data store",
+            declaration: "<div data-dojo-type='idx/form/Select' data-dojo-props='\"label\":\"idx.form.Select\",\"labelAlignment\":\"vertical\",\"store\":testStoreShort'></div>"
+        }]
+    }, {
+		clazz: ["idx.form.Textarea", "dijit.form.Textarea"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite Textarea",
+			declaration: "<input data-dojo-type='idx/form/Textarea' data-dojo-props='\"label\":\"idx.form.Textarea\",\"labelAlignment\":\"vertical\",\"value\":\"Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\"'></input>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit Textarea (base widget)",
+			declaration: "<div><label>dijit.form.Textarea</label></div><input data-dojo-type='dijit/form/Textarea' data-dojo-props='\"value\":\"Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\"'></input>"
+		}]
+	}, {
+		clazz: ["idx.form.TimeTextBox", "dijit.form.TimeTextBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite TimeTextBox",
+			declaration: "<input data-dojo-type='idx/form/TimeTextBox' data-dojo-props='\"label\":\"idx.form.TimeTextBox\",\"labelAlignment\":\"vertical\",\"displayedValue\":\"12:00 PM\"'></input>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit TimeTextBox (base widget)",
+			declaration: "<div><label>dijit.form.TimeTextBox</label></div><input data-dojo-type='dijit/form/TimeTextBox' data-dojo-props='\"displayedValue\":\"12:00 PM\"'></input>"
+		}]
+	}, {
+		clazz: ["idx.form.TriStateCheckBox", "dijit.form.CheckBox"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Composite TriStateCheckBox",
+            declaration: "<div data-dojo-type='idx/form/TriStateCheckBox' data-dojo-props='\"label\":\"idx.form.TriStateCheckBox\",\"states\":\"mixed\"'></div>"
+        },{
+			_type: "widgetPoprs",
+			description: "Dijit CheckBox  (base widget)",
+			declaration: "<div data-dojo-type='dijit/form/CheckBox' data-dojo-props='\"checked\":true'></div><label>dijit.form.CheckBox</label>"
+		}]
+	}
+	/**, {
+		clazz: ["idx.widget.CheckBoxTree", "dijit.Tree"],
+        templates: [{
+            _type: "widgetProps",
+            description: "CheckBoxTree",
+            declaration: "<div data-dojo-type='idx/widget/CheckBoxTree' data-dojo-props='\"model\":treeModel,\"autoExpand\":true,\"openOnClick\":true'></div>"
+        },{
+			_type: "widgetProps",
+			description: "Dijit Tree (base widget)",
+			declaration: "<div data-dojo-type='dijit/Tree' data-dojo-props='\"model\":treeModel,\"autoExpand\":true,\"openOnClick\":true'></div>"
+		}]
+	}, {
+		clazz: ["idx.widget.Dialog"],
+        templates: [{
+            _type: "widgetProps",
+            description: "Formatted Dialog",
+			declaration: "<div data-dojo-type='idx/widget/Dialog' data-dojo-props='\"title\":\"Dialog Title\",\"instruction\":\"Instructional information goes here.\",\"content\":\"<div style=\"height:80px\">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean semper sagittis velit. Cras in mi. Duis porta mauris ut ligula. Proin porta rutrum lacus. Etiam consequat scelerisque quam. Nulla facilisi. Maecenas luctus venenatis nulla.</div>\",\"reference\":{\"name\":\"Link goes here\",\"link\":\"http://dojotoolkit.org/\"}'></div>"
+        }]
+	}, {
+		clazz: ["idx.widget.HoverHelpTooltip"],
+        templates: [{
+            _type: "widgetProps",
+            description: "HoverHelpTooltip"
+        }]
+	}**/]
+}

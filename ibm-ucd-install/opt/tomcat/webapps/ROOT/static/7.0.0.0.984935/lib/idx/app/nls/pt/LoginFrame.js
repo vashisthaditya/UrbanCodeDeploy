@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/pt/LoginFrame",{loginTitle:"Login",labelUserName:"Nome de usu\u00e1rio",labelPassword:"Senha",invalidMessageTitle:"Tentativa de login inv\u00e1lida",invalidMessage:"N\u00e3o foi inserido um valor v\u00e1lido em ambos os campos obrigat\u00f3rios."});

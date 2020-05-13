@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/zh/WorkspaceType",{loadingMessage:"\u6b63\u5728\u88c5\u5165 ${workspaceTitle}\u3002\u8bf7\u7a0d\u5019...",failedLoadMessage:"\u672a\u80fd\u88c5\u5165 ${workspaceTitle}\u3002"});

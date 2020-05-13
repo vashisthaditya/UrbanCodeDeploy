@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/sl/SingleMessage",{viewAll:"Prika\u017ei vse ({num})",viewDetails:"Ve\u010d podrobnosti",refresh:"Osve\u017ei",showDetails:"Poka\u017ei podrobnosti",hideDetails:"Skrij podrobnosti"});

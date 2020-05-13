@@ -1,0 +1,3 @@
+//>>built
+define("idx/lang",["dojo/_base/lang","idx/main"],function(c,d){var e=c.getObject("lang",!0,d);d.startsWith=e.startsWith=function(a,b){return c.isString(a)&&c.isString(b)&&0===a.indexOf(b)};d.endsWith=e.endsWith=function(a,b){return c.isString(a)&&c.isString(b)&&a.indexOf(b)===a.length-b.length};d.equalsIgnoreCase=e.equalsIgnoreCase=function(a,b){return c.isString(a)&&c.isString(b)&&a.toLowerCase()===b.toLowerCase()};d.isNumber=e.isNumber=function(a){return"number"==typeof a&&isFinite(a)};d.getByteLengthInUTF8=
+e.getByteLengthInUTF8=function(a){if(!a)return null;a=encodeURIComponent(a);a=a.replace(/%[0-9A-F][0-9A-F]/g,"*");return a.length};return e});

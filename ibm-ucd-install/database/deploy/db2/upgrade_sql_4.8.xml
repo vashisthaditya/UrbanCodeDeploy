@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 4.8.x/5.x
+-->
+
+<change-set release="4.8">
+   <library name="workflow"
+       release="1.0"
+       base-dir="../workflow"
+       file="../workflow/db2/upgrade_sql_1.0.xml"
+       version-table="wf_db_version"
+       release-column="release_name"
+       version-column="ver"/>
+    <library name="property"
+       release="1.0"
+       base-dir="../property-sheets"
+       file="../property-sheets/db2/upgrade_sql_1.0.xml"
+       version-table="ps_db_version"
+       release-column="release_name"
+       version-column="ver"/>
+   <library name="vc"
+       release="1.0"
+       base-dir="../vc"
+       file="../vc/db2/upgrade_sql_1.0.xml"
+       version-table="vc_db_version"
+       release-column="release_name"
+       version-column="ver"/>
+
+  <change number="51">
+    <description>Incorporating workflow change to support continuation arguments</description>
+    <changeref library="workflow" change="15"/>
+  </change>
+  <change number="52">
+      <description>Adding support for HTTP property definitions</description>
+      <changeref library="property" change="8"/>
+  </change>
+  <change number="53">
+    <description>Indexing join column for finding latest versions by path/directory</description>
+    <changeref library="vc" change="5"/>
+  </change>
+  <change number="54">
+    <description>Add placeholder property to ps_prop_def</description>
+    <changeref library="property" change="9"/>
+  </change>
+  <change number="55">
+    <changeref library="workflow" change="16"/>
+  </change>
+  <change number="56">
+    <description>Harvest the workflow data to populate metadata table</description>
+    <groovy file="all/upgrade-scripts-48/upgrade_056_collecting_trace_metadata.groovy"/>
+  </change>
+    <change number="57">
+        <description>Add tables and columns for tracking apikeys and agent certificates</description>
+        <sql separator=";">
+          create table ds_apikey (
+              id varchar(36) not null primary key,
+              version integer default 0 not null,
+              apikey varchar(64) not null,
+              secretkey varchar(255) not null,
+              sec_user_id varchar(36) not null,
+              disabled varchar(1) default 'N' not null,
+              date_created bigint not null,
+              expiration bigint default 0 not null
+          );
+
+          alter table ds_agent add column apikey_id varchar(36);
+          alter table ds_agent add column jms_cert clob;
+
+          alter table ds_agent add constraint agent_2_apikey foreign key(apikey_id) references ds_apikey(id);
+          alter table ds_apikey add constraint apikey_2_user foreign key(sec_user_id) references sec_user(id);
+
+          create unique index ds_apikey_uci on ds_apikey(apikey);
+          create index ds_apikey_user_id on ds_apikey(sec_user_id);
+          create index ds_agn_key_endptid on ds_agent(apikey_id, endpoint_id);
+        </sql>
+    </change>
+
+<!--
+- REMINDER: Upgrades for product version 4.8.x/5.x. Place additions above this comment
+-->
+</change-set>

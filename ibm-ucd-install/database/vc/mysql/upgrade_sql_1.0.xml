@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<change-set release="1.0">
+  <change number="1">
+    <description>Added deletion of versioned entities</description>
+    <sql separator=";">
+        alter table vc_persistent_record add deleted varchar(1);
+        update vc_persistent_record set deleted = 'N';
+        alter table vc_persistent_record modify column deleted varchar(1) not null;
+    </sql>
+  </change>
+  <change number="2">
+    <description>Adding a special table for tracking the latest version of objects</description>
+    <sql separator=";">
+        create table vc_latest_version_entry (
+            path varchar(255) primary key not null,
+            persistent_record_id varchar(36) not null
+        ) engine = innodb;
+
+        insert into vc_latest_version_entry
+            (path, persistent_record_id)
+        select pr1.path, id
+            from vc_persistent_record pr1
+        inner join (select path, max(commit_id) as max_commit from vc_persistent_record group by path) pr2
+            on pr2.path = pr1.path
+        where pr1.commit_id = pr2.max_commit;
+    </sql>
+  </change>
+  <change number="3">
+    <description>Adding a table to syncrhonize servers trying to insert into the vc_commit table</description>
+    <sql separator=";">
+        create table vc_commit_lock (
+            name varchar(36) primary key not null
+        ) engine = innodb;
+        insert into vc_commit_lock values ( 'CommitLock' );
+    </sql>
+  </change>
+  <change number="4">
+    <description>No changes for this database server</description>
+  </change>
+  <change number="5">
+    <description>Indexing join column for finding latest versions by path/directory</description>
+    <sql separator=";">
+      create index vc_lve_persistent_record_id on vc_latest_version_entry(persistent_record_id);
+    </sql>
+  </change>
+  <change number="6">
+    <description>Adding tracking of metadata associated with versioned objects</description>
+    <sql separator=";">
+        create table vc_persistent_record_metadata (
+            id varchar(36) primary key not null,
+            metadata_generator varchar(255) not null,
+            metadata_key varchar(255) not null,
+            metadata_value varchar(255) not null,
+            persistent_record_id varchar(36) not null,
+            persistent_record_commit bigint not null
+        ) engine = innodb;
+
+        create table vc_persistent_meta_gen_state (
+            id varchar(36) primary key not null,
+            metadata_generator varchar(255) not null,
+            metadata_generator_version numeric not null,
+            scan_end_commit bigint not null,
+            newest_scanned_commit bigint not null,
+            locked varchar(1) not null
+        ) engine = innodb;
+
+        create index vc_prm_generator on vc_persistent_record_metadata(metadata_generator);
+        create index vc_prm_key on vc_persistent_record_metadata(metadata_key);
+        create index vc_prm_value on vc_persistent_record_metadata(metadata_value);
+        create index vc_prm_record_id on vc_persistent_record_metadata(persistent_record_id);
+        create index vc_prm_record_commit on vc_persistent_record_metadata(persistent_record_commit);
+    </sql>
+  </change>
+  <change number="7">
+    <description>Adjust indexes for vc_persistent_record and vc_persistent_record_metadata</description>
+    <sql separator=";">
+      alter table vc_persistent_record drop index vc_persistent_record_path;
+      create index vc_persistent_rec_path_ver on vc_persistent_record(path, relative_version);
+      alter table vc_persistent_record_metadata drop index vc_prm_generator;
+      create index vc_prm_gen_key on vc_persistent_record_metadata(metadata_generator, metadata_key);
+    </sql>
+  </change>
+  <change number="8">
+    <description>Prepare Online Prop Upgrade</description>
+    <sql separator=";">
+      create table vc_prop_update (
+          id varchar(36) not null primary key,
+          updated varchar(1) default 'N'
+      ) engine = innodb;
+
+      create table vc_update_tracking (
+          update_name varchar(255) not null primary key,
+          completed varchar(1) default 'N'
+      ) engine = innodb;
+    </sql>
+  </change>
+  <change number="9">
+    <description>Add relative_version, deleted, directory, commit_id to LatestVersionEntry table</description>
+    <sql separator=";">
+      alter table vc_latest_version_entry
+        add relative_version numeric default -1 not null,
+        add deleted varchar(1) default 'N' not null,
+        add directory varchar(255) default 'X' not null,
+        add commit_id bigint default -1 not null;
+    </sql>
+  </change>
+  <change number="10">
+    <description>Populate relative_version, deleted, directory, commit_id values in LatestVersionEntry table</description>
+    <sql separator=";">
+      update
+        vc_latest_version_entry lve,
+        vc_persistent_record pr
+      set
+        lve.relative_version = pr.relative_version,
+        lve.deleted = pr.deleted,
+        lve.directory = pr.directory,
+        lve.commit_id = pr.commit_id
+      where pr.id = lve.persistent_record_id;
+
+      create index vc_lve_path_commit_rec on vc_latest_version_entry(path, commit_id, persistent_record_id);
+      create index vc_lve_del_path_ver_rec on vc_latest_version_entry(deleted, path, relative_version, persistent_record_id);
+      create index vc_lve_del_dir_rec on vc_latest_version_entry(deleted, directory, persistent_record_id);
+    </sql>
+  </change>
+  <change number="11">
+    <description>Remove generator state lock column in favor of HALock</description>
+    <sql separator=";">
+      alter table vc_persistent_meta_gen_state drop column locked;
+    </sql>
+  </change>
+  <change number="12">
+    <description>Create index across vc_persistent_record commit_id and path</description>
+    <sql separator=";">
+       alter table vc_persistent_record drop index vc_persistent_record_commit;
+       create index vc_persist_rec_commit_path on vc_persistent_record(commit_id, path);
+    </sql>
+  </change>
+<!--
+  <change number="##">
+    <description>Description</description>
+    <sql separator=";">
+        statement;
+    </sql>
+    <groovy file="upgrade-scripts-09/014_some_change.groovy" />
+  </change>
+-->
+</change-set>

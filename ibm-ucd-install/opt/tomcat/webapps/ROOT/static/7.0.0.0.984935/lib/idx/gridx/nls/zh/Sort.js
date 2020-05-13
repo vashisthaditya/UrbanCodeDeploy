@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/zh/Sort",{helpMsg:"${0} - \u5355\u51fb\u4ee5\u6392\u5e8f\uff0c\u6216\u8005\u6309 Ctrl \u952e\u5e76\u5355\u51fb\u4ee5\u6dfb\u52a0\u5230\u6392\u5e8f\u9879",singleHelpMsg:"${0} - \u5355\u51fb\u4ee5\u6392\u5e8f",priorityOrder:"\u6392\u5e8f\u4f18\u5148\u7ea7 ${0}"});

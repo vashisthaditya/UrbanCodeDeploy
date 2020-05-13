@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.2.1.x.
+-->
+
+<change-set release="n1_6.2.1">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/mysql/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/mysql/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/mysql/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/mysql/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <description>Add phone number field</description>
+        <sql separator=";">
+          alter table sec_user add column phone_number varchar(20);
+        </sql>
+    </change>
+    <change number="2">
+        <description>Add locking mechanism for processes run upon version import</description>
+        <sql separator=";">
+            ALTER TABLE ds_version ADD creation_process_requested varchar(1) DEFAULT 'N' NOT NULL;
+        </sql>
+    </change>
+    <change number="3">
+        <description>Add lock request creation date for FIFO ordering</description>
+        <sql separator=";">
+            alter table ds_lock add column date_created bigint default 0 not null;
+        </sql>
+    </change>
+    <change number="4">
+        <description>Listing workflow traces for deletion</description>
+        <sql separator=";">
+            create table rt_deletable_trace (
+               id varchar(36) not null primary key
+            ) engine = innodb;
+        </sql>
+    </change>
+    <change number="5">
+        <description>Add exec ack resend columns</description>
+        <sql separator=";">
+            alter table ds_plugin_task_request add column last_resend_time bigint;
+            alter table ds_plugin_task_request add column resend_message longblob;
+            create index ds_ptr_lrt on ds_plugin_task_request(acked, last_resend_time);
+        </sql>
+    </change>
+    <change number="6">
+        <description>Allow authentication realms to support multiple authorization realms</description>
+        <sql separator=";">
+            create table sec_realm_mapping (
+                authentication_realm_id varchar(36) binary not null,
+                authorization_realm_id varchar(36) binary not null
+            )engine = innodb;
+
+            alter table sec_realm_mapping add constraint srm_authentication_realm_fk
+                foreign key (authentication_realm_id)
+                references sec_authentication_realm(id)
+            ;
+            alter table sec_realm_mapping add constraint srm_authorization_realm_fk
+                foreign key (authorization_realm_id)
+                references sec_authorization_realm(id)
+            ;
+
+            insert into sec_realm_mapping (authentication_realm_id, authorization_realm_id)
+            (select id, sec_authorization_realm_id from sec_authentication_realm);
+
+            alter table sec_authentication_realm drop foreign key sar_sec_authorization_realm_fk;
+            alter table sec_authentication_realm drop index sec_authn_rlm_authz_rlm;
+            alter table sec_authentication_realm drop column sec_authorization_realm_id;
+        </sql>
+    </change>
+    <change number="7">
+        <description>Cleaning API performance log</description>
+        <sql separator=";">
+            truncate table ds_request_audit_entry;
+        </sql>
+    </change>
+    <change number="8">
+        <description>Adding ability to save information from Agent Relays </description>
+        <sql separator=";">
+            create table ds_agent_relay (
+                id varchar(36) not null primary key,
+                version numeric default 0 not null,
+                name varchar(255),
+                endpoint_id varchar(64) not null,
+                description varchar(255),
+                relay_version varchar(36),
+                hostname varchar(255),
+                jms_port int default 0 not null,
+                status varchar(16),
+                last_contact bigint,
+                sec_resource_id varchar(36)
+            ) engine = innodb;
+        </sql>
+    </change>
+    <change number="9">
+        <description>Adding last_contact field for Agent table</description>
+        <sql separator=";">
+            alter table ds_agent add last_contact bigint;
+        </sql>
+    </change>
+    <change number="10">
+        <description>Adding index to improve resource tree performance (skipped in mysql)</description>
+    </change>
+    <change number="11">
+       <description>Adding the ability to override cleanup settings on environment</description>
+       <sql separator=";">
+          alter table ds_environment add history_days_to_keep numeric default -1 not null;
+       </sql>
+    </change>
+    <change number="12">
+        <description>Add new unique index for security performance</description>
+        <sql separator=";">
+          create unique index team_resource_role_map
+              on sec_resource_for_team(sec_resource_role_id, sec_team_space_id, sec_resource_id);
+        </sql>
+    </change>
+    <change number="13">
+        <description>Adding relay_hostname field for Relay table</description>
+        <sql separator=";">
+            alter table ds_agent_relay add relay_hostname varchar(255);
+        </sql>
+    </change>
+    <change number="14">
+        <description>Adding index to relay_id field in Agent table</description>
+        <sql separator=";">
+            create index ds_agent_relay_id on ds_agent(relay_id, ghosted_date);
+        </sql>
+    </change>
+    <change number="15">
+        <description>Encrypting secure Authentication Realm properties</description>
+        <groovy file="all/1.0/upgrade_031_secure_authentication_realm_props.groovy"/>
+    </change>
+    <change number="16">
+        <description>Removing Environment Templates orphan of Application Templates</description>
+        <groovy file="all/upgrade-scripts-621/upgrade_016_remove_orphan_environment_templates.groovy" />
+    </change>
+    <change number="17">
+        <description>Updating default process history cleanup settings</description>
+        <sql separator=";">
+            alter table ds_environment modify history_days_to_keep bigint;
+            alter table ds_environment alter history_days_to_keep set default 365;
+            alter table ds_environment add enable_process_history_cleanup varchar(1) default 'N' not null;
+            alter table ds_environment add use_system_default_days varchar(1) default 'Y' not null;
+            update ds_environment set history_days_to_keep = 365 where history_days_to_keep = -1;
+        </sql>
+    </change>
+    <change number="18">
+        <description>Encrypting secure system configuration properties</description>
+        <groovy file="all/upgrade-scripts-621/upgrade_018_encrypt_secure_system_config_props.groovy"/>
+    </change>
+    <change number="19">
+        <description>PropDef Encrypt</description>
+        <groovy file="all/upgrade-scripts-621/upgrade_019_encrypt_ps_prop_def.groovy"/>
+    </change>
+    <change number="20">
+      <description>Add format column to wf_workflow_trace if not there</description>
+      <changeref library="workflow" change="19"/>
+    </change>
+    <change number="21">
+        <description>Adding no self approval configuration feature</description>
+        <sql separator=";">
+            alter table ds_environment add no_self_approvals varchar(1) default 'N' not null;
+        </sql>
+    </change>
+    <change number="22">
+        <description>Updating component source config mapping</description>
+        <groovy file="all/upgrade-scripts-621/upgrade_022_set_ds_component_src_config_plugin.groovy"/>
+    </change>
+    <change number="23">
+        <description>Adding ability to show application process history cleanup progress</description>
+        <sql separator=";">
+            create table ds_history_cleanup_record (
+                id varchar(36) not null primary key,
+                version numeric default 0 not null,
+                total_deployments_for_cleanup numeric not null,
+                deployments_deleted numeric default 0 not null,
+                date_cleanup_started bigint not null,
+                date_cleanup_finished bigint
+            ) engine = innodb;
+            create index ds_historycleanup_datestarted on ds_history_cleanup_record(date_cleanup_started);
+        </sql>
+    </change>
+    <change number="24">
+        <description>Add cancel column to cal_entry table to determine when entries are cancelled.</description>
+        <sql separator=";">
+            ALTER TABLE cal_entry ADD COLUMN cancelled VARCHAR(1) BINARY DEFAULT 'N' NOT NULL;
+
+            UPDATE cal_entry AS ce
+                INNER JOIN rt_app_process_request AS apr
+                ON ce.id = apr.calendar_entry_id
+                SET ce.cancelled = 'Y'
+                WHERE apr.trace_id IS NULL AND ce.fired = 'Y';
+        </sql>
+    </change>
+    <change number="25">
+        <description>Prepare Source Config Prop Upgrade</description>
+        <changeref library="vc" change="8"/>
+        <sql separator=";">
+            insert into vc_update_tracking (update_name, completed) values ('SourceConfigPropSecurity', 'N');
+        </sql>
+    </change>
+    <change number="26">
+        <description>Add index to resource config inventory</description>
+        <changeref library="inventory" change="8"/>
+    </change>
+    <change number="27">
+        <description>Sql Server only upgrade</description>
+    </change>
+    <change number="28">
+        <description>Add created_date column to ds_agent to track agent installation date.</description>
+        <sql separator=";">
+            alter table ds_agent add column date_created bigint default 0 not null;
+        </sql>
+    </change>
+    <change number="29">
+        <description>Increase size of status columns to match ds_status</description>
+        <sql separator=";">
+            alter table ds_snapshot_status modify column status_name varchar(255);
+            alter table ds_version_status modify column status_name varchar(255);
+        </sql>
+    </change>
+    <change number="30">
+        <description>Add a default to last_resend_time column in ds_plugin_task_request</description>
+        <sql separator=";">
+            alter table ds_plugin_task_request alter last_resend_time set default 0;
+        </sql>
+    </change>
+    <change number="31">
+        <description>Add ghosting for resource roles</description>
+        <sql separator=";">
+            alter table sec_resource_role add column ghosted_date bigint default 0 not null;
+            update sec_resource_role set ghosted_date = 1 where enabled = 'N';
+            alter table sec_resource_role drop column enabled;
+        </sql>
+    </change>
+
+<!--
+- REMINDER: Upgrades for product version 6.2.1.x. Place additions above this comment.
+-->
+</change-set>

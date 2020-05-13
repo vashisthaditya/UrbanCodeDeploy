@@ -1,0 +1,40 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin agentMappingPage {
+    .fdw-compSelect-dialog .dojoxCheckedMultiSelect {
+      width: 90%;
+      height:150px;
+      border: 1px solid #cccccc;
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    
+    .fdw-compSelect-dialog .dojoxCheckedMultiSelect .dojoxCheckedMultiSelectWrapper {
+      border: none;
+      overflow: hidden;
+      height: 100%;
+    }
+    
+    .fdw-compSelect-dialog .dijitButton {
+      margin-top: 22px;
+      margin-bottom: 12px;
+    }
+    
+    .fdw-compSelect-dialog .dijitCheckBox {
+        margin-right: 10px;
+    }
+    
+    .fdw-designer-ok-btn {
+        float: right;
+        margin-right: 10px;
+    }
+    
+    .fdw-designer-cancel-btn {
+        float: right;
+    }
+}
+
+@include exports('agentMappingPage') {
+    @include agentMappingPage;
+}

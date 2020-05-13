@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<Server port="0" shutdown="SHUTDOWN" debug="0">
+  <Service name="Catalina">
+    <Connector port="${install.server.web.https.port}"
+               address="${install.server.web.ip}"
+               server="SERVER"
+               maxThreads="150"
+               enableLookups="false"
+               acceptCount="100"
+               debug="0"
+               connectionTimeout="20000"
+               disableUploadTimeout="true"
+               compression="1024"
+               noCompressionUserAgents="gozilla, traviata"
+               compressableMimeType="text/html,text/xml,text/javascript,text/css,text/plain,application/json"
+               algorithm="${install.server.ssl.algorithm}"
+               SSLEnabled="true"
+               scheme="https"
+               secure="true"
+               clientAuth="false"
+               URIEncoding="UTF-8"
+               ciphers="${install.server.ssl.enabledCiphers}"
+               sslEnabledProtocols="${install.server.ssl.enabledProtocols}"
+               keystoreFile="conf/tomcat.keystore"
+               keystorePass="${tomcat.keystore.password}" />
+    <Connector port="${install.server.web.port}"
+               address="${install.server.web.ip}"
+               server="SERVERPro"
+               redirectPort="${install.server.web.https.port}"
+               maxThreads="150"
+               enableLookups="false"
+               acceptCount="100"
+               debug="0"
+               connectionTimeout="20000"
+               URIEncoding="UTF-8"
+               disableUploadTimeout="true"/>
+    <Engine name="Catalina" defaultHost="localhost" debug="0">
+      <Host name="localhost"
+            debug="0"
+            appBase="webapps"
+            unpackWARs="true"
+            autoDeploy="false"
+            deployOnStartup="true"
+            xmlValidation="false"
+            xmlNamespaceAware="false">
+		<!-- We can add the reloadable="true" attribute to the context to
+		|	allow jsp reloading within tomcat.  This is disabled by default.
+		-->
+        <Context path=""
+                 docBase="ROOT"
+                 debug="0"
+                 reloadable="false"
+                 useHttpOnly="true"
+                 sessionCookieName="JSESSIONID_${install.server.web.port}">
+		  <!-- 	we can add an empty pathname attribute like 'pathname=""' to this manager
+				to disable persisting sessions to disk on server restart.	-->
+          <Manager className="org.apache.catalina.session.StandardManager" pathname=""/>
+          <Valve className="org.apache.catalina.authenticator.NonLoginAuthenticator" disableProxyCaching="true" securePagesWithPragma="false"/>
+        </Context>
+        <DefaultContext>
+          <Manager className="org.apache.catalina.session.StandardManager" pathname=""/>
+        </DefaultContext>
+      </Host>
+    </Engine>
+  </Service>
+</Server>

@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/sk/Sort",{helpMsg:"${0} - kliknutie = zoradi\u0165, Ctrl + kliknutie = prida\u0165 do zoradenia",singleHelpMsg:"${0} - Kliknut\u00edm zora\u010fte",priorityOrder:"priorita zoradenia ${0}"});

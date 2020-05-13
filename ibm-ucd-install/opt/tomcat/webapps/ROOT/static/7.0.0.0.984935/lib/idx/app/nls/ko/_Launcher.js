@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/ko/_Launcher",{tooManyOpenWorkspaces:'${maxOpen}\uac1c\ub97c \ucd08\uacfc\ud558\ub294 "${workspaceTypeName}"\u200e \uc791\uc5c5\uc601\uc5ed\uc744 \uc5f4 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4. \uac00\ub2a5\ud558\uba74 \uc774\ubbf8 \uc5f4\ub824 \uc788\ub294 "${workspaceTypeName}"\u200e \uc791\uc5c5\uc601\uc5ed\uc744 \ub2eb\uc73c\uc2ed\uc2dc\uc624.'});

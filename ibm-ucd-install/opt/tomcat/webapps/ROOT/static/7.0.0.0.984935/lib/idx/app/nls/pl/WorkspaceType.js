@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/pl/WorkspaceType",{loadingMessage:"\u0141adowanie ${workspaceTitle}.  Prosz\u0119 czeka\u0107...",failedLoadMessage:"\u0141adowanie ${workspaceTitle} nie powiod\u0142o si\u0119."});

@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 4.8.x/5.x
+-->
+
+<change-set release="4.8">
+   <library name="workflow"
+       release="1.0"
+       base-dir="../workflow"
+       file="../workflow/derby/upgrade_sql_1.0.xml"
+       version-table="wf_db_version"
+       release-column="release_name"
+       version-column="ver"/>
+   <library name="property"
+       release="1.0"
+       base-dir="../property-sheets"
+       file="../property-sheets/derby/upgrade_sql_1.0.xml"
+       version-table="ps_db_version"
+       release-column="release_name"
+       version-column="ver"/>
+   <library name="vc"
+       release="1.0"
+       base-dir="../vc"
+       file="../vc/derby/upgrade_sql_1.0.xml"
+       version-table="vc_db_version"
+       release-column="release_name"
+       version-column="ver"/>
+
+  <change number="39">
+    <description>Adding a list of processes to exempt from approval on an environment</description>
+    <groovy file="all/upgrade-scripts-48/upgrade_039_check_db_version.groovy" />
+    <sql separator=";">
+        alter table ds_environment add column exempt_process_ids varchar(4000);
+    </sql>
+  </change>
+  <change number="40">
+    <description>Changing the event_data column on cal_entry and cal_recurring_entry from type varchar to clob</description>
+    <sql separator=";">
+        alter table cal_entry add column event_data_new clob;
+        update cal_entry set event_data_new = event_data;
+        alter table cal_entry alter column event_data_new not null;
+        alter table cal_entry drop column event_data;
+        rename column cal_entry.event_data_new to event_data;
+        alter table cal_recurring_entry add column event_data_new clob;
+        update cal_recurring_entry set event_data_new = event_data;
+        alter table cal_recurring_entry alter column event_data_new not null;
+        alter table cal_recurring_entry drop column event_data;
+        rename column cal_recurring_entry.event_data_new to event_data;
+    </sql>
+  </change>
+  <change number="41">
+    <description>Add pattern column to property definition</description>
+    <changeref library="property" change="6"/>
+  </change>
+  <change number="42">
+    <description>Alter reporting table to only have length of 255 for indexing purposes.</description>
+    <sql separator=";">
+    </sql>
+  </change>
+  <change number="43">
+    <description>Add relay_id column to ds_agent table.</description>
+    <sql separator=";">
+        alter table ds_agent add column relay_id varchar(64);
+    </sql>
+  </change>
+  <change number="44">
+    <description>Make encryption keystore alias unique</description>
+    <groovy file="all/upgrade-scripts-48/upgrade_044_make_encryption_alias_unique_derby.groovy"/>
+  </change>
+  <change number="45">
+    <description>Adding security for the Processes tab</description>
+    <sql separator=";">
+        insert into sec_action (id, version, name, description, enabled, cascading, sec_schema_id)
+        values ('20000000000000000000000000001009', 0, 'Processes', 'View the processes tab.', 'Y', 'Y', '20000000000000000000000000000020');
+
+        insert into sec_role_to_action (sec_role_id, sec_action_id)
+        select sec_role_id, '20000000000000000000000000001009'
+        from sec_role_to_action
+        where sec_action_id = '20000000000000000000000000001007';
+    </sql>
+  </change>
+  <change number="46">
+    <description>Adding the default production license</description>
+    <groovy file="all/upgrade-scripts-48/upgrade_046_add_default_production_license.groovy"/>
+  </change>
+  <change number="47">
+    <description>Alter dynamic roles to allow for names longer than 64 characters</description>
+  </change>
+  <change number="48">
+    <description>Adding a table for tracking the latest version of persistents</description>
+    <changeref library="vc" change="2"/>
+  </change>
+  <change number="49">
+    <description>Adding a table for synchronizing use of vc_commit</description>
+    <changeref library="vc" change="3"/>
+  </change>
+  <change number="50">
+    <description>Changing ds_sa_message to track handled date for cleanup</description>
+    <sql separator=";">
+        drop table ds_sa_message;
+        create table ds_sa_message (
+            id varchar(36) not null primary key,
+            version numeric default 0 not null,
+            handled_date bigint not null
+        );
+    </sql>
+  </change>
+  <change number="51">
+    <description>Incorporating workflow change to support continuation arguments</description>
+    <changeref library="workflow" change="15"/>
+  </change>
+  <change number="52">
+      <description>Adding support for HTTP property definitions</description>
+      <changeref library="property" change="8"/>
+  </change>
+  <change number="53">
+    <description>Indexing join column for finding latest versions by path/directory</description>
+    <changeref library="vc" change="5"/>
+  </change>
+  <change number="54">
+    <description>Add placeholder property to ps_prop_def</description>
+    <changeref library="property" change="9"/>
+  </change>
+  <change number="55">
+    <changeref library="workflow" change="16"/>
+  </change>
+  <change number="56">
+    <description>Harvest the workflow data to populate metadata table</description>
+    <groovy file="all/upgrade-scripts-48/upgrade_056_collecting_trace_metadata.groovy"/>
+  </change>
+    <change number="57">
+        <description>Add tables and columns for tracking apikeys and agent certificates</description>
+        <sql separator=";">
+          create table ds_apikey (
+              id varchar(36) not null primary key,
+              version integer default 0 not null,
+              apikey varchar(64) not null,
+              secretkey varchar(255) not null,
+              sec_user_id varchar(36) not null,
+              disabled varchar(1) default 'N' not null,
+              date_created bigint not null,
+              expiration bigint default 0 not null
+          );
+
+          alter table ds_agent add column apikey_id varchar(36);
+          alter table ds_agent add column jms_cert clob;
+
+          alter table ds_agent add constraint agent_2_apikey foreign key(apikey_id) references ds_apikey(id);
+          alter table ds_apikey add constraint apikey_2_user foreign key(sec_user_id) references sec_user(id);
+
+          create unique index ds_apikey_uci on ds_apikey(apikey);
+          create index ds_apikey_user_id on ds_apikey(sec_user_id);
+          create index ds_agn_key_endptid on ds_agent(apikey_id, endpoint_id);
+        </sql>
+    </change>
+
+<!--
+- REMINDER: Upgrades for product version 4.8.x/5.x. Place additions above this comment
+-->
+</change-set>

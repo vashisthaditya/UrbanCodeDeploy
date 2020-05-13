@@ -1,0 +1,115 @@
+{
+	identifier: "clazz",
+	label: "clazz",
+	items: [
+		{
+			clazz: "dijit.form.ValidationTextBox", 
+			group: "dojo",
+			templates: [{
+				_type: "widgetPoprs",
+				description: "Dijit ValidationTextBox",
+				declaration: "<div><label>dijit.form.ValidationTextBox</label></div><input data-dojo-type='dijit/form/ValidationTextBox' data-dojo-props='\"value\":\"Dojo toolkit\"'></input>"
+			}]
+		},{
+			clazz: "dijit.form.CheckBox", 
+			group: "dojo",
+			templates: [{
+				_type: "widgetPoprs",
+				description: "Dijit CheckBox",
+				declaration: "<div data-dojo-type='dijit/form/CheckBox' data-dojo-props='\"checked\":true'></div><label>dijit.form.CheckBox</label>"
+			}]
+		},{
+			clazz: "dijit.form.ComboBox",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit ComboBox",
+				declaration: "<div><label>dijit.form.ComboBox</label></div><div data-dojo-type='dijit/form/ComboBox' data-dojo-props='\"store\":testStoreLong,\"searchAttr\":\"name\",\"value\":\"New York\"'></div>"
+			}]
+		},{
+			clazz: "dijit.form.CurrencyTextBox",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit CurrencyTextBox",
+				declaration: "<div><label>dijit.form.CurrencyTextBox</label></div><input data-dojo-type='dijit/form/CurrencyTextBox' data-dojo-props='\"currency\":\"USD\",\"value\":100'></input>"
+			}]
+		},{
+			clazz: "dijit.form.DateTextBox",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit DateTextBox",
+				declaration: "<div><label>dijit.form.DateTextBox</label></div><input data-dojo-type='dijit/form/DateTextBox' data-dojo-props='\"displayedValue\":\"4/1/2012\"'></input>"
+			}]
+		},{
+			clazz: "dijit.form.FilteringSelect",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit FilteringSelect",
+				declaration: "<div><label>dijit.form.FilteringSelect</label></div><div data-dojo-type='dijit/form/FilteringSelect' data-dojo-props='\"store\":testStoreLong,\"searchAttr\":\"name\",\"value\":\"New York\"'></div>"
+			}]
+		},{
+			clazz: "dijit.form.NumberSpinner",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit NumberSpinner",
+				declaration: "<div><label>dijit.form.NumberSpinner</label></div><div data-dojo-type='dijit/form/NumberSpinner' data-dojo-props='\"value\":100'></div>"
+			}]
+		},{
+			clazz: "dijit.form.NumberTextBox",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit NumberTextBox",
+				declaration: "<div><label>dijit.form.NumberTextBox</label></div><div data-dojo-type='dijit/form/NumberTextBox' data-dojo-props='\"value\":100'></div>"
+			}]
+		},{
+			clazz: "dijit.form.RadioButton",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit RadioButton",
+				declaration: "<input data-dojo-type='dijit/form/RadioButton' data-dojo-props='\"name\":\"dijitRadio\"'></input><label>dijit.form.RadioButton</label>"
+			}]
+		},{
+			clazz: "dijit.form.Select",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit Select",
+				declaration: "<div><label>dijit.form.Select</label></div><div data-dojo-type='dijit/form/Select' data-dojo-props='\"options\":[{\"value\":\"TN\",\"selected\":\"selected\",\"label\":\"Tennessee\"},{\"value\":\"VA\",\"label\":\"Virginia\"},{\"value\":\"WA\",\"label\":\"Washington\"},{\"value\":\"FL\",\"label\":\"Florida\"},{\"value\":\"CA\",\"label\":\"California\"}]'></div>"
+			},{
+				_type: "widgetProps",
+				description: "Dijit Select with data store",
+				declaration: "<div><label>dijit.form.Select</label></div><div data-dojo-type='dijit/form/Select' data-dojo-props='\"store\":testStoreShort'></div>"
+			}]
+		},{
+			clazz: "dijit.form.Textarea",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit Textarea",
+				declaration: "<div><label>dijit.form.Textarea</label></div><input data-dojo-type='dijit/form/Textarea' data-dojo-props='\"value\":\"Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\"'></input>"
+			}]
+		},{
+			clazz: "dijit.form.TimeTextBox",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit TimeTextBox",
+				declaration: "<div><label>dijit.form.TimeTextBox</label></div><input data-dojo-type='dijit/form/TimeTextBox' data-dojo-props='\"displayedValue\":\"12:00 PM\"'></input>"
+			}]
+		},{
+			clazz: "dijit.Tree",
+			group: "dojo",
+			templates:[{
+				_type: "widgetProps",
+				description: "Dijit TimeTextBox",
+				declaration: "<div data-dojo-type='dijit/Tree' data-dojo-props='\"model\":treeModel,\"autoExpand\":true,\"openOnClick\":true'></div>"
+			}]
+		}			
+	]
+}

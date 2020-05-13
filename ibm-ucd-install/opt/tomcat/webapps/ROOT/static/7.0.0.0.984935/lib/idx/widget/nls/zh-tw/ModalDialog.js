@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/zh-tw/ModalDialog",{Error:"\u932f\u8aa4",Warning:"\u8b66\u544a",Information:"\u8cc7\u8a0a",Success:"\u6210\u529f",Confirmation:"\u78ba\u8a8d",Question:"\u554f\u984c",closeButtonLabel:"\u95dc\u9589",cancelButtonLabel:"\u53d6\u6d88",executeButtonLabel:"\u78ba\u5b9a",checked:"\u4e0d\u8981\u518d\u6b21\u8a62\u554f"});

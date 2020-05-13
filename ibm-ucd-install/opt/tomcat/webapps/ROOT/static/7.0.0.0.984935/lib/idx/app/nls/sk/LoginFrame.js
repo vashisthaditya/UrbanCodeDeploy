@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/sk/LoginFrame",{loginTitle:"Prihl\u00e1si\u0165",labelUserName:"Meno u\u017e\u00edvate\u013ea",labelPassword:"Heslo",invalidMessageTitle:"Neplatn\u00fd pokus o prihl\u00e1senie",invalidMessage:"V oboch povinn\u00fdch poliach nie je zadan\u00e1 platn\u00e1 hodnota."});

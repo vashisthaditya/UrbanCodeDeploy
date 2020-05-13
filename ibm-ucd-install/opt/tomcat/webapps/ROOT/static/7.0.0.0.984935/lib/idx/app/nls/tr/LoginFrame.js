@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/tr/LoginFrame",{loginTitle:"Oturum A\u00e7",labelUserName:"Kullan\u0131c\u0131 ad\u0131",labelPassword:"Parola",invalidMessageTitle:"Ge\u00e7ersiz Oturum A\u00e7ma Giri\u015fimi",invalidMessage:"Her iki zorunlu alana ge\u00e7erli bir de\u011fer girilmedi."});

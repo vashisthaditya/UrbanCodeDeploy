@@ -1,0 +1,842 @@
+@import '../carbon/globals/import-once';
+
+@mixin webextWidgetsrtl {
+    /*
+    * Licensed Materials - Property of IBM* and/or HCL**
+    * UrbanCode Deploy
+    * (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+    * (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+    *
+    * U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+    * GSA ADP Schedule Contract with IBM Corp.
+    *
+    * * Trademark of International Business Machines
+    * ** Trademark of HCL Technologies Limited
+    */
+    
+    .rtl-ui .margin2Left {
+    	margin-left: 0;
+    	margin-right: 2px;
+    }
+    
+    .rtl-ui .margin5Left {
+    	margin-left: 0;
+    	margin-right: 5px;
+    }
+    
+    .rtl-ui .logContainer {
+    	right: 0px;
+    	left: 0px;
+    }
+    
+    .rtl-ui .linesContainer {
+    	padding: 6px 0px;
+    	border-right: none;
+    	border-left: 1px solid #444488;
+    }
+    
+    .rtl-ui .linesContainer>div {
+    	padding: 0px 6px;
+    }
+    
+    .rtl-ui .logText {
+    	left: auto;
+    	right: 49px;
+    	padding: 6px 0px;
+    	padding-left: 0;
+    	padding-right: 0px;
+    }
+    
+    .rtl-ui .logText>div {
+    	padding: 0px 6px;
+    }
+    
+    .rtl-ui .mainContainer {
+    	padding: 10px 20px 20px 20px;
+    }
+    
+    .rtl-ui .dj_ie7 .mainContainer {
+    	padding-top: 1px;
+    }
+    
+    .rtl-ui .navLink {
+    	margin-bottom: 10px;
+    }
+    
+    .rtl-ui .navLinkSeparator {
+    	padding: 0px 4px;
+    	margin-bottom: 10px;
+    }
+    
+    .rtl-ui .labelsAndValues-row {
+    	margin: 6px 0px;
+    }
+    
+    .rtl-ui .labelsAndValues-labelCell {
+    	text-align: left;
+    	padding-top: 3px;
+    }
+    
+    .rtl-ui .labelsAndValues-valueCell {
+    	padding-left: 0;
+    	padding-right: 13px;
+    }
+    
+    .rtl-ui .labelsAndValues-helpCell {
+    	margin: 1px 8px 0 0;
+    }
+    
+    .rtl-ui .labelsAndValuesConfig-labelCell {
+    	padding-left: 0;
+    	padding-right: 5px;
+    }
+    
+    .rtl-ui .labelsAndValuesConfig-valueCell {
+    	padding-left: 0;
+    	padding-right: 20px;
+    }
+    
+    .rtl-ui .filterBox {
+    	float: right;
+    	padding: 10px 15px;
+    	margin-right: 0;
+    	margin-left: 18px;
+    }
+    
+    .rtl-ui .stackedLabel {
+    	padding: 6px 0 1px 0;
+    }
+    
+    .rtl-ui .deleteIcon {
+    	left: auto;
+    	right: 2px;
+    }
+    
+    .rtl-ui .editDependency .dijitSelect {
+    	margin: 0px;
+    }
+    
+    .rtl-ui .editDependency .dijitButton .dijitButtonNode {
+    	margin-top: 0px;
+    }
+    
+    .rtl-ui .underFieldTip {
+    	margin-left: 0;
+    	margin-right: 196px;
+    }
+    
+    .rtl-ui .underFieldText {
+    	margin-left: 0;
+    	margin-right: 196px;
+    }
+    
+    .rtl-ui .underField {
+    	margin-left: 0;
+    	margin-right: 208px;
+    }
+    
+    .rtl-ui .dijitDialog .dijitDialogPaneContent .underField, .rtl-ui .dijitDialog .columnForm .underField {
+    	margin: 24px -4px 10px  !important;
+    	float: left;
+    }
+    
+    .rtl-ui .required {
+    	margin-left: 0;
+    	margin-right: 3px;
+    }
+    
+    .rtl-ui .wideFormLabel {
+    	padding-left: 0;
+    	padding-right: 20px;
+    	margin-top: 15px;
+    	margin-bottom: 5px;
+    }
+    
+    .rtl-ui .wideFormSubLabel {
+    	padding-left: 0;
+    	padding-right: 30px;
+    	margin-top: 8px;
+    	margin-bottom: 3px;
+    }
+    
+    .rtl-ui .raisedFormElement {
+    	margin: 0px 2px  !important;
+    }
+    
+    .rtl-ui .raisedFormElement .dijitButtonNode {
+    	margin-top: 0px  !important;
+    }
+    
+    .rtl-ui .sectionLabel {
+    	padding-bottom: 3px;
+    	margin-bottom: 6px;
+    	margin-top: 15px;
+    }
+    
+    .rtl-ui .actionsLink {
+    	margin-right: 0;
+    	margin-left: 8px;
+    }
+    
+    .rtl-ui .radioButtonGroup .radioButtonLabel {
+    	margin-bottom: 4px;
+    }
+    
+    .rtl-ui .last {
+    	clear: left;
+    }
+    
+    .rtl-ui .first {
+    	clear: right;
+    }
+    
+    .rtl-ui .clearFloats {
+    	clear: both;
+    }
+    
+    .rtl-ui .innerContainer {
+    	padding: 0px 30px;
+    }
+    
+    .rtl-ui .containerLabel {
+    	padding-left: 0;
+    	padding-right: 30px;
+    	padding-top: 15px;
+    }
+    
+    .rtl-ui .innerContainer .description {
+    	margin-bottom: 5px;
+    	margin-left: 0;
+    	margin-right: 3px;
+    }
+    
+    .rtl-ui .innerContainerLabel {
+    	margin: 0 0 3px 0;
+    }
+    
+    .rtl-ui #popupContainer {
+    	left: auto;
+    	right: 0px;
+    }
+    
+    .rtl-ui .upperTabs {
+    	margin-left: 0;
+    	margin-right: 2px;
+    }
+    
+    .rtl-ui .footer {
+    	text-align: center;
+    }
+    
+    .rtl-ui .treeTableHeader .th, .rtl-ui .headerTreeRow .th {
+    	padding: 2px 5px;
+    	border-right: none;
+    	border-left: solid 1px #5689c6;
+    }
+    
+    .rtl-ui .treeTableHeader .th:last-child, .rtl-ui .treeTableCell:last-child {
+    	border-right: none;
+    	border-left: none;
+    }
+    
+    .rtl-ui div.clear {
+    	clear: both;
+    }
+    
+    .rtl-ui .exp, .rtl-ui .col {
+    	float: right;
+    	margin: 2px 0 0 5px;
+    }
+    
+    .rtl-ui .emptyTree {
+    	text-align: center;
+    	padding: 10px 0px;
+    }
+    
+    .rtl-ui .loadingBox {
+    	margin: 10px auto;
+    	text-align: center;
+    }
+    
+    .rtl-ui .loadingBoxBorder {
+    	margin: 10px auto;
+    	text-align: center;
+    	padding: 10px;
+    }
+    
+    .rtl-ui .jsonRestTree .treeTableCell {
+    	padding: 5px 5px 1px 5px;
+    	border-right: none;
+    	border-left: solid 1px #fff;
+    }
+    
+    .rtl-ui .successAlert {
+    	padding: 5px;
+    	text-align: center;
+    }
+    
+    .rtl-ui .errorText, .rtl-ui .genericDetail .detailField.errorText {
+    	padding: 4px;
+    }
+    
+    .rtl-ui .helpImage {
+    	margin-left: 0;
+    	margin-right: 3px;
+    }
+    
+    .rtl-ui .container {
+    	padding: 1em 1em;
+    }
+    
+    .rtl-ui .clear {
+    	clear: both;
+    }
+    
+    .rtl-ui table.login {
+    	margin-right: auto;
+    	margin-left: auto;
+    }
+    
+    .rtl-ui table.login td.label {
+    	text-align: left;
+    	margin-right: 0;
+    	margin-left: 20px;
+    }
+    
+    .rtl-ui #tabManagerContainerId {
+    	margin: 0 13px;
+    }
+    
+    .rtl-ui .noPadding {
+    	padding: 0px  !important;
+    }
+    
+    .rtl-ui .noMargin {
+    	margin: 0px  !important;
+    }
+    
+    .rtl-ui .webextTable {
+    	margin-top: 15px;
+    }
+    
+    .rtl-ui .dj_ie7 .webextTable > table {
+    	margin: auto;
+    }
+    
+    .rtl-ui .webextTable > table > tbody > tr .cellWrapper {
+    	padding: 7px;
+    }
+    
+    .rtl-ui .webextTable > table > thead > tr > td {
+    	padding: 4px 0;
+    	text-align: center;
+    }
+    
+    .rtl-ui .webextTable th {
+    	padding: 7px;
+    }
+    
+    .rtl-ui .webextTable .tableHoverActions {
+    	right: auto;
+    	left: 0px;
+    }
+    
+    .rtl-ui .webextTable td .tableHoverActions .dijitButton,.rtl-ui  .webextTable td .tableHoverActions .dijitDropDownButton {
+    	margin: 0px;
+    }
+    
+    .rtl-ui .webextTable td .tableHoverActions .dijitButtonNode {
+    	padding-top: 0px  !important;
+    	padding-bottom: 0px  !important;
+    }
+    
+    .rtl-ui .webextTable td .tableHoverActions .dijitButtonNode {
+    	border-left: none;
+    	border-right: 1px solid #dbdbdb;
+    }
+    
+    .rtl-ui .webextTable td .tableHoverActions .dijitButtonText {
+    	padding-right: 0;
+    	padding-left: 0.3em;
+    }
+    
+    .rtl-ui .webextTable td .tableHoverActions .dijitButtonContents {
+    	margin-top: 6px;
+    }
+    
+    .rtl-ui .webextTable td .tableHoverActions .dijitDropDownButton .dijitButtonContents {
+    	margin-top: 5px;
+    }
+    
+    .rtl-ui .webextTable .sortImageWrapper {
+    	right: auto;
+    	left: 2px;
+    	margin-left: 0;
+    	margin-right: 10px;
+    }
+    
+    .rtl-ui .webextTable .noDataRow td {
+    	text-align: center;
+    	padding-top: 7px;
+    	padding-bottom: 6px;
+    }
+    
+    .rtl-ui .webextTable .webextTableFooter a, .rtl-ui .webextTable .webextTableFooter span {
+    	margin: 0px 4px;
+    }
+    
+    .rtl-ui .webextTable .webextTableFooter span {
+    	text-align: right;
+    }
+    
+    .rtl-ui .webextTable .webextTableFooter .numberOfItemsContainer {
+    	float: right;
+    }
+    
+    .rtl-ui .webextTable .webextTableFooter > div {
+    	padding: 5px 0;
+    }
+    
+    .rtl-ui .webextTable .webextTableFooter .perPage {
+    	float: left;
+    }
+    
+    .rtl-ui .webextTable .webextTableFooter .pageNumbers {
+    	text-align: center;
+    }
+    
+    .rtl-ui .webextTable th .dijitCheckBox, .rtl-ui .webextTable td .dijitCheckBox, .rtl-ui .webextTable td .dijitRadio {
+    	margin-right: 0;
+    	margin-left: 0px;
+    }
+    
+    .rtl-ui .webextTable td .dijitCheckBox, .rtl-ui .webextTable td .dijitRadio {
+    	margin-left: 0;
+    	margin-right: 2px;
+    }
+    
+    .rtl-ui .codestationSearchDialog .dijitDialogTitleBar {
+    	padding-bottom: 0  !important;
+    }
+    
+    .rtl-ui .codestationSearchDialog .dijitDialogPaneContent {
+    	padding: 0  !important;
+    }
+    
+    .rtl-ui .closeDialogIcon {
+    	float: left;
+    }
+    
+    .rtl-ui .dialogMultiSelectDialog label {
+    	margin: 2px;
+    }
+    
+    .rtl-ui .treeTable .collapseSpace {
+    	margin: -4px 0px;
+    }
+    
+    .rtl-ui .treeTable td.dojoDndHandle {
+    	padding: 5px 4px;
+    }
+    
+    .rtl-ui .treeTable td .expandableCellContent {
+    	margin-left: 0;
+    	margin-right: 17px;
+    }
+    
+    .rtl-ui .treeTable .expandCollapse {
+      left: 0px;
+      right:auto;
+    }
+    
+    .rtl-ui .webextTable .pageNumbers .dijitTextBox .dijitInputField {
+    	padding: 3px 0px;
+    }
+    
+    .rtl-ui .popDown .popDownHeader {
+    	margin-bottom: 6px;
+    	padding-left: 0;
+    	padding-right: 14px;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneContainer {
+    	margin: 20px;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneList {
+    	float: right;
+    	border-right: none;
+    	border-left: 2px solid #d2d2d2;
+    }
+    
+    .rtl-ui .innerContainer .twoPaneManager .twoPaneContainer {
+    	border-right: none;
+    	border-left: 2px solid #666666;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneDetail {
+    	margin-left: 0;
+    	margin-right: 225px;
+    	border-left: none;
+    	border-right: 1px solid #d2d2d2;
+    }
+    
+    .rtl-ui .innerContainer .twoPaneManager .twoPaneDetail {
+    	border-left: none;
+    	border-right: 2px solid #666666;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneDetailPadding {
+    	padding: 0px 20px 15px 20px;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneDetailPadding .containerLabel {
+    	padding-left: 0;
+    	padding-right: 0px !important;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneEntry {
+    	padding: 4px 10px;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneEntry .twoPaneActionIcons {
+    	float: left;
+    	padding-right: 0;
+    	padding-left: 7px;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneEntry .twoPaneArrow {
+    	right: auto;
+    	left: 4px;
+    }
+    
+    .rtl-ui .twoPaneManager .twoPaneManager {
+    	margin-top: -1px;
+    	margin-right: -10px;
+    	margin-left: -10px;
+    	margin-bottom: -16px;
+    }
+    
+    .rtl-ui .tabManager {
+    	margin-top: 10px;
+    }
+    
+    .rtl-ui #secondLevelTabs .tabManager {
+    	margin-left: 0;
+    	margin-right: 30px;
+    }
+    
+    .rtl-ui .tabManager .tab {
+    	margin-right: 0;
+    	margin-left: 2px;
+    	padding: 0px 14px;
+    	text-align: center;
+    	border-right: none;
+    	border-left: 1px solid #d2d2d2;
+    }
+    
+    .rtl-ui .tabManager .tab:last-child {
+    	border-right: none;
+    	border-left: none;
+    }
+    
+    .rtl-ui .tabManager .tab.selected {
+    	padding: 8px 14px 8px;
+    	margin-left: 0;
+    	margin-right: -3px;
+    	margin-bottom: -1px;
+    }
+    
+    .rtl-ui .tabManager .tab.selected:first-child {
+    	margin-left: 0;
+    	margin-right: 0px;
+    }
+    
+    .rtl-ui .topLevelTabs {
+    	padding: 0 30px;
+    }
+    
+    .rtl-ui .topLevelTabs .tabManager {
+    	margin-top: 0px;
+    }
+    
+    .rtl-ui .topLevelTabs .tabManager .tab {
+    	margin: 0 -1px;
+    	border-left: 1px solid transparent;
+    	border-right: 1px solid transparent;
+    	padding: 0px;
+    }
+    
+    .rtl-ui .topLevelTabs .tabManager .tabLabel {
+    	padding: 0px 16px;
+    	border-right: 1px solid transparent;
+    	border-left: 1px solid #dbdbdb;
+    }
+    
+    .rtl-ui .topLevelTabs .tabManager .tab:last-child .tabLabel {
+    	border-right: none;
+    	border-left: 1px solid transparent;
+    }
+    
+    .rtl-ui .topLevelTabs .tabManager .tab:first-child .tabLabel {
+    	border-left: none;
+    	border-right: 1px solid transparent;
+    }
+    
+    .rtl-ui .topLevelTabs .tabManager .tab:hover, .rtl-ui .topLevelTabs .tabManager .tab.selected {
+    	border-left: 1px solid #d2d2d2;
+    	border-right: 1px solid #d2d2d2;
+    }
+    
+    .rtl-ui .topLevelTabs .tabManager .tab:hover .tabLabel,.rtl-ui  .topLevelTabs .tabManager .tab.selected .tabLabel {
+    	border-left: 1px solid transparent;
+    	border-right: 1px solid transparent;
+    }
+    
+    .rtl-ui .topLevelTabs .tabManager .tab.selected:first-child {
+    	margin: 0 -1px;
+    }
+    
+    .rtl-ui .pagerItem {
+    	margin: 0px 4px;
+    }
+    
+    @media only screen
+    and (min-width: 1300px)
+    and (max-width: 1600px) {
+        .topLevelTabs .tabManager.overflow-tabs-1400 .tab,
+        .topLevelTabs .tabManager.overflow-tabs-1600 .tab {
+            border-bottom: 1px solid #DBDBDB;
+            border-right: 1px solid #D2D2D2;
+            border-left: 1px solid #D2D2D2;
+            margin: 0 0 0 -1px;
+        }
+        .topLevelTabs .tabManager.overflow-tabs-1400 .tabLabel,
+        .topLevelTabs .tabManager.overflow-tabs-1600 .tabLabel {
+            padding: 0 !important;
+            margin: 0 0 0 -2px;
+        }
+        .tabManager.overflow-tabs-1100 .tab.selected:first-child,
+        .tabManager.overflow-tabs-1200 .tab.selected:first-child {
+            margin: 0 -1px 0 0;
+        }
+    }
+    
+    @media only screen
+    and (min-width: 1100px)
+    and (max-width: 1300px) {
+        .topLevelTabs .tabManager.overflow-tabs-1100 .tab,
+        .topLevelTabs .tabManager.overflow-tabs-1200 .tab {
+            border-bottom: 1px solid #DBDBDB;
+            border-right: 1px solid #D2D2D2;
+            border-left: 1px solid #D2D2D2;
+            margin: 0 -1px 0 0;
+        }
+        .topLevelTabs .tabManager.overflow-tabs-1100 .tabLabel,
+        .topLevelTabs .tabManager.overflow-tabs-1200 .tabLabel {
+            padding: 0 !important;
+            margin: 0 -2px 0 0;
+        }
+        .tabManager.overflow-tabs-1100 .tab.selected:first-child,
+        .tabManager.overflow-tabs-1200 .tab.selected:first-child {
+            margin: 0 0 0 -1px;
+        }
+    }
+    
+    @media only screen
+    and (max-width: 1100px) {
+        .topLevelTabs .tabManager.overflow-tabs .tab {
+            border-right: 1px solid #D2D2D2;
+            border-left: 1px solid #D2D2D2;
+            margin: 0 -1px 0 0;
+        }
+        .topLevelTabs .tabManager.overflow-tabs .tabLabel {
+            padding: 0 !important;
+            margin: 0 -2px 0 0;
+        }
+        .tabManager.overflow-tabs .tab.selected:first-child {
+            margin: 0 -1px 0 0;
+        }
+    }
+    
+    .rtl-ui .pageAlerts .pageAlert {
+      padding: 10px 15px;
+      margin: 5px 30px;
+     }
+    
+    .rtl-ui .pageAlerts .pageAlert .dismiss {
+    	float: left;
+    	margin: -15px -11px;
+    }
+    
+    .rtl-ui .genericDetail {
+    	padding: 10px 30px 100px;
+    	margin-top: 10px;
+    	margin-bottom: -84px;
+    }
+    
+    .rtl-ui .genericDetail .detailField {
+    	text-align: left;
+    }
+    
+    .rtl-ui .genericDetail .detailDiv {
+    	margin-top: 3px;
+    }
+    
+    .rtl-ui .genericDetail .detailContainer {
+    	float: right;
+    	padding-top: 3px;
+    	padding-bottom: 5px;
+    }
+    
+    .rtl-ui .genericDetail.withDescription .detailContainer {
+    	border-right: none;
+    	border-left: 1px solid #000000;
+    }
+    
+    .rtl-ui .genericDetail .descriptionContainer {
+    	border-left: none;
+    	border-right: 1px solid black;
+    	padding-left: 0;
+    	padding-right: 30px;
+    	padding-bottom: 5px;
+    	margin-left: 0;
+    	margin-right: 390px;
+    }
+    
+    .rtl-ui .genericDetail.noProperties .descriptionContainer {
+    	margin-left: 0;
+    	margin-right: 0px;
+    	border-left: none;
+    	border-right: none;
+    }
+    
+    .rtl-ui .genericDetail .detailDescriptionLabel {
+    	margin-top: 9px;
+    }
+    
+    .rtl-ui .genericDetail .detailDescription {
+    	margin-top: 9px;
+    }
+    
+    .rtl-ui .dijitTextBox .dijitButtonNode, .rtl-ui .dijitSelect .dijitButtonNode {
+    	padding: 0 3px;
+    }
+    
+    .rtl-ui .dijitMenu.dijitComboBoxMenu, .rtl-ui .dijitPopup.dijitMenuPopup .dijitMenu {
+    	margin: 5px 0 0;
+    	padding: 0;
+    }
+    
+    .rtl-ui .dijitComboBoxMenu .dijitMenuItem, .rtl-ui .dijitPopup.dijitMenuPopup .dijitMenuTable .dijitMenuItem td {
+    	margin-top: -1px;
+    	padding: 6px 3px;
+    }
+    
+    .rtl-ui .dijitPopup.dijitMenuPopup .dijitSelectMenu .dijitMenuItem .dijitMenuItemLabel {
+    	padding: 6px 10px;
+    }
+    
+    .rtl-ui .dijitComboBoxMenu .dijitMenuItem:first-child, .rtl-ui .dijitComboBoxMenu .dijitMenuItem:nth-child(2), .rtl-ui .dijitPopup.dijitMenuPopup .dijitMenuTable .dijitMenuItem:first-child td {
+    	margin-top: 0;
+    }
+    
+    .rtl-ui .dijitComboBoxMenu .dijitMenuPreviousButton {
+    	margin-bottom: -1px;
+    }
+    
+    .rtl-ui .dijitComboBoxMenu .dijitMenuItem:last-child, .rtl-ui .dijitComboBoxMenu .dijitMenuItem:nth-last-child(2), .rtl-ui .dijitSelectMenu .dijitMenuItem:last-child td {
+    	margin-bottom: 0;
+    }
+    
+    .rtl-ui .menu-item-none-item {
+    	text-align: center;
+    }
+    
+    .rtl-ui .oneuiHeaderGlobalActionsMenu .dijitMenu.dijitMenuTable, .rtl-ui .dijitMenu.oneuiHeaderGlobalActionsMenu {
+    	margin: 0  !important;
+    }
+    
+    .rtl-ui .oneuiHeaderGlobalActionsMenu .dijitMenu.dijitMenuTable .dijitMenuArrowCell {
+    	padding: 0 4px 0 8px  !important;
+    }
+    
+    .rtl-ui .dijitComboBoxMenu .dijitMenuItem {
+    	padding: 6px 10px;
+    }
+    
+    .rtl-ui .filtering-scroll-select .clear-container {
+    	right: auto;
+    	left: 22px;
+    	padding: 5px 3px 3px 1px;
+    }
+    
+    .rtl-ui .filtering-scroll-select .selected-items-list {
+    	margin-bottom: 4px;
+    }
+    
+    .rtl-ui .filtering-scroll-select .selected-items-list .selected-item-container {
+    	margin: 0 0 4px 0;
+    }
+    
+    .rtl-ui .filtering-scroll-select .clear-selected-items {
+    	text-align: center;
+    	margin: 4px 0;
+    }
+    
+    .rtl-ui .filtering-scroll-select .selected-items-list .selected-item-container .selected-item-label {
+    	margin: 1px 4px;
+    	padding: 1px 0;
+    }
+    
+    .rtl-ui .filtering-scroll-select .selected-items-list .selected-item-container .remove-selected-item {
+    	padding: 1px 4px;
+    	float: left;
+    	border-left: none;
+    	border-right: 1px solid #FFF;
+    }
+    
+    .rtl-ui .filtering-scroll-select .selected-items-list .selected-item-container .remove-selected-item:hover {
+    	border-left-color: none;
+    	border-right-color: #00649D;
+    	-moz-border-top-right-radius: none;
+    	-moz-border-top-left-radius: 2px;
+    	-moz-border-bottom-right-radius: none;
+    	-moz-border-bottom-left-radius: 2px;
+    	border-top-right-radius: none;
+    	border-top-left-radius: 2px;
+    	border-bottom-right-radius: none;
+    	border-bottom-left-radius: 2px;
+    }
+    
+    .rtl-ui .color-picker > .selected-color-box-container {
+    	margin-top: 10px;
+    }
+    
+    .rtl-ui .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper {
+    	padding: 5px 0;
+    }
+    
+    .rtl-ui .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper div {
+    	text-align: center;
+    	margin: 5px 10px;
+    }
+    
+    .rtl-ui .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper > .selected-color-box-converted-from-container > .color-converted-name {
+    	padding-top: 5px;
+    }
+    
+    .rtl-ui .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper > .selected-color-box-converted-from-container > .color-converted-color {
+    	margin: 5px auto;
+    }
+    
+    .rtl-ui .infinite-scroll-loading-more-container {
+    	text-align: center;
+    	margin-bottom: 400px;
+    }
+    
+}
+
+@include exports('webextWidgetsrtl') {
+    @include webextWidgetsrtl;
+}

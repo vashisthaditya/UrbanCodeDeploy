@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/de/_DateTimeTextBox",{idxTimeIconTitle:"Zum \u00d6ffnen der Auswahlfunktion f\u00fcr die Uhrzeit hier klicken",idxDateIconTitle:"Zum \u00d6ffnen der Auswahlfunktion f\u00fcr das Datum hier klicken"});

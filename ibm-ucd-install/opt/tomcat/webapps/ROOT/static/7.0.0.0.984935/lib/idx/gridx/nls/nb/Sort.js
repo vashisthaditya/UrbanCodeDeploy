@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/nb/Sort",{helpMsg:"${0} - Klikk for \u00e5 sortere eller Ctrl+klikk for \u00e5 legge til sortering",singleHelpMsg:"${0} - Klikk for \u00e5 sortere",priorityOrder:"sorteringsprioritet ${0}"});

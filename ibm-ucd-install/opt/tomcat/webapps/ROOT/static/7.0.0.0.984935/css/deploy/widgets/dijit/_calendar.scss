@@ -1,0 +1,11 @@
+@import '../../carbon/globals/import-once';
+
+@mixin dijit-calendar {
+    .dijitCalendar {
+    
+    }
+}
+
+@include exports('dijit-calendar') {
+    @include dijit-calendar;
+}

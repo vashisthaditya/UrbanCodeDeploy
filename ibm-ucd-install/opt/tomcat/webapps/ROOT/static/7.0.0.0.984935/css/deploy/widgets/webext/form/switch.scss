@@ -1,0 +1,121 @@
+@import '../../../carbon/globals/import-once';
+
+$shadow-color: #82D1F5;
+$highlight: #4178BE;
+
+@mixin switch {
+    .webext-switch{
+        min-width: 32px;
+        cursor: pointer;
+        position: relative;
+        white-space: nowrap;
+
+        &.webext-switch-disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .webext-switch-wrapper {
+            margin: 2px 0;
+            position: relative;
+        }
+
+        &.switch-on {
+            .webext-switch-container {
+                background-color: $brand-01;
+                border-radius: 100px;
+                border: 2px;
+                -webkit-transition: background-color 0.4s;
+                -moz-transition: background-color 0.4s;
+                transition: background-color 0.4s;
+            }
+
+            .webext-switch-handle {
+                left: 20px;
+                border: none;
+                background-color: $ui-01;
+            }
+        }
+
+        &.switch-off {
+            .webext-switch-handle {
+                background-color: $ui-05;
+                left: 3px;
+                .webext-switch-handle-check {
+                    display: none;
+                }
+            }
+        }
+
+        .webext-switch-handle {
+            height: 10px;
+            width: 10px;
+            border-radius: 10px;
+            top: 3px;
+            box-shadow: none;
+            text-align: center;
+            background-color: $ui-05;
+            position: absolute;
+            -webkit-transition: left 0.2s, width 0.2s, border-color 0.25s;
+            -moz-transition: left 0.2s, width 0.2s, border-color 0.25s;
+            transition: left 0.2s, width 0.2s, border-color 0.25s;
+
+            .webext-switch-handle-check {
+                fill: $highlight;
+                height: 100%;
+                transition: fill 0.4s;
+            }
+        }
+
+        .webext-switch-container {
+            height: 16px;
+            width: 32px;
+            border: 2px solid $ui-05;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border-radius: 20px;
+            background-color: $ui-01;
+            -webkit-transition: background-color 0.25s, border-color 0.5s, border-width 0.25s;
+            -moz-transition: background-color 0.25s, border-color 0.5s, border-width 0.25s;
+            transition: background-color 0.25s, border-color 0.5s, border-width 0.25s;
+        }
+
+        .webext-switch-label {
+            @include font-family;
+            vertical-align: top;
+            position: relative;
+            top: 3px;
+            margin: 0 10px;
+            font-size: 14px;
+            width: 200px;
+            white-space: normal;
+            text-align: left;
+            line-height: 14px;
+            font-weight: bold;
+        }
+
+        &.webext-switch-label-before .webext-switch-label {
+            text-align: right;
+        }
+    }
+
+    .webext-switch:focus .webext-switch-handle, .webext-switch:hover .webext-switch-handle {
+        border-color: $shadow-color;
+    }
+
+    .webext-switch-checkbox {
+        position: absolute;
+        top: 3px;
+        left: 10px;
+        display: none;
+    }
+
+    .webext-switch:focus .webext-switch-container, .webext-switch:hover .webext-switch-container {
+        box-shadow: 0 0 6px 0 $shadow-color;
+    }
+}
+
+@include exports('switch') {
+    @include switch;
+}

@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/ko/WorkspaceType",{loadingMessage:"${workspaceTitle}\uc744(\ub97c) \ub85c\ub4dc\ud558\ub294 \uc911\uc785\ub2c8\ub2e4. \uae30\ub2e4\ub9ac\uc2ed\uc2dc\uc624...",failedLoadMessage:"${workspaceTitle} \ub85c\ub4dc\uc5d0 \uc2e4\ud328\ud588\uc2b5\ub2c8\ub2e4."});

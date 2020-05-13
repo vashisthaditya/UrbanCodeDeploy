@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/ar/_InputListMixin",{invalidMessage:"\u064a\u062c\u0628 \u062a\u062d\u062f\u064a\u062f \u0628\u0646\u062f \u0648\u0627\u062d\u062f \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644."});

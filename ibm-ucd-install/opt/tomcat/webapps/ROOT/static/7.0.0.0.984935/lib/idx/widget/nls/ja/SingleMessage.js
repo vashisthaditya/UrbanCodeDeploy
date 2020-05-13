@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/ja/SingleMessage",{viewAll:"\u3059\u3079\u3066\u8868\u793a ({num})",viewDetails:"\u3055\u3089\u306b\u8a73\u3057\u304f\u8868\u793a",refresh:"\u6700\u65b0\u8868\u793a",showDetails:"\u8a73\u7d30\u306e\u8868\u793a",hideDetails:"\u8a73\u7d30\u306e\u975e\u8868\u793a"});

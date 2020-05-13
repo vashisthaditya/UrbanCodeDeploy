@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/el/EditController",{editLabel:"\u03a4\u03c1\u03bf\u03c0\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7",saveLabel:"\u0391\u03c0\u03bf\u03b8\u03ae\u03ba\u03b5\u03c5\u03c3\u03b7",cancelLabel:"\u0391\u03ba\u03cd\u03c1\u03c9\u03c3\u03b7"});

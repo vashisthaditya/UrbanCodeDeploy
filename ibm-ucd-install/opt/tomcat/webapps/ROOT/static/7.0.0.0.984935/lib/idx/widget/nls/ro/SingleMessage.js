@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/ro/SingleMessage",{viewAll:"Vizualizare tot ({num})",viewDetails:"Mai multe detalii",refresh:"Re\u00eemprosp\u0103tare",showDetails:"Afi\u015fare detalii",hideDetails:"Ascundere detalii"});

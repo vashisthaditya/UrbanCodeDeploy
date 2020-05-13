@@ -1,0 +1,2 @@
+//>>built
+define("idx/tooltips",["dojo/_base/lang","idx/main","dojo/_base/kernel","dijit/Tooltip","./util"],function(a,b,c){a=a.getObject("tooltips",!0,b);c.deprecated("idx.tooltips","idx.tooltips deprecated. The idx/tooltips module is no longer needed since Dojo 1.7");return a});

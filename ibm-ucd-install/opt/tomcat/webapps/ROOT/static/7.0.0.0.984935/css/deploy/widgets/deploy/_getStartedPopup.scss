@@ -1,0 +1,117 @@
+@import "../carbon/globals/colors";
+@import "../carbon/globals/vars";
+@import '../../carbon/globals/import-once';
+
+@mixin getStartedPopup {
+    
+    .get-started-popup.dijitDialog {
+        background-color: $color__white;
+        width: 800px;
+        top: 100px !important;
+        border: none;
+    
+        .dijitDialogTitleBar {
+            border: none;
+            margin: 0px 0px 0px 0px;
+    
+            .close-popup-button {
+                width: 29px;
+                height: 28px;
+                margin: 16px 16px 16px 0px;
+                cursor: pointer;
+                margin-left: auto;
+                font-size: 28px;
+                line-height: 35px;
+                background-image: url("../../lib/idx/themes/oneui/idx/widget/images/popupClose.png");
+            }
+        }
+    
+        .dijitDialogPaneContent {
+            color: $color__blue-90;
+    
+            .title {
+                font-weight: 100;
+                color: $color__navy-gray-6;
+                text-align: left;
+                padding-left: 45px;
+                padding-bottom: 17px;
+            }
+    
+            .content {
+                text-align: center;
+    
+                .bottomrow {
+                    padding-top: 48px;
+                    padding-bottom: 48px;
+    
+                    .badgecontainer {
+    
+                        display: inline-block;
+                        margin-left: auto;
+                        margin-right: auto;
+                        width: 150px;
+                        height: auto;
+                        vertical-align: top;
+    
+                        &:hover {
+                            cursor: pointer;
+                            .secondarytaskbadges {
+                                border-color: $color__blue-51;
+                            }
+                            .secondarytasklbl {
+                                color: $color__blue-51;
+                            }
+                        }
+        
+                        .secondarytaskbadges {
+                            border: 1px solid $ui-05;
+                            border-radius: 50%;
+                            height: 100px;
+                            width: 100px;
+                            background: $color__white;
+                            margin-left: auto;
+                            margin-right: auto;
+                            left: 0;
+                        }
+    
+                        .secondarytasklbl {
+                            width: 150px;
+                            font-size: 16px;
+                            letter-spacing: 0;
+                            text-align: center;
+                            line-height: 20px;
+                            font-weight: 700;
+                            padding-top: 7px;
+                            padding-bottom: 20px;
+                        }
+    
+                        .tutorial {
+                            background:url(../../images/getStarted/Tutorial.png) no-repeat center #fff;                
+                        }
+                        .videos {
+                            background:url(../../images/getStarted/Videos.png) no-repeat center #fff;
+                        }
+                        .questions {
+                            background:url(../../images/getStarted/Questions.png) no-repeat center #fff;
+                        }
+                        .documentation {
+                            background:url(../../images/getStarted/Documentation.png) no-repeat center #fff;
+                        }
+                    }
+                }
+    
+            }
+        
+            .message {
+                font-size: 16px;
+                line-height: 24px;
+                text-align: left;
+                padding-left: 48px;
+            }
+        }
+    }
+}
+
+@include exports('getStartedPopup') {
+    @include getStartedPopup;
+}

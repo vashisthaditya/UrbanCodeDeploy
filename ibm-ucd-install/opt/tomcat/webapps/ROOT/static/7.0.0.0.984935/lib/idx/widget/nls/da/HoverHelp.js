@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/da/HoverHelp",{defaultHrefLabel:"L\u00e6s mere",defaultMessage:"[Ingen hj\u00e6lpetekst defineret]\u200e",defaultTitle:"Peg eller klik for at f\u00e5 vist hj\u00e6lpen"});

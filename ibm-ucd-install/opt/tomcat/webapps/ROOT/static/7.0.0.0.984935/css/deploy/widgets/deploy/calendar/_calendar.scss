@@ -1,0 +1,400 @@
+@import "../../../carbon/globals/colors";
+@import '../../../carbon/globals/import-once';
+
+@mixin calendar {
+    
+    $calendar-sidebar-width: 310px;
+    
+    .calendar-sidebar {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        float: left;
+        width: $calendar-sidebar-width;
+    
+        a {
+            text-decoration: none;
+        }
+    
+        .calendar-sidebar-tabs {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: auto;
+            border-bottom: none;
+            white-space: nowrap;
+    
+            .calendar-sidebar-tab {
+                background-color: white;
+                border: 1px solid #4178BE;
+                color:  #3D70B2;
+                height: 32px;
+                width: 94px;
+                margin-right: 0px;
+                margin-top: 20px;
+                font-weight: 100;
+                padding: 8px 0 4px;
+                text-align: center;
+                cursor: pointer;
+    
+                &:nth-child(1) {
+                    border-radius: 8px 0px 0px 8px;
+                }
+    
+                &:nth-child(2) {
+                    border-radius: 0px 8px 8px 0px;
+                }
+    
+                &.current-calendar-tab {
+                    color: white;
+                    background-color: #3D70B2;
+                    font-weight: 100;
+                    padding-bottom: 5px;
+                }
+            }
+    
+        }
+    }
+    
+    .dijitCalendarPopup {
+        .dijitCalendar {
+            background: #FFFFFF;
+            box-shadow: 6px 6px 6px 0 rgba(0,0,0,0.10);
+    
+            // unable to find where we are creating the datepicker pop up calendars
+            width: 280px !important;
+        }
+    }
+    
+    .dijitCalendar {
+        border-collapse: separate;
+        border-spacing: 8px;
+        background-color: #FFFFFF;
+    
+        // Month dropdown + nav buttons
+        .dijitCalendarMonthContainer {
+            th {
+                text-align: center;
+                vertical-align: middle;
+                padding-bottom: 0px;
+            }
+    
+            .dijitCalendarIncrementControl {
+                margin: auto;
+            }
+    
+            .dijitCalendarIncrease {
+                @extend .navIcon-Icon_chevron--right__brand-01;
+            }
+    
+            .dijitCalendarDecrease {
+                @extend .navIcon-Icon_chevron--left__brand-01;
+            }
+    
+            .dijitA11ySideArrow {
+                display: none;
+            }
+    
+            .dijitDropDownButton {
+                @include smallInputs;
+    
+                .dijitButtonNode {
+                    background-color: transparent;
+    
+                    &:hover {
+                        background-color: $field-01;
+                    }                
+                }
+            }
+        }
+    
+        .dijitCalendarDayLabel {
+            font-weight: bold;
+            padding: 4px;
+        }
+    
+        .dijitCalendarDateLabel {
+            padding: 4px
+        }
+    
+        .dijitCalendarBodyContainer {
+            @include font-family;
+            font-size: 12px;
+    
+            .dijitCalendarNextMonth {
+                .dijitCalendarDateLabel {
+                    color: $text-02;
+                } 
+            }
+    
+            .dijitCalendarCurrentMonth {
+                .dijitCalendarDateLabel {
+                    color: $text-01;
+                }
+            }
+    
+            .dijitCalendarCurrentDate {
+                .dijitCalendarDateLabel {
+                    border: 2px solid #4178BE;
+                }
+            }
+        }
+    
+        // calendar footer
+        .dijitCalendarYearLabel {
+            text-align: center;
+    
+            .dijitCalendarSelectedYear {
+                color: $brand-01;
+                font-weight: bold;
+            }
+        }
+    }
+    
+    .calendar {
+    
+        .calendar-contents {
+            .buttonContainer {
+                .calendar-title {
+                    @include font-family;
+                    font-size: 28px;
+                    color: #5A6872;
+                    line-height: 35px;
+                    float: left;
+                    padding-left: 50px;
+                }
+    
+                .dijitToolbar {
+                    float: right;
+                    @include smallInputs;
+                }
+            }
+    
+            .viewContainer {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 35px;
+                bottom: 0;
+                overflow: hidden;
+              }
+        }
+    
+        .calendar-sidebar {
+            @include smallInputs;
+            box-shadow: none;
+            border-radius: 0;
+            border: 1px solid #CCC;
+    
+            .dijitCalendarContainer {
+                width: 280px;
+                margin: auto;
+            }
+    
+            .calendar-sidebar-panel {
+                width: $calendar-sidebar-width;
+                padding: 8px 20px 8px 20px;
+                border-top: 1px solid #CCC;
+                min-height: 395px;
+                border: 1px solid #CCC;
+    
+                &.calendar-sidebar-panel-filters {
+                    display: flex;
+                    flex-direction: column;
+    
+                    &.hidden {
+                        display: none;
+                    }
+                }
+    
+                .calendar-sidebar-panel-section {
+                    margin-bottom: 8px;
+                    overflow: hidden;
+    
+                    .calendar-sidebar-panel-label {
+                        font-weight: bold;
+                        padding-bottom: 4px;
+                    }
+    
+                    .versionSelectorComponent {
+                        margin-bottom: 8px;
+                    }
+    
+                    .calendar-date-drop-down {
+                        width: 125px !important;
+                        float: left;
+                    }
+    
+                    .calendar-time-drop-down {
+                        width: 130px !important;
+                        float: right;
+                    }
+            
+                    .dijitSelect, .versionSelectorComponent, .dijitTextBox {
+                        width: 100%;
+    
+                        .dijitButtonContents {
+                            width: 100%;
+                        }
+                    }
+    
+                    .webext-select, .webext-select .dijitTextBox {
+                        width: 100% !important;
+                    }
+                    
+                }
+    
+                .calendar-sidebar-bottom-filter-container {
+                    border-top: 1px solid #DFE3E6;
+                    padding-top: 10px;
+                }
+    
+                .calendar-filter-section {
+                    display: flex;
+                    flex-direction: column;
+    
+                    .add-filter-container {
+                        order: 3;
+                        .add-filter-icon {
+                            @extend .glyph-Glyph_add__brand-01;
+                            float: left;
+                        }
+    
+                        .add-filter-label {
+                            float: left;
+                            color: $brand-01;
+                            font-weight: bold;
+                            margin-right: 4px;
+                            cursor: pointer;
+                            line-height: 16px;
+                        }
+                    }
+    
+                    .remove-filter-icon {
+                        position: absolute;
+                        align-self: flex-end;
+                        @extend .glyph-Glyph_subtract__ui-05;
+                    }
+                }
+    
+            }
+        }
+        .dojoxCalendar {
+            margin-left: $calendar-sidebar-width;
+            width: auto;
+        }
+    }
+    
+    .calendar, #calendarContainer {
+        padding-top: 10px;
+    }
+    .dojoxCalendar {
+        width: auto;
+    }
+    
+    .dojoxCalendar .buttonContainer .dijitToolbar .current-calendar-view .dijitButtonText {
+      font-weight: bold;
+    }
+    .dojoxCalendar .buttonContainer .dijitToolbarSeparator {
+        background: none;
+        background-color: #DDD;
+        width: 1px;
+        padding: 0;
+    }
+    .dojoxCalendar .view {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    
+    .dojoxCalendarColumnView .dojoxCalendarEvent.entry .endTime {
+        display: none !important;
+    }
+    
+    .calendar-sidebar .dijitCalendar {
+        background-color: #FFF
+    }
+    .calendar-sidebar .dijitCalendar .dijitCalendarArrow,
+    .calendar-sidebar .dijitCalendar .dijitCalendarNextYear,
+    .calendar-sidebar .dijitCalendar .dijitCalendarPreviousYear {
+        border-color: #FFF;
+    }
+    
+    // .calendar-sidebar-panel-filters .calendar-sidebar-panel-section .dijitValidationTextBox {
+    //     margin-top: 2px;
+    // }
+    
+    .calendar-sidebar-environment-color {
+        height: 10px;
+        width: 10px;
+        border-radius: 10px;
+        margin: 2px 5px 0 0;
+        vertical-align: top;
+        box-shadow: 0 0 2px #888;
+    }
+    
+    .calendar-sidebar-create-button-container {
+        padding: 0 10px 10px 10px;
+        border-bottom: 1px solid #CCC;
+        margin: 0 -10px 10px;
+        text-align: center;
+    }
+    .calendar-sidebar-create-button-container .dijitButtonNode .dijitButtonText {
+        max-width: 180px;
+        word-break: break-word;
+        white-space: pre-wrap;
+    }
+    
+    .dijitButton.calendar-sidebar-button {
+        margin-left: 0px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .calendar-sidebar-save-message, .calendar-sidebar-hover-container {
+        position: absolute;
+        width: 193px;
+        padding: 10px;
+        background-color: #FFF;
+        border: 2px solid #555;
+        border-radius: 4px;
+        box-shadow: 0 0 10px 0 #AAA;
+        z-index: 5;
+    }
+    
+    .calendar-sidebar-panel-filters .calendar-sidebar-save-message {
+        margin-top: 10px;
+    }
+    
+    .calendar-sidebar-save-message {
+        margin-top: -1px;
+        background-color: #D4ECFE;
+        border: 2px solid #1A99FC;
+        z-index: 10;
+        text-align: center;
+    }
+    
+    .calendar-sidebar-panel-section .calendar-date-drop-down {
+        width: 110px;
+        margin-right: 4px;
+    }
+    .calendar-sidebar-panel-section .calendar-time-drop-down {
+        width: 100px;
+    }
+    
+    .calendar-sidebar-modify-button-container,
+    .calendar-sidebar-filter-button-container {
+        text-align: center;
+    }
+    .calendar-sidebar-panel .calendar-update-button,
+    .calendar-sidebar-panel .calendar-cancel-button {
+        margin-top: 10px;
+        width: auto !important;
+    }
+}
+
+@include exports('calendar') {
+    @include calendar;
+}

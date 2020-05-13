@@ -1,0 +1,63 @@
+/**
+ * This is the entrypoint for UCD to use carbon styles.
+ */
+
+//-------------------------
+// 🌍 Global
+//-------------------------
+
+$css--font-face: false;
+$css--helpers: true !default;
+$css--body: true !default;
+$css--use-experimental-grid: false !default;
+$css--use-experimental-grid-fallback: false !default;
+$css--use-layer: true !default;
+$css--reset: true !default;
+$css--typography: true !default;
+$css--plex: false;
+
+@import 'globals/colors';
+@import 'globals/vars';
+@import 'globals/mixins';
+@import 'globals/layout';
+@import 'globals/layer';
+@import 'globals/spacing';
+@import 'globals/typography';
+@import 'globals/import-once';
+@import 'globals/css--reset';
+@import 'globals/css--font-face';
+@import 'globals/css--helpers';
+@import 'globals/css--body';
+@import 'globals/css--typography';
+@import 'grid/grid';
+
+//-------------------------
+// ☠️  Manage deprecations
+//-------------------------
+
+/**
+ * We flag this variable as true if someone uses the globals/styles.scss
+ * entry-point. This allows us to collect all the messages and display them at
+ * the end of the file instead of bringing it up per-component.
+ *
+ * If a consumer instead gets the components by importing the partial directly,
+ * this variable _will not_ be set to true, so the deprecation message will be
+ * displayed after the @import.
+ */
+$deprecations--entry: true;
+// Collect all deprecation reasons into this list throughout the import cycle.
+$deprecations--reasons: ();
+// This message will be prepended to any deprecation notice
+$deprecations--message: 'Deprecated code was found, this code will be removed before the next release of Carbon.';
+
+// Cycle through all the deprecation reasons, if any exist, that have been
+// accumulated through the @import process.
+@if (length($deprecations--reasons) > 0) {
+  $deprecations--message: '';
+  @each $reason in $deprecations--reasons {
+    $deprecations--message: '#{$deprecations--message}
+REASON: #{$reason}';
+  }
+
+  @warn $deprecations--message;
+}

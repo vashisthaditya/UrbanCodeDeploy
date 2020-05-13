@@ -1,0 +1,37 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin configurationTree {
+    .configurationTree {
+        background-color: white;
+    }
+    
+    .configurationTreeDiv .webextTable > table > thead > tr > th {
+        background-color: white;
+    }
+    
+    .configurationTreeDiv .webextTable > table tr {
+        border: none;
+    }
+    
+    .configurationTreeDiv .webextTable > table tr td {
+        border: none;
+    }
+    
+    .configurationTreeDiv .webextTable > table > thead > tr.tableFilterRow > td {
+        background-color: white;
+        border-top: 2px solid white;
+    }
+    
+    .configurationTreeDiv .aboveTreeOptions {
+        float: right;
+        margin-right: 10px;
+    }
+    
+    .configurationTreeDiv .webextTable > table .tableFilterRow .filterField, .webextTable > table .tableFilterRow .dijitDateTextBox {
+        max-width: 17em;
+    }
+}
+
+@include exports('configurationTree') {
+    @include configurationTree;
+}

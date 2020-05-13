@@ -1,0 +1,3 @@
+//>>built
+define("idx/widget/_MenuOpenOnHoverMixin",["dojo/_base/declare"],function(b){return b("idx.widget._MenuOpenOnHoverMixin",null,{openOnHover:!0,_isActuallyActive:!1,_setOpenOnHoverAttr:function(a){(this.openOnHover=a)?this._forceActive():this._restoreActive()},_markActive:function(){this.inherited(arguments);this._isActuallyActive=!0},_markInactive:function(){this.openOnHover||this.inherited(arguments);this._isActuallyActive=!1},_forceActive:function(){var a=this._isActuallyActive;this._markActive();
+this._isActuallyActive=a},_restoreActive:function(){this._isActuallyActive?this._markActive():this._markInactive()}})});

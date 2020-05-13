@@ -1,0 +1,2 @@
+//>>built
+define("idx/bus/BusMessage",["dojo/_base/declare","dojo/_base/lang"],function(b,c){return b("idx.bus.BusMessage",[],{scope:"",messageType:"",source:null,broadcast:!1,args:null,constructor:function(a){a&&c.mixin(this,a);this._results=[]},getResultCount:function(){return this._results.length},isHandled:function(){return 0<this.getResultCount()},appendResult:function(a,b){this._results.push({source:a,result:b})}})});

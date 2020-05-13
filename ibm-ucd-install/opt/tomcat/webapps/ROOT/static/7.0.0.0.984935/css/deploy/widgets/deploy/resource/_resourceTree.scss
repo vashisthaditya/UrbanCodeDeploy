@@ -1,0 +1,12 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin resourceTree {
+    .resourceList .inline-table-icon {
+        margin-right: 5px;
+        margin-bottom: -2px;
+    }
+}
+
+@include exports('resourceTree') {
+    @include resourceTree;
+}

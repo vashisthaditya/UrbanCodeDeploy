@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/ko/ModalDialog",{Error:"\uc624\ub958",Warning:"\uacbd\uace0",Information:"\uc815\ubcf4",Success:"\uc644\ub8cc",Confirmation:"\ud655\uc778",Question:"\uc9c8\ubb38",closeButtonLabel:"\ub2eb\uae30",cancelButtonLabel:"\ucde8\uc18c",executeButtonLabel:"\ud655\uc778",checked:"\ub2e4\uc2dc \ubb3b\uc9c0 \uc54a\uc74c"});

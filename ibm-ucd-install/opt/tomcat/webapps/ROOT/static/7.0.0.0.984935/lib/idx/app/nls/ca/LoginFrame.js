@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/ca/LoginFrame",{loginTitle:"Inici de sessi\u00f3",labelUserName:"Nom d'usuari",labelPassword:"Contrasenya",invalidMessageTitle:"Intent d'inici de sessi\u00f3 no v\u00e0lid",invalidMessage:"No s'ha indicat un valor v\u00e0lid en cap dels camps necessaris."});

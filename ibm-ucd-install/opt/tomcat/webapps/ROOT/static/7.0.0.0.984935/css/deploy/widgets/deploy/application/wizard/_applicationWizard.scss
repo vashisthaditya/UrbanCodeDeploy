@@ -1,0 +1,548 @@
+@import "../../../dijit/form/smallInputMixins";
+@import '../../../../carbon/globals/import-once';
+
+@mixin applicationWizard {
+    
+    .applicationWizard {
+        background-color: $ui-02;
+    
+        .dijitContentPane {
+            border: none;
+            background-color: $ui-01;
+        }
+    
+        .environment-controls {
+            width: 100%;
+            vertical-align: middle;
+            position: relative;
+            margin: 1px;
+        }
+    
+        .environment-controls .addEnvironmentMenu {
+            position: absolute;
+            top: 20px;
+            left: -135px;
+            z-index: 999;
+            width: 130px;
+            margin-left: 140px;
+            border: 1px solid #979797;
+            background-color: white;
+        }
+    
+        .environment-template-option:hover {
+            background-color: #D4F3FC;
+            cursor: pointer;
+        }
+    
+        .environment-controls .created-environments-title {
+            font-weight: normal;
+            font-size: 1.4em;
+        }
+    
+        .environment-controls .button-container {
+            float: right;
+            height: 100%;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            display: inline-flex;
+        }
+    
+        .environment-controls .icon-button {
+            width: 16px;
+            height: 16px;
+            margin-right: 20px;
+            margin-top: 1px;
+            background-repeat: none;
+        }
+        .environment-controls .icon-button:hover {
+            cursor: pointer;
+        }
+    
+        .add-button {
+            background-image: url('../../images/wizard/environment/add.png');
+        }
+        .environment-controls .add-button:hover {
+            background-image: url('../../images/wizard/environment/add-hov.png');
+        }
+    
+        .environment-controls .clone-button {
+            background-image: url('../../images/wizard/environment/duplicate.png');
+        }
+        .environment-controls .clone-button-disabled {
+            background-image: url('../../images/wizard/environment/duplicate-gray.png');
+        }
+        .environment-controls .clone-button:hover {
+            background-image: url('../../images/wizard/environment/duplicate-hov.png');
+        }
+    
+        .environment-controls .remove-button {
+            background-image: url('../../images/wizard/environment/remove.png');
+            margin-right: 5px;
+        }
+        .environment-controls .remove-button-disabled {
+            background-image: url('../../images/wizard/environment/remove-gray.png');
+            margin-right: 5px;
+        }
+        .environment-controls .remove-button:hover {
+            background-image: url('../../images/wizard/environment/remove-hov.png');
+        }
+        .selected {
+            background-color: rgb(244, 244, 244);
+        }
+    
+        .environment-option {
+            position: relative;
+            height: 33px;
+            line-height: 33px;
+            margin-bottom: 2px;
+        }
+    
+        .environment-option .environment-option-content {
+            position: relative;
+            display: inline-block;
+            font-size: 1.2em;
+            width: 100%;
+        }
+    
+        .environment-option .full-length {
+            width: 250px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    
+        .environment-option .partial-length {
+            width: 130px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    
+        .environment-option .required-property-wrapper {
+            display: inline-block;
+            float: right;
+            width: 120px;
+        }
+    
+        .environment-option .environment-req-props {
+            color: #656565;
+            font-size: 0.65em;
+            margin-right: 8px;
+        }
+    
+        .environment-option .environment-name-container {
+            display: inline-block;
+        }
+    
+        .environment-option .environment-name {
+            font-weight: bolder;
+        }
+    
+        .environment-option .propStatusIcon {
+            height: 100%;
+            width: 16px;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+    
+        .environment-option .complete {
+            background: url('../../images/wizard/environment/dark-complete.png') no-repeat;
+        }
+        .environment-option .partial {
+            background: url('../../images/wizard/environment/dark-incomplete.png') no-repeat;
+        }
+        .environment-option .empty {
+            background: url('../../images/wizard/environment/dark-empty.png') no-repeat;
+        }
+    
+        .appComponentSelector {
+            @include smallInputs;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            min-height: 95px;
+    
+            >div {
+                padding-left: 48px;
+                padding-right: 48px;
+            }
+        }
+    
+        .appComponentSelector .selectorControls {
+            @include display-flex;
+            @include align-items(center);
+            padding-bottom: 2px;
+            border-bottom: 1px solid #BDBDBD;
+        }
+    
+        .appComponentSelector .selectorControls > div {
+        }
+    
+        .appComponentSelector .selectorControls .requirementLabel {
+            font-size: 120%;
+            line-height: 24px;
+            padding-bottom: 1px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    
+        .appComponentSelector .selectorControls .createComponent {
+            margin-left:auto;
+            margin-right: 30px;
+            padding-left: 10px;
+        }
+    
+        .appComponentSelector .selectorControls .selectAttach {
+        }
+    
+        .appComponentSelector .requirementDescription {
+            margin-top: 1em;
+            font-style: italic;
+            font-weight: bold;
+            color: #777;
+        }
+    
+        .environment-properties .columnForm {
+            padding-bottom: 36px;
+        }
+    
+        .agentMappingTargetTree .environment-name {
+        margin-left: 14px;
+        }
+    
+        .environment-name-container-noPropDefs .environment-name {
+            float: left;
+            display: inline-block;
+            padding: 0px;
+            max-width: 470px;
+            padding-left: 8px;
+        }
+    
+        .environment-name-container-noDesc-noPropDefs .environment-name {
+            float: left;
+            display: inline-block;
+            padding: 0px;
+            max-width: 340px;
+            padding-left: 8px;
+        }
+    
+        .environment-name-container-noDesc .environment-name {
+            float: left;
+            display: inline-block;
+            padding: 0px;
+            max-width: 490px;
+            padding-left: 8px;
+        }
+        .environment-option .expandNode {
+            left: 8px;
+        }
+    
+        .dark-colored-environment.environment-option .expandNode {
+            background-position: -48px -330px;
+        }
+    
+        .dark-colored-environment.environment-option.expanded .expandNode {
+            background-position: -48px -270px;
+        }
+    
+        .environment-option .expand-node-container {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        width: 20px;
+        cursor: pointer;
+        }
+    
+        .agentMappingPage {
+            position: relative;
+        }
+    
+        .agentMappingPage .columns {
+            position: absolute;
+            bottom: 0;
+            top: 3em;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+        }
+    
+        .agentMappingPage .columnHeader {
+            font-size: 110%;
+            font-weight: bold;
+            border-bottom: 1px #999999 solid;
+            line-height: 20px;
+        }
+    
+        .agentMappingPage .columnInstructions {
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+    
+        .agentMappingPage .environmentsColumn,
+        .agentMappingPage .agentsColumn {
+            display: inline-block;
+            width: 45%;
+            max-height: 100%;
+            margin-left: 3%;
+        }
+    
+        .agentMappingPage .environmentsColumn {
+            position: relative;
+            float: right;
+            height: 100%;
+            margin-right: 3%;
+        }
+    
+        .agentMappingPage .environmentsAttach {
+            position: absolute;
+            top: 21px;
+            bottom: 0;
+            overflow: auto;
+        }
+    
+        .agentMappingPage .environmentsColumn > div {
+            width: 99%;
+        }
+    
+    
+        .agentMappingPage .webextTable {
+            margin-top: 0px;
+            margin-bottom: 15px;
+        }
+    
+        .agentMappingPage .assignedAgent {
+            position: relative;
+            padding-top:7px;
+            padding-left:11px;
+        }
+    
+        .agentMappingTargetTree:first-child {
+            margin-top: 10px;
+        }
+    
+        .agentMappingTargetTree span.del {
+            margin-left: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+            cursor: pointer;
+            display: none;
+        }
+    
+        .agentMappingPage .assignedAgent:hover span.del {
+            display: inline;
+        }
+    
+        .callToAction {
+            font-weight: bold;
+            margin-bottom: 1em;
+        }
+    
+        /**************************************************************************************************
+        * Application Wizard 3rd page layout
+        **************************************************************************************************/
+        .environmentPage {
+            position: relative;
+        }
+    
+        .created-environments-column {
+            display: inline-block;
+            width: 40%;
+            min-height: 420px;
+            position: relative;
+        }
+    
+        .created-environments-list {
+            border: 1px solid #979797;
+            position: absolute;
+            top: 24px;
+            bottom: 0;
+            width: 100%;
+            overflow: auto;
+        }
+    
+        .create-environment-form-column {
+            display: inline-block;
+            width: 58%;
+            float: right;
+        }
+    
+        .environment-form {
+            background-color: rgb(244, 244, 244);
+            position: absolute;
+            top: 62px;
+            bottom: 0;
+            max-height: 395px;
+            width: 450px;
+            overflow: auto;
+        }
+    
+        .environment-form .env-tmpl-dropdown {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+    
+        .environment-form .env-tmpl-dropdown-label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    
+        .environment-form .environment-tmpl-description {
+            margin: 20px;
+        }
+    
+        .environment-form .labelsAndValues-labelCell {
+            text-align: left;
+            font-weight: bold;
+            margin-left: 8px;
+            width: 400px;
+            display: block;
+            line-height: 16px;
+        }
+    
+        .environment-form .labelsAndValues-row {
+            width: 380px;
+            padding-left: 20px;
+        }
+    
+        .environment-form .pageAlerts {
+            width: 400px;
+        }
+    
+        .environment-form .columnForm {
+            width: 400px;
+            padding-bottom: 36px;
+    
+            div.table {
+                margin: 0;
+            }
+        }
+    
+        .environment-form .icon-button {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+        }
+    
+        .environment-form .create-environment-label {
+            text-align:center;
+            font-size:1.5em;
+            padding-top:24px;
+            width:412px;
+            color:#00649d;
+            white-space:nowrap;
+            display: inline-block;
+        }
+    
+        .create-env-widget {
+            width: 130px;
+            margin-left: 140px;
+            border: 1px solid #979797;
+            background: white;
+        }
+    
+        .environment-template-option {
+            margin-bottom: 1px;
+        }
+    
+        .environment-template-option-content {
+            height: 26px;
+            font-size: 1.3em;
+            line-height: 26px;
+        }
+    
+        .environment-template-option .environment-name-container {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            width: 100%;
+        }
+    
+        .created-environments-column .modelWidgetList {
+            cursor: pointer;
+        }
+    
+        .env-prop-label {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            margin-left: 35px;
+            color: #666;
+            font-size: 1.1em;
+        }
+    
+        .wizard-component-page-tooltip, .wizard-environment-page-tooltip {
+            width:300px;
+            line-height:20px
+        }
+    
+        .wizard-agent-mapping-page-tooltip {
+            width:400px;
+            line-height:20px
+        }
+    
+        .horizontal-spacer {
+            display: inline;
+            margin-right: 5px;
+        }
+    
+        .containerLabel {
+            font-size: 1.6em;
+            padding-top: 15px;
+            vertical-align: baseline;
+            text-shadow: none;
+        }
+    
+        .pageAlert {
+            background-color:#f0faff;
+            border-color:#3c9fca;
+            border: 2px solid;
+            border-radius: 5px;
+            box-shadow: 0 0 6px 0 #aaa;
+            color:#444;
+            margin: 5px 30px;
+            padding: 10px 15px;
+            padding-bottom: 20px;
+        }
+    
+        .pageAlerts .msgtitle {
+            font-size:1.2em;
+            font-weight:bold;
+        }
+    
+    
+        .pageAlerts .description {
+            font-weight:normal;
+            font-size:1em;
+        }
+    
+        .pageAlerts .solutionheader {
+            font-size:1em;
+            font-weight:bold;
+        }
+    
+    
+        .pageAlerts .solutionoptions {
+            font-weight:normal;
+            line-height:24px;
+        }
+    
+    
+        .pageAlerts .solutionoptionscontainer {
+            padding-bottom: 16px;
+        }
+    
+    
+        .pageAlerts .listheader  {
+            line-height:24px;
+            font-size:1em;
+            font-weight:normal;
+        }
+    }
+}
+
+@include exports('applicationWizard') {
+    @include applicationWizard;
+}

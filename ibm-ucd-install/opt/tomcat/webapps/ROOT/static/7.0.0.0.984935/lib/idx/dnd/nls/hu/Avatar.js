@@ -1,0 +1,2 @@
+//>>built
+define("idx/dnd/nls/hu/Avatar",{copyText:"${num} elem m\u00e1sol\u00e1sa",moveText:"${num} elem \u00e1thelyez\u00e9se",copyOneText:"1 elem m\u00e1sol\u00e1sa",moveOneText:"1 elem \u00e1thelyez\u00e9se"});

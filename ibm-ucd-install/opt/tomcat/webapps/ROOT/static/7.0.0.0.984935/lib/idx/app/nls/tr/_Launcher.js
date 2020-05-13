@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/tr/_Launcher",{tooManyOpenWorkspaces:'En fazla ${maxOpen} "${workspaceTypeName}"\u200e \u00e7al\u0131\u015fma alan\u0131 a\u00e7\u0131k olabilir.  M\u00fcmk\u00fcnse a\u00e7\u0131k olan  "${workspaceTypeName}"\u200e \u00e7al\u0131\u015fma alan\u0131n\u0131 kapat\u0131n.'});

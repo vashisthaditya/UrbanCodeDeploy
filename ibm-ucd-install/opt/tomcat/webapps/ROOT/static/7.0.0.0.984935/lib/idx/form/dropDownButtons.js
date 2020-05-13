@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/dropDownButtons",["dojo/_base/lang","idx/main","dojo/dom-class","dijit/form/DropDownButton"],function(b,f,c,a){var b=b.getObject("form.dropDownButtons",!0,f),a=a.prototype,d=a.openDropDown,e=a.closeDropDown;if(d)a.openDropDown=function(){var a=d.call(this,arguments);this._opened&&c.add(this.domNode,"idxDropDownOpen");return a};if(e)a.closeDropDown=function(a){var b=e.call(this,arguments);c.remove(this.domNode,"idxDropDownOpen");return b};return b});

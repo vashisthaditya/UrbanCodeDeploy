@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<project name="install" basedir="." default="install">
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Properties
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <property name="src.dir" location="." />
+    <property name="compiled.dir" location="./compiled" />
+    <property file="${src.dir}/install.properties" />
+
+    <property name="upgrade.server" value="n" />
+    <property environment="env" />
+    <property name="java.home" value="env.JAVA_HOME" />
+
+    <property name="install.root.dir" location="${basedir}" />
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Classpaths
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <mkdir dir="${compiled.dir}"/>
+    <path id="classpath">
+        <fileset dir="${src.dir}/opt">
+            <include name="groovy-*/embeddable/*.jar" />
+        </fileset>
+        <fileset dir="${src.dir}/lib">
+            <include name="**/*.jar"/>
+            <include name="**/*.zip"/>
+            <exclude name="groovy*.jar"/>
+        </fileset>
+        <dirset dir="." includes="compiled"/>
+        <dirset dir="${compiled.dir}" includes="resources"/>
+        <dirset dir="${src.dir}/install/resources" includes="licenses"/>
+    </path>
+
+    <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="classpath" />
+    <taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="classpath" />
+
+    <!-- ===================================================================
+    usage
+    =================================================================== -->
+    <target name="version-check">
+        <groovy fork="false">
+           try {
+               getClass().getClassLoader().loadClass("java.util.Base64");
+           }
+           catch (ClassNotFoundException e) {
+               throw new RuntimeException("Java 1.8.0 or greater required for UrbanCode Deploy. " +
+               "Installer initialized with ${System.getProperty('java.version')}. If this is an upgrade, ensure that JAVA_HOME in [serverHome]/bin/set_env points to Java 8.")
+
+           }
+        </groovy>
+    </target>
+    <target name="compile" depends="version-check">
+        <groovyc destdir="${compiled.dir}" encoding="UTF-8">
+            <src>
+                <path>
+                    <pathelement location="${src.dir}/install" />
+                </path>
+            </src>
+        </groovyc>
+        <copy todir="${compiled.dir}">
+            <fileset dir="${src.dir}/install">
+                <exclude name="**/*.groovy"/>
+            </fileset>
+        </copy>
+
+        <pathconvert property="classpathstring" refid="classpath" />
+    </target>
+
+    <target name="install" depends="compile">
+        <record name="${src.dir}/install.log" action="start"/>
+        <groovy classpathref="classpath">
+            def ContainerInstaller installer = new ContainerInstaller(properties.classpathstring)
+            installer.setAntBuilder(ant)
+            if (properties.nonInteractive) {
+                installer.setNonInteractive(true)
+            }
+            installer.install()
+        </groovy>
+        <record name="${src.dir}/install.log" action="stop"/>
+    </target>
+
+    <target name="install-non-interactive" depends="compile">
+        <record name="${src.dir}/install.log" action="start"/>
+        <groovy classpathref="classpath">
+            def ContainerInstaller installer = new ContainerInstaller(properties.classpathstring)
+            installer.setNonInteractive(true)
+            installer.setAntBuilder(ant)
+            installer.install()
+        </groovy>
+        <record name="${src.dir}/install.log" action="stop"/>
+    </target>
+
+    <target name="migrate-database" depends="compile">
+        <record name="${src.dir}/migration.log" action="start"/>
+        <groovy classpathref="classpath">
+            def ContainerInstaller installer = new ContainerInstaller(properties.classpathstring)
+            installer.setAntBuilder(ant)
+            installer.migrateDatabase()
+        </groovy>
+        <record name="${src.dir}/migration.log" action="stop"/>
+    </target>
+
+    <target name="install-database" depends="compile">
+        <record name="${src.dir}/install-database.log" action="start"/>
+        <groovy classpathref="classpath">
+            def ContainerInstaller installer = new ContainerInstaller(properties.classpathstring)
+            installer.setAntBuilder(ant)
+            if (properties.nonInteractive) {
+                installer.setNonInteractive(true)
+            }
+            if (properties.doUpgrade) {
+                installer.setDoUpgrade(true)
+            }
+            installer.installDatabase()
+        </groovy>
+        <record name="${src.dir}/install-database.log" action="stop"/>
+    </target>
+</project>

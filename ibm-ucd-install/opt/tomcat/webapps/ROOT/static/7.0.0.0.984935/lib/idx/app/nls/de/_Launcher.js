@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/de/_Launcher",{tooManyOpenWorkspaces:'Es k\u00f6nnen maximal ${maxOpen} Arbeitsbereiche des Typs "${workspaceTypeName}"\u200e ge\u00f6ffnet werden. Falls m\u00f6glich, schlie\u00dfen Sie Arbeitsbereiche des Typs "${workspaceTypeName}"\u200e.'});

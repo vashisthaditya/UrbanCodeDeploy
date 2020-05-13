@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/ja/CheckBoxSelect",{missingMessage:"\u5c11\u306a\u304f\u3068\u3082 1 \u3064\u306e\u9805\u76ee\u3092\u9078\u629e\u3059\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059\u3002"});

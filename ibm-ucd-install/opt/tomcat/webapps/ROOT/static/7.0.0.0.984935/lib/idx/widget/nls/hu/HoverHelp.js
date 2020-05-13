@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/hu/HoverHelp",{defaultHrefLabel:"Tov\u00e1bbi tudnival\u00f3k",defaultMessage:"[Nincs megadva s\u00fag\u00f3sz\u00f6veg]\u200e",defaultTitle:"Mozgassa f\u00f6l\u00e9 az egret vagy kattintson ide a s\u00fag\u00f3 megjelen\u00edt\u00e9s\u00e9hez"});

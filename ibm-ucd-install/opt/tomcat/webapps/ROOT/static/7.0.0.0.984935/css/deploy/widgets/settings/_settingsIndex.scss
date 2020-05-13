@@ -1,0 +1,91 @@
+@import "../../carbon/globals/colors";
+@import "../../carbon/globals/vars";
+@import '../../carbon/globals/import-once';
+
+@mixin settingsIndex {
+    
+    .settings-index {
+        @include reset;
+        @include font-family;
+        @include font-smoothing;
+        @include letter-spacing;
+    
+        margin: -40px 0 0 0;
+    
+        .category {
+            background-color: $color__white;
+            width: 32%;
+            min-width: 400px;
+            min-height: 660px;
+            vertical-align: top;
+    
+            .category-wrapper {
+                padding: 0px 0px 0px 0px;
+                height: 100%;
+                vertical-align: top;
+            }
+    
+            .category-label {
+                color: $text-02;
+                font-size: 1.7em;
+                font-weight: 100;
+                padding: 43px 0px 48px 0px;
+                margin-bottom: 0px;
+                text-align: center;
+            }
+    
+            .category-links {
+                .link-container {
+                    font-size: 1.1em;
+                    margin: 0px 0px 0px 0px;
+                    padding: 0px 0px 22px 80px;
+                    max-height: 54px;
+    
+                    a {
+                        text-align: left;
+                        text-decoration: none;
+                        display: inline-block;
+    
+                        &:hover {
+                            text-decoration: underline;
+                        }
+    
+                        .inner-link-text {
+                            color: $color__darkblue-1;
+                            font-weight: 500;
+                            padding: 0px 5px 0px 0px;
+                            margin-top: 8px;
+                            margin-left: 35px;
+                        }
+                    }
+    
+                    .output-log-download-link {
+                        color: $ui-05;
+                        font-size: 0.8em;
+                        font-family: Georgia;
+                        position: relative;
+                    }
+                }
+            }
+        }
+    
+        .category.inline-block {
+            margin-top: 50px;
+        }
+    
+        .category-divider {
+            width: 0px;
+            margin: 0 1%;
+            min-height: 460px;
+        }
+    
+        .general-icon {
+            width: 15px;
+            height: 16px;
+        }
+    }
+}
+
+@include exports('settingsIndex') {
+    @include settingsIndex;
+}

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<change-set release="1.0">
+  <!-- Changes 1-7 are pre-DB2 support -->
+  <change number="8">
+    <description>Add support for HTTP properties</description>
+    <sql separator=";">
+        alter table ps_prop_def add default_label varchar(4000) default null;
+        alter table ps_prop_def add long_default_label clob default null;
+        alter table ps_prop_value add label varchar(4000) default null;
+        alter table ps_prop_value add long_label clob default null;
+
+        create table ps_http_prop_info (
+            id varchar(36) not null primary key,
+            version integer default 0 not null,
+            prop_def_id varchar(36) not null,
+            url varchar(4000) not null,
+            username varchar(255),
+            password varchar(255),
+            data_format varchar(36) not null,
+            base_path varchar(4000),
+            value_path varchar(4000),
+            label_path varchar(4000)
+        );
+        create unique index ps_http_prop_info_uci on ps_http_prop_info(prop_def_id, version);
+        alter table ps_http_prop_info add constraint ps_http_prop_info_fk foreign key(prop_def_id) references ps_prop_def(id);
+    </sql>
+  </change>
+  <change number="9">
+    <description>Add placeholder property</description>
+    <sql separator=";">
+        alter table ps_prop_def add column placeholder varchar(4000);
+    </sql>
+  </change>
+  <change number="10">
+    <description>Add support for Scripted properties</description>
+    <sql separator=";">
+        create table ps_scripted_prop_info (
+            id varchar(36) not null primary key,
+            version integer default 0 not null,
+            prop_def_id varchar(36) not null,
+            source varchar(4000) not null,
+            arguments varchar(4000),
+            data_source_type varchar(36) not null,
+            data_format varchar(36) not null,
+            base_path varchar(4000),
+            value_path varchar(4000),
+            label_path varchar(4000)
+        );
+        create unique index ps_scripted_prop_info_uci on ps_scripted_prop_info(prop_def_id, version);
+        alter table ps_scripted_prop_info add constraint ps_scripted_prop_info_fk foreign key(prop_def_id) references ps_prop_def(id);
+        
+        alter table ps_http_prop_info add data_auth_type varchar(36) not null default 'BASIC';
+    </sql>
+  </change>
+  <change number="11">
+    <description>Add resolve_http_url property</description>
+    <sql separator=";">
+        alter table ps_http_prop_info add column resolve_http_url varchar(4000);
+    </sql>
+  </change>
+  <change number="12">
+    <description>Remove extraneous allowed values</description>
+    <groovy file="all/1.0/upgrade_12_delete_extraneous_data.groovy"/>
+  </change>
+  <change number="13">
+    <description>Changes to indices to help with database performance</description>
+    <sql separator=";">
+        create index ps_psd_tpsd_id on ps_prop_sheet_def(template_prop_sheet_def_id);
+    </sql>
+  </change>
+</change-set>

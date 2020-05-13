@@ -1,0 +1,16 @@
+@import '../../carbon/globals/import-once';
+
+@mixin authorization {
+    
+    .authorizationRealmList {
+        .idxButtonSpecial {
+            float: right;
+            margin-bottom: 8px;
+            margin-right: 0px;
+        }
+    }
+}
+
+@include exports('authorization') {
+    @include authorization;
+}

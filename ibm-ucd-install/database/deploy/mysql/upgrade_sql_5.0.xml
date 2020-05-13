@@ -1,0 +1,954 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.0.0.x.
+-->
+
+<change-set release="5.0">
+  <library name="workflow"
+      release="1.0"
+      base-dir="../workflow"
+      file="../workflow/mysql/upgrade_sql_1.0.xml"
+      version-table="wf_db_version"
+      release-column="release_name"
+      version-column="ver"/>
+  <library name="vc"
+      release="1.0"
+      base-dir="../vc"
+      file="../vc/mysql/upgrade_sql_1.0.xml"
+      version-table="vc_db_version"
+      release-column="release_name"
+      version-column="ver"/>
+  <library name="property-sheets"
+      release="1.0"
+      base-dir="../property-sheets"
+      file="../property-sheets/mysql/upgrade_sql_1.0.xml"
+      version-table="ps_db_version"
+      release-column="release_name"
+      version-column="ver"/>
+
+  <change number="1">
+    <description>Add type column to pl_plugin table</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_001_check_db_version.groovy" />
+    <sql separator=";">
+      alter table pl_plugin_command add type varchar(255);
+    </sql>
+  </change>
+  <change number="2">
+    <description>Add the pl_plugin_role table</description>
+    <sql separator=";">
+      create table pl_plugin_role (
+          plugin_id varchar(36) not null,
+          role_id varchar(36) not null
+      ) engine = innodb;
+    </sql>
+  </change>
+  <change number="3">
+    <description>Add role column to pl_plugin_command table</description>
+    <sql separator=";">
+      alter table pl_plugin_command add role_id varchar(36);
+    </sql>
+  </change>
+  <change number="4">
+    <description>Migrate security schema from commons-security model to air-security</description>
+    <sql separator=";">
+        update sec_db_version set ver = 11;
+
+        drop table sec_role_to_action;
+        drop table sec_dynamic_role_prop;
+        drop table sec_dynamic_role_to_action;
+        drop table sec_dynamic_role;
+        drop table sec_group_role_on_resource;
+        drop table sec_user_role_on_resource;
+        drop table sec_role;
+        drop table sec_action;
+
+        alter table sec_resource_type drop foreign key srt_sec_schema_fk;
+        alter table sec_resource_type drop sec_schema_id;
+        drop table sec_schema;
+
+        alter table sec_user add im_id varchar(256);
+    </sql>
+  </change>
+  <change number="5">
+    <description>Migrate security schema from commons-security model to air-security</description>
+    <sql separator=";" file="all/upgrade-scripts-50/upgrade_005_sec_schema_mysql.sql" />
+  </change>
+  <change number="6">
+    <description>Migrate security schema from commons-security model to air-security</description>
+    <sql separator=";" file="all/upgrade-scripts-50/upgrade_006_add_fks.sql" />
+    <sql separator=";" file="all/upgrade-scripts-50/upgrade_006_add_security_seed_data.sql" />
+  </change>
+  <change number="7">
+    <description>Load new security schema with pre-populated configuration</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_007_populate_security.groovy" />
+  </change>
+  <change number="8">
+    <description>Remove role requirement columns from statuses</description>
+    <sql separator=";">
+        alter table ds_status drop application_role_name;
+        alter table ds_status drop component_role_name;
+    </sql>
+  </change>
+  <change number="9">
+    <description>Updating mappings from live tasks to roles to use new security concepts</description>
+    <sql separator=";">
+        delete from tsk_task_resource_role_map;
+        alter table tsk_task_resource_role_map drop sec_resource_type_id;
+        alter table tsk_task_resource_role_map drop sec_schema_id;
+        alter table tsk_task_resource_role_map add sec_resource_role_id varchar(64);
+    </sql>
+  </change>
+  <change number="10">
+    <description>Incorporating user properties upgrade</description>
+    <sql separator=";">
+        create table sec_user_property (
+            id varchar(36) binary not null,
+            version numeric default 0 not null,
+            name varchar(255) binary not null,
+            value varchar(4000) binary not null,
+            sec_user_id varchar(36) binary not null,
+            primary key (id),
+            constraint sec_user_property_uc unique (name, sec_user_id)
+        ) engine = innodb;
+
+        alter table sec_user_property add constraint sup_sec_user_fk
+            foreign key (sec_user_id)
+            references sec_user (id)
+        ;
+      insert into sec_user_property
+      (id, version, name, value, sec_user_id)
+          select pv.id, 0, pv.name, pv.value, usr.id
+              from sec_user usr
+              join ds_user_preferences pref on usr.id = pref.id
+              join ps_prop_value pv on pv.prop_sheet_id = pref.prop_sheet_id
+              where pv.value is not null;
+
+      insert into sec_resource_for_team
+      (id, version, sec_resource_id, sec_team_space_id)
+          select res.id, 0, res.id, '20000000000000000000000100000000'
+              from sec_resource res;
+
+      delete from ps_prop_value where prop_sheet_id in (select prop_sheet_id from ds_user_preferences);
+      delete from ps_prop_sheet where id in (select prop_sheet_id from ds_user_preferences);
+      drop table ds_user_preferences;
+    </sql>
+  </change>
+  <change number="11">
+    <description>Changing resource name uniqueness to be scoped by parent (1/2)</description>
+    <sql separator=";">
+      alter table ds_resource drop index ds_resource_name_uc;
+      alter table ds_resource drop index ds_resource_name_uci;
+    </sql>
+  </change>
+  <change number="12">
+    <description>Changing resource name uniqueness to be scoped by parent (2/2)</description>
+    <sql separator=";">
+      create unique index ds_resource_name_uci on ds_resource(name, parent_id, ghosted_date);
+      alter table ds_resource add constraint ds_resource_name_uc unique(name, parent_id, ghosted_date);
+    </sql>
+  </change>
+  <change number="13">
+    <description>Creating mapping table from environments to resources</description>
+    <sql separator=";">
+        create table ds_environment_to_resource (
+            environment_id varchar(36) not null,
+            resource_id varchar(36) not null
+        ) engine = innodb;
+
+        create index ds_env_to_res_environment_id on ds_environment_to_resource(environment_id);
+        create index ds_env_to_res_resource_id on ds_environment_to_resource(resource_id);
+        alter table ds_environment_to_resource add constraint ds_env_to_res_2_env foreign key(environment_id) references ds_environment(id);
+        alter table ds_environment_to_resource add constraint ds_env_to_res_2_res foreign key(resource_id) references ds_resource(id);
+    </sql>
+  </change>
+  <change number="14">
+    <description>Adding tags, converting existing resource roles to tags</description>
+    <sql separator=";">
+        create table ds_tag (
+            id varchar(36) not null primary key,
+            version numeric default 0 not null,
+            name varchar(255) not null,
+            description varchar(256),
+            color varchar(10),
+            object_type varchar(64) not null
+        ) engine = innodb;
+
+        create table ds_resource_to_tag (
+            resource_id varchar(36) not null,
+            tag_id varchar(36) not null
+        ) engine = innodb;
+
+        insert into ds_tag (id, version, name, description, color, object_type)
+        select id, version, name, description, color, 'Resource'
+        from ds_resource_role;
+
+        insert into ds_resource_to_tag (resource_id, tag_id)
+        select resource_id, resource_role_id
+        from ds_resource_to_role;
+
+        delete from ds_resource_to_role;
+        delete from ds_resource_role;
+
+        create unique index ds_tag_name_uci on ds_tag(name, object_type);
+        create index ds_tag_object_type on ds_tag(object_type);
+        create index ds_tag_name on ds_tag(name);
+        alter table ds_tag add constraint ds_tag_name_uc unique(name, object_type);
+
+        create index ds_r2t_resource_id on ds_resource_to_tag(resource_id);
+        create index ds_r2t_tag_id on ds_resource_to_tag(tag_id);
+        alter table ds_resource_to_tag add constraint ds_r2t_2_resource foreign key(resource_id) references ds_resource(id);
+        alter table ds_resource_to_tag add constraint ds_r2t_2_role foreign key(tag_id) references ds_tag(id);
+    </sql>
+  </change>
+  <change number="15">
+    <description>Creating resource roles associated with components</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_015_component_resource_roles.groovy" />
+  </change>
+  <change number="16">
+    <description>Migrating resource groups to the new resource model</description>
+    <sql separator=";">
+        alter table ds_resource drop index ds_resource_name_uc;
+        alter table ds_resource drop index ds_resource_name_uci;
+    </sql>
+    <groovy file="all/upgrade-scripts-50/upgrade_016_resources_for_groups.groovy" />
+    <sql separator=";">
+        create unique index ds_resource_name_uci on ds_resource(name, parent_id, ghosted_date);
+        alter table ds_resource add constraint ds_resource_name_uc unique(name, parent_id, ghosted_date);
+    </sql>
+  </change>
+  <change number="17">
+    <description>Changing all resource group security resources to resource resources</description>
+    <sql separator=";">
+        update sec_resource set sec_resource_type_id = '20000000000000000000000000000104' where sec_resource_type_id = '20000000000000000000000000000105';
+    </sql>
+  </change>
+  <change number="18">
+    <description>Convert various resource role usages to tag usage</description>
+    <sql separator=";">
+        alter table ds_snapshot_to_version drop role_id;
+        alter table rt_app_proc_req_to_version drop role_id;
+
+        alter table rt_version_selector drop foreign key ver_sel2rol;
+        alter table rt_version_selector drop role_id;
+
+        update inv_desired_inventory set role_id = null;
+    </sql>
+  </change>
+  <change number="19">
+    <description>Creating subresources with appropriate roles for all resources mapped to components</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_019_create_component_subresources.groovy" />
+  </change>
+  <change number="20">
+    <description>Removing resource groups</description>
+    <sql separator=";">
+        update ds_res_grp_cmp_env_mapping
+        set resource_id = res_group_static_id, res_group_static_id = null
+        where res_group_static_id is not null;
+
+        insert into ds_environment_to_resource (environment_id, resource_id)
+        select distinct environment_id, resource_id
+        from ds_res_grp_cmp_env_mapping
+        where resource_id is not null;
+
+        drop table ds_res_grp_cmp_env_mapping;
+        drop table ds_res_group_static_to_res;
+        drop table ds_resource_condition;
+        drop table ds_res_group_dynamic;
+        drop table ds_res_group_static;
+
+        delete from sec_role_action where sec_action_id in (select id from sec_action where sec_resource_type_id = '20000000000000000000000000000105');
+        delete from sec_action where sec_resource_type_id = '20000000000000000000000000000105';
+        delete from sec_resource_type where id = '20000000000000000000000000000105';
+    </sql>
+  </change>
+  <change number="21">
+    <description>Removing join table between resources and roles</description>
+    <sql separator=";">
+        alter table ds_resource add role_id varchar(36);
+
+        update ds_resource
+            set role_id =
+                (select max(resource_role_id)
+                from ds_resource_to_role
+                where resource_id = ds_resource.id);
+
+        drop table ds_resource_to_role;
+
+        create index ds_resource_role_id on ds_resource(role_id);
+        alter table ds_resource add constraint ds_resource_2_role foreign key(role_id) references ds_resource_role(id);
+    </sql>
+  </change>
+  <change number="22">
+    <description>Adding a more defined relationship between resource roles and components</description>
+    <sql separator=";">
+        alter table ds_resource_role drop color;
+        alter table ds_resource_role add component_id varchar(36);
+
+        update ds_resource_role rr
+        set rr.component_id =
+            (select c.id
+            from ds_component c
+            where c.name = rr.name
+            and ghosted_date = 0);
+
+        create index ds_res_role_component_id on ds_resource_role(component_id);
+        alter table ds_resource_role add constraint ds_res_role_2_component foreign key(component_id) references ds_component(id);
+    </sql>
+  </change>
+  <change number="23">
+    <description>Adding ghosting to snapshots</description>
+    <sql separator=";">
+        alter table ds_snapshot drop index ds_snapshot_uc;
+        alter table ds_snapshot drop index ds_snapshot_uci;
+
+        alter table ds_snapshot add ghosted_date bigint default 0 not null;
+        create unique index ds_snapshot_uci on ds_snapshot(application_id, name, ghosted_date);
+        alter table ds_snapshot add constraint ds_snapshot_uc unique(application_id, name, ghosted_date);
+    </sql>
+  </change>
+  <change number="24">
+    <description>Adding a path field to ds_resource</description>
+    <sql separator=";">
+        alter table ds_resource add column path varchar(1000) not null default "/";
+    </sql>
+  </change>
+  <change number="25">
+    <description>Populate the path field in ds_resource</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_025_migrate_path.groovy"/>
+  </change>
+  <change number="26">
+    <description>Remove all references to task definition</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_026_migrate_manual_task_mysql.groovy" />
+  </change>
+  <change number="27">
+    <description>Drop the task definition table</description>
+    <sql separator=";">
+        drop table tsk_task_definition;
+    </sql>
+  </change>
+  <change number="28">
+    <description>Adding resource templates</description>
+    <sql separator=";">
+        create table ds_resource_template (
+            id varchar(36) not null primary key,
+            version numeric default 0 not null,
+            name varchar(255) not null,
+            description varchar(1000),
+            resource_id varchar(36) not null,
+            sec_resource_id varchar(36) not null,
+            ghosted_date bigint default 0 not null,
+            prop_sheet_id varchar(36) not null,
+            prop_sheet_def_id varchar(36) not null
+        ) engine = innodb;
+
+        create unique index ds_resource_template_name_uci on ds_resource_template(name, ghosted_date);
+        create index ds_resource_template_res_id on ds_resource_template(resource_id);
+        create index ds_resource_template_sr_id on ds_resource_template(sec_resource_id);
+        alter table ds_resource_template add constraint ds_resource_template_name_uc unique(name, ghosted_date);
+        alter table ds_resource_template add constraint ds_resource_template_2_res foreign key(resource_id) references ds_resource(id);
+
+        alter table ds_resource add column resource_template_id varchar(36);
+
+        create index ds_resource_res_template_id on ds_resource(resource_template_id);
+        alter table ds_resource add constraint ds_resource_2_res_template foreign key(resource_template_id) references ds_resource_template(id);
+
+        alter table ds_resource drop index ds_resource_name_uc;
+        alter table ds_resource drop index ds_resource_name_uci;
+        create unique index ds_resource_name_uci on ds_resource(name, parent_id, resource_template_id, ghosted_date);
+        alter table ds_resource add constraint ds_resource_name_uc unique(name, parent_id, resource_template_id, ghosted_date);
+
+
+        insert into sec_resource_type (id, version, name, enabled)
+        values ('20000000000000000000000000000110', 0, 'Resource Template', 'Y');
+
+        insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id)
+        values ('200000000000000000000000001d0001', 0, 'Create Resource Templates', 'Create new resource templates for this team.', 'Y', 'Y', '20000000000000000000000000000110');
+        insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id)
+        values ('200000000000000000000000001d0002', 0, 'View Resource Templates', 'View resource templates in this team.', 'Y', 'Y', '20000000000000000000000000000110');
+        insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id)
+        values ('200000000000000000000000001d0003', 0, 'Edit Resource Templates', 'Edit resource templates in this team.', 'Y', 'Y', '20000000000000000000000000000110');
+
+        insert into sec_role_action (id, version, sec_role_id, sec_action_id)
+        values ('200000000000000000000000001d0001', 0, '20000000000000000000000000010001', '200000000000000000000000001d0001');
+        insert into sec_role_action (id, version, sec_role_id, sec_action_id)
+        values ('200000000000000000000000001d0002', 0, '20000000000000000000000000010001', '200000000000000000000000001d0002');
+        insert into sec_role_action (id, version, sec_role_id, sec_action_id)
+        values ('200000000000000000000000001d0003', 0, '20000000000000000000000000010001', '200000000000000000000000001d0003');
+    </sql>
+  </change>
+  <change number="29">
+    <description>Reversing the direction of the relationship between resource roles and components</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_029_resource_roles_for_ghosted_components.groovy"/>
+    <sql separator=";">
+        alter table ds_resource_role add special_type varchar(20);
+        update ds_resource_role set special_type = 'COMPONENT' where component_id is not null;
+
+        alter table ds_component add resource_role_id varchar(36);
+        update ds_component comp set comp.resource_role_id =
+            (select id from ds_resource_role where component_id = comp.id);
+        alter table ds_component modify column resource_role_id varchar(36) not null;
+
+        alter table ds_resource_role drop foreign key ds_res_role_2_component;
+        alter table ds_resource_role drop index ds_res_role_component_id;
+        alter table ds_resource_role drop component_id;
+
+        create index ds_cmp_res_role_id on ds_component(resource_role_id);
+        alter table ds_component add constraint ds_cmp_2_res_role foreign key(resource_role_id) references ds_resource_role(id);
+    </sql>
+  </change>
+  <change number="30">
+    <description>refactor unique constraints into indexes -- security</description>
+    <sql separator=";">
+
+    create table sec_resource_for_team2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        sec_resource_id varchar(36) binary not null,
+        sec_team_space_id varchar(36) binary not null,
+        sec_resource_role_id varchar(36) binary,
+        primary key (id)
+    )ENGINE = INNODB;
+
+    create table sec_role_action2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        sec_role_id varchar(36) binary not null,
+        sec_action_id varchar(36) binary not null,
+        sec_resource_role_id varchar(36) binary,
+        primary key (id)
+    )ENGINE = INNODB;
+
+    insert into sec_resource_for_team2 (id, version, sec_resource_id, sec_team_space_id, sec_resource_role_id)
+        select id, version, sec_resource_id, sec_team_space_id, sec_resource_role_id from sec_resource_for_team;
+    insert into sec_role_action2 (id, version, sec_role_id, sec_action_id, sec_resource_role_id)
+        select id, version, sec_role_id, sec_action_id, sec_resource_role_id from sec_role_action;
+
+    drop table sec_resource_for_team;
+    drop table sec_role_action;
+
+    rename table sec_resource_for_team2 to sec_resource_for_team;
+    rename table sec_role_action2 to sec_role_action;
+
+    create unique index team_resource_role_mapping
+        on sec_resource_for_team(sec_resource_id, sec_team_space_id, sec_resource_role_id);
+
+    create unique index action_resource_role_mapping
+        on sec_role_action(sec_role_id, sec_action_id, sec_resource_role_id);
+
+
+    </sql>
+  </change>
+  <change number="31">
+    <description>refactor unique constraints into indexes -- udeploy</description>
+    <sql separator=";">
+        alter table ds_tag drop index ds_tag_name_uc;
+        alter table ds_agent drop index ds_agent_name_uc;
+        alter table ds_agent_pool drop index ds_agent_pool_name_uc;
+        alter table ds_resource drop index ds_resource_name_uc;
+        alter table ds_resource_template drop index ds_resource_template_name_uc;
+        alter table ds_component drop index ds_component_name_uc;
+        alter table ds_version drop index ds_version_name_uc;
+        alter table ds_version_status drop index ds_ver_status_uc;
+        alter table ds_application drop index ds_application_name_uc;
+        alter table ds_environment drop index ds_env_name_uc;
+        alter table ds_prop_cmp_env_mapping drop index ds_pce_map_uc;
+        alter table ds_snapshot drop index ds_snapshot_uc;
+        alter table ds_snapshot_config_version drop index ds_scv_uc;
+        alter table ds_status drop index ds_status_uc;
+        alter table pl_plugin drop index pl_plugin_uc;
+        alter table pl_plugin_command drop index pl_plugin_command_uc;
+        alter table ds_network_relay drop index ds_network_relay_name_uc;
+
+        alter table ds_component drop index ds_component_name_uci;
+        create unique index ds_component_name_uci on ds_component(name, ghosted_date);
+        alter table ds_network_relay drop index ds_network_relay_name_uci;
+        create unique index ds_network_relay_name_uci on ds_network_relay(name);
+    </sql>
+  </change>
+  <change number="32">
+    <description>refactor unique constraints into indexes -- property</description>
+    <changeref library="property-sheets" change="6"/>
+    <changeref library="property-sheets" change="7"/>
+  </change>
+  <change number="33">
+    <description>Adding prepopulated resource roles</description>
+    <sql separator=";">
+        insert into ps_prop_sheet_def (id, version, name, description, prop_sheet_group_id, template_handle, template_prop_sheet_def_id)
+        values ('1f7febf7-456b-400c-b277-128fd78f55a7', 5, 'Dynamic Group', NULL, NULL, NULL, NULL);
+        insert into ps_prop_def (id, version, prop_sheet_def_id, name, description, label, default_value, long_default_value, property_type, required, hidden, index_order, allowed_prop_sheet_def_id, pattern)
+        values ('3ef5c4f8-0ff8-43f0-9636-7ae9aeab8a2d', 0, '1f7febf7-456b-400c-b277-128fd78f55a7', 'rules', '', 'rules', NULL, NULL, 'TEXT', 'N', 'N', 0, NULL, '');
+        insert into ds_resource_role (id, version, name, description, prop_sheet_def_id, special_type)
+        values ('4241a880-d5aa-4c0e-ad72-c179fd3af69f', 1, 'Dynamic Group', '', '1f7febf7-456b-400c-b277-128fd78f55a7', 'DYNAMIC_GROUP');
+    </sql>
+  </change>
+  <change number="34">
+    <description>Adding ghosting of applications</description>
+    <sql separator=";">
+        alter table ds_application drop index ds_application_name_uci;
+        alter table ds_application add ghosted_date bigint default 0 not null;
+        create unique index ds_application_name_uci on ds_application(name, ghosted_date);
+    </sql>
+  </change>
+  <change number="35">
+    <description>Adding resource team inheritance</description>
+    <sql separator=";">
+        alter table ds_resource add inherit_team varchar(1) default 'N' not null;
+    </sql>
+  </change>
+  <change number="36">
+    <description>Adding environment blueprints</description>
+    <sql separator=";">
+        create table ds_blueprint (
+            id varchar(36) not null primary key,
+            version numeric default 0 not null,
+            name varchar(255) not null,
+            description varchar(1000),
+            ghosted_date bigint default 0 not null,
+            date_created bigint not null,
+            created_by_user varchar(64) not null,
+            application_id varchar(36) not null,
+            template_id varchar(36) not null
+        ) engine = innodb;
+
+        create unique index ds_blueprint_name_uci on ds_blueprint(name, application_id, ghosted_date);
+        create index ds_blueprint_application_id on ds_blueprint(application_id);
+        create index ds_blueprint_template_id on ds_blueprint(template_id);
+        alter table ds_blueprint add constraint ds_blueprint_2_application foreign key(application_id) references ds_application(id);
+        alter table ds_blueprint add constraint ds_blueprint_2_template foreign key(template_id) references ds_resource_template(id);
+
+        alter table ds_resource add blueprint_id varchar(36);
+        create index ds_resource_blueprint_id on ds_resource(blueprint_id);
+        alter table ds_resource add constraint ds_resource_2_blueprint foreign key(blueprint_id) references ds_blueprint(id);
+
+        alter table ds_resource drop index ds_resource_name_uci;
+        create unique index ds_resource_name_uci on ds_resource(name, parent_id, resource_template_id, blueprint_id, ghosted_date);
+    </sql>
+  </change>
+  <change number="37">
+    <description>Adding a built-in role for agent placeholders</description>
+    <sql separator=";">
+        insert into ps_prop_sheet_def (id, version, name, description, prop_sheet_group_id, template_handle, template_prop_sheet_def_id)
+        values ('cf105769-2c3f-4482-8f7b-5b1212d20511', 0, 'Agent Placeholder', NULL, NULL, NULL, NULL);
+        insert into ds_resource_role (id, version, name, description, prop_sheet_def_id, special_type)
+        values ('e87aa3ff-4307-4167-b6f9-74a58b3b9e6f', 1, 'Agent Placeholder', '', 'cf105769-2c3f-4482-8f7b-5b1212d20511', 'AGENT_PLACEHOLDER');
+    </sql>
+  </change>
+  <change number="38">
+    <description>Removing Role Security Report</description>
+    <sql separator=";">
+        delete from vc_commit_path_entry where id='fd92e999-d472-4269-af1b-4306a93bb1a2';
+        delete from vc_commit_path_entry where id='fd92e999-d472-4269-af1b-4306a93bb1a3';
+        delete from vc_persistent_record where id='d4125af4-1672-42dd-90d6-670a72188033';
+        delete from vc_persistent_record where id='d4125af4-1672-42dd-90d6-670a72188034';
+    </sql>
+  </change>
+  <change number="39">
+    <description>Ghost custom role reports in the database</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_039_ghost_custom_role_reports.groovy" />
+  </change>
+  <change number="40">
+    <description>removing licenses from agents</description>
+    <sql separator=";">
+      alter table ds_agent drop foreign key ds_agent_2_license;
+      alter table ds_agent drop column license_id;
+    </sql>
+  </change>
+  <change number="41">
+    <description>Adding cloud connections</description>
+    <sql separator=";">
+        create table ds_cloud_connection (
+    		    id varchar(36) not null primary key,
+    		    version numeric default 0 not null,
+    		    name varchar(255) not null,
+    		    url varchar(255) not null,
+      			username varchar(255) not null,
+      			password varchar(255) not null,
+    		    description varchar(1000),
+    		    sec_resource_id varchar(36) not null,
+    		    ghosted_date bigint default 0 not null,
+    		    prop_sheet_id varchar(36) not null,
+    		    prop_sheet_def_id varchar(36) not null
+    		) engine = innodb;
+
+        create unique index ds_cloud_connection_uci on ds_cloud_connection(url, username, ghosted_date);
+        create index ds_cloud_connection_url on ds_cloud_connection(url);
+        create index ds_cloud_connection_sr_id on ds_cloud_connection(sec_resource_id);
+
+        insert into sec_resource_type (id, version, name, enabled)
+        values ('20000000000000000000000000000111', 0, 'Cloud Connection', 'Y');
+
+        insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id)
+        values ('200000000000000000000000001d0004', 0, 'Create Cloud Connection', 'Create new cloud connections for this team.', 'Y', 'Y', '20000000000000000000000000000111');
+        insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id)
+        values ('200000000000000000000000001d0005', 0, 'View Cloud Connection', 'View cloud connections in this team.', 'Y', 'Y', '20000000000000000000000000000111');
+        insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id)
+        values ('200000000000000000000000001d0006', 0, 'Edit Cloud Connection', 'Edit cloud connections in this team.', 'Y', 'Y', '20000000000000000000000000000111');
+
+        insert into sec_role_action (id, version, sec_role_id, sec_action_id)
+        values ('200000000000000000000000001d0004', 0, '20000000000000000000000000010001', '200000000000000000000000001d0004');
+        insert into sec_role_action (id, version, sec_role_id, sec_action_id)
+        values ('200000000000000000000000001d0005', 0, '20000000000000000000000000010001', '200000000000000000000000001d0005');
+        insert into sec_role_action (id, version, sec_role_id, sec_action_id)
+        values ('200000000000000000000000001d0006', 0, '20000000000000000000000000010001', '200000000000000000000000001d0006');
+    </sql>
+  </change>
+  <change number="42">
+    <description>Adding tracking of which blueprint was used to create an environment</description>
+    <sql separator=";">
+        alter table ds_environment add blueprint_id varchar(36);
+        create index ds_environment_blueprint_id on ds_environment(blueprint_id);
+        alter table ds_environment add constraint ds_environment_2_blueprint foreign key(blueprint_id) references ds_blueprint(id);
+    </sql>
+  </change>
+  <change number="43">
+    <description>refactor unique constraints into indexes -- security</description>
+    <sql separator=";">
+    create table sec_action2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        name varchar(64) binary not null,
+        description varchar(1024) binary,
+        enabled varchar(1) binary default 'Y' not null,
+        cascading varchar(1) binary default 'N' not null,
+        sec_resource_type_id varchar(36) binary not null,
+        primary key (id)
+    )ENGINE = INNODB;
+    insert into sec_action2 (id, version, name, description, enabled, cascading, sec_resource_type_id)
+        (select id, version, name, description, enabled, cascading, sec_resource_type_id from sec_action);
+    drop table sec_action;
+    rename table sec_action2 to sec_action;
+    create unique index sec_action_name
+        on sec_action(name);
+    alter table sec_role_action add constraint srar_sec_action_fk
+        foreign key (sec_action_id)
+        references sec_action (id);
+
+    alter table sec_auth_token drop index sec_auth_token_uc;
+    create unique index sec_auth_token_uc
+        on sec_auth_token(token);
+
+    create table sec_group2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        name varchar(255) binary not null,
+        sec_authorization_realm_id varchar(36) binary not null,
+        enabled varchar(1) binary default 'Y' not null,
+        primary key (id)
+    )ENGINE = INNODB;
+    insert into sec_group2 (id, version, name, sec_authorization_realm_id, enabled)
+        select id, version, name, sec_authorization_realm_id, enabled from sec_group;
+    alter table sec_group_role_on_team drop foreign key sgrot_sec_group_fk;
+    alter table sec_user_to_group drop foreign key sutg_sec_group_fk;
+    drop table sec_group;
+    rename table sec_group2 to sec_group;
+    create unique index sec_name_realm_mapping
+        on sec_group(name, sec_authorization_realm_id);
+    alter table sec_group_role_on_team add constraint sgrot_sec_group_fk
+        foreign key (sec_group_id)
+        references sec_group (id);
+    alter table sec_user_to_group add constraint sutg_sec_group_fk
+        foreign key (sec_group_id)
+        references sec_group (id);
+
+    create table sec_group_role_on_team2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        sec_group_id varchar(36) binary not null,
+        sec_role_id varchar(36) binary not null,
+        sec_team_space_id varchar(36) binary not null,
+        primary key (id)
+    )ENGINE = INNODB;
+    insert into sec_group_role_on_team2 (id, version, sec_group_id, sec_role_id, sec_team_space_id)
+        select id, version, sec_group_id, sec_role_id, sec_team_space_id from sec_group_role_on_team;
+    drop table sec_group_role_on_team;
+    rename table sec_group_role_on_team2 to sec_group_role_on_team;
+    create unique index sec_group_role_team_mapping
+        on sec_group_role_on_team(sec_group_id, sec_role_id, sec_team_space_id);
+
+    create table sec_resource_role2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        name varchar(255) binary not null,
+        description varchar(1024) binary,
+        enabled varchar(1) binary default 'Y' not null,
+        sec_resource_type_id varchar(36) binary not null,
+        primary key (id)
+    )ENGINE = INNODB;
+    insert into sec_resource_role2 (id, version, name, description, enabled, sec_resource_type_id)
+        select id, version, name, description, enabled, sec_resource_type_id from sec_resource_role;
+    drop table sec_resource_role;
+    rename table sec_resource_role2 to sec_resource_role;
+    create unique index sec_resource_role_name
+        on sec_resource_role(name);
+    alter table sec_resource_for_team add constraint srft_sec_resource_role_fk
+        foreign key (sec_resource_role_id)
+        references sec_resource_role (id);
+    alter table sec_role_action add constraint srar_sec_resource_role_fk
+        foreign key (sec_resource_role_id)
+        references sec_resource_role (id);
+
+    create table sec_role2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        name varchar(255) binary not null,
+        description varchar(1024) binary,
+        enabled varchar(1) binary default 'Y' not null,
+        primary key (id)
+    )ENGINE = INNODB;
+    insert into sec_role2 (id, version, name, description, enabled)
+        select id, version, name, description, enabled from sec_role;
+    alter table sec_user_role_on_team drop foreign key surot_sec_role_fk;
+    drop table sec_role;
+    rename table sec_role2 to sec_role;
+    create unique index sec_role_name
+        on sec_role(name);
+    alter table sec_role_action add constraint srar_sec_role_fk
+        foreign key (sec_role_id)
+        references sec_role (id);
+    alter table sec_user_role_on_team add constraint surot_sec_role_fk
+        foreign key (sec_role_id)
+        references sec_role (id);
+
+    create table sec_team_space2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        enabled varchar(1) binary default 'Y' not null,
+        name varchar(255) binary not null,
+        description varchar(4000) binary,
+        primary key (id)
+    ) engine = innodb;
+    insert into sec_team_space2 (id, version, enabled, name, description)
+        select id, version, enabled, name, description from sec_team_space;
+    alter table sec_user_role_on_team drop foreign key surot_sec_team_space_fk;
+    drop table sec_team_space;
+    rename table sec_team_space2 to sec_team_space;
+    create unique index sec_team_space_name
+        on sec_team_space(name);
+    alter table sec_resource_for_team add constraint srft_sec_team_space_fk
+        foreign key (sec_team_space_id)
+        references sec_team_space (id);
+
+    alter table sec_user_role_on_team add constraint surot_sec_team_space_fk
+        foreign key (sec_team_space_id)
+        references sec_team_space (id);
+
+    alter table sec_user drop index sec_user_uc;
+    create unique index sec_user_uc
+        on sec_user(name, sec_authentication_realm_id, ghosted_date);
+
+    alter table sec_user_property drop index sec_user_property_uc;
+    create unique index sec_user_property_uc
+        on sec_user_property(name, sec_user_id);
+
+    create table sec_user_role_on_team2 (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        sec_user_id varchar(36) binary not null,
+        sec_role_id varchar(36) binary not null,
+        sec_team_space_id varchar(36) binary not null,
+        primary key (id)
+    ) engine = innodb;
+    insert into sec_user_role_on_team2 (id, version, sec_user_id, sec_role_id, sec_team_space_id)
+        select id, version, sec_user_id, sec_role_id, sec_team_space_id from sec_user_role_on_team;
+    drop table sec_user_role_on_team;
+    rename table sec_user_role_on_team2 to sec_user_role_on_team;
+    create unique index sec_user_role_on_team_mapping
+        on sec_user_role_on_team(sec_user_id, sec_role_id, sec_team_space_id);
+
+    create table sec_user_to_group2 (
+        sec_user_id varchar(36) binary not null,
+        sec_group_id varchar(36) binary not null
+    )ENGINE = INNODB;
+    insert into sec_user_to_group2 (sec_user_id, sec_group_id)
+        select sec_user_id, sec_group_id from sec_user_to_group;
+    drop table sec_user_to_group;
+    rename table sec_user_to_group2 to sec_user_to_group;
+    create unique index sec_user_group_mapping
+        on sec_user_to_group(sec_user_id, sec_group_id);
+
+
+    alter table sec_action add constraint sa_sec_resource_type_fk
+        foreign key (sec_resource_type_id)
+        references sec_resource_type (id);
+
+    alter table sec_group add constraint sg_sec_authorization_realm_fk
+        foreign key (sec_authorization_realm_id)
+        references sec_authorization_realm (id);
+
+    alter table sec_group_role_on_team add constraint sgrot_sec_group_fk
+        foreign key (sec_group_id)
+        references sec_group (id);
+
+    alter table sec_group_role_on_team add constraint sgrot_sec_role_fk
+        foreign key (sec_role_id)
+        references sec_role (id);
+
+    alter table sec_group_role_on_team add constraint sgrot_sec_team_space_fk
+        foreign key (sec_team_space_id)
+        references sec_team_space (id);
+
+    alter table sec_resource_role add constraint srr_sec_resource_type_fk
+        foreign key (sec_resource_type_id)
+        references sec_resource_type (id);
+
+    alter table sec_user_role_on_team add constraint surot_sec_user_fk
+        foreign key (sec_user_id)
+        references sec_user (id);
+
+    alter table sec_user_role_on_team add constraint surot_sec_role_fk
+        foreign key (sec_role_id)
+        references sec_role (id);
+
+    alter table sec_user_role_on_team add constraint surot_sec_team_space_fk
+        foreign key (sec_team_space_id)
+        references sec_team_space (id);
+
+    alter table sec_user_to_group add constraint sutg_sec_user_fk
+        foreign key (sec_user_id)
+        references sec_user (id);
+
+    alter table sec_user_to_group add constraint sutg_sec_group_fk
+        foreign key (sec_group_id)
+        references sec_group (id);
+
+    </sql>
+  </change>
+  <change number="44">
+    <description>Adding a built-in role for smartcloud logical nodes</description>
+    <sql separator=";">
+        insert into ps_prop_sheet_def (id, version, name, description, prop_sheet_group_id, template_handle, template_prop_sheet_def_id)
+        values ('a44d9ebf-f98f-4a89-a5c0-cc7b366cc4f2', 0, 'SmartCloud Logical Node', NULL, NULL, NULL, NULL);
+        insert into ps_prop_def (id, version, prop_sheet_def_id, name, description, label, default_value, long_default_value, property_type, required, hidden, index_order, allowed_prop_sheet_def_id, pattern)
+        values ('8e652769-355c-43b3-a521-8cc3dd1c3c0b', 0, 'a44d9ebf-f98f-4a89-a5c0-cc7b366cc4f2', 'patternId', 'ID of the pattern for this node.', 'Pattern ID', NULL, NULL, 'TEXT', 'Y', 'N', 0, NULL, NULL);
+        insert into ps_prop_def (id, version, prop_sheet_def_id, name, description, label, default_value, long_default_value, property_type, required, hidden, index_order, allowed_prop_sheet_def_id, pattern)
+        values ('902682bd-5ca2-4d71-9ae2-39971819f308', 0, 'a44d9ebf-f98f-4a89-a5c0-cc7b366cc4f2', 'partId', 'ID of the OS Part for this node.', 'OS Part ID', NULL, NULL, 'TEXT', 'Y', 'N', 1, NULL, NULL);
+        insert into ps_prop_def (id, version, prop_sheet_def_id, name, description, label, default_value, long_default_value, property_type, required, hidden, index_order, allowed_prop_sheet_def_id, pattern)
+        values ('395bd966-3b12-402c-9fdc-682e74c1ff25', 0, 'a44d9ebf-f98f-4a89-a5c0-cc7b366cc4f2', 'cloudId', 'Cloud ID for this node.', 'Cloud ID', NULL, NULL, 'TEXT', 'Y', 'N', 2, NULL, NULL);
+        insert into ds_resource_role (id, version, name, description, prop_sheet_def_id, special_type)
+        values ('96a2c9bf-f0e4-4193-ad2f-72be17973c75', 1, 'SmartCloud Logical Node', '', 'a44d9ebf-f98f-4a89-a5c0-cc7b366cc4f2', 'AGENT_PLACEHOLDER');
+    </sql>
+  </change>
+  <change number="45">
+    <description>Updating notification entries to work with new security model</description>
+    <sql separator=";">
+        alter table ds_notification_entry add resource_type_id varchar(64);
+        update ds_notification_entry set resource_type_id = '20000000000000000000000000000100' where schema_id = '20000000000000000000000000000010';
+        update ds_notification_entry set resource_type_id = '20000000000000000000000000000103' where schema_id = '20000000000000000000000000000013';
+        update ds_notification_entry set resource_type_id = '20000000000000000000000000000104' where schema_id = '20000000000000000000000000000014';
+        alter table ds_notification_entry modify column resource_type_id varchar(64) not null;
+
+        alter table ds_notification_entry add resource_role_id varchar(64);
+        alter table ds_notification_entry drop column schema_id;
+    </sql>
+  </change>
+  <change number="46">
+    <description>Adding roles to statuses</description>
+    <sql separator=";">
+        alter table ds_status add role_id varchar(36);
+    </sql>
+  </change>
+  <change number="47">
+    <description>Renaming Calendar Tab Action</description>
+    <sql separator=";">
+        update sec_action set name='Deployment Calendar Tab' where id='200000000000000000000000001c0004';
+    </sql>
+  </change>
+  <change number="48">
+    <description>Adding the processes action</description>
+    <sql separator=";">
+        insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id)
+        values ('200000000000000000000000001c000a', 0, 'Processes Tab', 'View the processes tab.', 'Y', 'Y', '20000000000000000000000000000200');
+
+        insert into sec_role_action (id, version, sec_role_id, sec_action_id)
+        values ('200000000000000000000000001c000a', 0, '20000000000000000000000000010001', '200000000000000000000000001c000a');
+    </sql>
+  </change>
+  <change number="49">
+    <description>Removing security from licenses</description>
+    <groovy file="all/upgrade-scripts-50/upgrade_049_remove_license_security.groovy" />
+  </change>
+  <change number="50">
+    <description>Adding tracking of a provisioned system ID in environments</description>
+    <sql separator=";">
+        alter table ds_environment add instance_id numeric;
+    </sql>
+  </change>
+  <change number="51">
+    <description>Incorporate security upgrade to support licenses</description>
+    <sql separator=";">
+        create table sec_license_type (
+        id varchar(36) binary not null,
+        version numeric default 0 not null,
+        feature varchar(36) binary not null,
+        is_reservable varchar(1) default 'N' not null,
+        primary key (id)
+        );
+
+        create table sec_action_to_license_type (
+        action_id varchar(36) not null,
+        license_type_id varchar(36) not null
+        );
+
+        alter table sec_user add column sec_license_type_id_requested varchar(36);
+        alter table sec_user add column sec_license_type_id_received varchar(36);
+    </sql>
+  </change>
+  <change number="52">
+    <description>removing the "not null" constraint from sec_user_property</description>
+    <sql separator=";">
+        alter table sec_user_property modify value varchar(4000) binary default null;
+    </sql>
+  </change>
+  <change number="53">
+    <description>Adding agentNamePatterns propdef to the Agent Placeholder resource role</description>
+    <sql separator=";">
+      insert into ps_prop_def (id, version, prop_sheet_def_id, name, description, label, default_value, long_default_value, property_type, required, hidden, index_order, allowed_prop_sheet_def_id, pattern)
+      values ('7cb87cf2-4bad-421c-be9b-57eaa49c6fc8', 0, 'cf105769-2c3f-4482-8f7b-5b1212d20511', 'agentNamePatterns', 'Patterns identifying agents for the prototype to pick up', 'Agent Name Patterns', NULL, NULL, 'TEXT', 'N', 'N', 0, NULL, NULL);
+    </sql>
+  </change>
+  <change number="54">
+    <description>Incorporating user session count change from security library</description>
+    <sql separator=";">
+        alter table sec_user add column licensed_session_count integer default 0 not null;
+        update sec_user set licensed_session_count = 0;
+    </sql>
+  </change>
+  <change number="55">
+    <description>Adding missing entries to latest entry table</description>
+    <sql separator=";">
+      delete from vc_latest_version_entry;
+
+      insert into vc_latest_version_entry
+          (path, persistent_record_id)
+      select pr1.path, id
+          from vc_persistent_record pr1
+      inner join (select path, max(commit_id) as max_commit from vc_persistent_record group by path) pr2
+          on pr2.path = pr1.path
+      where pr1.commit_id = pr2.max_commit;
+    </sql>
+  </change>
+  <change number="56">
+    <description>Add foreign key from apikey to sec user</description>
+    <sql separator=";">
+          alter table ds_apikey add constraint apikey_2_user foreign key(sec_user_id) references sec_user(id);
+    </sql>
+  </change>
+
+
+<!--
+- REMINDER: Upgrades for product version 6.0.0.x. Place additions above this comment.
+-->
+</change-set>

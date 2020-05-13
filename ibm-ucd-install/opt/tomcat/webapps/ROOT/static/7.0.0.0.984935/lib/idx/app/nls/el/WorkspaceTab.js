@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/el/WorkspaceTab",{altTitle:"\u039a\u03b1\u03c1\u03c4\u03ad\u03bb\u03b1 \u03c7\u03ce\u03c1\u03bf\u03c5 \u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1\u03c2 \u03b3\u03b9\u03b1: ${title}"});

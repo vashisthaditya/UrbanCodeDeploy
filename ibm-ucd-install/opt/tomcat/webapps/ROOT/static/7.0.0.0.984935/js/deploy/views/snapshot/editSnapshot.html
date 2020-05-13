@@ -1,0 +1,51 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="containerLabel hidden" id="containerLabel"></div>
+  <div class="innerContainer">
+    <div id="editSnapshot"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "deploy/widgets/snapshot/EditSnapshot",
+        "dojo/dom"
+        ],
+    function(
+        EditSnapshot,
+        dom
+    ) {
+        if (!appState.snapshot) {
+            dom.byId("containerLabel").innerHTML = i18n("New Application Snapshot");
+            dom.byId("containerLabel").className = "containerLabel";
+        }
+        var locked = false;
+        if (appState.snapshot) {
+            locked = appState.snapshot.versionsLocked || appState.snapshot.configLocked;
+        }
+        var editSnapshot = new EditSnapshot({
+            application: appState.application,
+            snapshot: appState.snapshot,
+            readOnly: locked,
+            callback: function() {
+                if (appState.snapshot) {
+                    navBar.setHash("snapshot/"+appState.snapshot.id);
+                }
+            }
+        });
+        editSnapshot.placeAt("editSnapshot");
+    });
+    /* ]]> */
+</script>

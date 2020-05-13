@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/ro/Dnd",{moveRow:"Mutare ${0} r\u00e2nduri",moveColumn:"Mutare ${0} coloane",copyRow:"Copiere ${0} r\u00e2nduri",copyColumn:"Copiere ${0} coloane",moveOneRow:"Mutare 1 r\u00e2nd",moveOneColumn:"Mutare 1 coloan\u0103",copyOneRow:"Copiere 1 r\u00e2nd",copyOneColumn:"Copiere 1 coloan\u0103"});

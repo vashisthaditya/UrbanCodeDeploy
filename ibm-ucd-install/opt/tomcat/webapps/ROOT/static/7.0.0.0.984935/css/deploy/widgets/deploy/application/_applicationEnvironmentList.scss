@@ -1,0 +1,663 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin applicationEnvironmentList {
+    
+    .application-environment-list .saved-notification, .process-save-dialog {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+        right: 30px;
+        box-shadow: 0 0 10px 0 #555;
+        z-index: 1000;
+        text-align: center;
+        font-size: 1.6em;
+        font-weight: 300;
+        padding: 15px;
+        margin: 0;
+        visibility:visible;
+        opacity:1;
+        color: #FFF;
+        -webkit-transition: visibility 0s linear 0s, opacity 0.4s linear, top 0.4s linear, left 0.4s linear, right 0.4s linear;
+        -moz-transition: visibility 0s linear 0s, opacity 0.4s linear, top 0.4s linear, left 0.4s linear, right 0.4s linear;
+        transition: visibility 0s linear 0s, opacity 0.4s linear, top 0.4s linear, left 0.4s linear, right 0.4s linear;
+    }
+    .fixed-top.application-environment-list .saved-notification {
+        top: 60px;
+        left: 15px;
+        right: 15px;
+    }
+    .application-environment-list .hide-notification .saved-notification, .process-save-dialog.hide-notification {
+        visibility:hidden;
+        opacity:0;
+        -webkit-transition: visibility 0s linear 0.5s,opacity 0.5s linear;
+        -moz-transition: visibility 0s linear 0.5s,opacity 0.5s linear;
+        transition: visibility 0s linear 0.5s,opacity 0.5s linear;
+    }
+    .application-environment-list .saved-notification .general-icon, .process-save-dialog .general-icon {
+        margin: 0 12px -8px;
+    }
+    .application-environment-list .environment-list-help-text {
+        margin-right: auto;
+    }
+    .application-environment-list .environment-list-help-text .number-of-environments {
+        margin-left: 20px;
+    }
+    .fixed-top.application-environment-list .environment-list-help-text .number-of-environments {
+        position: fixed;
+        right: 15px;
+        top: 50px;
+        margin-left: 20px;
+        z-index: 100;
+        background-color: #EEE;
+        padding: 5px 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 0 #555;
+        opacity: 1;
+        -webkit-transition: visibility 0s linear 0.5s,opacity 0.5s linear;
+        -moz-transition: visibility 0s linear 0.5s,opacity 0.5s linear;
+        transition: visibility 0s linear 0.5s,opacity 0.5s linear;
+    }
+    .fixed-top.application-environment-list .environment-list-help-text .number-of-environments:hover {
+        opacity: 0;
+    }
+    .application-environment-list .environments-expand-collapse-all {
+        float: right;
+        margin: 14px 12px 0 0;
+    }
+    .application-environment-list .environments-expand-collapse-all > a {
+        margin-left: 20px;
+    }
+    .application-environment-list-filter {
+        background-color: #EEE;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .fixed-top .application-environment-list-filter {
+        position: fixed;
+        padding: 10px 40px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        box-shadow: 0 0 10px 0 #555;
+        z-index: 10;
+        min-width: 890px;
+    }
+    .fixed-top.application-environment-list .environment-list {
+        margin-top: 75px;
+    }
+    
+    .application-environment-list-filter .add-item-icon {
+        display: none;
+        position: absolute;
+        left: 9px;
+    }
+    .fixed-top .application-environment-list-filter .add-item-icon {
+        display: block;
+    }
+    
+    .environment-list-search-box {
+        margin-right: 10px;
+    }
+    .environment-list-search-box.webext-select {
+        margin-left: 10px;
+    }
+    .environment-list-search-box, .environment-list-search-box .dijitTextBox,
+    .environment-list-search-box, .environment-list-search-box .dijitComboBox {
+        width: 280px;
+    }
+    .application-environment-list > .listTopButtons {
+        min-height: 26px;
+    }
+    
+    .snapshot-environment-list > .application-environment-list > .listTopButtons {
+        margin-top: -20px;
+    }
+    
+    .environment-summary .environment-name-container .dojoDndHandle {
+        cursor: move;
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
+    }
+    .environment-summary.dojoDndItemOver {
+        cursor: default;
+    }
+    .environment-summary .dojoDndHandle:active,
+    .environment-summary.dojoDndItemBefore,
+    .environment-summary.dojoDndItemBefore .dojoDndHandle,
+    .environment-summary.dojoDndItemBefore .dojoDndHandle a,
+    .environment-summary.dojoDndItemAfter,
+    .environment-summary.dojoDndItemAfter .dojoDndHandle,
+    .environment-summary.dojoDndItemAfter .dojoDndHandle a {
+        cursor: move;
+        cursor: -webkit-grabbing !important;
+        cursor: -moz-grabbing !important;
+        -webkit-user-select: text;
+    }
+    .environment-summary.dojoDndItemBefore {
+        border: none;
+        border-top: 2px solid #444;
+        padding-top: 10px !important;
+        margin-top: 10px !important;
+    }
+    .environment-summary.dojoDndItemAfter {
+        border: none;
+        border-bottom: 2px solid #444;
+        padding-bottom: 10px !important;
+        margin-bottom: 10px !important;
+    }
+    .dojoDndSourceMoved .environment-summary.dojoDndItemAnchor {
+        opacity: 0.25;
+    }
+    .dojoDndSourceMoved .environment-summary {
+    }
+    .dojoDndAvatarItem .environment-summary {
+        white-space: nowrap;
+        min-width: 600px;
+    }
+    .dojoDndAvatarItem .environment-summary .environment-summary-buttons,
+    .dojoDndAvatarItem .environment-summary .environment-inner-container,
+    .dojoDndAvatarItem .environment-summary .environment-compliancy span,
+    .dojoDndAvatarItem .environment-summary .expand-node-container {
+        display: none;
+        opacity: 0;
+        font-size: 0;
+    }
+    .dojoDndAvatarItem .environment-summary .environment-name {
+        margin-left: 10px;
+    }
+    .dojoDndAvatarItem .environment-summary .environment-name-container {
+        min-width: 200px;
+    }
+    
+    /**
+     * Compliancy reports
+     */
+    .environment-compliancy {
+      display: inline-block;
+    }
+    .dj_ie7 .environment-compliancy {
+      display: inline;
+      zoom: 1;
+    }
+    
+    .environment-compliancy .compliancyHeaderContainer {
+      display: inline-block;
+      font-size: 16px;
+      width: 100%;
+    }
+    .dj_ie7 .environmentCompliancy .compliancyHeaderContainer {
+      display: inline;
+      zoom: 1;
+    }
+    
+    .environmentCompliancy .compliancyHeader, .snapshotCompliancy {
+      display: block;
+      padding: 5px 15px;
+      border: 1px solid #cccccc;
+    }
+    .snapshotCompliancy {
+      padding: 5px 7px;
+    }
+    
+    .roleLabel, .statusLabel {
+      display: inline-block;
+      margin-left: 3px;
+      padding: 0px 2px;
+    }
+    .dj_ie7 .roleLabel, .statusLabel {
+      display: inline;
+      zoom: 1;
+    }
+    
+    .environment-summary {
+        padding: 0;
+        position: relative;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        opacity: 1;
+        -webkit-transition: opacity 0.2s ease, padding 0.15s ease, border 0.1s ease, margin 0.15s ease;
+        -moz-transition: opacity 0.2s ease, padding 0.15s ease, border 0.1s ease, margin 0.15s ease;
+        transition: opacity 0.2s ease, padding 0.15s ease, border 0.1s ease, margin 0.15s ease;
+    }
+    .environment-summary.initial-hide-environment {
+        height: 0px;
+        overflow: hidden;
+        opacity: 0;
+    }
+    .environment-summary:first-child, .environment-summary:first-child:hover {
+        margin-top: 0px;
+    }
+    .environment-summary .environment-summary-highlight {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 0px;
+        background-color: #EEE;
+        -webkit-transition: width 0.6s ease;
+        -moz-transition: width 0.6s ease;
+        transition: width 0.6s ease;
+    }
+    .environment-summary:hover .environment-summary-highlight {
+        -webkit-transition: width 0.3s ease;
+        -moz-transition: width 0.3s ease;
+        transition: width 0.3s ease;
+    }
+    .environment-summary .environment-summary-highlight.right {
+        right: -30px;
+    }
+    .environment-summary .environment-summary-highlight.left {
+        left: -30px;
+    }
+    .environment-summary:hover .environment-summary-highlight {
+        width: 30px;
+    }
+    .dojoDndSourceMoved .environment-summary.dojoDndItem:hover .environment-summary-highlight {
+        width: 0px;
+    }
+    
+    .agentMappingTargetTree .environment-name-container,
+    .environment-summary .environment-name-container {
+        height: 36px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .agentMappingTargetTree .environment-name-container > div,
+    .environment-summary .environment-name-container > div {
+        vertical-align: middle;
+    }
+    .environment-summary .environment-information-container {
+        width: 60%;
+        height: 36px;
+        float: right;
+    }
+    .agentMappingTargetTree .environment-name-container,
+    .environment-summary .environment-name-container div,
+    .environment-summary .environment-name-container a,
+    .environment-summary .environment-information-container span,
+    .environment-summary .environment-information-container .compliancy-label,
+    .environment-summary .environment-information-container .environment-compliancy > span,
+    .environment-summary .environment-information-container .environment-latest-snapshot > div,
+    .environment-summary .environment-information-container .environment-latest-snapshot > a,
+    .environment-summary .environment-information-container .external-blueprint > div,
+    .environment-summary .environment-information-container .external-blueprint > a {
+        color: #FFF;
+    }
+    .agentMappingTargetTree.light-colored-environment .environment-name-container,
+    .environment-summary.light-colored-environment .environment-name-container div,
+    .environment-summary.light-colored-environment .environment-name-container a,
+    .environment-summary.light-colored-environment .environment-information-container span,
+    .environment-summary.light-colored-environment .environment-information-container .compliancy-label,
+    .environment-summary.light-colored-environment .environment-information-container .environment-compliancy > span,
+    .environment-summary.light-colored-environment .environment-information-container .environment-latest-snapshot > div,
+    .environment-summary.light-colored-environment .environment-information-container .environment-latest-snapshot > a,
+    .environment-summary.light-colored-environment  .environment-information-container .external-blueprint > div,
+    .environment-summary.light-colored-environment  .environment-information-container .external-blueprint > a {
+        color: #444;
+    }
+    
+    .agentMappingTargetTree .environment-name-container {
+        line-height: 36px;
+    }
+    
+    .agentMappingTargetTree .environment-name-container span,
+    .environment-summary .environment-name-container a {
+        font-size: 1.2em;
+        font-weight: 300;
+    }
+    .environment-summary .environment-name-container .environment-name-label-overflow {
+        margin-left: 100px;
+    }
+    .environment-summary .environment-name-container .environment-name.cloud-environment {
+        margin-left: 0;
+        padding-left: 40px;
+    }
+    .environment-summary .environment-name-container .reset-environment-name a {
+        -webkit-transition: margin-left 0.25s linear;
+        -moz-transition: margin-left 0.25s linear;
+        transition: margin-left 0.25s linear;
+    }
+    .agentMappingTargetTree .environment-name,
+    .environment-summary .environment-name {
+        margin-left: 10px;
+        font-size: 1.2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 8px 0 0 10px;
+        min-height: 36px;
+    }
+    .agentMappingTargetTree .environment-name {
+        line-height: 36px;
+    }
+    .dj_gecko .environment-summary .environment-name {
+        margin-top: 2px;
+    }
+    
+    .environment-summary .environment-inner-container {
+        white-space: nowrap;
+        margin-right: 250px;
+    }
+    
+    .environment-summary .environment-summary-buttons {
+        float: left;
+    }
+    .environment-summary .button-container {
+        vertical-align: top;
+        width: 36px;
+    }
+    .environment-summary .button-container.environment-actions, .environment-summary .button-container.preview-snapshot {
+        border-right: 1px solid #FFF;
+    }
+    .environmentSummary .button-container .dijitDropDownButton {
+        margin: 0px;
+    }
+    .environmentSummary .button-container .dijitDropDownButton .dijitButtonNode {
+        background: none;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+    }
+    .environmentSummary .button-container .dijitDropDownButton .dijitButtonNode .dijitButtonText {
+        padding: 0;
+    }
+    .environmentSummary .button-container .dijitDropDownButton .dijitButtonNode .dijitButtonContents {
+        text-shadow: none;
+        margin-top: -8px;
+        font-size: 1.4em;
+    }
+    .environmentSummary .button-container .dijitDropDownButton .dijitButtonNode .dijitArrowButtonInner {
+        display: none;
+    }
+    .environmentSummary .button-container .dijitDropDownButton .dijitButtonNode .dijitArrowButtonChar {
+        display: none !important;
+    }
+    .environment-summary .button-container .environment-summary-button,
+    .environment-summary .button-container .dijitDropDownButton .dijitButtonNode {
+        height: 36px;
+        width: 36px;
+        -webkit-transition-property: background-color;
+        -moz-transition-property: background-color;
+        transition-property: background-color;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+    }
+    .environment-summary .button-container .environment-summary-button:hover,
+    .environment-summary .button-container .dijitDropDownButton .dijitButtonNode:hover {
+        background:rgb(175,175,175);
+        background:rgba(255,255,255,0.25);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#66000000,endColorstr=#66000000);
+        cursor: pointer;
+    }
+    .environment-summary .button-container .environment-summary-button:active,
+    .environment-summary .button-container .dijitDropDownButton .dijitButtonNode:active,
+    .environment-summary .button-container .dijitDropDownButton.dijitDropDownButtonOpened .dijitButtonNode {
+        background:rgb(75,75,75);
+        background:rgba(0,0,0,0.4);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#66000000,endColorstr=#66000000);
+        cursor: pointer;
+    }
+    .environment-summary .button-container .dijitDropDownButton .dijitOffScreen {
+        left: -100% !important;
+    }
+    
+    .environment-summary .button-container.environment-actions .dijitDropDownButton {
+        margin-top: 0px;
+    }
+    .environment-summary .button-container .environment-summary-button > div,
+    .environment-summary .button-container.environment-actions .dijitDropDownButton .dijitIcon {
+        height: 24px;
+        width: 24px;
+        position: relative;
+        top: 4px;
+    }
+    .environment-summary .button-container .environment-summary-button > div {
+        top: 5px;
+        left: 6px;
+    }
+    .environment-summary .cloud-container > div {
+        position: relative;
+        left: 10px;
+    }
+    .environment-summary .cloud-container {
+        vertical-align: top;
+        height: 20px;
+        width: 40px;
+        position: absolute;
+        margin-left: -40px;
+    }
+    
+    .environment-summary .expand-node-container {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: -18px;
+        cursor: pointer;
+        opacity: 0.25;
+    }
+    .environment-summary:hover .expand-node-container {
+        opacity: 0.8;
+    }
+    .agentMappingTargetTree .expandNode,
+    .environment-summary .expandNode {
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+        background: url(../../images/webext/icons/misc-arrow-sprite.png) no-repeat;
+        background-position: 0px -330px;
+        position: relative;
+        top: 9px;
+    }
+    .dark-colored-environment.environment-summary:hover .expandNode {
+        background-position: -48px -330px;
+    }
+    .dojoDndMove .environment-summary.dojoDndItem .expandNode {
+        display: none;
+    }
+    .environment-summary .expand-node-container:hover .expandNode {
+        opacity: 0.6;
+    }
+    .environment-summary .expand-node-container:active .expandNode {
+        background-position: -32px -330px;
+    }
+    .agentMappingTargetTree.expanded .expand-node-container .expandNode,
+    .environment-summary.expanded .expand-node-container .expandNode {
+        background-position: 0px -270px;
+    }
+    .dark-colored-environment.environment-summary.expanded:hover .expandNode {
+        background-position: -48px -270px;
+    }
+    .environment-summary.expanded .expand-node-container:active .expandNode {
+        background-position: -32px -270px;
+    }
+    
+    .environment-summary .environmentLatestSnapshot {
+        border-right: none;
+    }
+    
+    .environment-summary .environment-information-container .environment-compliancy {
+        position: relative;
+        width: 240px;
+        border-right: none;
+        height: 28px;
+        padding: 4px;
+        top: 4px;
+        right: 4px;
+        float: right;
+    }
+    .environment-summary .environment-information-container .environment-compliancy .environment-compliancy-wrapper {
+        position: relative;
+        text-align: center;
+    }
+    .environment-summary .environment-information-container .compliancy-label {
+        float: right;
+        text-align: right;
+        margin: 4px 10px 0 0;
+    }
+    .snapshot-environment-summary .environment-information-container .compliancy-label {
+        margin-top: 10px;
+    }
+    .environment-summary .environment-latest-snapshot,
+    .environment-summary .external-blueprint {
+      padding: 4px 4px 4px 8px;
+      height: 36px;
+      width: 80%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: top;
+    }
+    .environment-summary .external-blueprint {
+        width: 40%;
+    }
+    .environment-summary .environment-latest-snapshot.blueprint-environment {
+        width: 40%;
+    }
+    .environment-summary .environment-inner-container .no-link {
+        font-style: italic;
+    }
+    .environment-summary .environment-latest-snapshot > div,
+    .environment-summary .environment-information-container .compliancy-label > div {
+        height: 15px;
+    }
+    .environment-summary .environment-compliancy > span {
+        z-index: 5;
+        position: relative;
+    }
+    .environment-summary .environment-information-container .environment-compliancy-wrapper > span {
+        position: relative;
+        top: 2px;
+    }
+    
+    .environment-summary .environment-compliancy .successMeter {
+        position: absolute;
+        height: 20px;
+        top: 0px;
+        left: 0px;
+    }
+    .environment-summary .environment-information-container .environment-compliancy .successMeter {
+        background: #8CC63F;
+        background: -webkit-linear-gradient(to right, #8CC63F 75%, transparent 25%);
+        background: -moz-linear-gradient(to right, #8CC63F 75%, transparent 25%);
+        background: -ms-linear-gradient(to right, #8CC63F 75%, transparent 25%);
+        background: linear-gradient(to right, #8CC63F 75%, transparent 25%);
+        background-size: 3px 2px;
+    }
+    .dj_ie9 .environment-summary .environment-information-container .environment-compliancy .successMeter,
+    .dj_ie8 .environment-summary .environment-information-container .environment-compliancy .successMeter,
+    .dj_ie7 .environment-summary .environment-information-container .environment-compliancy .successMeter {
+        background: none;
+        background-image: url('../../images/meter/green-stripe-meter.png');
+    }
+    .environmentSummary .environment-compliancy .failMeter {
+        position: absolute;
+        height: 20px;
+        top: 0px;
+        right: 0px;
+    }
+    .environment-summary .environment-information-container .environment-compliancy .failMeter {
+        background: #D9182D;
+        background: -webkit-linear-gradient(to right, #D9182D 75%, transparent 25%);
+        background: -moz-linear-gradient(to right, #D9182D 75%, transparent 25%);
+        background: -ms-linear-gradient(to right, #D9182D 75%, transparent 25%);
+        background: linear-gradient(to right, #D9182D 75%, transparent 25%);
+        background-size: 3px 2px;
+    }
+    .dj_ie9 .environment-summary .environment-information-container .environment-compliancy .failMeter,
+    .dj_ie8 .environment-summary .environment-information-container .environment-compliancy .failMeter,
+    .dj_ie7 .environment-summary .environment-information-container .environment-compliancy .failMeter {
+        background: none;
+        background-image: url('../../images/meter/red-stripe-meter.png');
+    }
+    
+    @media (min-resolution: 144dppx),
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (min--moz-device-pixel-ratio: 1.5),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min-device-pixel-ratio: 1.5),
+    (min-resolution: 1.5dppx) {
+        .environment-summary .environment-information-container .environment-compliancy .successMeter,
+        .environment-summary .environment-information-container .environment-compliancy .failMeter {
+            background-size: 3px 2px;
+        }
+    }
+    
+    .environment-summary .webextTable .environment-compliancy .successMeter,
+    .environment-summary .webextTable .environment-compliancy .failMeter {
+        height: 100%;
+    }
+    .environment-summary .webextTable {
+        margin-top: 10px;
+    }
+    .environment-summary .environment-details .listTopButtons {
+        display: none;
+    }
+    
+    .environment-summary .environment-compliancy .meter-overlay {
+        position: absolute;
+        height: 28px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .environment-summary .environment-compliancy .meter-overlay .meter-overlay-bar {
+        height: 28px;
+        width: 1px;
+        border-right: 1px solid;
+    }
+    .environment-summary .environment-compliancy .noMeter {
+        position: absolute;
+        height: 28px;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+    }
+    
+    .environment-summary .environment-details {
+        display: none;
+    }
+    .environment-summary.expanded .environment-details, .dojoDndSourceMoved .environment-summary.expanded.dojoDndItem:hover .environment-details {
+        display: block;
+        border: 4px solid #FFF;
+        border-top: none;
+        padding: 4px;
+        padding-top: 2px;
+        background-color: #FFF;
+        -webkit-transition: border-left-width 0.08s linear 0s, padding-left 0.08s linear 0s;
+        -moz-transition: border-left-width 0.08s linear 0s, padding-left 0.08s linear 0s;
+        transition: border-left-width 0.08s linear 0s, padding-left 0.08s linear 0s;
+    }
+    .environment-summary.expanded:hover .environment-details {
+        border-left-width: 0;
+        padding-left: 14px;
+        -webkit-transition: border-left-width 0.08s linear 0.3s, padding-left 0.08s linear 0.3s;
+        -moz-transition: border-left-width 0.08s linear 0.3s, padding-left 0.08s linear 0.3s;
+        transition: border-left-width 0.08s linear 0.3s, padding-left 0.08s linear 0.3s;
+    }
+    .dojoDndSourceMoved .environment-summary.dojoDndItem:hover .environment-summary-highlight {
+        width: 0px;
+    }
+    .environment-summary.expanded .environment-details .webextTable .no-items-in-table > thead {
+        display: none;
+    }
+    .environment-summary.expanded .environment-details .webextTable .no-items-in-table .noDataRow {
+        border: none;
+    }
+    .environment-summary.expanded .environment-details .webextTable .no-items-in-table .noDataRow td {
+        font-weight: 300;
+        font-size: 1.2em;
+    }
+    .environment-summary.expanded .environment-details .webextTable .no-items-in-table .numberOfItemsContainer {
+        margin-top: -10px;
+    }
+    
+    
+}
+
+@include exports('applicationEnvironmentList') {
+    @include applicationEnvironmentList;
+}

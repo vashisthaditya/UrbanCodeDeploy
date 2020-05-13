@@ -1,0 +1,66 @@
+/*
+* Licensed Materials - Property of IBM* and/or HCL**
+* UrbanCode Deploy
+* (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+* (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+*
+* U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+* GSA ADP Schedule Contract with IBM Corp.
+*
+* * Trademark of International Business Machines
+* ** Trademark of HCL Technologies Limited
+*/
+/**************************************************************************************************
+ * IBM Branding
+ *************************************************************************************************/
+
+/* Login Page */
+body.oneui.loginPage .loginFrame {
+    padding-top: 90px;
+    background-image: url(../../images/vendor/ibm/ibmLogoDark.png);
+    background-position: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+@media (min-resolution: 144dpi),
+(-webkit-min-device-pixel-ratio: 1.5),
+(min--moz-device-pixel-ratio: 1.5),
+(-o-min-device-pixel-ratio: 3/2),
+(min-device-pixel-ratio: 1.5),
+(min-resolution: 1.5dppx) {
+    body.oneui.loginPage .loginFrame  {
+        background-image: url(../../images/vendor/ibm/ibmLogoDark-retina.png);
+        background-size: 85px 30px !important;
+    }
+}
+
+/* "About" popup */
+.about-popup .dijitDialogTitleBar {
+    background: url(../../images/vendor/ibm/ibmLogoDark.png) 30px center no-repeat;
+    border: none;
+    height: 40px;
+}
+
+@media (min-resolution: 144dppx),
+(-webkit-min-device-pixel-ratio: 1.5),
+(min--moz-device-pixel-ratio: 1.5),
+(-o-min-device-pixel-ratio: 3/2),
+(min-device-pixel-ratio: 1.5),
+(min-resolution: 1.5dppx) {
+    .about-popup .dijitDialogTitleBar {
+        background-image: url(../../images/vendor/ibm/ibmLogoDark-retina.png);
+        background-size: 85px 30px !important;
+    }
+}
+
+/* Navgation bar */
+body.oneui .idxHeaderContainer .idxHeaderPrimary .idxHeaderLogoBox {
+    width: 90px;
+}
+
+.oneui .idxHeaderContainer .idxHeaderPrimary .idxHeaderLogo {
+    width: 80px;
+    height: 38px;
+    margin-top: 7px;
+    background: url(../../images/vendor/ibm/headerLogo.png) no-repeat 35% 23%;
+}

@@ -1,0 +1,436 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.1.0.x.
+-->
+
+<change-set release="n1_6.0.2">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/mysql/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/mysql/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/mysql/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/mysql/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <description>Add dismiss attribute to license log entries</description>
+        <sql separator=";">
+            alter table ds_license_log_entry add dismissed varchar(1) default 'N' not null;
+        </sql>
+    </change>
+    <change number="2">
+        <description>Adding integration failure tag to components</description>
+        <sql separator=";">
+            alter table ds_component add integration_failed varchar(1) default 'N' not null;
+        </sql>
+    </change>
+    <change number="3">
+        <description>Add the "map to environment" resource permission</description>
+        <groovy file="all/upgrade-scripts-602/upgrade_003_resource_map_permissions.groovy" />
+    </change>
+    <change number="4">
+        <description>Add additional resource permissions</description>
+        <groovy file="all/upgrade-scripts-602/upgrade_005_new_resource_permissions.groovy" />
+    </change>
+    <change number="5">
+        <description>Add sub_tag column to pl_plugin_command</description>
+        <sql separator=";">
+            alter table pl_plugin_command add column sub_tag varchar(4000);
+        </sql>
+    </change>
+    <change number="6">
+        <description>Changing status inactivation to status deletion</description>
+        <sql separator=";">
+            alter table ds_status add column ghosted_date bigint default 0 not null;
+            update ds_status set ghosted_date = 1395185208000 where active = 'N';
+            alter table ds_status drop active;
+
+            alter table ds_status drop index ds_status_uci;
+            create unique index ds_status_uci on ds_status(name, status_type, ghosted_date);
+        </sql>
+    </change>
+    <change number="7">
+        <description>Changing config template inactivation to deletion</description>
+        <groovy file="all/upgrade-scripts-602/upgrade_007_config_template_deletion.groovy" />
+    </change>
+    <change number="8">
+        <description>add component_tag_id column to ds_resource</description>
+        <sql separator=";">
+            alter table ds_resource add column component_tag_id varchar(36);
+            create index ds_resource_component_tag_id on ds_resource(component_tag_id);
+            alter table ds_resource add constraint ds_resource_2_component_tag foreign key(component_tag_id) references ds_tag(id);
+        </sql>
+    </change>
+    <change number="9">
+        <description>Add copied activities</description>
+        <sql separator=";">
+            create table ds_copied_activity(
+                id varchar(36) not null primary key,
+                user_id varchar(64) not null,
+                version numeric default 0 not null,
+                label varchar(255),
+                activity_data longtext not null
+            ) engine = innodb;
+        </sql>
+    </change>
+    <change number="10">
+        <description>Removing database storage of server/agent messages</description>
+        <sql separator=";">
+            drop table ds_sa_message;
+            drop table ds_sa_dialogue;
+
+            alter table ds_agent add last_properties_hash numeric;
+            update ds_agent set last_status = 'OFFLINE' where last_status = 'CONNECTED';
+
+            delete from ds_plugin_task_request;
+            delete from pl_source_config_execution where status = 'WAITING' or log_id is null;
+
+            update pl_source_config_execution set id = log_id;
+            alter table pl_source_config_execution drop index pl_src_config_exe_dialogue_id;
+            alter table pl_source_config_execution drop dialogue_id;
+            alter table pl_source_config_execution drop log_id;
+        </sql>
+    </change>
+    <change number="11">
+        <description>Adding sizeOnDisk column to Version to keep track of size.</description>
+        <!-- we want the default to be zero for any versions created after this upgrade, but for the ones before we want to be -1 so we know to upgrade -->
+        <sql separator=";">
+            alter table ds_version add column size_on_disk bigint default -1 not null;
+            alter table ds_version alter column size_on_disk set default 0;
+        </sql>
+    </change>
+    <change number="12">
+        <description>Update numeric columns to integer</description>
+        <changeref library="vc" change="4"/>
+        <changeref library="inventory" change="5"/>
+    </change>
+    <change number="13">
+        <description>Add Component Type field to components</description>
+        <sql separator=";">
+            alter table ds_component add column component_type varchar(16) default 'STANDARD' not null;
+        </sql>
+    </change>
+    <change number="14">
+        <description>Setting artifact and WinRS agent settings to be ID instead of name references</description>
+        <sql separator=";">
+            update ps_prop_value pv
+            set pv.value = (select ag.id from ds_agent ag where name = pv.value and ghosted_date = 0)
+            where pv.name = 'server.artifact.agent'
+                and pv.prop_sheet_id = '00000000-0000-0000-0000-000000000001'
+                and pv.value is not null;
+
+            update ps_prop_value pv
+            set pv.value = (select ag.id from ds_agent ag where name = pv.value and ghosted_date = 0)
+            where pv.name = 'server.winrs.agent'
+                and pv.prop_sheet_id = '00000000-0000-0000-0000-000000000001'
+                and pv.value is not null;
+        </sql>
+    </change>
+    <change number="15">
+        <description>Standardizing action names for cloud connections</description>
+        <sql separator=";">
+            update sec_action set name = 'Create Cloud Connections' where name = 'Create Cloud Connection';
+            update sec_action set name = 'View Cloud Connections' where name = 'View Cloud Connection';
+        </sql>
+    </change>
+    <change number="16">
+        <description>Create lock table for ptr store</description>
+        <sql separator=";">
+            create table ds_ptr_store_lock(
+                id numeric not null primary key
+            ) engine = innodb;
+
+            insert into ds_ptr_store_lock (id) values (0);
+            insert into ds_ptr_store_lock (id) values (1);
+            insert into ds_ptr_store_lock (id) values (2);
+            insert into ds_ptr_store_lock (id) values (3);
+            insert into ds_ptr_store_lock (id) values (4);
+            insert into ds_ptr_store_lock (id) values (5);
+            insert into ds_ptr_store_lock (id) values (6);
+            insert into ds_ptr_store_lock (id) values (7);
+            insert into ds_ptr_store_lock (id) values (8);
+            insert into ds_ptr_store_lock (id) values (9);
+            insert into ds_ptr_store_lock (id) values (10);
+            insert into ds_ptr_store_lock (id) values (11);
+            insert into ds_ptr_store_lock (id) values (12);
+            insert into ds_ptr_store_lock (id) values (13);
+            insert into ds_ptr_store_lock (id) values (14);
+            insert into ds_ptr_store_lock (id) values (15);
+        </sql>
+    </change>
+    <change number="17">
+        <description>Make archived versions with size on disk to be 0</description>
+        <sql separator=";">
+            update ds_version set size_on_disk = 0 where archived = 'Y' or archived = 'y';
+        </sql>
+    </change>
+    <change number="18">
+        <!-- this is an odd looking query. It is going to create the table and then populate
+             it based and the result of the select query
+        -->
+        <description>Create table for version upgrades</description>
+        <sql separator=";">
+            create table ds_version_upgrade (
+                id varchar(36) not null primary key,
+                version numeric default 0 not null,
+                locked varchar(1) default 'N' not null,
+                upgraded varchar(1) default 'N' not null
+            ) engine = innodb
+            select
+                id as id,
+                0 as version,
+                'N' as locked,
+                'N' as upgraded
+            from
+                ds_version
+            where
+                archived = 'N' or archived = 'n';
+        </sql>
+    </change>
+    <change number="19">
+        <description>Adding a column for tracking errors encountered related to agents</description>
+        <sql separator=";">
+            alter table ds_agent add error_data longtext;
+        </sql>
+    </change>
+    <change number="20">
+        <description>Adding support for HTTP property definitions</description>
+        <changeref library="property-sheets" change="8"/>
+    </change>
+    <change number="21">
+        <description>Landscaper integration to create environments from blueprint</description>
+        <sql separator=";">
+            create table ds_integration_provider (
+                id varchar(36) not null primary key,
+                version numeric default 0 not null,
+                date_created bigint not null,
+                classname varchar(255) not null,
+                name varchar(255) not null,
+                description varchar(4000),
+                prop_sheet_id varchar(36) not null,
+                ghosted_date bigint default 0 not null
+            ) engine = innodb;
+
+            create table ds_ext_environment (
+                id varchar(36) not null primary key,
+                ext_id varchar(36) not null,
+                name varchar(255) not null,
+                version numeric default 0 not null,
+                environment_id varchar(36) not null,
+                date_created bigint not null,
+                ext_blueprint_id varchar(36),
+                ext_blueprint_name varchar(255) not null,
+                ext_blueprint_version varchar(36),
+                ext_blueprint_url varchar(255),
+                ext_configuration_id varchar(36),
+                ext_configuration_name varchar(255),
+                ext_configuration_version varchar(36),
+                integration_provider_id varchar(36),
+                prop_sheet_id varchar(36) not null,
+                ghosted_date bigint default 0 not null
+            ) engine = innodb;
+
+            create index ds_ext_env_env_id on ds_ext_environment(environment_id);
+            create index ds_ext_env_provider_id on ds_ext_environment(integration_provider_id);
+            alter table ds_ext_environment add constraint ds_ext_env_2_environment foreign key(environment_id) references ds_environment(id);
+            alter table ds_ext_environment add constraint ds_ext_env_2_int_provider foreign key(integration_provider_id) references ds_integration_provider(id);
+        </sql>
+    </change>
+    <change number="22">
+      <description>Splitting snapshot locked state into version and config locking</description>
+      <sql separator=";">
+        alter table ds_environment add snapshot_lock_type varchar(64);
+
+        alter table ds_snapshot add versions_locked varchar(1);
+        alter table ds_snapshot add config_locked varchar(1);
+        update ds_snapshot set versions_locked = locked, config_locked = locked;
+
+        alter table ds_snapshot drop locked;
+        alter table ds_snapshot modify column versions_locked varchar(1) not null;
+        alter table ds_snapshot modify column config_locked varchar(1) not null;
+      </sql>
+    </change>
+    <change number="23">
+      <description>Adding index to pl_source_config_execution</description>
+      <sql separator=";">
+create index pl_src_config_ag_id on pl_source_config_execution(agent_id);
+create index pl_src_config_status on pl_source_config_execution(status);
+      </sql>
+    </change>
+    <change number="24">
+      <description>Add ignorequalifiers column to components</description>
+      <sql separator=";">
+        alter table ds_component add ignore_qualifiers numeric default 0 not null;
+      </sql>
+    </change>
+    <change number="25">
+      <description>Adding a table to track request performance</description>
+      <sql separator=";">
+            create table ds_request_audit_entry (
+                id varchar(36) not null primary key,
+                version numeric default 0 not null,
+                user_id varchar(36),
+                short_url varchar(255) not null,
+                full_url varchar(4000) not null,
+                duration bigint not null,
+                method varchar(10) not null,
+                date_created bigint not null
+            ) engine = innodb;
+
+            create index ds_req_audit_user_id on ds_request_audit_entry(user_id);
+            create index ds_req_audit_short_url on ds_request_audit_entry(short_url);
+            create index ds_req_audit_duration on ds_request_audit_entry(duration);
+            create index ds_req_audit_method on ds_request_audit_entry(method);
+            create index ds_req_audit_date_created on ds_request_audit_entry(date_created);
+      </sql>
+    </change>
+    <change number="26">
+      <description>Adding ghosting support for authorization realms</description>
+      <sql separator=";">
+        alter table sec_authorization_realm
+        add ghosted_date bigint default 0 not null;
+      </sql>
+    </change>
+    <change number="27">
+      <description>Finding references to deleted users and setting them to admin.</description>
+      <sql separator=";">
+        update ds_component set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_application set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_version set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_version_status set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_snapshot set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_snapshot_status set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_blueprint set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+      </sql>
+    </change>
+    <change number="28">
+      <description>Correcting references to resource roles from resource roles and components</description>
+      <sql separator=";">
+          update ds_resource
+          set role_id = (
+            select res_role.id
+            from ds_resource_role res_role
+            where res_role.name = (select res_role_2.name from ds_resource_role res_role_2 where res_role_2.id = role_id)
+            limit 1)
+          where role_id is not null and role_id != (
+            select res_role.id
+            from ds_resource_role res_role
+            where res_role.name = (select res_role_2.name from ds_resource_role res_role_2 where res_role_2.id = role_id)
+            limit 1);
+
+          update ds_component comp
+          set comp.resource_role_id = (
+            select id
+            from ds_resource_role
+            where name = comp.name
+            limit 1)
+          where (
+            select id from ds_resource_role
+            where name = comp.name
+            limit 1) is not null
+          and (
+            select id from ds_resource_role
+            where name = comp.name
+            limit 1) != comp.resource_role_id;
+
+          delete from ds_resource_role
+          where id not in (
+            select resource_role_id
+            from ds_component
+            where resource_role_id is not null)
+          and special_type = 'COMPONENT';
+      </sql>
+    </change>
+    <change number="29">
+      <description>Implementing timeouts for unacked plugin command requests.</description>
+      <sql separator=";">
+        alter table pl_source_config_execution add column request_time bigint;
+        alter table pl_source_config_execution add column acked varchar(1) default 'N' not null;
+        update pl_source_config_execution set acked = 'Y';
+
+        alter table ds_plugin_task_request add column request_time bigint;
+        alter table ds_plugin_task_request add column acked varchar(1) default 'N' not null;
+        update ds_plugin_task_request set acked = 'Y';
+      </sql>
+    </change>
+    <change number="30">
+      <description>Indexing audit records. (This update may take some time)</description>
+      <sql separator=";">
+          create index ds_audit_user_id on ds_audit_entry(user_id);
+          create index ds_audit_user_name on ds_audit_entry(user_name);
+          create index ds_audit_event_type on ds_audit_entry(event_type);
+          create index ds_audit_description on ds_audit_entry(description);
+          create index ds_audit_obj_type on ds_audit_entry(obj_type);
+          create index ds_audit_obj_name on ds_audit_entry(obj_name);
+          create index ds_audit_obj_id on ds_audit_entry(obj_id);
+          create index ds_audit_created_date on ds_audit_entry(created_date);
+          create index ds_audit_status on ds_audit_entry(status);
+          create index ds_audit_deletable on ds_audit_entry(deletable);
+      </sql>
+    </change>
+    <change number="31">
+      <description>Updating Process Lock Tables</description>
+      <sql separator=";">
+          insert into ds_sync (name, locked) values ('LOCK-ACQUISITION-LOCK', 'N');
+      </sql>
+    </change>
+    <change number="32">
+      <description>Making changes to support OAuth properties and scripted properties.</description>
+      <changeref library="property-sheets" change="10"/>
+    </change>
+    <change number="33">
+      <description>Disabling SSLv3 (Moved to installer; Currently no-op)</description>
+    </change>
+    <change number="34">
+      <description>Adding IP address tracking to auditing</description>
+      <sql separator=";">
+          alter table sec_user add column last_ip_address varchar(40);
+          alter table ds_audit_entry add ip_address varchar(40);
+          create index ds_audit_ip on ds_audit_entry(ip_address);
+      </sql>
+    </change>
+
+<!--
+- REMINDER: Upgrades for product version 6.1.0.x. Place additions above this comment.
+-->
+</change-set>

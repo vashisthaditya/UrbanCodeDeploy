@@ -1,0 +1,73 @@
+@import '../carbon/globals/import-once';
+
+@mixin webextCommonrtl {
+    /*
+    * Licensed Materials - Property of IBM* and/or HCL**
+    * UrbanCode Deploy
+    * (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+    * (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+    *
+    * U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+    * GSA ADP Schedule Contract with IBM Corp.
+    *
+    * * Trademark of International Business Machines
+    * ** Trademark of HCL Technologies Limited
+    */
+    .rtl-ui .secondary-nav {
+    	padding: 5px 30px 0px;
+    }
+    
+    .rtl-ui .secondary-nav .idxBreadcrumbItem {
+    	padding: 2px;
+    	margin-top: 3px;
+    }
+    
+    .rtl-ui .idxHeaderContainer .oneuiContentContainer .dijitTabContainerTop-tabs {
+    	margin-left: 0;
+    	margin-right: 30px;
+    }
+    
+    .rtl-ui .window-wrapper {
+    	margin-bottom: -40px;
+    }
+    
+    .rtl-ui ._webext_detail_header .heading h1 {
+    	margin: 10px 30px 15px 0;
+    }
+    
+    .rtl-ui .page-footer {
+    	text-align: center;
+    }
+    
+    .rtl-ui .page-footer .footer-content {
+    	padding-top: 14px;
+    }
+    
+    .rtl-ui .centered {
+    	margin: 10px auto;
+    }
+    
+    .rtl-ui h2 {
+    	margin-bottom: 12px;
+    	margin-top: 12px;
+    }
+    
+    .rtl-ui h3 {
+    	margin-bottom: 6px;
+    	margin-top: 14px;
+    }
+    
+    .rtl-ui .indent15px {
+    	padding-left: 0;
+    	padding-right: 15px;
+    }
+    
+    .rtl-ui .floatLeft {
+    	float: right;
+    }
+    
+}
+
+@include exports('webextCommonrtl') {
+    @include webextCommonrtl;
+}

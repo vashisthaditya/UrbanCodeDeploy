@@ -1,0 +1,2 @@
+//>>built
+define("idx/containers",["dojo/_base/lang","idx/main","dijit/_Container","dijit/_WidgetBase","idx/widgets"],function(b,e,a){var b=b.getObject("containers",!0,e),a=a.prototype,c=a.addChild,d=a.removeChild;a.addChild=function(a,b){c&&c.call(this,a,b);this._started&&this._idxStyleChildren()};a.removeChild=function(a){d&&d.call(this,a);"number"==typeof a&&this.getChildren();this._started&&this._idxStyleChildren()};return b});

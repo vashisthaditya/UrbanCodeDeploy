@@ -1,0 +1,60 @@
+@import '../../carbon/globals/import-once';
+
+@mixin reports {
+    .report-sidebar {
+        .report-accordion {
+            .dijitTitlePane {
+                background: #ffff;
+
+                &:hover {
+                    background: $color__gray-1;
+                }
+                .dijitTitlePaneTextNode {
+                    padding-left: 8px;
+                    color: $color__darkblue-1;
+                    font-size: 14px;
+                    font-weight: bold;
+
+                    &:hover {
+                        color: $color__blue-51;
+                    }
+                }
+            }
+            
+            .report-link-div-selected {
+                .report-link-selected {
+                    color: $color__blue-51;
+                    font-weight: bold;
+                    background-color: $color__gray-1;
+                }
+            }
+
+            .report-link-div {
+                &:hover {
+                    background: $color__gray-1;
+                }
+
+                .report-link {
+                    font-size: 12px;
+                    color: $color__darkblue-1;
+
+                    &:hover{
+                        color: $color__blue-51;
+                    }
+                }
+            }
+        }
+    }
+    .report-breadcrumb-container {
+        background-color: #ffff;
+        border-color: $color__gray-1;
+
+        .report-breadcrumb {
+            color: $color__darkblue-1;
+        }
+    }
+}
+
+@include exports('reports') {
+    @include reports;
+}

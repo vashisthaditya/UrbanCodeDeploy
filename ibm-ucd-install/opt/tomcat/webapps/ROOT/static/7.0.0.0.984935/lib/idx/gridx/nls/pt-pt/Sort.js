@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/pt-pt/Sort",{helpMsg:"${0} - Fa\u00e7a clique para ordenar ou carregue na tecla Control e fa\u00e7a clique para adicionar a ordena\u00e7\u00e3o",singleHelpMsg:"${0} - Fa\u00e7a clique para ordenar",priorityOrder:"prioridade de ordena\u00e7\u00e3o ${0}"});

@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/hu/_Launcher",{tooManyOpenWorkspaces:'Legfeljebb ${maxOpen} "${workspaceTypeName}"\u200e munkater\u00fclet nyithat\u00f3 meg.  Ha lehets\u00e9ges, z\u00e1rjon be nyitott "${workspaceTypeName}"\u200e munkater\u00fcleteket.'});

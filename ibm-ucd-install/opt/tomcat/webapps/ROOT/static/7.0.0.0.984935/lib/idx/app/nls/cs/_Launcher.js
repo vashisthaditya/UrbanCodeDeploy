@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/cs/_Launcher",{tooManyOpenWorkspaces:'Nelze otev\u0159\u00edt v\u00edce ne\u017e ${maxOpen} pracovn\u00edch prostor\u016f "${workspaceTypeName}"\u200e. Je-li to mo\u017en\u00e9, zav\u0159ete pracovn\u00ed prostory "${workspaceTypeName}"\u200e, kter\u00e9 jsou ji\u017e otev\u0159eny.'});

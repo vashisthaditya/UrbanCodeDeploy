@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/ro/Sort",{helpMsg:"${0} - Face\u0163i clic pentru a sorta sau face\u0163i control-clic pentru a ad\u0103uga la sortare",singleHelpMsg:"${0} - Face\u0163i clic pentru a sorta",priorityOrder:"prioritate sortare ${0}"});

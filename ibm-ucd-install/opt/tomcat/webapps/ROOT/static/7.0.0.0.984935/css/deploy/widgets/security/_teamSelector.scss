@@ -1,0 +1,102 @@
+@import '../../carbon/globals/import-once';
+
+@mixin teamSelector {
+    .showTeam .dijitButton .dijitButtonNode,
+    .showTeam .dijitDropDownButton .dijitButtonNode,
+    .showTeam .dijitComboButton .dijitButtonNode,
+    .showTeam .dijitToggleButton .dijitButtonNode {
+        @extend .glyph-Glyph_add__ui-05;
+        border:none;
+        -webkit-box-shadow:none;
+        -moz-box-shadow:none;
+        box-shadow:none;
+    }
+    .showTeam .dijitButton .dijitButtonNode:hover,
+    .showTeam .dijitDropDownButton .dijitButtonNode:hover,
+    .showTeam .dijitComboButton .dijitButtonNode:hover,
+    .showTeam .dijitToggleButton .dijitButtonNode:hover {
+        opacity: 0.5;
+        background-color: transparent;
+    }
+    .showTeam .dijitButtonFocused .dijitButtonNode,
+    .showTeam .dijitDropDownButtonFocused .dijitButtonNode,
+    .showTeam .dijitToggleButtonFocused .dijitButtonNode {
+        outline: none; /*Remove and change for accessibility BlueWash*/
+    }
+    .showTeam .dijitButton .dijitButtonNode {
+        min-width: 5px;
+        padding: 0px;
+    }
+    
+    .teamForm {
+        background-color: #F7FBFE;
+        padding: 5px;
+        border: 1px solid #DFE3E6;
+        border-radius: 5px;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.10);
+        font-style: normal;
+        min-width: 400px;
+        margin: 5px 0;
+    
+        .teamFormLabel {
+            font-weight: bold;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+    
+        .dijitPlaceHolder {
+            font-style: normal;
+        }
+    
+        .webext-multi-select {
+            .dijitComboBox {
+                width: 370px !important;
+            }    
+        }
+    
+        .webext-select {
+            .dijitComboBox {
+                width: 370px !important;
+            }
+        }
+        
+    
+        .clear-selected-items {
+            background-color: white;
+            border: none;
+            color: $color__blue-51;
+            font-weight: bold;
+            padding: 8px 0px 9px 0px;
+            margin: 0;
+    
+            &:hover {
+                border: none;
+                background-color: white;
+                color: $color__blue-51;
+            }
+        }
+    
+        .team-selector-buttons {
+            border: none;
+            padding-right: 10px;
+            padding-bottom: 5px;
+        }
+    
+        .icon-Icon_close__ui-05 {
+            float: right;
+        }
+    }
+    
+    .teamForm:hover, .teamForm:active {
+        box-shadow: 0 0 1px 0 #82D1F5;
+    }
+    .teamForm:hover, .teamForm:active,
+    .teamForm:hover .team-selector-buttons,
+    .teamForm:active .team-selector-buttons {
+        border-color: #82D1F5 !important;
+    }
+}
+
+@include exports('teamSelector') {
+    @include teamSelector;
+}

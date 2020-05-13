@@ -1,0 +1,1 @@
+This static file is downloaded by agents during communication testing.

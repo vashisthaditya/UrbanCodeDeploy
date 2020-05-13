@@ -1,0 +1,3 @@
+//>>built
+define("idx/gridx/modules/pagination/PaginationBar","dojo/_base/declare,dojo/_base/lang,dojo/_base/array,gridx/core/_Module,gridx/modules/pagination/PaginationBar,./GotoPagePane,idx/widget/Dialog,dijit/form/Button,idx/form/NumberTextBox,dojo/i18n!gridx/nls/PaginationBar".split(","),function(c,d,e,f,g,h,i,b,j,k){return f.register(c(g,{constructor:function(){this.arg("dialogProps",{buttons:[new b({label:k.gotoDialogOKBtn,onClick:d.hitch(this,function(){e.some(this._pagers,function(a){if((a=a._gotoDialog)&&
+a.open)return a.content._onOK(),!0})})})]})},dialogClass:i,gotoPagePane:h,buttonClass:b,numberTextBoxClass:j,sizeSeparator:""}))});

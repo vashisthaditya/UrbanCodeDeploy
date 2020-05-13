@@ -1,0 +1,148 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<project name="ibm-ucd-database-init"
+         default="init-db" basedir=".">
+
+
+    <property name="db.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+    <property name="db.connection.url" value="jdbc:derby:${basedir}/../appdata/var/db/data"/>
+    <property name="db.userid" value="ibm_ucd"/>
+    <property name="db.password" value="password"/>
+
+    <property name="new.db.connection.driver_class" value="org.mariadb.jdbc.Driver"/>
+    <property name="new.db.userid" value="${db.userid}"/>
+    <property name="new.db.name" value="${new.db.userid}"/>
+    <property name="new.db.password" value="${db.password}"/>
+    <property name="new.db.type" value="mysql"/>
+    <property name="new.db.host" value="ucd-db"/>
+    <property name="new.db.port" value="3306"/>
+    <property name="new.db.connection" value="jdbc:${new.db.type}://${new.db.host}:${new.db.port}/${new.db.name}"/>
+
+    <property name="new.root.db.password" value="my-secret-pw"/>
+    <property name="new.root.db.connection" value="jdbc:${new.db.type}://${new.db.host}:${new.db.port}/${new.db.type}"/>
+
+    <macrodef name="ant-sql">
+        <attribute name="dbDriver" default="${new.db.connection.driver_class}"/>
+        <attribute name="url" default="${new.db.connection}"/>
+        <attribute name="userid" default="${new.db.userid}"/>
+        <attribute name="password" default="${new.db.password}"/>
+        <attribute name="src"/>
+        <sequential>
+            <echo>sql driver="@{dbDriver}" url="@{url}" userid="@{userid}" password="@{password}" classpath="classpath.lib.ext" src="@{src}"</echo>
+            <sql driver="@{dbDriver}" url="@{url}" userid="@{userid}" password="@{password}" classpath="classpath.lib.ext" src="@{src}">
+                <classpath refid="classpath.lib.ext"/>
+            </sql>
+        </sequential>
+    </macrodef>
+
+    <target name="set-classpath-lib-ext">
+        <path id="classpath.lib.ext">
+            <fileset dir="${basedir}/../lib">
+                <include name="**/*.jar" />
+            </fileset>
+        </path>
+    </target>
+
+    <target name="load-taskdefs">
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+            <classpath>
+                <pathelement location="./ant-contrib.jar"/>
+            </classpath>
+        </taskdef>
+    </target>
+
+    <target name="process-db-file">
+        <ant-sql src="${sql-file}" />
+    </target>
+
+    <target name="process-db-files" depends="load-taskdefs">
+        <foreach target="process-db-file" param="sql-file" inheritRefs="true">
+            <fileset dir="${dir}/${new.db.type}">
+                <include name="*.ddl"/>
+            </fileset>
+        </foreach>
+        <foreach target="process-db-file" param="sql-file" inheritRefs="true">
+            <fileset dir="${dir}">
+                <include name="*.ddl"/>
+            </fileset>
+        </foreach>
+        <foreach target="process-db-file" param="sql-file" inheritRefs="true">
+            <fileset dir="${dir}">
+                <include name="*.sql"/>
+            </fileset>
+        </foreach>
+    </target>
+
+    <target name="define-db-tables" depends="load-taskdefs, set-classpath-lib-ext">
+        <foreach target="process-db-files" param="dir" inheritRefs="true">
+            <path>
+                <dirset dir="${basedir}">
+                    <include name="*"/>
+                    <exclude name="deploy"/>
+                </dirset>
+            </path>
+        </foreach>
+        <antcall target="process-db-files" inheritRefs="true"> <!-- deploy database updates must be handled last -->
+            <param name="dir" value="deploy"/>
+        </antcall>
+    </target>
+
+    <target name="transfer-key-values" depends="set-classpath-lib-ext">
+        <tempfile destDir="/tmp" property="temp.properties.file" suffix=".properties"/>
+        <sql driver="${db.connection.driver_class}" url="${db.connection.url}"
+             userid="${db.userid}" password="${db.password}" classpath="classpath.lib.ext"
+             print="true" expandProperties="true" showheaders="false" showtrailers="false" output="${temp.properties.file}">
+            <classpath refid="classpath.lib.ext"/>
+            <![CDATA[
+            SELECT 'new.license.server.url=' || value from ps_prop_value WHERE name = 'license.server.url';
+            SELECT 'new.server.external.user.url=' || value from ps_prop_value WHERE name = 'server.external.user.url';
+            SELECT 'new.server.external.web.url=' || value from ps_prop_value WHERE name = 'server.external.web.url';
+            SELECT 'new.admin.password=' || password from sec_user WHERE name = 'admin';
+            ]]>
+            <!-- mySQL syntax for concatenate strings is: SELECT concat ('license.server.url=',value) from ps_prop_value WHERE name = 'license.server.url'; -->
+        </sql>
+        <property file="${temp.properties.file}"/>
+        <delete file="${temp.properties.file}"/>
+        <sql driver="${new.db.connection.driver_class}" url="${new.db.connection}"
+             userid="${new.db.userid}" password="${new.db.password}" classpath="classpath.lib.ext"
+             print="true" expandProperties="true" showheaders="false" showtrailers="false">
+            <classpath refid="classpath.lib.ext"/>
+            <![CDATA[
+            insert into ps_prop_value (id, version, name, value, long_value, description, secure, prop_sheet_id) values ('00000000-0000-0000-0000-000000000014', 0, 'license.server.url', '${new.license.server.url}', null, null, 'N', '00000000-0000-0000-0000-000000000001');
+            insert into ps_prop_value (id, version, name, value, long_value, description, secure, prop_sheet_id) values ('00000000-0000-0000-0000-000000000001', 0, 'server.external.web.url', '${new.server.external.web.url}', null, null, 'N', '00000000-0000-0000-0000-000000000001');
+            insert into ps_prop_value (id, version, name, value, long_value, description, secure, prop_sheet_id) values ('00000000-0000-0000-0000-000000000011', 0, 'server.external.user.url', '${new.server.external.user.url}', null, null, 'N', '00000000-0000-0000-0000-000000000001');
+            UPDATE sec_user SET password = '${new.admin.password}' WHERE name = 'admin';
+            ]]>
+        </sql>
+    </target>
+
+    <target name="create-db" depends="set-classpath-lib-ext">
+        <sql driver="${new.db.connection.driver_class}" url="${new.root.db.connection}"
+             userid="root" password="${new.root.db.password}" autocommit="true" expandProperties="true"
+             print="true" showheaders="false" showtrailers="false">
+            <classpath refid="classpath.lib.ext"/>
+            <![CDATA[
+            CREATE USER '${new.db.userid}'@'localhost' IDENTIFIED BY '${new.db.password}';
+            CREATE DATABASE ${new.db.name} character set utf8 collate utf8_bin;
+            GRANT ALL ON ${new.db.name}.* TO '${new.db.userid}'@'%' IDENTIFIED BY '${new.db.password}' WITH GRANT OPTION;
+            ]]>
+        </sql>
+    </target>
+
+    <target name="init-db" depends="define-db-tables, transfer-key-values">
+    </target>
+
+</project>

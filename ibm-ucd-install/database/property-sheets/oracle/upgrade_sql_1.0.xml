@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<change-set release="1.0">
+  <change number="1">
+    <description>First database version</description>
+    <sql separator=";"></sql>
+  </change>
+  <change number="2">
+    <description>Increase max size of property definition description to 4000</description>
+    <sql separator=";">
+    alter table ps_prop_def modify description varchar2(4000);
+    </sql>
+  </change>
+  <change number="3">
+    <description>Add support for long default values on property definitions.</description>
+    <sql separator=";">
+    alter table ps_prop_def add long_default_value clob lob (long_default_value) store as ps_prop_default_value_lob;
+    </sql>
+  </change>
+  <change number="4">
+    <description>Add template property sheet.</description>
+    <sql separator=";">
+    alter table ps_prop_sheet add template_prop_sheet_id varchar2(36);
+    alter table ps_prop_sheet add constraint ps_prop_sheet_template foreign key(template_prop_sheet_id) references ps_prop_sheet(id);
+    </sql>
+  </change>
+  <change number="5">
+    <description>Added more complete references from DB objects to versioned objects</description>
+    <sql separator=";">
+        alter table ps_prop_sheet_def add template_handle varchar2(256);
+        alter table ps_prop_sheet_def add template_prop_sheet_def_id varchar2(36);
+        
+        create table ps_prop_sheet_handle (
+            id varchar2(36) not null primary key,
+            version numeric default 0 not null,
+            prop_sheet_handle varchar2(256) not null,
+            prop_sheet_def_id varchar2(36) not null
+        );
+        
+        alter table ps_prop_sheet add prop_sheet_def_handle varchar2(256);
+
+        create unique index ps_prop_sheet_handle_uci on ps_prop_sheet_handle(prop_sheet_def_id, prop_sheet_handle);
+        create index ps_psh_prop_sheet_def_id on ps_prop_sheet_handle(prop_sheet_def_id);
+        alter table ps_prop_sheet_handle add constraint ps_prop_sheet_handle_uc unique(prop_sheet_def_id, prop_sheet_handle);
+        alter table ps_prop_sheet_handle add constraint ps_psh_2_psd foreign key(prop_sheet_def_id) references ps_prop_sheet_def(id);
+    </sql>
+  </change>
+  <change number="6">
+    <description>Add pattern for Property Definition</description>
+    <sql separator=";">
+        alter table ps_prop_def add pattern varchar2(255);
+    </sql>
+  </change>
+  <change number="7">
+    <description>Remove unique constraints</description>
+    <sql separator=";">
+        alter table ps_prop_def drop constraint ps_prop_def_uc;
+        alter table ps_prop_sheet_handle drop constraint ps_prop_sheet_handle_uc;
+        alter table ps_prop_value drop constraint ps_prop_val_uc;
+    </sql>
+  </change>
+  <change number="8">
+    <description>Add support for HTTP properties</description>
+    <sql separator=";">
+        alter table ps_prop_def add default_label varchar2(4000) default null;
+        alter table ps_prop_def add long_default_label clob default null;
+        alter table ps_prop_value add label varchar2(4000) default null;
+        alter table ps_prop_value add long_label clob default null;
+
+        create table ps_http_prop_info (
+            id varchar2(36) not null primary key,
+            version numeric default 0 not null,
+            prop_def_id varchar2(36) not null,
+            url varchar2(4000) not null,
+            username varchar2(255),
+            password varchar2(255),
+            data_format varchar2(36) not null,
+            base_path varchar2(4000),
+            value_path varchar2(4000),
+            label_path varchar2(4000)
+        );
+        create unique index ps_http_prop_info_uci on ps_http_prop_info(prop_def_id, version);
+        alter table ps_http_prop_info add constraint ps_http_prop_info_fk foreign key(prop_def_id) references ps_prop_def(id);
+    </sql>
+  </change>
+  <change number="9">
+    <description>Add placeholder property</description>
+    <sql separator=";">
+        alter table ps_prop_def add placeholder varchar2(4000);
+    </sql>
+  </change>
+  <change number="10">
+    <description>Add support for Scripted properties</description>
+    <sql separator=";">
+        create table ps_scripted_prop_info (
+            id varchar2(36) not null primary key,
+            version numeric default 0 not null,
+            prop_def_id varchar2(36) not null,
+            source varchar2(4000) not null,
+            arguments varchar2(4000),
+            data_source_type varchar2(36) not null,
+            data_format varchar2(36) not null,
+            base_path varchar2(4000),
+            value_path varchar2(4000),
+            label_path varchar2(4000)
+        );
+        create unique index ps_scripted_prop_info_uci on ps_scripted_prop_info(prop_def_id, version);
+        alter table ps_scripted_prop_info add constraint ps_scripted_prop_info_fk foreign key(prop_def_id) references ps_prop_def(id);
+        
+        alter table ps_http_prop_info add data_auth_type varchar2(36) default 'BASIC' not null ;
+    </sql>
+  </change>
+  <change number="11">
+    <description>Add resolve_http_url property</description>
+    <sql separator=";">
+        alter table ps_http_prop_info add resolve_http_url varchar2(4000);
+    </sql>
+  </change>
+  <change number="12">
+    <description>Remove extraneous allowed values</description>
+    <groovy file="all/1.0/upgrade_12_delete_extraneous_data.groovy"/>
+  </change>
+  <change number="13">
+    <description>Changes to indices to help with database performance</description>
+    <sql separator=";">
+        create index ps_psd_tpsd_id on ps_prop_sheet_def(template_prop_sheet_def_id);
+    </sql>
+  </change>
+</change-set>

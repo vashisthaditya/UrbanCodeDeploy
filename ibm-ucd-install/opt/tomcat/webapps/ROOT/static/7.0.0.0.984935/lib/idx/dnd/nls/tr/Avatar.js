@@ -1,0 +1,2 @@
+//>>built
+define("idx/dnd/nls/tr/Avatar",{copyText:"${num} \u00f6\u011fe kopyala",moveText:"${num} \u00f6\u011fe ta\u015f\u0131",copyOneText:"1 \u00f6\u011fe kopyala",moveOneText:"1 \u00f6\u011fe ta\u015f\u0131"});

@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/zh/_Launcher",{tooManyOpenWorkspaces:'\u4e0d\u80fd\u6253\u5f00\u8d85\u8fc7 ${maxOpen} \u4e2a "${workspaceTypeName}"\u200e \u5de5\u4f5c\u7a7a\u95f4\u3002\u5982\u679c\u53ef\u80fd\uff0c\u8bf7\u5173\u95ed\u5df2\u6253\u5f00\u7684 "${workspaceTypeName}"\u200e \u5de5\u4f5c\u7a7a\u95f4\u3002'});

@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/fi/Sort",{helpMsg:"${0} - Lajittele napsauttamalla tai lis\u00e4\u00e4 lajitteluehtoihin pit\u00e4m\u00e4ll\u00e4 Ctrl-n\u00e4pp\u00e4int\u00e4 painettuna ja napsauttamalla",singleHelpMsg:"${0} - Lajittele napsauttamalla",priorityOrder:"lajitteluprioriteetti ${0}"});

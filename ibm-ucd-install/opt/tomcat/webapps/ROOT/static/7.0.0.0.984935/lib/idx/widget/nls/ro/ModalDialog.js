@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/ro/ModalDialog",{Error:"Eroare",Warning:"Avertisment",Information:"Informa\u0163ii",Success:"Succes",Confirmation:"Confirmare",Question:"\u00centrebare",closeButtonLabel:"\u00cenchidere",cancelButtonLabel:"Anulare",executeButtonLabel:"OK",checked:"Nu se \u00eentreab\u0103 din nou"});

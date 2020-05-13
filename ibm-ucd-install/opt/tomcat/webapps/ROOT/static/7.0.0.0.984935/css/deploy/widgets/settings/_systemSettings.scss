@@ -1,0 +1,21 @@
+@import '../../carbon/globals/import-once';
+
+@mixin systemSettings {
+    
+    .masterContainer {
+      .systemSettings {
+        .columnForm {
+           margin: 0;
+        }
+        .underField {
+           .dijitButton {
+              padding-right: 16px;
+           }
+        }
+      }
+    }
+}
+
+@include exports('systemSettings') {
+    @include systemSettings;
+}

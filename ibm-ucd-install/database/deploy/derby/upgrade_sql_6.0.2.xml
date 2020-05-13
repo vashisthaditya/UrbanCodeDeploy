@@ -1,0 +1,786 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.1.0.x.
+-->
+
+<change-set release="n1_6.0.2">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/derby/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/derby/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/derby/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/derby/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <description>Add dismiss attribute to license log entries</description>
+        <sql separator=";">
+            alter table ds_license_log_entry add dismissed varchar(1) default 'N' not null;
+        </sql>
+    </change>
+    <change number="2">
+        <description>Adding integration failure tag to components</description>
+        <sql separator=";">
+            alter table ds_component add column integration_failed varchar(1) default 'N' not null;
+        </sql>
+    </change>
+    <change number="3">
+        <description>Add the "map to environment" resource permission</description>
+        <groovy file="all/upgrade-scripts-602/upgrade_003_resource_map_permissions.groovy" />
+    </change>
+    <change number="4">
+        <description>Add additional resource permissions</description>
+        <groovy file="all/upgrade-scripts-602/upgrade_005_new_resource_permissions.groovy" />
+    </change>
+    <change number="5">
+        <description>Add sub_tag column to pl_plugin_command</description>
+        <sql separator=";">
+            alter table pl_plugin_command add column sub_tag varchar(4000);
+        </sql>
+    </change>
+    <change number="6">
+        <description>Changing status inactivation to status deletion</description>
+        <sql separator=";">
+            alter table ds_status add column ghosted_date bigint default 0 not null;
+            update ds_status set ghosted_date = 1395185208000 where active = 'N';
+            alter table ds_status drop active;
+
+            drop index ds_status_uci;
+            create unique index ds_status_uci on ds_status(name, status_type, ghosted_date);
+        </sql>
+    </change>
+    <change number="7">
+        <description>Changing config template inactivation to deletion</description>
+        <groovy file="all/upgrade-scripts-602/upgrade_007_config_template_deletion.groovy" />
+    </change>
+    <change number="8">
+        <description>add component_tag_id column to ds_resource</description>
+        <sql separator=";">
+            alter table ds_resource add column component_tag_id varchar(36);
+            create index ds_resource_component_tag_id on ds_resource(component_tag_id);
+            alter table ds_resource add constraint ds_resource_2_component_tag foreign key(component_tag_id) references ds_tag(id);
+        </sql>
+    </change>
+    <change number="9">
+        <description>Adding copied activities</description>
+        <sql separator=";">
+            create table ds_copied_activity (
+                id varchar(36) not null primary key,
+                user_id varchar(64) not null,
+                activity_data clob not null,
+                label varchar(255),
+                version numeric default 0 not null
+            );
+        </sql>
+    </change>
+    <change number="10">
+        <description>Removing database storage of server/agent messages</description>
+        <sql separator=";">
+            drop table ds_sa_message;
+            drop table ds_sa_dialogue;
+
+            alter table ds_agent add column last_properties_hash numeric;
+            update ds_agent set last_status = 'OFFLINE' where last_status = 'CONNECTED';
+
+            delete from ds_plugin_task_request;
+            delete from pl_source_config_execution where status = 'WAITING' or log_id is null;
+
+            update pl_source_config_execution set id = log_id;
+            drop index pl_src_config_exe_dialogue_id;
+            alter table pl_source_config_execution drop dialogue_id;
+            alter table pl_source_config_execution drop log_id;
+        </sql>
+    </change>
+    <change number="11">
+        <description>Adding sizeOnDisk column to Version to keep track of size.</description>
+        <!-- we want the default to be zero for any versions created after this upgrade, but for the ones before we want to be -1 so we know to upgrade -->
+        <sql separator=";">
+            alter table ds_version add column size_on_disk bigint default -1 not null;
+            alter table ds_version alter column size_on_disk set default 0;
+        </sql>
+    </change>
+    <change number="12">
+        <description>Update numeric columns to integer</description>
+        <changeref library="vc" change="4"/>
+        <changeref library="inventory" change="5"/>
+        <sql separator=";">
+            drop index pl_plugin_uci;
+            drop index pl_source_config_plugin_uci;
+
+            alter table cal_calendar add version_new integer default 0 not null;
+            update cal_calendar set version_new = version;
+            alter table cal_calendar drop version;
+            rename column cal_calendar.version_new to version;
+
+            alter table cal_entry add version_new integer default 0 not null;
+            update cal_entry set version_new = version;
+            alter table cal_entry drop version;
+            rename column cal_entry.version_new to version;
+
+            alter table cal_blackout add version_new integer default 0 not null;
+            update cal_blackout set version_new = version;
+            alter table cal_blackout drop version;
+            rename column cal_blackout.version_new to version;
+
+            alter table cal_recurring_entry add version_new integer default 0 not null;
+            update cal_recurring_entry set version_new = version;
+            alter table cal_recurring_entry drop version;
+            rename column cal_recurring_entry.version_new to version;
+
+            alter table ds_db_version add ver_new integer default 0 not null;
+            update ds_db_version set ver_new = ver;
+            alter table ds_db_version drop ver;
+            rename column ds_db_version.ver_new to ver;
+
+            alter table ds_tag add version_new integer default 0 not null;
+            update ds_tag set version_new = version;
+            alter table ds_tag drop version;
+            rename column ds_tag.version_new to version;
+
+            alter table ds_agent add version_new integer default 0 not null;
+            update ds_agent set version_new = version;
+            alter table ds_agent drop version;
+            rename column ds_agent.version_new to version;
+
+            alter table ds_agent add last_properties_hash_new integer ;
+            update ds_agent set last_properties_hash_new = last_properties_hash;
+            alter table ds_agent drop last_properties_hash;
+            rename column ds_agent.last_properties_hash_new to last_properties_hash;
+
+            alter table ds_agent_request_record add version_new integer default 0 not null;
+            update ds_agent_request_record set version_new = version;
+            alter table ds_agent_request_record drop version;
+            rename column ds_agent_request_record.version_new to version;
+
+            alter table ds_agent_pool add version_new integer default 0 not null;
+            update ds_agent_pool set version_new = version;
+            alter table ds_agent_pool drop version;
+            rename column ds_agent_pool.version_new to version;
+
+            alter table ds_resource add version_new integer default 0 not null;
+            update ds_resource set version_new = version;
+            alter table ds_resource drop version;
+            rename column ds_resource.version_new to version;
+
+            alter table ds_resource_template add version_new integer default 0 not null;
+            update ds_resource_template set version_new = version;
+            alter table ds_resource_template drop version;
+            rename column ds_resource_template.version_new to version;
+
+            alter table ds_cloud_connection add version_new integer default 0 not null;
+            update ds_cloud_connection set version_new = version;
+            alter table ds_cloud_connection drop version;
+            rename column ds_cloud_connection.version_new to version;
+
+            alter table ds_resource_role add version_new integer default 0 not null;
+            update ds_resource_role set version_new = version;
+            alter table ds_resource_role drop version;
+            rename column ds_resource_role.version_new to version;
+
+            alter table ds_component add version_new integer default 0 not null;
+            update ds_component set version_new = version;
+            alter table ds_component drop version;
+            rename column ds_component.version_new to version;
+
+            alter table ds_component add cleanup_days_to_keep_new integer default 0 not null;
+            update ds_component set cleanup_days_to_keep_new = cleanup_days_to_keep;
+            alter table ds_component drop cleanup_days_to_keep;
+            rename column ds_component.cleanup_days_to_keep_new to cleanup_days_to_keep;
+
+            alter table ds_component add cleanup_count_to_keep_new integer default 0 not null;
+            update ds_component set cleanup_count_to_keep_new = cleanup_count_to_keep;
+            alter table ds_component drop cleanup_count_to_keep;
+            rename column ds_component.cleanup_count_to_keep_new to cleanup_count_to_keep;
+
+            alter table ds_version add version_new integer default 0 not null;
+            update ds_version set version_new = version;
+            alter table ds_version drop version;
+            rename column ds_version.version_new to version;
+
+            alter table ds_version_status add version_new integer default 0 not null;
+            update ds_version_status set version_new = version;
+            alter table ds_version_status drop version;
+            rename column ds_version_status.version_new to version;
+
+            alter table ds_notification_scheme add version_new integer default 0 not null;
+            update ds_notification_scheme set version_new = version;
+            alter table ds_notification_scheme drop version;
+            rename column ds_notification_scheme.version_new to version;
+
+            alter table ds_notification_entry add version_new integer default 0 not null;
+            update ds_notification_entry set version_new = version;
+            alter table ds_notification_entry drop version;
+            rename column ds_notification_entry.version_new to version;
+
+            alter table ds_application add version_new integer default 0 not null;
+            update ds_application set version_new = version;
+            alter table ds_application drop version;
+            rename column ds_application.version_new to version;
+
+            alter table ds_environment add version_new integer default 0 not null;
+            update ds_environment set version_new = version;
+            alter table ds_environment drop version;
+            rename column ds_environment.version_new to version;
+
+            alter table ds_environment add index_order_new integer;
+            update ds_environment set index_order_new = index_order;
+            alter table ds_environment alter column index_order_new not null;
+            alter table ds_environment drop index_order;
+            rename column ds_environment.index_order_new to index_order;
+
+            alter table ds_environment add instance_id_new integer ;
+            update ds_environment set instance_id_new = instance_id;
+            alter table ds_environment drop instance_id;
+            rename column ds_environment.instance_id_new to instance_id;
+
+            alter table ds_environment add cleanup_days_to_keep_new integer default 0 not null;
+            update ds_environment set cleanup_days_to_keep_new = cleanup_days_to_keep;
+            alter table ds_environment drop cleanup_days_to_keep;
+            rename column ds_environment.cleanup_days_to_keep_new to cleanup_days_to_keep;
+
+            alter table ds_environment add cleanup_count_to_keep_new integer default 0 not null;
+            update ds_environment set cleanup_count_to_keep_new = cleanup_count_to_keep;
+            alter table ds_environment drop cleanup_count_to_keep;
+            rename column ds_environment.cleanup_count_to_keep_new to cleanup_count_to_keep;
+
+            alter table ds_prop_cmp_env_mapping add version_new integer default 0 not null;
+            update ds_prop_cmp_env_mapping set version_new = version;
+            alter table ds_prop_cmp_env_mapping drop version;
+            rename column ds_prop_cmp_env_mapping.version_new to version;
+
+            alter table ds_env_ver_condition add version_new integer default 0 not null;
+            update ds_env_ver_condition set version_new = version;
+            alter table ds_env_ver_condition drop version;
+            rename column ds_env_ver_condition.version_new to version;
+
+            alter table ds_env_ver_condition add index_order_new integer;
+            update ds_env_ver_condition set index_order_new = index_order;
+            alter table ds_env_ver_condition alter column index_order_new not null;
+            alter table ds_env_ver_condition drop index_order;
+            rename column ds_env_ver_condition.index_order_new to index_order;
+
+            alter table ds_snapshot add version_new integer default 0 not null;
+            update ds_snapshot set version_new = version;
+            alter table ds_snapshot drop version;
+            rename column ds_snapshot.version_new to version;
+
+            alter table ds_snapshot_to_version add version_new integer default 0 not null;
+            update ds_snapshot_to_version set version_new = version;
+            alter table ds_snapshot_to_version drop version;
+            rename column ds_snapshot_to_version.version_new to version;
+
+            alter table ds_snapshot_to_version add index_order_new integer ;
+            update ds_snapshot_to_version set index_order_new = index_order;
+            alter table ds_snapshot_to_version drop index_order;
+            rename column ds_snapshot_to_version.index_order_new to index_order;
+
+            alter table ds_snapshot_config_version add version_new integer default 0 not null;
+            update ds_snapshot_config_version set version_new = version;
+            alter table ds_snapshot_config_version drop version;
+            rename column ds_snapshot_config_version.version_new to version;
+
+            alter table ds_snapshot_config_version add persistent_version_new integer ;
+            update ds_snapshot_config_version set persistent_version_new = persistent_version;
+            alter table ds_snapshot_config_version drop persistent_version;
+            rename column ds_snapshot_config_version.persistent_version_new to persistent_version;
+
+            alter table ds_snapshot_status add version_new integer default 0 not null;
+            update ds_snapshot_status set version_new = version;
+            alter table ds_snapshot_status drop version;
+            rename column ds_snapshot_status.version_new to version;
+
+            alter table ds_blueprint add version_new integer default 0 not null;
+            update ds_blueprint set version_new = version;
+            alter table ds_blueprint drop version;
+            rename column ds_blueprint.version_new to version;
+
+            alter table ds_status add version_new integer default 0 not null;
+            update ds_status set version_new = version;
+            alter table ds_status drop version;
+            rename column ds_status.version_new to version;
+
+            alter table ds_copied_activity add version_new integer default 0 not null;
+            update ds_copied_activity set version_new = version;
+            alter table ds_copied_activity drop version;
+            rename column ds_copied_activity.version_new to version;
+
+            alter table rt_property_context add version_new integer default 0 not null;
+            update rt_property_context set version_new = version;
+            alter table rt_property_context drop version;
+            rename column rt_property_context.version_new to version;
+
+            alter table rt_property_context_group_map add version_new integer default 0 not null;
+            update rt_property_context_group_map set version_new = version;
+            alter table rt_property_context_group_map drop version;
+            rename column rt_property_context_group_map.version_new to version;
+
+            alter table rt_property_context_group_map add index_order_new integer;
+            update rt_property_context_group_map set index_order_new = index_order;
+            alter table rt_property_context_group_map alter column index_order_new not null;
+            alter table rt_property_context_group_map drop index_order;
+            rename column rt_property_context_group_map.index_order_new to index_order;
+
+            alter table rt_process_request add version_new integer default 0 not null;
+            update rt_process_request set version_new = version;
+            alter table rt_process_request drop version;
+            rename column rt_process_request.version_new to version;
+
+            alter table rt_deployment_request add version_new integer default 0 not null;
+            update rt_deployment_request set version_new = version;
+            alter table rt_deployment_request drop version;
+            rename column rt_deployment_request.version_new to version;
+
+            alter table rt_app_process_request add version_new integer default 0 not null;
+            update rt_app_process_request set version_new = version;
+            alter table rt_app_process_request drop version;
+            rename column rt_app_process_request.version_new to version;
+
+            alter table rt_app_proc_req_to_version add version_new integer default 0 not null;
+            update rt_app_proc_req_to_version set version_new = version;
+            alter table rt_app_proc_req_to_version drop version;
+            rename column rt_app_proc_req_to_version.version_new to version;
+
+            alter table rt_app_proc_req_to_version add index_order_new integer ;
+            update rt_app_proc_req_to_version set index_order_new = index_order;
+            alter table rt_app_proc_req_to_version drop index_order;
+            rename column rt_app_proc_req_to_version.index_order_new to index_order;
+
+            alter table rt_version_selector add version_new integer default 0 not null;
+            update rt_version_selector set version_new = version;
+            alter table rt_version_selector drop version;
+            rename column rt_version_selector.version_new to version;
+
+            alter table rt_comp_process_request add version_new integer default 0 not null;
+            update rt_comp_process_request set version_new = version;
+            alter table rt_comp_process_request drop version;
+            rename column rt_comp_process_request.version_new to version;
+
+            alter table tsk_approval add version_new integer default 0 not null;
+            update tsk_approval set version_new = version;
+            alter table tsk_approval drop version;
+            rename column tsk_approval.version_new to version;
+
+            alter table tsk_task add version_new integer default 0 not null;
+            update tsk_task set version_new = version;
+            alter table tsk_task drop version;
+            rename column tsk_task.version_new to version;
+
+            alter table tsk_task_resource_role_map add version_new integer default 0 not null;
+            update tsk_task_resource_role_map set version_new = version;
+            alter table tsk_task_resource_role_map drop version;
+            rename column tsk_task_resource_role_map.version_new to version;
+
+            alter table tsk_task_member_map add version_new integer default 0 not null;
+            update tsk_task_member_map set version_new = version;
+            alter table tsk_task_member_map drop version;
+            rename column tsk_task_member_map.version_new to version;
+
+            alter table pl_plugin add version_new integer default 0 not null;
+            update pl_plugin set version_new = version;
+            alter table pl_plugin drop version;
+            rename column pl_plugin.version_new to version;
+
+            alter table pl_plugin add plugin_version_new integer;
+            update pl_plugin set plugin_version_new = plugin_version;
+            alter table pl_plugin alter column plugin_version_new not null;
+            alter table pl_plugin drop plugin_version;
+            rename column pl_plugin.plugin_version_new to plugin_version;
+
+            alter table pl_plugin_command add version_new integer default 0 not null;
+            update pl_plugin_command set version_new = version;
+            alter table pl_plugin_command drop version;
+            rename column pl_plugin_command.version_new to version;
+
+            alter table ds_plugin_task_request add version_new integer default 0 not null;
+            update ds_plugin_task_request set version_new = version;
+            alter table ds_plugin_task_request drop version;
+            rename column ds_plugin_task_request.version_new to version;
+
+            alter table pl_source_config_plugin add version_new integer default 0 not null;
+            update pl_source_config_plugin set version_new = version;
+            alter table pl_source_config_plugin drop version;
+            rename column pl_source_config_plugin.version_new to version;
+
+            alter table pl_source_config_plugin add plugin_version_new integer;
+            update pl_source_config_plugin set plugin_version_new = plugin_version;
+            alter table pl_source_config_plugin alter column plugin_version_new not null;
+            alter table pl_source_config_plugin drop plugin_version;
+            rename column pl_source_config_plugin.plugin_version_new to plugin_version;
+
+            alter table ds_license_log_entry add version_new integer default 0 not null;
+            update ds_license_log_entry set version_new = version;
+            alter table ds_license_log_entry drop version;
+            rename column ds_license_log_entry.version_new to version;
+
+            alter table ds_network_relay add version_new integer default 0 not null;
+            update ds_network_relay set version_new = version;
+            alter table ds_network_relay drop version;
+            rename column ds_network_relay.version_new to version;
+
+            alter table ds_network_relay add port_new integer;
+            update ds_network_relay set port_new = port;
+            alter table ds_network_relay alter column port_new not null;
+            alter table ds_network_relay drop port;
+            rename column ds_network_relay.port_new to port;
+
+            alter table ds_recent_report add version_new integer default 0 not null;
+            update ds_recent_report set version_new = version;
+            alter table ds_recent_report drop version;
+            rename column ds_recent_report.version_new to version;
+
+            alter table ds_lockable add version_new integer default 0 not null;
+            update ds_lockable set version_new = version;
+            alter table ds_lockable drop version;
+            rename column ds_lockable.version_new to version;
+
+            alter table ds_lockable add max_permits_new integer default 1 not null;
+            update ds_lockable set max_permits_new = max_permits;
+            alter table ds_lockable drop max_permits;
+            rename column ds_lockable.max_permits_new to max_permits;
+
+            alter table ds_lock add version_new integer default 0 not null;
+            update ds_lock set version_new = version;
+            alter table ds_lock drop version;
+            rename column ds_lock.version_new to version;
+
+            alter table ds_audit_entry add version_new integer default 0 not null;
+            update ds_audit_entry set version_new = version;
+            alter table ds_audit_entry drop version;
+            rename column ds_audit_entry.version_new to version;
+
+            create unique index pl_source_config_plugin_uci on pl_source_config_plugin(plugin_id, plugin_version, ghosted_date);
+            create unique index pl_plugin_uci on pl_plugin(plugin_id, plugin_version, ghosted_date);
+        </sql>
+    </change>
+    <change number="13">
+        <description>Add Component Type field to components</description>
+        <sql separator=";">
+            alter table ds_component add component_type varchar(16) default 'STANDARD' not null;
+        </sql>
+    </change>
+    <change number="14">
+        <description>Setting artifact and WinRS agent settings to be ID instead of name references</description>
+        <sql separator=";">
+            update ps_prop_value pv
+            set pv.value = (select ag.id from ds_agent ag where name = pv.value and ghosted_date = 0)
+            where pv.name = 'server.artifact.agent'
+                and pv.prop_sheet_id = '00000000-0000-0000-0000-000000000001'
+                and pv.value is not null;
+
+            update ps_prop_value pv
+            set pv.value = (select ag.id from ds_agent ag where name = pv.value and ghosted_date = 0)
+            where pv.name = 'server.winrs.agent'
+                and pv.prop_sheet_id = '00000000-0000-0000-0000-000000000001'
+                and pv.value is not null;
+        </sql>
+    </change>
+    <change number="15">
+        <description>Standardizing action names for cloud connections</description>
+        <sql separator=";">
+            update sec_action set name = 'Create Cloud Connections' where name = 'Create Cloud Connection';
+            update sec_action set name = 'View Cloud Connections' where name = 'View Cloud Connection';
+        </sql>
+    </change>
+    <change number="16">
+        <description>Create lock table for ptr store</description>
+        <sql separator=";">
+            create table ds_ptr_store_lock(
+                id integer not null primary key
+            );
+
+            insert into ds_ptr_store_lock (id) values (0);
+            insert into ds_ptr_store_lock (id) values (1);
+            insert into ds_ptr_store_lock (id) values (2);
+            insert into ds_ptr_store_lock (id) values (3);
+            insert into ds_ptr_store_lock (id) values (4);
+            insert into ds_ptr_store_lock (id) values (5);
+            insert into ds_ptr_store_lock (id) values (6);
+            insert into ds_ptr_store_lock (id) values (7);
+            insert into ds_ptr_store_lock (id) values (8);
+            insert into ds_ptr_store_lock (id) values (9);
+            insert into ds_ptr_store_lock (id) values (10);
+            insert into ds_ptr_store_lock (id) values (11);
+            insert into ds_ptr_store_lock (id) values (12);
+            insert into ds_ptr_store_lock (id) values (13);
+            insert into ds_ptr_store_lock (id) values (14);
+            insert into ds_ptr_store_lock (id) values (15);
+        </sql>
+    </change>
+    <change number="17">
+        <description>Make archived versions with size on disk to be 0</description>
+        <sql separator=";">
+            update ds_version set size_on_disk = 0 where archived = 'Y' or archived = 'y';
+        </sql>
+    </change>
+    <change number="18">
+        <description>create version upgrade table for online upgrade</description>
+        <sql separator=";">
+            create table ds_version_upgrade (
+                id varchar(36) not null primary key,
+                version integer default 0 not null,
+                locked varchar(1) default 'N' not null,
+                upgraded varchar(1) default 'N' not null
+            );
+
+            insert
+            into
+                ds_version_upgrade
+                (id, version, upgraded, locked)
+            select
+                id,
+                0,
+                'N',
+                'N'
+            from
+                ds_version
+            where
+                archived = 'N' or archived = 'n';
+        </sql>
+    </change>
+    <change number="19">
+        <description>Adding a column for tracking errors encountered related to agents</description>
+        <sql separator=";">
+            alter table ds_agent add error_data clob;
+        </sql>
+    </change>
+    <change number="20">
+        <description>Adding support for HTTP property definitions</description>
+        <changeref library="property-sheets" change="8"/>
+    </change>
+    <change number="21">
+        <description>Landscaper integration to create environments from blueprint</description>
+        <sql separator=";">
+            create table ds_integration_provider (
+                id varchar(36) not null primary key,
+                version integer default 0 not null,
+                date_created bigint not null,
+                classname varchar(255) not null,
+                name varchar(255) not null,
+                description varchar(4000),
+                prop_sheet_id varchar(36) not null,
+                ghosted_date bigint default 0 not null
+            );
+
+            create table ds_ext_environment (
+                id varchar(36) not null primary key,
+                ext_id varchar(36) not null,
+                name varchar(255) not null,
+                version integer default 0 not null,
+                environment_id varchar(36) not null,
+                date_created bigint not null,
+                ext_blueprint_id varchar(36),
+                ext_blueprint_name varchar(255) not null,
+                ext_blueprint_version varchar(36),
+                ext_blueprint_url varchar(255),
+                ext_configuration_id varchar(36),
+                ext_configuration_name varchar(255),
+                ext_configuration_version varchar(36),
+                integration_provider_id varchar(36),
+                prop_sheet_id varchar(36) not null,
+                ghosted_date bigint default 0 not null
+            );
+
+            create index ds_ext_env_env_id on ds_ext_environment(environment_id);
+            create index ds_ext_env_provider_id on ds_ext_environment(integration_provider_id);
+            alter table ds_ext_environment add constraint ds_ext_env_2_environment foreign key(environment_id) references ds_environment(id);
+            alter table ds_ext_environment add constraint ds_ext_env_2_int_provider foreign key(integration_provider_id) references ds_integration_provider(id);
+        </sql>
+    </change>
+    <change number="22">
+      <description>Splitting snapshot locked state into version and config locking</description>
+      <sql separator=";">
+        alter table ds_environment add column snapshot_lock_type varchar(64);
+
+        alter table ds_snapshot add column versions_locked varchar(1);
+        alter table ds_snapshot add column config_locked varchar(1);
+        update ds_snapshot set versions_locked = locked, config_locked = locked;
+
+        alter table ds_snapshot drop locked;
+        alter table ds_snapshot alter column versions_locked not null;
+        alter table ds_snapshot alter column config_locked not null;
+      </sql>
+    </change>
+    <change number="23">
+      <description>Adding index to pl_source_config_execution</description>
+      <sql separator=";">
+        create index pl_src_config_ag_id on pl_source_config_execution(agent_id);
+        create index pl_src_config_status on pl_source_config_execution(status);
+      </sql>
+    </change>
+    <change number="24">
+      <description>Add ignorequalifiers column to components</description>
+      <sql separator=";">
+        alter table ds_component add column ignore_qualifiers integer default 0 not null;
+      </sql>
+    </change>
+    <change number="25">
+      <description>Adding a table to track request performance</description>
+      <sql separator=";">
+            create table ds_request_audit_entry (
+                id varchar(36) not null primary key,
+                version integer default 0 not null,
+                user_id varchar(36),
+                short_url varchar(255) not null,
+                full_url varchar(4000) not null,
+                duration bigint not null,
+                method varchar(10) not null,
+                date_created bigint not null
+            );
+
+            create index ds_req_audit_user_id on ds_request_audit_entry(user_id);
+            create index ds_req_audit_short_url on ds_request_audit_entry(short_url);
+            create index ds_req_audit_duration on ds_request_audit_entry(duration);
+            create index ds_req_audit_method on ds_request_audit_entry(method);
+            create index ds_req_audit_date_created on ds_request_audit_entry(date_created);
+      </sql>
+    </change>
+    <change number="26">
+      <description>Adding ghosting support for authorization realms</description>
+      <sql separator=";">
+        alter table sec_authorization_realm
+        add column ghosted_date bigint default 0 not null;
+      </sql>
+    </change>
+    <change number="27">
+      <description>Finding references to deleted users and setting them to admin.</description>
+      <sql separator=";">
+        update ds_component set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_application set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_version set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_version_status set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_snapshot set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_snapshot_status set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+        update ds_blueprint set created_by_user='20000000000000000000000001000000'
+            where created_by_user not in (select id from sec_user);
+      </sql>
+    </change>
+    <change number="28">
+      <description>Correcting references to resource roles from resource roles and components</description>
+      <sql separator=";">
+          update ds_resource
+          set role_id = (
+            select res_role.id
+            from ds_resource_role res_role
+            where res_role.name = (select res_role_2.name from ds_resource_role res_role_2 where res_role_2.id = role_id)
+            fetch first 1 rows only)
+          where role_id is not null and role_id != (
+            select res_role.id
+            from ds_resource_role res_role
+            where res_role.name = (select res_role_2.name from ds_resource_role res_role_2 where res_role_2.id = role_id)
+            fetch first 1 rows only);
+
+          update ds_component comp
+          set comp.resource_role_id = (
+            select id
+            from ds_resource_role
+            where name = comp.name
+            fetch first 1 rows only)
+          where (
+            select id from ds_resource_role
+            where name = comp.name
+            fetch first 1 rows only) is not null
+          and (
+            select id from ds_resource_role
+            where name = comp.name
+            fetch first 1 rows only) != comp.resource_role_id;
+
+          delete from ds_resource_role
+          where id not in (
+            select resource_role_id
+            from ds_component
+            where resource_role_id is not null)
+          and special_type = 'COMPONENT';
+      </sql>
+    </change>
+    <change number="29">
+      <description>Implementing timeouts for unacked plugin command requests.</description>
+      <sql separator=";">
+        alter table pl_source_config_execution add column request_time bigint;
+        alter table pl_source_config_execution add column acked varchar(1) default 'N' not null;
+        update pl_source_config_execution set acked = 'Y';
+
+        alter table ds_plugin_task_request add column request_time bigint;
+        alter table ds_plugin_task_request add column acked varchar(1) default 'N' not null;
+        update ds_plugin_task_request set acked = 'Y';
+      </sql>
+    </change>
+    <change number="30">
+      <description>Indexing audit records. (This update may take some time)</description>
+      <sql separator=";">
+          create index ds_audit_user_id on ds_audit_entry(user_id);
+          create index ds_audit_user_name on ds_audit_entry(user_name);
+          create index ds_audit_event_type on ds_audit_entry(event_type);
+          create index ds_audit_description on ds_audit_entry(description);
+          create index ds_audit_obj_type on ds_audit_entry(obj_type);
+          create index ds_audit_obj_name on ds_audit_entry(obj_name);
+          create index ds_audit_obj_id on ds_audit_entry(obj_id);
+          create index ds_audit_created_date on ds_audit_entry(created_date);
+          create index ds_audit_status on ds_audit_entry(status);
+          create index ds_audit_deletable on ds_audit_entry(deletable);
+      </sql>
+    </change>
+    <change number="31">
+      <description>Updating Process Lock Tables</description>
+      <sql separator=";">
+          insert into ds_sync (name, locked) values ('LOCK-ACQUISITION-LOCK', 'N');
+      </sql>
+    </change>
+    <change number="32">
+      <description>Making changes to support OAuth properties and scripted properties.</description>
+      <changeref library="property-sheets" change="10"/>
+    </change>
+    <change number="33">
+      <description>Disabling SSLv3 (Moved to installer; Currently no-op)</description>
+    </change>
+    <change number="34">
+      <description>Adding IP address tracking to auditing</description>
+      <sql separator=";">
+          alter table sec_user add column last_ip_address varchar(40);
+          alter table ds_audit_entry add column ip_address varchar(40);
+          create index ds_audit_ip on ds_audit_entry(ip_address);
+        </sql>
+    </change>
+
+<!--
+- REMINDER: Upgrades for product version 6.1.0.x. Place additions above this comment.
+-->
+</change-set>

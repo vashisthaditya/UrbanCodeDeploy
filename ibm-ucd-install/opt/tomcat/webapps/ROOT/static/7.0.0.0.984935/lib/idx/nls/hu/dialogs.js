@@ -1,0 +1,2 @@
+//>>built
+define("idx/nls/hu/dialogs",{information:"Inform\u00e1ci\u00f3k",warning:"Figyelmeztet\u00e9s",error:"Hiba",confirmation:"Meger\u0151s\u00edt\u00e9s",progress:"Folyamatban",loading:"Bet\u00f6lt\u00e9s",close:"Bez\u00e1r\u00e1s"});

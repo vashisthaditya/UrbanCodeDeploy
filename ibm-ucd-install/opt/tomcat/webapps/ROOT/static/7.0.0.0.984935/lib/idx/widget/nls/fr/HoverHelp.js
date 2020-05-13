@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/fr/HoverHelp",{defaultHrefLabel:"En savoir plus",defaultMessage:"[Aucun texte d'aide n'a \u00e9t\u00e9 d\u00e9fini]\u200e",defaultTitle:"Survolez ou cliquez sur cet \u00e9l\u00e9ment pour afficher l'aide"});

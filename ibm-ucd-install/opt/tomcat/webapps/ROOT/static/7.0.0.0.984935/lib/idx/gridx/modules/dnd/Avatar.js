@@ -1,0 +1,3 @@
+//>>built
+define("idx/gridx/modules/dnd/Avatar","dojo/_base/declare,dojo/string,dojo/dom-class,dojo/dom-construct,dojo/_base/window,dojo/dnd/Avatar,dojo/i18n!../../nls/Dnd".split(","),function(c,d,e,f,g,h,i){return c(h,{construct:function(){this.isA11y=e.contains(g.body(),"dijit_a11y");this.node=f.toDom(["<div class='gridxDndAvatar' style='position:absolute;'><div class='gridxDnDIcon' style='position:absolute;'>",this.isA11y?"<span id='a11yIcon'>"+(this.manager.copy?"+":"<")+"</span>":"","</div><div class='gridxDnDItemCount'>",
+this._generateText(),"</div></div>"].join(""))},_generateText:function(){var b=this.manager,a=b._dndInfo;return d.substitute(i[[b.copy?"copy":"move",1==a.count?"One":"",a.cssName].join("")],[a.count])}})});

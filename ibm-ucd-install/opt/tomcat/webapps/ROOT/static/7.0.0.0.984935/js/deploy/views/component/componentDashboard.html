@@ -1,0 +1,47 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="containerLabel" id="componentResourcesLabel"></div>
+  <div class="innerContainer">
+    <div id="componentResources"></div>
+  </div>
+
+  <div class="containerLabel" id="componentRequestHistoryLabel"></div>
+  <div class="innerContainer">
+    <div id="componentRequestHistory"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "deploy/widgets/component/ComponentRequestHistory",
+        "deploy/widgets/component/ComponentResources",
+        "dojo/dom"
+        ],
+    function(
+        ComponentRequestHistory,
+        ComponentResources,
+        dom
+    ) {
+        dom.byId("componentRequestHistoryLabel").innerHTML = i18n("Component Request History");
+        dom.byId("componentResourcesLabel").innerHTML = i18n("Inventory For Component");
+        var componentRequestHistory = new ComponentRequestHistory();
+        componentRequestHistory.placeAt("componentRequestHistory");
+        var componentResources = new ComponentResources({
+            componentId: appState.component.id
+        });
+        componentResources.placeAt("componentResources");
+    });
+    /* ]]> */
+</script>

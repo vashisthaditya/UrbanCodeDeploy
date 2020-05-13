@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/ro/WorkspaceType",{loadingMessage:"\u00cenc\u0103rcare ${workspaceTitle}.  V\u0103 rug\u0103m s\u0103 a\u015ftepta\u0163i....",failedLoadMessage:"A e\u015fuat \u00eenc\u0103rcarea ${workspaceTitle}."});

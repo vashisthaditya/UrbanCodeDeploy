@@ -1,0 +1,451 @@
+@import "../carbon/globals/mixins";
+@import "../carbon/globals/colors";
+@import '../carbon/globals/import-once';
+
+$headerGutter: 18px;
+$mainGutter: 72px;
+
+$topPageHeader-height: 48px;
+$topPageHeader-background: $color__darkblue-1;
+$topPageHeader-color: #FFF;
+$topPageHeader-leftright-visual-margin: 24px;
+
+$topLevelTab-height: 48px;
+$topLevelTab-background: $color__navy-gray-3;
+$topLevelTab-color: #FFF;
+$topLevelTab-selected-background: $color__navy-gray-3;
+$topLevelTab-active-color: $color__blue-30;
+$topLevelTab-active-background: $color__navy-gray-3;
+$topLevelTab-visual-gap: $headerGutter * 2;
+
+$secondLevelTab-height: 48px;
+$secondLevelTab-background: #FFF;
+$secondLevelTab-color: $color__darkblue-1;
+$secondLevelTab-selected-background: #FFF;
+$secondLevelTab-active-color: $color__blue-51;
+$secondLevelTab-active-background: #FFF;
+$secondLevelTab-visual-gap: 48px;
+
+$breadcrumbItem-visual-gap: 16px;
+
+@mixin defaultEntryPoint {
+    
+    #topPageHeader {
+      & {
+        color: $topPageHeader-color;
+      }
+    
+      .idxHeaderPrimaryInner {
+        >ul {
+          @include display-flex;
+          @include align-items(center);
+    
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          height: $topPageHeader-height;
+          background: $topPageHeader-background;
+    
+          %paddedHeader {
+            @include display-flex;
+            @include align-items(center);
+            padding: 0 ($topPageHeader-leftright-visual-margin / 2);
+            height: $topPageHeader-height;
+          }
+    
+          // The IDX header used floats, and the classes are ambiguous, so we have
+          // to reorder.
+    
+          // "UrbanCode Deploy"
+          >li:nth-of-type(1) {
+            @extend %paddedHeader;
+            @include order(1);
+            padding-left: $headerGutter;
+          }
+    
+          // Vendor Logo
+          >li:nth-of-type(2) {
+            display: none;
+          }
+    
+          // Help Dropdown
+          >li:nth-of-type(3) {
+            @extend %paddedHeader;
+            @include order(4);
+            margin-left: auto;
+    
+            &:hover {
+                background: $color__navy-gray-3;
+            }
+          }
+    
+          // "Seperator"
+          >li:nth-of-type(4) {
+            display: none;
+          }
+    
+          // User & dropdown
+          >li:nth-of-type(5) {
+            @extend %paddedHeader;
+            @include order(5);
+            padding-right: $headerGutter;
+    
+            &:hover {
+                background: $color__navy-gray-3;
+            }
+    
+            &:active {
+                background: $color__navy-gray-3;
+            }
+          }
+    
+          >li >a {
+            color: #FFF;
+            vertical-align: text-bottom;
+            text-decoration: none;
+          }
+    
+          >li >a >span {
+            line-height: $topPageHeader-height;
+          }
+        }
+      }
+    
+      .idxHeaderPrimaryTitle {
+        margin-right: $topPageHeader-leftright-visual-margin;
+        font-size: 18px;
+        letter-spacing: 0;
+      }
+    }
+    
+    .topLevelTabs {
+      background-color: $topLevelTab-background;
+    }
+    
+    .topLevelTabs .tabManager {
+      & {
+        margin-top: 0;
+      }
+    
+      .tab {
+        height: $topLevelTab-height;
+        display: inline-block;
+        margin: 0 ($topLevelTab-visual-gap / 2);
+        padding: 0;
+      }
+    
+    
+      .tabLabel {
+        display: inline-block;
+        position: relative;
+        color: $topLevelTab-color;
+        top: 15px;
+        font-size: 14px;
+        line-height: 16px;
+        padding: 0;
+      }
+    
+      .tab.selected {
+        background-color: $topLevelTab-selected-background;
+      }
+    
+      .tab:hover {
+        background-color: $topLevelTab-active-background;
+      }
+    
+      .tab.selected {
+        border-bottom: 2px solid $topLevelTab-active-color;
+      }
+    
+      .tab.selected .tabLabel,
+      .tab:hover .tabLabel {
+        color: $topLevelTab-active-color;
+      }
+    
+      .top-level-loading-image {
+          background: rgba(255, 255, 255, 0) url('../../images/webext/loading.gif') no-repeat center center;
+          height: $topLevelTab-height;
+          width: $topLevelTab-height;
+          position: absolute;
+          top: $topPageHeader-height;
+          right: $headerGutter;
+      }
+    
+    }
+    
+    #secondLevelTabs .tabManager {
+      & {
+        margin-top: 0;
+      }
+    
+      .tab {
+        height: $secondLevelTab-height;
+        display: inline-block;
+        margin-right: $secondLevelTab-visual-gap;
+        padding: 0;
+      }
+    
+    
+      .tabLabel {
+        display: inline-block;
+        position: relative;
+        color: $secondLevelTab-color;
+        top: 15px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 16px;
+        padding: 0;
+      }
+    
+      .tab:first-of-type {
+        margin-left: $mainGutter;
+      }
+    
+      .tab.selected {
+        background-color: $secondLevelTab-selected-background;
+      }
+    
+      .tab:hover {
+        background-color: $secondLevelTab-active-background;
+      }
+    
+      .tab.selected {
+        border-bottom: 2px solid $secondLevelTab-active-color;
+      }
+    
+      .tab.selected .tabLabel,
+      .tab:hover .tabLabel {
+        color: $secondLevelTab-active-color;
+      }
+    }
+    
+    .noSecondLevelTabs .idxHeaderSecondary {
+      display: none;
+    }
+    
+    %header-menu-table {
+      background-color: $color__navy-gray-3;
+      background: $color__navy-gray-3;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.10);
+    
+      .dijitMenuItemSelected {
+        background-color: $color__blue-51;
+      }
+    
+      .dijitMenuItemHover {
+        background-color: $color__blue-51;
+      }
+    
+      .dijitMenuItem {
+        height: 40px;
+        text-align: left;
+    
+        a {
+          text-decoration: none;
+          color: $color__white;
+        }
+    
+        .dijitMenuItemLabel {
+          width: 152px;
+          color: $color__white;
+          line-height: 40px;
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+      }
+    }
+    
+    // Primary header menus
+    .oneuiHeaderGlobalActionsMenu > .dijitMenuPopup {
+      .dijitMenuTable {
+        @extend %header-menu-table;
+      }
+    }
+    
+    // Secondary header menus
+    .dijitMenuPopup > .oneuiHeaderGlobalActionsMenu {
+      @extend %header-menu-table;
+    }
+    
+    // Adding left caret to my profile
+    .oneuiHeaderGlobalActionsMenu #dijit_PopupMenuItem_0 {
+      .dijitMenuItemLabel {
+        padding-left: 0px;
+        &::before{
+          width: 16px;
+          margin-left: 6px;
+          margin-right: 6px;
+          content: "‹";
+          font-size: 20px;
+        }
+      }
+    }
+    
+    // Primary help menu specific - state behavior
+    .oneuiHeaderGlobalActionsMenu .oneuiMenuColumn {
+      .dijitMenuItemSelected {
+        background-color: $color__navy-gray-3 !important;
+      }
+    
+      .dijitMenuItem:hover {
+        background-color: $color__blue-51 !important;
+      }
+    }
+    
+    .secondary-nav {
+      padding-top: 12px;
+      padding-bottom: 5px;
+      padding-left: $mainGutter;
+      padding-right: $mainGutter;
+    }
+    
+    .secondary-nav .idxBreadcrumbItem {
+      margin-right: $breadcrumbItem-visual-gap;
+      font-size: 14px;
+      line-height: 18px;
+    }
+    
+    .secondary-nav .idxBreadcrumb .idxBreadcrumbItem.idxBreadcrumbItemClickable {
+      color: $color__blue-51;
+      text-decoration: none;
+    }
+    
+    .idxHeaderContainer .idxHeaderUserName.idxHeaderDropDown .userIcon {
+        @extend .icon-Icon_user2__ui-01;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+    
+    .idxHeaderContainer .idxHeaderUserName.idxHeaderDropDown .idxHeaderDropDownArrow {
+        display: none;
+    }
+    
+    .idxHeaderContainer .idxHeaderPrimary li.idxHeaderPrimaryAction.idxHeaderHelp .idxHeaderHelpIcon {
+        @extend .glyph;
+        @extend .glyph-Glyph_help__ui-01;
+    
+        // need to force inline block
+        display: inline-block !important;
+    }
+    
+    .idxHeaderContainer .idxHeaderPrimary li.idxHeaderPrimaryAction.idxHeaderHelp .idxTextAlternative {
+        display: none;
+    }
+    
+    .dijitContentPane {
+        background-color: $ui-02;
+    }
+    
+    .window-wrapper {
+      min-height: 100%;
+      margin-bottom: -40px;
+      background-color: #FFF;
+    }
+    
+    .page-content {
+      width: 100%;
+    }
+    
+    .page-content .inner-page-content {
+      min-width: 960px;
+    
+      .pageAlerts {
+        margin: 5px $mainGutter;
+      }
+    }
+    
+    ._webext_detail_header .heading h1 {
+      font-size: 29px;
+      font-weight: 300;
+      line-height: 38px;
+      color: $color__navy-gray-6;
+      letter-spacing: 0;
+      text-align: left;
+      margin-left: $mainGutter;
+      margin-bottom: 3px;
+    }
+    
+    #toggle-header-link {
+      margin-left: 16px;
+    }
+    
+    $genericDetail-line-height: 16px;
+    .genericDetail {
+      & {
+        display: none;
+        margin-top: 16px;
+        margin-left: $mainGutter;
+        margin-right: $mainGutter;
+        font-size: 14px;
+        line-height: $genericDetail-line-height;
+      }
+    
+      .detailLabel {
+        width: 160px;
+        font-weight: bold;
+      }
+    
+      .detailField {
+        width: 200px;
+      }
+    
+      .detailContainer {
+        float: left;
+        width: 390px;
+      }
+    
+      &.withDescription .detailContainer {
+        border-right: 2px solid #000000;
+      }
+      &.noProperties .detailContainer {
+        display: none;
+      }
+    
+      .descriptionContainer {
+        display: none;
+        padding-left: 30px;
+        margin-left: 390px;
+      }
+      &.withDescription .descriptionContainer {
+        display: block;
+      }
+      &.noProperties .descriptionContainer {
+        margin-left: 0px;
+        border-left: none;
+      }
+    
+      .detailDescriptionLabel {
+        font-weight: 600;
+      }
+    }
+    
+    .footer-spacer {
+      height: 40px;
+    }
+    
+    .page-footer {
+      width: 100%;
+      height: 40px;
+      background: $ui-02;
+      color: #444444;
+      font-size: 11px;
+      text-align: center;
+    }
+    
+    .page-footer .footer-content {
+      padding-top: 14px;
+    }
+    
+    #graphContainer .dijitContentPane {
+      background-color: #FFFFFF;
+    }
+    
+    .fdw-process-dialog .dijitContentPane {
+      background-color: #FFFFFF;
+    }
+}
+
+@include exports('defaultEntryPoint') {
+    @include defaultEntryPoint;
+}

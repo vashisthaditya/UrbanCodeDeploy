@@ -1,0 +1,149 @@
+@import '../../carbon/globals/import-once';
+
+@mixin rightPanel {
+    .right-panel {
+        top: 0;
+        height: 100%;
+        background-color: #FFF;
+        box-shadow: -1px 1px 4px 0 #CCC;
+        border-left: 1px solid #CCC;
+        position: relative !important;
+        z-index: 20;
+        overflow-y: auto;
+    
+        .panel-header {
+            padding-top: 24px;
+            padding-left: 32px;
+            padding-right: 24px;
+    
+            .rightPanel-tooltipTitle {
+                padding-top: 12px;
+                @include font-family;
+                font-size: 18px;
+    
+                .containerLabel {
+                    padding-left: 0px;
+                }
+            }
+    
+            .panel-subtitle {
+                width: 60%;
+                float: left;
+                margin-top: 8px;
+                @include font-family;
+                font-size: 16px;
+            }
+    
+            .panel-title-contents {
+                float: left;
+                text-align: right;
+                width: 100%;
+                padding-right: 12px;
+                padding-top: 14px
+            }
+        }
+    
+        .panel-content {
+            padding: 0 32px;
+    
+            .webextTable {
+                margin-top: 10px;
+            }
+    
+            .treeTable tfoot.tfoot-fixed-position {
+                position: relative;
+            }
+        }
+    
+        .panel-close-button {
+            @extend .icon-Icon_close__brand-01;
+            float: right;
+            position: relative;
+            bottom: 5px;
+        }
+    
+        .panel-close-button:hover {
+            @extend .icon-Icon_close__brand-02;
+        }
+    
+        .panel-close-button:active {
+            @extend .icon-Icon_close__brand-01;
+        }
+    
+        .panel-title {
+            font-size: 1.6em;
+            color: #222;
+            text-shadow: #C6C6C6 0px 1px 1px;
+        }
+    }
+    
+    
+    
+    #blueprintManager .resourceList .right-panel-container {
+        top: 0;
+    }
+    
+    #resourceTemplateEditManager .resourceList .right-panel-container {
+        top: 0;
+    }
+    
+    .application-environment .right-panel-container {
+            top: 218px;
+    }
+    
+    .resourceList.configuration-table .right-panel-container {
+        top: 96px;
+    }
+    
+    .resourceList .right-panel-container.right-panel-top {
+        top: 0;
+    }
+    .resourceList .right-panel-container.right-panel-top {
+        position: fixed;
+        z-index: 1;
+    }
+    .resourceList .right-panel-container.right-panel-top .right-panel {
+        min-height: 100%;
+        overflow-y: scroll;
+    }
+    
+    .executionLog .expandCollapse {
+        margin-top: 20px;
+        margin-right: 5px;
+    }
+    .with-description-text .expandCollapse {
+        margin-top: 0px;
+        margin-bottom: 3px;
+    }
+    
+    .with-description-text .listTopButtons {
+        margin-left: 12px;
+    }
+    .with-top-buttons .listTopButtons {
+        margin-left: 12px;
+        margin-bottom: -10px;
+    }
+    
+    @media only screen and (min-width: 1400px) {
+        .table-show-right-panel {
+            margin-right: 540px;
+        }
+    }
+    
+    
+    .right-panel-container {
+        position: absolute;
+        top: 179px;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+    }
+    
+    .right-panel .perPage {
+      display: none;
+    }
+}
+
+@include exports('rightPanel') {
+    @include rightPanel;
+}

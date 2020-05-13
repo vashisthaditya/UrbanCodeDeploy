@@ -1,0 +1,608 @@
+/*
+ * Licensed Materials - Property of IBM* and/or HCL**
+ * UrbanCode Deploy
+ * (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+ * (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+ *
+ * U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+ * GSA ADP Schedule Contract with IBM Corp.
+ *
+ * * Trademark of International Business Machines
+ * ** Trademark of HCL Technologies Limited
+ */
+/**
+ * This is the entrypoint for UCD to use carbon styles.
+ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+input[type='file'] {
+  border-radius: 0; }
+
+input[type='text']::-ms-clear {
+  display: none; }
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+sup {
+  vertical-align: super; }
+
+sub {
+  vertical-align: sub; }
+
+ol,
+ul {
+  list-style: none; }
+
+blockquote,
+q {
+  quotes: none; }
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+* {
+  box-sizing: border-box; }
+
+/**
+ * Generic `deprecate` mixin that is being used to indicate that a component is
+ * no longer going to be present in the next major release of Carbon.
+ */
+.bx--visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  visibility: visible;
+  white-space: nowrap; }
+
+.bx--body {
+  font-family: "IBM Helvetica", Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
+  color: #152934;
+  background-color: #f5f7fa;
+  line-height: 1; }
+
+/**
+ * Generic `deprecate` mixin that is being used to indicate that a component is
+ * no longer going to be present in the next major release of Carbon.
+ */
+body {
+  font-family: "IBM Helvetica", Helvetica Neue, HelveticaNeue, Helvetica, sans-serif;
+  color: #152934;
+  background-color: #f5f7fa;
+  font-size: 14px;
+  line-height: 1; }
+
+/**
+ * Generic `deprecate` mixin that is being used to indicate that a component is
+ * no longer going to be present in the next major release of Carbon.
+ */
+.bx--type-giga {
+  font-size: 4.75rem;
+  line-height: 1.25;
+  font-weight: 300; }
+
+.bx--type-mega {
+  font-size: 3.375rem;
+  line-height: 1.25;
+  font-weight: 300; }
+
+.bx--type-omega {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  font-weight: 600; }
+
+.bx--type-caption {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 400; }
+
+.bx--type-legal {
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  font-weight: 400; }
+
+.bx--type-caps {
+  text-transform: uppercase; }
+
+strong,
+.bx--type-strong {
+  font-weight: 700; }
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400; }
+
+em {
+  font-style: italic; }
+
+a {
+  color: #3d70b2; }
+
+h1,
+.bx--type-alpha {
+  font-size: 2.25rem;
+  line-height: 1.25;
+  font-weight: 300; }
+
+h2,
+.bx--type-beta {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  font-weight: 300; }
+
+h3,
+.bx--type-gamma {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 300; }
+
+h4,
+.bx--type-delta {
+  font-size: 1.125rem;
+  line-height: 1.25;
+  font-weight: 600; }
+
+h5,
+.bx--type-epsilon {
+  font-size: 1rem;
+  line-height: 1.25;
+  font-weight: 600; }
+
+h6,
+.bx--type-zeta {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-weight: 600; }
+
+.bx--grid {
+  margin-left: 3%;
+  margin-right: 3%;
+  padding-left: 5px;
+  padding-right: 5px; }
+  @media (min-width: 576px) {
+    .bx--grid {
+      margin-left: 5%;
+      margin-right: 5%;
+      padding-left: 10px;
+      padding-right: 10px; } }
+  .bx--grid.max {
+    max-width: 1600px; }
+
+.bx--row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px; }
+  @media (min-width: 576px) {
+    .bx--row {
+      margin: 0 -10px; } }
+
+[class*='bx--col'] {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding: 0 5px; }
+  @media (min-width: 576px) {
+    [class*='bx--col'] {
+      padding: 0 10px; } }
+
+.bx--col-xs-1 {
+  flex-basis: 8.3333333333%; }
+
+.bx--col-xs-2 {
+  flex-basis: 16.6666666667%; }
+
+.bx--col-xs-3 {
+  flex-basis: 25%; }
+
+.bx--col-xs-4 {
+  flex-basis: 33.3333333333%; }
+
+.bx--col-xs-5 {
+  flex-basis: 41.6666666667%; }
+
+.bx--col-xs-6 {
+  flex-basis: 50%; }
+
+.bx--col-xs-7 {
+  flex-basis: 58.3333333333%; }
+
+.bx--col-xs-8 {
+  flex-basis: 66.6666666667%; }
+
+.bx--col-xs-9 {
+  flex-basis: 75%; }
+
+.bx--col-xs-10 {
+  flex-basis: 83.3333333333%; }
+
+.bx--col-xs-11 {
+  flex-basis: 91.6666666667%; }
+
+.bx--col-xs-12 {
+  flex-basis: 100%; }
+
+@media (min-width: 576px) {
+  .bx--col-sm-auto {
+    flex: 0 0 auto;
+    width: auto; }
+  .bx--col-sm-1 {
+    flex-basis: 8.3333333333%; }
+  .bx--col-sm-2 {
+    flex-basis: 16.6666666667%; }
+  .bx--col-sm-3 {
+    flex-basis: 25%; }
+  .bx--col-sm-4 {
+    flex-basis: 33.3333333333%; }
+  .bx--col-sm-5 {
+    flex-basis: 41.6666666667%; }
+  .bx--col-sm-6 {
+    flex-basis: 50%; }
+  .bx--col-sm-7 {
+    flex-basis: 58.3333333333%; }
+  .bx--col-sm-8 {
+    flex-basis: 66.6666666667%; }
+  .bx--col-sm-9 {
+    flex-basis: 75%; }
+  .bx--col-sm-10 {
+    flex-basis: 83.3333333333%; }
+  .bx--col-sm-11 {
+    flex-basis: 91.6666666667%; }
+  .bx--col-sm-12 {
+    flex-basis: 100%; } }
+
+@media (min-width: 768px) {
+  .bx--col-md-auto {
+    flex: 0 0 auto;
+    width: auto; }
+  .bx--col-md-1 {
+    flex-basis: 8.3333333333%; }
+  .bx--col-md-2 {
+    flex-basis: 16.6666666667%; }
+  .bx--col-md-3 {
+    flex-basis: 25%; }
+  .bx--col-md-4 {
+    flex-basis: 33.3333333333%; }
+  .bx--col-md-5 {
+    flex-basis: 41.6666666667%; }
+  .bx--col-md-6 {
+    flex-basis: 50%; }
+  .bx--col-md-7 {
+    flex-basis: 58.3333333333%; }
+  .bx--col-md-8 {
+    flex-basis: 66.6666666667%; }
+  .bx--col-md-9 {
+    flex-basis: 75%; }
+  .bx--col-md-10 {
+    flex-basis: 83.3333333333%; }
+  .bx--col-md-11 {
+    flex-basis: 91.6666666667%; }
+  .bx--col-md-12 {
+    flex-basis: 100%; } }
+
+@media (min-width: 992px) {
+  .bx--col-lg-auto {
+    flex: 0 0 auto;
+    width: auto; }
+  .bx--col-lg-1 {
+    flex-basis: 8.3333333333%; }
+  .bx--col-lg-2 {
+    flex-basis: 16.6666666667%; }
+  .bx--col-lg-3 {
+    flex-basis: 25%; }
+  .bx--col-lg-4 {
+    flex-basis: 33.3333333333%; }
+  .bx--col-lg-5 {
+    flex-basis: 41.6666666667%; }
+  .bx--col-lg-6 {
+    flex-basis: 50%; }
+  .bx--col-lg-7 {
+    flex-basis: 58.3333333333%; }
+  .bx--col-lg-8 {
+    flex-basis: 66.6666666667%; }
+  .bx--col-lg-9 {
+    flex-basis: 75%; }
+  .bx--col-lg-10 {
+    flex-basis: 83.3333333333%; }
+  .bx--col-lg-11 {
+    flex-basis: 91.6666666667%; }
+  .bx--col-lg-12 {
+    flex-basis: 100%; } }
+
+@media (min-width: 1200px) {
+  .bx--col-xl-auto {
+    flex: 0 0 auto;
+    width: auto; }
+  .bx--col-xl-1 {
+    flex-basis: 8.3333333333%; }
+  .bx--col-xl-2 {
+    flex-basis: 16.6666666667%; }
+  .bx--col-xl-3 {
+    flex-basis: 25%; }
+  .bx--col-xl-4 {
+    flex-basis: 33.3333333333%; }
+  .bx--col-xl-5 {
+    flex-basis: 41.6666666667%; }
+  .bx--col-xl-6 {
+    flex-basis: 50%; }
+  .bx--col-xl-7 {
+    flex-basis: 58.3333333333%; }
+  .bx--col-xl-8 {
+    flex-basis: 66.6666666667%; }
+  .bx--col-xl-9 {
+    flex-basis: 75%; }
+  .bx--col-xl-10 {
+    flex-basis: 83.3333333333%; }
+  .bx--col-xl-11 {
+    flex-basis: 91.6666666667%; }
+  .bx--col-xl-12 {
+    flex-basis: 100%; } }
+
+@media (min-width: 1600px) {
+  .bx--col-xxl-auto {
+    flex: 0 0 auto;
+    width: auto; }
+  .bx--col-xxl-1 {
+    flex-basis: 8.3333333333%; }
+  .bx--col-xxl-2 {
+    flex-basis: 16.6666666667%; }
+  .bx--col-xxl-3 {
+    flex-basis: 25%; }
+  .bx--col-xxl-4 {
+    flex-basis: 33.3333333333%; }
+  .bx--col-xxl-5 {
+    flex-basis: 41.6666666667%; }
+  .bx--col-xxl-6 {
+    flex-basis: 50%; }
+  .bx--col-xxl-7 {
+    flex-basis: 58.3333333333%; }
+  .bx--col-xxl-8 {
+    flex-basis: 66.6666666667%; }
+  .bx--col-xxl-9 {
+    flex-basis: 75%; }
+  .bx--col-xxl-10 {
+    flex-basis: 83.3333333333%; }
+  .bx--col-xxl-11 {
+    flex-basis: 91.6666666667%; }
+  .bx--col-xxl-12 {
+    flex-basis: 100%; } }
+
+.bx--col-xs,
+.bx--col-sm,
+.bx--col-md,
+.bx--col-lg {
+  flex-basis: 0;
+  flex: 1;
+  flex-grow: 1;
+  max-width: 100%; }
+
+/**
+ * We flag this variable as true if someone uses the globals/styles.scss
+ * entry-point. This allows us to collect all the messages and display them at
+ * the end of the file instead of bringing it up per-component.
+ *
+ * If a consumer instead gets the components by importing the partial directly,
+ * this variable _will not_ be set to true, so the deprecation message will be
+ * displayed after the @import.
+ */
+html, body, .loginFramePositioner {
+  height: 100%; }
+
+.loginFramePositioner {
+  display: -ms-flexbox;
+  display: flex; }
+
+.leftside {
+  -ms-flex: 45;
+  flex: 45;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.loginbox {
+  width: 400px;
+  margin: 10%; }
+
+.productName {
+  font-size: 32px;
+  line-height: 45px; }
+
+.productVersion {
+  font-size: 18px;
+  /*color: #002E00;*/
+  line-height: 23px;
+  margin-top: 8px; }
+
+form {
+  margin-top: 35px; }
+
+form .form-item {
+  -ms-flex: 1;
+  flex: 1;
+  margin-right: 1rem;
+  margin-bottom: 1.5rem; }
+
+form .label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-block;
+  vertical-align: baseline;
+  margin-bottom: 0.5rem; }
+
+form .dijitTextBox {
+  font-size: 0.875rem;
+  display: block;
+  width: 100%;
+  height: 2.5rem;
+  min-width: 10rem;
+  padding: 0 1rem;
+  color: #152934;
+  background-color: #ebf0f7;
+  border: 1px solid transparent; }
+
+form .dijitTextBox input {
+  height: 2.5rem; }
+
+.loginSubmitWrapper {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse; }
+
+.legal {
+  font-size: 14px; }
+
+.rightside {
+  -ms-flex: 55;
+  flex: 55;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #222c39;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3); }
+
+.rightside .centered-logo {
+  width: 100%; }
+
+.rightside img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px; }
+  @media (max-width: 700px) {
+    .rightside img {
+      display: none; } }
+
+#widget_usernameField {
+  padding: 0; }
+
+#widget_passwordField {
+  padding: 0; }
+
+/*
+     * sets the webkit autocomplete highlight of text fields to be the existing
+     * background color
+     */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #ebf0f7 inset; }
+
+/*# sourceMappingURL=login.css.map */

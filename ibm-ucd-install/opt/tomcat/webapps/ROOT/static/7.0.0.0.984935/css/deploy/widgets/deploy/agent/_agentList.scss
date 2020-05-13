@@ -1,0 +1,29 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin agentList {
+    .dijitTextArea.dijitDisabled.connectionResults {
+        min-height:5em;
+        height: 100px;
+        width: 400px;
+        margin: 10px;
+        display: block;
+        color: black;
+        opacity: 1;
+    }
+    
+    .connectionTestButton {
+        margin: 10px;
+        display: block;
+        float: right;
+    }
+    
+    .installNewAgentTypeSelector {
+      .dijitDialogPaneContent {
+          margin: 8px 48px 48px 48px;
+      }
+    }
+}
+
+@include exports('agentList') {
+    @include agentList;
+}

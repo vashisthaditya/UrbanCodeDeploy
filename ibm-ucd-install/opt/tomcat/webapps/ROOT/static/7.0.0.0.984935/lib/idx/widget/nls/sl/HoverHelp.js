@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/sl/HoverHelp",{defaultHrefLabel:"Ve\u010d informacij",defaultMessage:"[Dolo\u010deno ni bilo nobeno besedilo pomo\u010di]\u200e",defaultTitle:"Z mi\u0161ko lebdite nad elementom ali kliknite za prikaz pomo\u010di"});

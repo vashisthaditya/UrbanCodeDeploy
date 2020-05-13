@@ -1,0 +1,12 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin fieldList {
+    .checkBoxLabel {
+        margin-left: 20px;
+        margin-bottom: -25px;
+    }
+}
+
+@include exports('fieldList') {
+    @include fieldList;
+}

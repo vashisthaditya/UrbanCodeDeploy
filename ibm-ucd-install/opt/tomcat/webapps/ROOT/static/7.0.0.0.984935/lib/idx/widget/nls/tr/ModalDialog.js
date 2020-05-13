@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/tr/ModalDialog",{Error:"Hata",Warning:"Uyar\u0131",Information:"Bilgi",Success:"Ba\u015far\u0131l\u0131",Confirmation:"Do\u011frulama",Question:"Soru",closeButtonLabel:"Kapat",cancelButtonLabel:"\u0130ptal",executeButtonLabel:"Tamam",checked:"Bir daha sorma"});

@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/sl/LoginFrame",{loginTitle:"Prijava",labelUserName:"Uporabni\u0161ko ime",labelPassword:"Geslo",invalidMessageTitle:"Neuspe\u0161na prijava",invalidMessage:"Oba zahtevana polja ne vsebujeta veljavnih vrednosti."});

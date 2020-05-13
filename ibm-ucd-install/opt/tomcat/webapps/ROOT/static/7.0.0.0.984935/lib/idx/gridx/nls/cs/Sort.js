@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/cs/Sort",{helpMsg:"${0}: Klepnut\u00edm polo\u017eky se\u0159ad\u00edte, klepnut\u00edm s podr\u017een\u00edm kl\u00e1vesy Ctrl m\u016f\u017eete polo\u017eky p\u0159id\u00e1vat do \u0159azen\u00ed.",singleHelpMsg:"${0}: Klepnut\u00edm polo\u017eky se\u0159ad\u00edte.",priorityOrder:"priorita \u0159azen\u00ed ${0}"});

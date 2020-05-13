@@ -1,0 +1,65 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="containerLabel" id="mainLabel1"></div>
+  <div class="innerContainer">
+    <div class="description" id="inventoryStatusDescription"></div>
+    <div id="inventoryStatusList"></div>
+  </div>
+
+  <div class="hr"></div>
+  <div class="containerLabel" id="mainLabel2"></div>
+  <div class="innerContainer">
+    <div class="description" id="versionStatusDescription"></div>
+    <div id="versionStatusList"></div>
+  </div>
+
+  <div class="hr"></div>
+  <div class="containerLabel" id="mainLabel3"></div>
+  <div class="innerContainer">
+    <div class="description" id="snapshotStatusDescription"></div>
+    <div id="snapshotStatusList"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "deploy/widgets/status/StatusList",
+        "dojo/dom"
+        ],
+    function(
+        StatusList,
+        dom
+    ) {
+        dom.byId("mainLabel1").innerHTML = i18n("Inventory Statuses");
+        dom.byId("mainLabel2").innerHTML = i18n("Version Statuses");
+        dom.byId("mainLabel3").innerHTML = i18n("Snapshot Statuses");
+        dom.byId("inventoryStatusDescription").innerHTML = i18n("These statuses can be used when adding versions to the inventory. Inventory statuses can represent the different states a version can be in on the target environment or resource (active, running, staged, etc).");
+        dom.byId("versionStatusDescription").innerHTML = i18n("These statuses can be applied to component versions and checked with environment gates to ensure that versions meet certain criteria before deployments.");
+        dom.byId("snapshotStatusDescription").innerHTML = i18n("These statuses can be applied to snapshots.");
+        var inventoryStatusList = new StatusList({
+            type: "inventory"
+        });
+        inventoryStatusList.placeAt("inventoryStatusList");
+        var versionStatusList = new StatusList({
+            type: "version"
+        });
+        versionStatusList.placeAt("versionStatusList");
+        var versionStatusList = new StatusList({
+            type: "snapshot"
+        });
+        versionStatusList.placeAt("snapshotStatusList");
+    });
+    /* ]]> */
+</script>

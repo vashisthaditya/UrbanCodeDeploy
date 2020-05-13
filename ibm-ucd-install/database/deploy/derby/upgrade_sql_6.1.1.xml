@@ -1,0 +1,435 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.1.1.x.
+-->
+
+<change-set release="n1_6.1.1">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/derby/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/derby/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/derby/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/derby/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <description>Adding a list of other permissible parent resource roles for resource roles</description>
+        <sql separator=";">
+            create table ds_res_role_allowed_parent (
+                resource_role_id varchar(36) not null,
+                allowed_parent_id varchar(36) not null
+            );
+
+            create index ds_rrap_res_role_id on ds_res_role_allowed_parent(resource_role_id);
+            create index ds_rrap_allowed_parent_id on ds_res_role_allowed_parent(allowed_parent_id);
+            alter table ds_res_role_allowed_parent add constraint ds_rrap_2_res_role foreign key(resource_role_id) references ds_resource_role(id);
+            alter table ds_res_role_allowed_parent add constraint ds_rrap_2_allowed_parent foreign key(allowed_parent_id) references ds_resource_role(id);
+        </sql>
+    </change>
+    <change number="2">
+        <description>Allowing plugin commands to be associated with multiple resource roles</description>
+        <sql separator=";">
+            create table pl_command_to_resource_role (
+                command_id varchar(36) not null,
+                resource_role_id varchar(36) not null
+            );
+
+            create index ds_c2rr_command_id on pl_command_to_resource_role(command_id);
+            create index ds_c2rr_resource_role_id on pl_command_to_resource_role(resource_role_id);
+            alter table pl_command_to_resource_role add constraint ds_c2rr_2_command foreign key(command_id) references pl_plugin_command(id);
+            alter table pl_command_to_resource_role add constraint ds_c2rr_2_resource_role foreign key(resource_role_id) references ds_resource_role(id);
+
+            insert into pl_command_to_resource_role
+            select id, role_id
+            from pl_plugin_command
+            where role_id is not null;
+
+            alter table pl_plugin_command drop role_id;
+        </sql>
+    </change>
+    <change number="3">
+        <description>Adding a default resource name property setting to resource roles</description>
+        <sql separator=";">
+            alter table ds_resource_role add column default_name_property varchar(255);
+        </sql>
+    </change>
+    <change number="4">
+        <description>Adding tracking of discovery commands executed on resources</description>
+        <sql separator=";">
+            alter table ds_resource add column discovery_failed varchar(1) default 'N' not null;
+
+            create table ds_discovery_execution (
+                id varchar(36) not null primary key,
+                command_id varchar(36),
+                resource_id varchar(36),
+                agent_id varchar(36),
+                status varchar(16),
+                start_time bigint,
+                end_time bigint,
+                auth_token varchar(255),
+                request_time bigint,
+                acked varchar(1) default 'N' not null
+            );
+
+            create index ds_disc_exec_command_id on ds_discovery_execution(command_id);
+            create index ds_disc_exec_resource_id on ds_discovery_execution(resource_id);
+            create index ds_disc_exec_agent_id on ds_discovery_execution(agent_id);
+            create index ds_disc_exec_start_time on ds_discovery_execution(start_time);
+            alter table ds_discovery_execution add constraint ds_disc_exec_2_command foreign key(command_id) references pl_plugin_command(id);
+            alter table ds_discovery_execution add constraint ds_disc_exec_2_resource foreign key(resource_id) references ds_resource(id);
+            alter table ds_discovery_execution add constraint ds_disc_exec_2_agent foreign key(agent_id) references ds_agent(id);
+        </sql>
+    </change>
+    <change number="5">
+        <description>Changing environment instance ID from integer to string</description>
+        <sql separator=";">
+            alter table ds_environment add column instance_id_temp varchar(64);
+        </sql>
+        <groovy file="all/upgrade-scripts-611/upgrade_005_change_instance_id_type.groovy" />
+        <sql separator=";">
+            alter table ds_environment drop column instance_id;
+            rename column ds_environment.instance_id_temp to instance_id;
+        </sql>
+    </change>
+    <change number="6">
+        <description>Add IPAS Logical Node resource role</description>
+        <sql separator=";">
+            insert into ps_prop_sheet_def
+              (id, version, name, description, prop_sheet_group_id, template_handle, template_prop_sheet_def_id)
+            values
+              ('19a50000-19a5-19a5-19a5-19a500000000', 0, 'IPAS Logical Node', NULL, NULL, NULL, NULL);
+
+            insert into ps_prop_def
+              (id, version, prop_sheet_def_id, name, description, label, default_value, long_default_value, property_type, required, hidden, index_order, allowed_prop_sheet_def_id, pattern)
+            values
+              ('19a50000-19a5-19a5-19a5-19a500000001', 0, '19a50000-19a5-19a5-19a5-19a500000000', 'patternId', 'ID of the pattern for this node.', 'Pattern ID', NULL, NULL, 'TEXT', 'Y', 'N', 0, NULL, NULL);
+
+            insert into ps_prop_def
+              (id, version, prop_sheet_def_id, name, description, label, default_value, long_default_value, property_type, required, hidden, index_order, allowed_prop_sheet_def_id, pattern)
+            values
+              ('19a50000-19a5-19a5-19a5-19a500000002', 0, '19a50000-19a5-19a5-19a5-19a500000000', 'partId', 'ID of the OS Part for this node.', 'OS Part ID', NULL, NULL, 'TEXT', 'Y', 'N', 1, NULL, NULL);
+
+            insert into ps_prop_def
+              (id, version, prop_sheet_def_id, name, description, label, default_value, long_default_value, property_type, required, hidden, index_order, allowed_prop_sheet_def_id, pattern)
+            values
+              ('19a50000-19a5-19a5-19a5-19a500000003', 0, '19a50000-19a5-19a5-19a5-19a500000000', 'cloudId', 'Cloud ID for this node.', 'Cloud ID', NULL, NULL, 'TEXT', 'Y', 'N', 2, NULL, NULL);
+
+            insert into ds_resource_role
+              (id, version, name, description, prop_sheet_def_id, special_type)
+            values
+              ('19a50000-19a5-19a5-19a5-19a500000004', 1, 'IPAS Logical Node', '', '19a50000-19a5-19a5-19a5-19a500000000', 'AGENT_PLACEHOLDER');
+        </sql>
+    </change>
+    <change number="7">
+        <description>Add table for mapping roles to default child folders</description>
+        <sql separator=";">
+            create table ds_res_role_default_child (
+              resource_role_id varchar(36) not null,
+              child_folder_name varchar(255) not null
+            );
+        </sql>
+    </change>
+    <change number="8">
+        <description>Add foldername options for allowed parent roles</description>
+        <sql separator=";">
+            create index ds_rrdc_res_role_id on ds_res_role_default_child(resource_role_id);
+            create index ds_rrdc_child on ds_res_role_default_child(child_folder_name);
+            alter table ds_res_role_default_child add constraint ds_rrdc_2_res_role foreign key(resource_role_id) references ds_resource_role(id);
+            alter table ds_res_role_allowed_parent add column id varchar(36);
+            alter table ds_res_role_allowed_parent add column foldername varchar(255);
+            create index ds_rrap_foldername on ds_res_role_allowed_parent(foldername);
+        </sql>
+        <groovy file="all/upgrade-scripts-611/upgrade_008_add_uuid_for_allowed_parent.groovy"/>
+        <sql separator=";">
+            alter table ds_res_role_allowed_parent alter column id not null;
+            alter table ds_res_role_allowed_parent add primary key(id);
+        </sql>
+    </change>
+    <change number="9">
+      <description>Adding resolveHttpValuesUrl to HttpPropInfo</description>
+      <changeref library="property-sheets" change="11"/>
+    </change>
+    <change number="10">
+      <description>Adding tracking of metadata associated with versioned objects</description>
+      <changeref library="vc" change="6"/>
+    </change>
+    <change number="11">
+      <description>Remove extraneous allowed values</description>
+      <changeref library="property-sheets" change="12"/>
+    </change>
+    <change number="12">
+      <description>Moving Component Template tags to Component</description>
+      <groovy file="all/upgrade-scripts-611/upgrade_012_component_template_tags.groovy"/>
+    </change>
+    <change number="13">
+      <description>Add tables for agent topology</description>
+      <sql file="../agent-topology/derby/top-schema.ddl" separator=";"/>
+      <sql file="../agent-topology/top-foreign-keys.ddl" separator=";"/>
+      <sql file="../agent-topology/top-seed-data.sql" separator=";"/>
+    </change>
+    <change number="14">
+      <description>Converting existing blueprints into resource templates</description>
+      <sql separator=";">
+          alter table ds_resource_template add column parent_id varchar(36);
+          alter table ds_resource_template add column application_id varchar(36);
+
+          create index ds_resource_template_app_id on ds_resource_template(application_id);
+          alter table ds_resource_template add constraint ds_resource_template_2_app foreign key(application_id) references ds_application(id);
+          create index ds_resource_template_prnt_id on ds_resource_template(parent_id);
+          alter table ds_resource_template add constraint ds_resource_template_2_parent foreign key(parent_id) references ds_resource_template(id);
+
+          alter table ds_resource_template drop constraint ds_resource_template_2_res;
+          drop index ds_resource_template_res_id;
+          alter table ds_resource_template drop resource_id;
+
+          drop index ds_resource_template_name_uci;
+          drop index ds_resource_name_uci;
+
+          insert into sec_resource (id, version, name, enabled, sec_resource_type_id)
+          select id, 0, name, 'Y', '20000000000000000000000000000110' from ds_blueprint where ghosted_date = 0;
+          insert into sec_resource (id, version, name, enabled, sec_resource_type_id)
+          select id, 0, name, 'N', '20000000000000000000000000000110' from ds_blueprint where ghosted_date != 0;
+
+          insert into ps_prop_sheet (id, version, template_prop_sheet_id)
+          select bp.id, 0, rt.prop_sheet_id from ds_blueprint bp join ds_resource_template rt on bp.template_id = rt.id;
+          insert into ps_prop_sheet_def (id, version)
+          select id, 0 from ds_blueprint;
+
+          insert into ds_resource_template (id, version, name, description, parent_id, application_id, sec_resource_id, ghosted_date, prop_sheet_id, prop_sheet_def_id)
+          select id, version, name, description, template_id, application_id, id, ghosted_date, id, id from ds_blueprint;
+
+          update ds_resource set resource_template_id = blueprint_id
+          where blueprint_id is not null;
+
+          alter table ds_resource drop constraint ds_resource_2_blueprint;
+          drop index ds_resource_blueprint_id;
+          alter table ds_resource drop blueprint_id;
+
+          alter table ds_environment add column resource_template_id varchar(36);
+          create index ds_environment_res_template_id on ds_environment(resource_template_id);
+          alter table ds_environment add constraint ds_environment_2_res_template foreign key(resource_template_id) references ds_resource_template(id);
+
+          update ds_environment set resource_template_id = blueprint_id;
+
+          alter table ds_environment drop constraint ds_environment_2_blueprint;
+          drop index ds_environment_blueprint_id;
+          alter table ds_environment drop blueprint_id;
+
+          drop table ds_blueprint;
+      </sql>
+    </change>
+    <change number="15">
+      <description>Adding prototype flag for resources in templates</description>
+      <sql separator=";">
+          alter table ds_resource add prototype varchar(1) default 'N' not null;
+      </sql>
+    </change>
+    <change number="16">
+      <description>Improving auth token cleanup (Adding index to DB, this may take a while)</description>
+      <sql separator=";">
+          create index sec_auth_token_exp on sec_auth_token(expiration);
+          alter table sec_auth_token add column date_created bigint default 0 not null;
+      </sql>
+    </change>
+    <change number="17">
+      <description>Adding allowed resource names</description>
+      <sql separator=";">
+          alter table ds_res_role_allowed_parent add allowed_name varchar(255);
+      </sql>
+    </change>
+    <change number="18">
+      <description>Add Type to Discovery Execution Records</description>
+      <sql separator=";">
+          alter table ds_discovery_execution add action varchar(16);
+      </sql>
+    </change>
+    <change number="19">
+      <description>Add HATimer lock for LicenseCleaner</description>
+      <sql separator=";">
+          insert into top_hatimer values ('6fee918b-7254-4bea-8757-72573674ff62', 0);
+      </sql>
+    </change>
+    <change number="20">
+      <description>Adding indexes to cover some queries against calendars and component process requests</description>
+      <sql separator=";">
+          create index cal_ce_fired on cal_entry(fired);
+          create index cal_ce_sched_date on cal_entry(scheduled_date);
+          create index rt_cpr_appr_id on rt_comp_process_request(approval_id);
+      </sql>
+    </change>
+    <change number="21">
+      <description>Adding indexes for trace ID on process requests</description>
+      <sql separator=";">
+          create index rt_cpr_trace_id on rt_comp_process_request(trace_id);
+          create index rt_apr_trace_id on rt_app_process_request(trace_id);
+      </sql>
+    </change>
+    <change number="22">
+      <description>Adding more indexes for Source Config Plugin Executions</description>
+      <sql separator=";">
+        create index pl_src_config_request_time on pl_source_config_execution(request_time);
+        create index pl_src_config_start_time on pl_source_config_execution(start_time);
+       </sql>
+    </change>
+    <change number="23">
+      <description>Track result of agent connection test</description>
+      <sql separator=";">
+        create table ds_agent_test_result (
+          id varchar(36) not null primary key,
+          test_result varchar(2000)
+        );
+        insert into ds_agent_test_result (id) select id from ds_agent;
+      </sql>
+    </change>
+    <change number="24">
+      <description>Add last modified time to snapshots, versions, applications, and components</description>
+      <sql separator=";">
+          alter table ds_version add column last_modified bigint default 0 not null;
+          alter table ds_snapshot add column last_modified bigint default 0 not null;
+          alter table ds_application add column last_modified bigint default 0 not null;
+          alter table ds_component add column last_modified bigint default 0 not null;
+          alter table ds_environment add column last_modified bigint default 0 not null;
+          create index ds_version_last_mod on ds_version(last_modified);
+          create index ds_snap_last_mod on ds_snapshot(last_modified);
+          create index ds_application_last_mod on ds_application(last_modified);
+          create index ds_component_last_mod on ds_component(last_modified);
+          create index ds_environment_last_mod on ds_environment(last_modified);
+      </sql>
+    </change>
+    <change number="25">
+      <description>
+          Change data type of property context mapping index to facilitate use of timestamps instead of integers so we can avoid concurrency issues in HA setups.
+      </description>
+      <sql separator=";">
+          alter table rt_property_context_group_map add column index_order_new bigint;
+          update rt_property_context_group_map set index_order_new = index_order;
+          alter table rt_property_context_group_map drop column index_order;
+          rename column rt_property_context_group_map.index_order_new to index_order;
+          alter table rt_property_context_group_map alter column index_order not null;
+          alter table rt_property_context drop column next_mapping_index;
+      </sql>
+    </change>
+    <change number="26">
+      <description>
+          Convert overlooked column from upgrade 25 to bigint.
+      </description>
+    </change>
+    <change number="27">
+      <description>Updated description of "Manage Resource Roles" option.</description>
+      <sql separator=";">
+          update sec_action set description = 'Create and edit resource roles. Roles are loaded for use by certain plugins.'
+          where id = '200000000000000000000000001b0002';
+      </sql>
+    </change>
+    <change number="28">
+      <description>Add tables for halock</description>
+      <sql file="../halock/derby/hlk-schema.ddl" separator=";"/>
+      <sql file="../halock/hlk-foreign-keys.ddl" separator=";"/>
+      <sql file="../halock/hlk-seed-data.sql" separator=";"/>
+    </change>
+    <change number="29">
+      <description>Adding tracking of stack execution for UCDP integration</description>
+      <sql separator=";">
+          create table rt_stack_execution_record (
+              id varchar(36) not null primary key,
+              version integer default 0 not null,
+              resource_data clob,
+              last_updated bigint not null,
+              result varchar(32),
+              app_process_request_id varchar(36) not null,
+              continuation varchar(73) not null,
+              stack_id varchar(36) not null,
+              provider_id varchar(36) not null
+          );
+          create index rt_stack_exec_result on rt_stack_execution_record(result);
+          create index rt_stack_exec_last_updated on rt_stack_execution_record(last_updated);
+          create index rt_stack_exec_app_request_id on rt_stack_execution_record(app_process_request_id);
+          alter table rt_stack_execution_record add constraint rt_stackexec_to_apr foreign key(app_process_request_id) references rt_app_process_request(id);
+          alter table rt_stack_execution_record add constraint rt_stackexec_to_inv_prov foreign key(provider_id) references ds_integration_provider(id);
+      </sql>
+    </change>
+    <change number="30">
+      <description>Add missing foreign key indices</description>
+      <sql separator=";">
+          create index sec_grot_role
+                  on sec_group_role_on_team(sec_role_id);
+
+          create index sec_grot_team_space
+                  on sec_group_role_on_team(sec_team_space_id);
+
+          create index sec_group_author_realm
+                  on sec_group(sec_authorization_realm_id);
+
+          create index sec_role_action_sec_action
+                  on sec_role_action(sec_action_id);
+
+          create index sec_role_action_res_role
+                  on sec_role_action(sec_resource_role_id);
+
+          create index sec_rft_res_role
+                  on sec_resource_for_team(sec_resource_role_id);
+
+          create index sec_rft_team_space
+                  on sec_resource_for_team(sec_team_space_id);
+
+          create index sec_res_hier_child_sec_res
+                  on sec_resource_hierarchy(child_sec_resource_id);
+
+          create index sec_user_prop_user_id
+                  on sec_user_property(sec_user_id);
+
+          create index sec_urot_role_id
+                  on sec_user_role_on_team(sec_role_id);
+
+          create index sec_utg_gid
+                  on sec_user_to_group(sec_group_id);
+
+          create index sec_user_auth_realm
+                  on sec_user(sec_authentication_realm_id);
+      </sql>
+    </change>
+    <change number="31">
+      <description>Change the column width of the blueprint and configuration in external environment table</description>
+      <sql separator=";">
+        alter table ds_ext_environment alter column ext_blueprint_id set data type varchar(255);
+        alter table ds_ext_environment alter column ext_configuration_id set data type varchar(255);
+      </sql>
+    </change>
+
+<!--
+- REMINDER: Upgrades for product version 6.1.1.x. Place additions above this comment.
+-->
+</change-set>

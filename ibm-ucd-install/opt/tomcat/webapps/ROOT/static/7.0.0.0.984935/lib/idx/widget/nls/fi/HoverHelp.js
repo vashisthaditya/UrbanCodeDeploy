@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/fi/HoverHelp",{defaultHrefLabel:"Lis\u00e4tietoja",defaultMessage:"[Ohjeteksti\u00e4 ei ole m\u00e4\u00e4ritetty]\u200e",defaultTitle:"N\u00e4yt\u00e4 ohje viem\u00e4ll\u00e4 osoitin t\u00e4h\u00e4n tai napsauttamalla"});

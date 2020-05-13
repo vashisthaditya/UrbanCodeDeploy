@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/sk/_DateTimeTextBox",{idxTimeIconTitle:"Kliknut\u00edm otvor\u00edte textov\u00e9 pole pre v\u00fdber \u010dasu",idxDateIconTitle:"Kliknut\u00edm otvor\u00edte textov\u00e9 pole pre v\u00fdber d\u00e1tumu"});

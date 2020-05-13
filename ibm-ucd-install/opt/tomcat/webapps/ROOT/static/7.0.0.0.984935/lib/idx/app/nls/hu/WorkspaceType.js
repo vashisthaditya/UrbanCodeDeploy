@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/hu/WorkspaceType",{loadingMessage:"${workspaceTitle} bet\u00f6lt\u00e9se.  K\u00e9rem, v\u00e1rjon...",failedLoadMessage:"${workspaceTitle} bet\u00f6lt\u00e9se nem siker\u00fclt."});

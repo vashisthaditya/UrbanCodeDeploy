@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/sl/Sort",{helpMsg:"${0} - Kliknite za razvr\u0161\u010danje ali pa pritisnite ctrl in kliknite, da dodate v razvr\u0161\u010danje",singleHelpMsg:"${0} - Kliknite za razvr\u0161\u010danje",priorityOrder:"razvr\u0161\u010danje prednosti ${0}"});

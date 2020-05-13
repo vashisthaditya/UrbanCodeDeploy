@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/pl/SingleMessage",{viewAll:"Wy\u015bwietl wszystkie ({num})",viewDetails:"Wi\u0119cej szczeg\u00f3\u0142\u00f3w",refresh:"Od\u015bwie\u017c",showDetails:"Poka\u017c szczeg\u00f3\u0142y",hideDetails:"Ukryj szczeg\u00f3\u0142y"});

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.2.6.x.
+-->
+
+<change-set release="n1_6.2.6">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/sqlserver/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/sqlserver/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/sqlserver/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/sqlserver/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <!-- upgrade removed -->
+        <description></description>
+    </change>
+    <change number="2">
+        <!-- upgrade removed -->
+        <description></description>
+    </change>
+    <change number="3">
+      <description>Insert new System user into DB</description>
+      <sql separator=";">
+        alter table sec_user add is_system nvarchar(1) default 'N' not null;
+        insert into sec_user (id, version, name, enabled, sec_authentication_realm_id, is_system)
+        values ('20000000000000000000000111000000', 0, 'INTERNAL SYSTEM USER FOR IBM URBANCODE DEPLOY', 'Y', '20000000000000000000000000000001', 'Y');
+      </sql>
+    </change>
+    <change number="4">
+      <description>Add new tables for tracking Agent usage</description>
+      <sql separator=";">
+        create table ds_agent_usage (
+            id nvarchar(36) not null primary key,
+            type nvarchar(36) not null,
+            time_stamp bigint not null,
+            count int default 0 not null
+        );
+
+        create table ds_agent_usage_tracking (
+            id nvarchar(36) not null primary key,
+            type nvarchar(36) not null,
+            window_start bigint not null,
+            window_end bigint not null,
+            watermark int default 0 not null
+        );
+
+        create index ds_agent_usage_time on ds_agent_usage(time_stamp);
+        create index ds_agent_usage_count on ds_agent_usage(count);
+      </sql>
+    </change>
+    <change number="5">
+        <description>Add option to environments to require a snapshot upon deployment</description>
+        <sql separator=";">
+            alter table ds_environment add require_snapshot nvarchar(1) default 'N' not null;
+        </sql>
+    </change>
+
+<!--
+- REMINDER: Upgrades for product version 6.2.6.x. Place additions above this comment.
+-->
+</change-set>

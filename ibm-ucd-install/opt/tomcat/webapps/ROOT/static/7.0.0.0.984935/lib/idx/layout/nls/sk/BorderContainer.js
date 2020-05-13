@@ -1,0 +1,2 @@
+//>>built
+define("idx/layout/nls/sk/BorderContainer",{toggleTitleExpand:"Rozvin\u00fa\u0165 \u010das\u0165",toggleTitleCollapse:"Zvin\u00fa\u0165 \u010das\u0165",toggleTitleRestore:"Obnovi\u0165 \u010das\u0165"});

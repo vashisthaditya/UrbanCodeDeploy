@@ -1,0 +1,3 @@
+//>>built
+define("idx/form/_CheckBoxSelectMenuItem",["dojo/_base/declare","dojo/dom-class","dijit/CheckedMenuItem"],function(b,c,d){return b("idx.form._CheckBoxSelectMenuItem",d,{option:null,parent:null,_updateBox:function(){this.option.selected=!!this.option.selected;this.set("checked",this.option.selected)},_onClick:function(a){if(13!=a.keyCode&&!this.disabled&&!this.readOnly)this.option.selected=!this.option.selected,this.inherited(arguments)},_setCheckedAttr:function(a){c.toggle(this.domNode,"dijitCheckedMenuItemChecked",
+a);this.domNode.setAttribute("aria-checked",a);this._set("checked",a)}})});

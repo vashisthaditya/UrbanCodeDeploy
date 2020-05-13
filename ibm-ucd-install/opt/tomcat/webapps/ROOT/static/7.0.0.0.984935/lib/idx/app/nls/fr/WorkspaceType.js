@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/fr/WorkspaceType",{loadingMessage:"Chargement de ${workspaceTitle}.  Veuillez patienter....",failedLoadMessage:"Echec du chargement de l'espace de travail ${workspaceTitle}."});

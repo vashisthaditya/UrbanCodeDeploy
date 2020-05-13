@@ -1,0 +1,104 @@
+@import 'colors';
+@import 'spacing';
+
+$prefix: 'bx' !default;
+
+$carbon--ease-in: cubic-bezier(0.25, 0, 1, 1); // Used primarily for removing elements from the screen.
+$carbon--ease-out: cubic-bezier(
+  0,
+  0,
+  0.25,
+  1
+); // Used for adding elements to the screen or changing on-screen states at a users's input.
+$carbon--standard-easing: cubic-bezier(0.5, 0, 0.1, 1); // Used for the majority of animations.
+
+// For back-ward compatibility
+$bx--ease-in: $carbon--ease-in;
+$bx--ease-out: $carbon--ease-out;
+$bx--standard-easing: $carbon--standard-easing;
+
+$transition--base: 250ms;
+$transition--expansion: 300ms;
+
+// Color Theme Variables
+$brand-01: #3d70b2;
+$brand-02: #5596e6;
+$brand-03: #41d6c3;
+$ui-01: #ffffff;
+$ui-02: #f5f7fa;
+$ui-03: #f0f3f6;
+$ui-04: #dfe3e6;
+$ui-05: #8c9ba5;
+$text-01: #152934;
+$text-02: #5a6872;
+$text-03: #5a6872;
+$inverse-01: #ffffff;
+$field-01: #ebf0f7;
+$support-01: #e71d32;
+$support-02: #5aa700;
+$support-03: #efc100;
+$support-04: #5aaafa;
+$nav-01: $color__navy-gray-1 !default;
+$nav-02: $color__blue-90 !default;
+$nav-03: $color__purple-30 !default;
+$nav-04: $color__purple-60 !default;
+$nav-05: $color__teal-40 !default;
+$nav-06: $color__teal-50 !default;
+$nav-07: $color__blue-30 !default;
+$nav-08: $color__blue-51 !default;
+
+// Global
+$input-border: 1px solid transparent !default;
+$input-label-weight: 600 !default;
+
+// Button Theme Variables
+$button-font-weight: 600 !default;
+$button-font-size: 0.875rem !default;
+$button-line-height: 16px;
+$button-border-radius: 0 !default;
+$button-height: 40px !default;
+$button-padding: 0 $spacing-md !default;
+$button-padding-sm: 0 $spacing-xs !default;
+$button-border-width: 2px !default;
+
+// Accordion (Reverse)
+$accordion-flex-direction: row !default;
+$accordion-justify-content: flex-start !default;
+$accordion-arrow-margin: 0 0 0 $spacing-2xs !default;
+$accordion-title-margin: 0 0 0 $spacing-md !default;
+$accordion-content-padding: 0 $spacing-md 0  $spacing-2xl !default;
+
+// Card
+$card-text-align: center !default;
+$card-flex-align: center !default;
+
+// Checkbox
+$checkbox-border-width: 2px !default;
+
+// Code Snippet
+$snippet-background-color: $field-01 !default;
+
+// Content Switcher
+$content-switcher-border-radius: 8px !default;
+$content-switcher-option-border: 1px solid $brand-01 !default;
+
+// Data Table
+$data-table-heading-transform: uppercase !default;
+$data-table-heading-border-bottom: 1px solid $brand-01 !default;
+$data-table-row-height: 2rem !default;
+
+// Modal
+$modal-border-top: $brand-01 4px solid !default;
+$modal-footer-background-color: $ui-03 !default;
+
+// Progress Indicator
+$progress-indicator-bar-width: 1px inset transparent !default;
+$progress-indicator-stroke-width: 5 !default;
+$progress-indicator-line-offset: 0.625rem !default;
+
+// Radio Button
+$radio-border-width: 2px !default;
+
+// Structured Theme Variables
+$structured-list-padding: 2rem !default;
+$structured-list-text-transform: none !default;

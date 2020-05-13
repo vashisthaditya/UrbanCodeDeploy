@@ -1,0 +1,14 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin versionSelectionDialog {
+    .version-selection-dialog {
+       padding: 25px $dialog-gutter 25px $dialog-gutter;
+       .dijitDialogTitleBar {
+         margin-left:0;
+       }
+    }
+}
+
+@include exports('versionSelectionDialog') {
+    @include versionSelectionDialog;
+}

@@ -1,0 +1,17 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin versionCompare {
+    .dijitDialog .versionCompare .columnForm .underField {
+        background-color: #FFF;
+    }
+    
+    .prop-sheet-diff-report-table .diffReportTable {
+        padding-left: 72px;
+        padding-right:72px;
+        padding-bottom: 15px;
+    }
+}
+
+@include exports('versionCompare') {
+    @include versionCompare;
+}

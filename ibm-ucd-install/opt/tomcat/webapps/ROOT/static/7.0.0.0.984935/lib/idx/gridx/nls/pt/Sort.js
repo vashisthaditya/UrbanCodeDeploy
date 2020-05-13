@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/pt/Sort",{helpMsg:"${0} - Clique para classificar ou control-clique para incluir para classifica\u00e7\u00e3o",singleHelpMsg:"${0} - Clique para classificar",priorityOrder:"prioridade de classifica\u00e7\u00e3o ${0}"});

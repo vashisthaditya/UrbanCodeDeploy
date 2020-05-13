@@ -1,0 +1,135 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="containerLabel" id="mainLabel1"></div>
+  <div class="innerContainer">
+    <div id="deploymentRequestCompliancy"></div>
+  </div>
+
+  <div class="hr"></div>
+  <div class="containerLabel"> 
+    <span id="currentInventoryView"></span>
+    &nbsp; - &nbsp;
+    <a href="javascript:void(0);" id="alternateInventoryView"></a>
+  </div>
+  <div class="innerContainer">
+    <div id="noncompliancyByResource"></div>
+    <div id="noncompliancyByVersion"></div>
+    <div class="listTopButtons" id="repeatButton"></div>
+  </div>
+
+  <div class="hr"></div>
+  <div class="containerLabel" id="mainLabel2"></div>
+  <div class="innerContainer">
+    <div id="deploymentRequestHistory"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "deploy/widgets/deploymentRequest/DeploymentRequestCompliancy",
+        "deploy/widgets/deploymentRequest/DeploymentRequestHistory",
+        "deploy/widgets/deploymentRequest/NoncompliancyByResource",
+        "deploy/widgets/deploymentRequest/NoncompliancyByVersion",
+        "dijit/form/Button",
+        "dojo/_base/xhr",
+        "dojo/dom",
+        "js/webext/widgets/Alert",
+        "js/webext/widgets/GenericConfirm"
+        ],
+    function(
+        DeploymentRequestCompliancy,
+        DeploymentRequestHistory,
+        NoncompliancyByResource,
+        NoncompliancyByVersion,
+        Button,
+        xhr,
+        dom,
+        Alert,
+        GenericConfirm
+    ) {
+        dom.byId("mainLabel1").innerHTML = i18n("Inventory Compliancy");
+        dom.byId("mainLabel2").innerHTML = i18n("Application Process Requests");
+        var deploymentRequestCompliancy = new DeploymentRequestCompliancy({
+            deploymentRequest: appState.deploymentRequest
+        });
+        deploymentRequestCompliancy.placeAt("deploymentRequestCompliancy");
+        var inventoryDiv = dom.byId("environmentInventory");
+        var currentViewSpan = dom.byId("currentInventoryView");
+        var alternateViewLink = dom.byId("alternateInventoryView");
+        var currentView = "resource";
+        var inventoryByVersionDiv = dom.byId("noncompliancyByVersion");
+        inventoryByVersionDiv.className = "hidden";
+        var inventoryByVersion = new NoncompliancyByVersion();
+        inventoryByVersion.placeAt("noncompliancyByVersion");
+        var inventoryByResourceDiv = dom.byId("noncompliancyByResource");
+        var inventoryByResource = new NoncompliancyByResource();
+        inventoryByResource.placeAt("noncompliancyByResource");
+        currentViewSpan.innerHTML = i18n("Noncompliant Resources");
+        alternateViewLink.innerHTML = i18n("View Versions");
+        alternateViewLink.onclick = function() {
+            if (currentView === "version") {
+                currentView = "resource";
+                currentViewSpan.innerHTML = i18n("Noncompliant Resources");
+                alternateViewLink.innerHTML = i18n("View Versions");
+                inventoryByVersionDiv.className = "hidden";
+                inventoryByResourceDiv.className = "";
+            }
+            else if (currentView === "resource") {
+                currentView = "version";
+                currentViewSpan.innerHTML = i18n("Noncompliant Versions");
+                alternateViewLink.innerHTML = i18n("View Resources");
+                inventoryByResourceDiv.className = "hidden";
+                inventoryByVersionDiv.className = "";
+            }
+        };
+        if (appState.environment.security.execute) {
+            var repeatRequestDiv = dom.byId("repeatRequest");
+            var repeatButton = new Button({
+                label: i18n("Repeat Request"),
+                showTitle: false,
+                onClick: function() {
+                    var confirm = new GenericConfirm({
+                        message: i18n("Are you sure you want to repeat the application process request for this deployment request?"),
+                        action: function() {
+                            xhr.put({
+                                url: bootstrap.restUrl+"deploy/deploymentRequest/"+appState.deploymentRequest.id+"/repeat",
+                                handleAs: "json",
+                                load: function(data) {
+                                    navBar.setHash("applicationProcessRequest/"+data.requestId+"/log", false, true);
+                                },
+                                error: function(error) {
+                                    new Alert({
+                                        title: i18n("Error"),
+                                        messages: [i18n("An error has occurred while starting the component process:"),
+                                                   "",
+                                                   util.escape(error.responseText)]
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+            repeatButton.domNode.style.margin = "0px 3px";
+            repeatButton.domNode.style.fontSize = "11px";
+            repeatButton.placeAt("repeatButton");
+        }
+        var deploymentRequestHistory = new DeploymentRequestHistory({
+            deploymentRequest: appState.deploymentRequest
+        });
+        deploymentRequestHistory.placeAt("deploymentRequestHistory");
+    });
+    /* ]]> */
+</script>

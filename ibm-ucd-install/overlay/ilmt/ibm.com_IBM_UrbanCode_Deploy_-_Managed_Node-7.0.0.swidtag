@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SoftwareIdentity name="IBM UrbanCode Deploy - Managed Node" tagId="ibm.com-5eadb7a848fd4e5f9cc1419f5b8b303a-7.0.0" version="7.0.0" versionScheme="multipartnumeric" xml:lang="en" xmlns="http://standards.iso.org/iso/19770/-2/2015/schema.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.iso.org/iso/19770/-2/2015-current/schema.xsd schema.xsd">
+    <Meta persistentId="5eadb7a848fd4e5f9cc1419f5b8b303a"/>
+    <Meta generator="4-1-20170912"/>
+    <Entity name="IBM" regid="ibm.com" role="licensor tagCreator softwareCreator"/>
+</SoftwareIdentity>

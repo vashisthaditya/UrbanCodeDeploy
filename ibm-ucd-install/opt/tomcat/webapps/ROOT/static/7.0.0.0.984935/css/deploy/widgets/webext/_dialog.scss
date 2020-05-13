@@ -1,0 +1,108 @@
+@import '../../carbon/globals/import-once';
+
+$dialog-gutter: 48px;
+$dialog-close-icon-space: 16px;
+$dialog-title-line-height: 35px;
+
+@mixin dialog {
+    
+    .dijitDialog {
+      @include layer(pop-out);
+      background-color: #ffffff;
+      border-top: 5px solid $brand-01;
+      padding: 0;
+
+      .innerContainer {
+        margin: 0px;
+        padding: 0 $dialog-gutter;
+      }
+    
+      .dijitDialogTitleBar {
+        margin-top: 44px;
+        margin-bottom: 24px;
+        font-size: 28px;
+        color: $text-02;
+        line-height: $dialog-title-line-height;
+        margin-left: $dialog-gutter;
+        margin-right: $dialog-gutter;
+    
+        > .labelsAndValues-helpCell {
+          margin-top: $dialog-title-line-height - 25px;
+        }
+      }
+    
+      .containerLabel {
+        padding-left: $dialog-gutter;
+      }
+    
+    
+      .dijitDialogCloseIcon {
+        position: absolute;
+        right: $dialog-close-icon-space;
+        top: $dialog-close-icon-space;
+      }
+    
+      .columnForm {
+        div.table {
+          margin: 0 $dialog-gutter;
+        }
+    
+        .underField {
+          padding: 25px $dialog-gutter;
+          background-color: $ui-03;
+        }
+      }
+    }
+    
+    .ucd-generic-confirm-alert {
+      padding: 0px $dialog-gutter 0px $dialog-gutter;
+      .dijitDialogTitleBar {
+        margin-left: 0;
+      }
+      .underField {
+        padding: 25px 0px;
+      }
+    }
+    
+    .importForm {
+      margin-left: 48px;
+      margin-right: 48px;
+      .labelsAndValues-row {
+        margin-top: $columnForm-vertical-space;
+    
+        &:first-of-type {
+          margin-top: 0;
+        }
+    
+        .labelsAndValues-labelCell {
+          font-weight: 600;
+          margin-bottom: 0px;
+          display: inline-block;
+          margin-bottom: 8px;
+          &:empty {
+            margin-bottom: 0px;
+          }
+        }
+    
+        .labelsAndValues-valueCell {
+          .dijitCheckBox {
+            margin-right: 10px;
+          }
+          vertical-align: middle;
+        }
+      }
+      .filInputContainer {
+        margin-top: 8px;
+      }
+      .dijitButton {
+         display:flex;
+         margin-top:25px;
+         margin-bottom:25px;
+         flex-direction:row-reverse
+      }
+    }
+}
+
+@include exports('dialog') {
+    @include dialog;
+}

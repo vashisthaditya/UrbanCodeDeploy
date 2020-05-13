@@ -1,0 +1,24 @@
+<div class="idxBanner">
+	<div class="idxBannerInnerContainer">
+		<div class="idxBannerLogoArea">
+			<div class="idxBannerLogo"></div>
+		</div>
+		<div dojoAttachPoint="_trailerNode" class="idxBannerTrailer">
+			<div dojoAttachPoint="actionsButton" 
+					dojoType="dijit.form.DropDownButton"
+					iconClass="idxBannerActionButtonIcon">
+				<span>${usernameLabel}</span>
+				<div dojoType="dijit.Menu" dojoAttachPoint="actionsMenu" style="display: none;">
+				</div>
+			</div>
+			<div dojoAttachPoint="helpButton" 
+					dojoType="dijit.form.Button"
+					label="${helpLabel}"
+					showLabel="false"
+					iconClass="idxBannerHelpButtonIcon">
+			</div>
+		</div>
+		<div dojoAttachPoint="containerNode" class="idxBannerContainer"></div>
+	</div>
+	<div class="idxBannerBottomBar"></div>
+</div>

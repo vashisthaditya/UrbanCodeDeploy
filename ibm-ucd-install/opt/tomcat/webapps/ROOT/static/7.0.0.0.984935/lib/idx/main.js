@@ -1,0 +1,2 @@
+//>>built
+define("idx/main",["require","dojo/_base/lang","dojo/_base/kernel","dojo/_base/window","dojo/dom-class"],function(d,a,b,e,f){var a=a.getObject("idx",!0),c=function(){var a=e.body();f.add(a,"idx_dojo_"+b.version.major+"_"+b.version.minor)},g=b.version.minor;2>b.version.major&&7>g?dojo.addOnLoad(c):d(["dojo/domReady!"],c);return a});

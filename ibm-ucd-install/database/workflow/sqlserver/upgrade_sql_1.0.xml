@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<change-set release="1.0">
+  <change number="1">
+    <description>Added foreign keys and indices</description>
+    <sql separator=";">
+        alter table wf_activity add constraint wf_act_to_act foreign key(parent_activity_id) references wf_activity(id);
+        create index wf_act_parent_act_id on wf_activity(parent_activity_id);
+        
+        alter table wf_configuration_property add constraint wf_conf_prop_to_act foreign key(activity_id) references wf_activity(id);
+        create index wf_conf_prop_act_id on wf_configuration_property(activity_id);
+        
+        alter table wf_activity_trace add constraint wf_act_trace_to_act_trace foreign key(parent_activity_trace_id) references wf_activity_trace(id);
+        create index wf_act_trace_parent_trace_id on wf_activity_trace(parent_activity_trace_id);
+        
+        alter table wf_activity_trace_property add constraint wf_act_trace_prop_to_act_trace foreign key(activity_trace_id) references wf_activity_trace(id);
+        create index wf_act_trace_prop_act_trace_id on wf_activity_trace_property(activity_trace_id);
+        
+        alter table wf_workflow_trace add constraint wf_wf_trace_to_act_trace foreign key(root_activity_trace_id) references wf_activity_trace(id);
+        create index wf_wf_trace_root_act_trace_id on wf_workflow_trace(root_activity_trace_id);
+        
+        alter table wf_execution_context add constraint wf_exec_ctx_to_exec_ctx foreign key(parent_execution_context_id) references wf_execution_context(id);
+        alter table wf_execution_context add constraint wf_exec_ctx_to_act_id foreign key(activity_id) references wf_activity(id);
+        alter table wf_execution_context add constraint wf_exec_ctx_to_act_trace_id foreign key(activity_trace_id) references wf_activity_trace(id);
+        create index wf_exec_ctx_parent_exec_ctx_id on wf_execution_context(parent_execution_context_id);
+        create index wf_exec_ctx_act_id on wf_execution_context(activity_id);
+        create index wf_exec_ctx_act_trace_id on wf_execution_context(activity_trace_id);
+        
+        alter table wf_runtime_property add constraint wf_runtime_prop_to_exec_ctx foreign key(execution_context_id) references wf_execution_context(id);
+        create index wf_runtime_prop_exec_ctx_id on wf_runtime_property(execution_context_id);
+        
+        alter table wf_workflow add constraint wf_wf_to_exec_ctx foreign key(root_execution_context_id) references wf_execution_context(id);
+        alter table wf_workflow add constraint wf_wf_to_wf_trace foreign key(workflow_trace_id) references wf_workflow_trace(id);
+        create index wf_wf_root_exec_ctx_id on wf_workflow(root_execution_context_id);
+        create index wf_wf_wf_trace_id on wf_workflow(workflow_trace_id);
+        
+        alter table wf_dispatched_task add constraint wf_dsp_task_to_exec_ctx foreign key(execution_context_id) references wf_execution_context(id);
+        alter table wf_dispatched_task add constraint wf_dsp_task_to_wf foreign key(workflow_id) references wf_workflow(id);
+        create index wf_dsp_task_exec_ctx_id on wf_dispatched_task(execution_context_id);
+        create index wf_dsp_task_wf_id on wf_dispatched_task(workflow_id);
+        
+        alter table wf_signal add constraint wf_signal_to_wf foreign key(workflow_id) references wf_workflow(id);
+        alter table wf_signal add constraint wf_signal_to_dsp_task foreign key(dispatched_task_id) references wf_dispatched_task(id);
+        create index wf_signal_wf_id on wf_signal(workflow_id);
+        create index wf_signal_dsp_task_id on wf_signal(dispatched_task_id);
+        
+        alter table wf_workflow_event_listener add constraint wf_wf_evt_lst_to_wf foreign key(workflow_id) references wf_workflow(id);
+        create index wf_wf_evt_lst_wf_id on wf_workflow_event_listener(workflow_id);
+        
+        alter table wf_event_listener_property add constraint wf_evt_lst_prop_to_wf_evt_lst foreign key(workflow_event_listener_id) references wf_workflow_event_listener(id);
+        create index wf_evt_lst_prop_wf_evt_lst_id on wf_event_listener_property(workflow_event_listener_id);
+    </sql>
+  </change>
+  <change number="2">
+    <description>Removed the null constraint on workflow event listeners to workflows</description>
+    <sql separator=";">
+        alter table wf_workflow_event_listener alter workflow_id null;
+    </sql>
+  </change>
+  <change number="3">
+    <description>Added child index order column to execution contexts</description>
+    <sql separator=";">
+        alter table wf_execution_context add child_index_order integer;
+    </sql>
+  </change>
+  <change number="4">
+    <description>Added tracking of ActivityGraph to workflows</description>
+    <sql separator=";">
+        alter table wf_workflow add graph_reference varchar(256);
+        update wf_workflow set graph_reference = '';
+        alter table wf_workflow alter column graph_reference not null;
+    </sql>
+  </change>
+  <change number="5">
+    <description>Removed configuration (activity) tables</description>
+    <sql separator=";">
+        alter table wf_execution_context drop constraint wf_exec_ctx_to_act_id;
+        drop table wf_configuration_property;
+        drop table wf_activity;
+    </sql>
+  </change>
+  <change number="6">
+    <description>Added support for values over 4000 characters</description>
+    <sql separator=";">
+        alter table wf_activity_trace_property add property_value_clob ntext;
+        alter table wf_runtime_property add property_value_clob ntext;
+        alter table wf_event_listener_property add property_value_clob ntext;
+    </sql>
+  </change>
+  <change number="7">
+    <description>Add activity reference to workflow.</description>
+    <sql separator=";">
+        alter table wf_activity_trace add workflow_trace_id nvarchar(36);
+    </sql>
+    <groovy file="all/upgrade_007_add_workflow_reference.groovy" />
+    <sql separator=";">
+        alter table wf_activity_trace alter column workflow_trace_id nvarchar(36) not null;
+        alter table wf_workflow_trace alter column root_activity_trace_id nvarchar(36) null;
+        create index wf_act_trace_wf_trace_id on wf_activity_trace(workflow_trace_id);
+        alter table wf_activity_trace add constraint wf_act_trace_to_wf_trace foreign key(workflow_trace_id) references wf_workflow_trace(id);
+    </sql>
+  </change>
+  <change number="8">
+    <description>Refreshed all foreign keys to ensure they exist</description>
+    <groovy file="all/upgrade_008_drop_foreign_keys.groovy" />
+    <sql separator=";" file="wf-foreign-keys.ddl" />
+  </change>
+  <change number="9">
+    <description>Blank change</description>
+  </change>
+  <change number="10">
+    <description>Restructured persistence to support active-active</description>
+    <sql separator=";">
+        update wf_activity_trace set execution_status = 'CLOSED', execution_result='FAULTED' where execution_status in ('UNINITIALIZED', 'INITIALIZED', 'EXECUTING', 'CANCELING') and (execution_result is null or execution_result = 'NONE');
+    </sql>
+    <sql separator=";" file="all/upgrade_010_migrate_to_active_active_sqlserver.sql" />
+    <sql separator=";" file="all/upgrade_010_migrate_to_active_active.sql" />
+    <sql separator=";">
+     
+        drop index wf_workflow_trace.wf_wf_trace_root_act_trace_id;
+        alter table wf_activity_trace drop column started_on;
+        alter table wf_activity_trace drop column ended_on;
+        alter table wf_activity_trace drop column execution_result;
+        alter table wf_activity_trace drop column execution_status;
+        alter table wf_activity_trace drop column child_index_order;
+        
+        alter table wf_workflow_trace drop column workflow_state;
+        alter table wf_workflow_trace drop column root_activity_trace_id;
+        
+        create index wf_disp_task_wfid on wf_dispatched_task(workflow_id);
+        create index wf_wft_pause_wfid on wf_workflow_trace_pause(workflow_trace_id);
+        create index wf_wft_root_atid on wf_workflow_trace_root(activity_trace_id);
+        create index wf_at_status_atid on wf_activity_trace_status(activity_trace_id);
+        create index wf_at_result_atid on wf_activity_trace_result(activity_trace_id);
+        create index wf_at_start_atid on wf_activity_trace_start(activity_trace_id);
+        create index wf_at_end_atid on wf_activity_trace_end(activity_trace_id);
+    </sql>
+  </change>
+  <change number="11">
+    <description>Use yes_no for bools</description>
+    <sql separator=";">
+        alter table wf_workflow_trace_pause add pausedtemp nvarchar(1);
+        update wf_workflow_trace_pause set pausedtemp = 'P';
+    </sql>
+    <groovy file="all/upgrade_011_yes_no_bools.groovy" />
+    <sql separator=";">
+        alter table wf_workflow_trace_pause drop column paused;
+        exec sp_rename 'wf_workflow_trace_pause.pausedtemp', 'paused', 'COLUMN';
+    </sql>
+  </change>
+  <change number="12">
+    <description>Prepare schema for trace data reformatting</description>
+    <sql separator=";">
+        alter table wf_workflow_trace add workflow_trace_data ntext;
+    </sql>
+  </change>
+  <change number="13">
+    <description>Condense workflow trace data into one table</description>
+    <groovy file="all/upgrade_013_trace_into_clob.groovy" />
+  </change>
+  <change number="14">
+    <description>Remove old trace tables</description>
+    <sql separator=";">
+        DECLARE
+            @constraintName sysname
+          , @query nvarchar(4000)
+
+        SELECT @constraintName = (
+            SELECT object_name(CDEFAULT)
+            FROM syscolumns
+            WHERE ID = object_id('wf_workflow_trace')
+                AND NAME = 'created_ts'
+        )
+
+        SET @query = '
+            ALTER TABLE wf_workflow_trace
+            DROP ' + @constraintName + '
+        '
+
+        EXEC sys.sp_executesql @query;
+
+        drop table wf_activity_trace_start;
+        drop table wf_activity_trace_end;
+        drop table wf_activity_trace_result;
+        drop table wf_activity_trace_status;
+        drop table wf_activity_trace_prop;
+        drop table wf_activity_trace;
+        drop table wf_workflow_trace_root;
+        drop table wf_workflow_trace_pause;
+        alter table wf_workflow_trace drop column created_ts;
+        delete from wf_workflow_trace where workflow_trace_data is null;
+        alter table wf_workflow_trace alter column workflow_trace_data ntext not null;
+    </sql>
+  </change>
+  <change number="15">
+    <description>Add a method data payload to dispatched tasks.</description>
+    <sql separator=";">
+        alter table wf_dispatched_task add method_data varbinary(max);
+    </sql>
+  </change>
+  <change number="16">
+    <description>Create the workflow metadata table</description>
+    <sql separator=";">
+        create table wf_workflow_metadata (
+            workflow_trace_id varchar(36) not null primary key,
+            result varchar(32),
+            status varchar(32),
+            start_time bigint,
+            end_time bigint,
+            duration_time bigint,
+            paused varchar(1) not null
+        );
+
+        create index wf_metadata_result on wf_workflow_metadata(result);
+        create index wf_metadata_status on wf_workflow_metadata(status);
+        create index wf_metadata_start_time on wf_workflow_metadata(start_time);
+        create index wf_metadata_end_time on wf_workflow_metadata(end_time);
+        create index wf_metadata_duration_time on wf_workflow_metadata(duration_time);
+        create index wf_metadata_paused on wf_workflow_metadata(paused);
+    </sql>
+  </change>
+  <change number="17">
+    <description>Harvest the workflow data to populate metadata table</description>
+    <groovy file="all/upgrade_017_collecting_trace_metadata.groovy" />
+  </change>
+  <change number="18">
+    <description>MySQL only change</description>
+  </change>
+  <change number="19">
+    <description>Add format column to wf_workflow_trace table</description>
+    <groovy file="all/upgrade_019_add_format_column_to_workflow_trace.groovy" />
+  </change>
+<!-- 
+  <change number="##">
+    <description>Description</description>
+    <sql separator=";">
+        statement;
+    </sql>
+  </change>
+-->
+</change-set>

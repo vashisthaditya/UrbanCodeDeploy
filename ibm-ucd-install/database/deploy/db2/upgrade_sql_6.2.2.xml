@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.2.1.x.
+-->
+
+<change-set release="n1_6.2.2">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/db2/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/db2/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/db2/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/db2/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <description>Create and assign Security Resources for Agent Relays</description>
+        <sql separator=";">
+            insert into sec_resource_type (id,version,name,enabled) values ('20000000000000000000000000000114', 0, 'Agent Relay', 'Y');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000220001', 0, 'View Agent Relays', 'View agent relays in this team.', 'Y', 'Y', '20000000000000000000000000000114', null);
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000220002', 0, 'Delete', 'Delete agent relays.', 'Y', 'Y', '20000000000000000000000000000114', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000220003', 0, 'Edit Basic Settings', 'Edit basic settings for agent relays.', 'Y', 'Y', '20000000000000000000000000000114', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000220004', 0, 'Manage Teams', 'Manage teams for agent relays.', 'Y', 'Y', '20000000000000000000000000000114', 'Edit');
+        </sql>
+        <groovy file="all/upgrade-scripts-622/upgrade_001_create_security_resources_for_relays.groovy"/>
+        <sql separator=";">
+            create table ds_agent_relay_copy (
+                id varchar(36) not null primary key,
+                version integer default 0 not null,
+                name varchar(255),
+                endpoint_id varchar(64) not null,
+                description varchar(255),
+                relay_version varchar(36),
+                hostname varchar(255),
+                relay_hostname varchar(255),
+                jms_port int default 0 not null,
+                status varchar(16),
+                last_contact bigint,
+                sec_resource_id varchar(36) not null);
+
+            insert into ds_agent_relay_copy (id, version, name, endpoint_id, description, relay_version, hostname, relay_hostname, jms_port, status, last_contact, sec_resource_id)
+            select
+            id, version, name, endpoint_id, description, relay_version, hostname, relay_hostname, jms_port, status, last_contact, sec_resource_id
+            from ds_agent_relay;
+
+            drop table ds_agent_relay;
+            commit;
+
+            rename ds_agent_relay_copy to ds_agent_relay;
+            commit;
+        </sql>
+    </change>
+    <change number="2">
+        <description>Adding ghosted date to name index for resource roles</description>
+        <sql separator=";">
+            <!-- We have to call reorg twice for DB2 zOS-->
+            drop index sec_resource_role_name;
+            call sysproc.admin_cmd('reorg table sec_resource_role');
+
+            create unique index sec_resource_role_name
+                on sec_resource_role(name, ghosted_date);
+            call sysproc.admin_cmd('reorg table sec_resource_role');
+        </sql>
+    </change>
+<!--
+- REMINDER: Upgrades for product version 6.2.2.x. Place additions above this comment.
+-->
+</change-set>

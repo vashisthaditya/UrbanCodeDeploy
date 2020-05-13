@@ -1,0 +1,13 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin componentTagRequirementSelector {
+    .tagRequirementList {
+      .modelWidgetList > div {
+        @extend .clearfix;
+      }
+    }
+}
+
+@include exports('componentTagRequirementSelector') {
+    @include componentTagRequirementSelector;
+}

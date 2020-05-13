@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/fr/Sort",{helpMsg:"${0} - Cliquez pour effectuer le tri ou cliquez et maintenez la touche Ctrl enfonc\u00e9e pour ajouter un \u00e9l\u00e9ment au tri",singleHelpMsg:"${0} - Cliquez pour effectuer le tri",priorityOrder:"priorit\u00e9 de tri ${0}"});

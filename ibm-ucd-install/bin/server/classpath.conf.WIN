@@ -1,0 +1,14 @@
+dir @SERVER_HOME@\patches
+jardir @SERVER_HOME@\patches
+dir @SERVER_HOME@\conf
+dir @SERVER_HOME@\conf\server
+file @JAVA_HOME@\lib\tools.jar
+jardir @SERVER_HOME@\lib\thirdparty
+jardir @SERVER_HOME@\lib\ext
+jardir @SERVER_HOME@\lib
+jardir @SERVER_HOME@\lib\bsf
+jardir @SERVER_HOME@\lib\smartcloud
+jardir @SERVER_HOME@\opt\tomcat\bin
+jardir @SERVER_HOME@\opt\tomcat\lib
+jardir @SERVER_HOME@\extensions
+nativedir @SERVER_HOME@\native\@ARCH@

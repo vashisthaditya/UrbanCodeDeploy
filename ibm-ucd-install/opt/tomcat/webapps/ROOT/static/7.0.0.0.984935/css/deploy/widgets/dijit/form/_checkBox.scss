@@ -1,0 +1,68 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin checkBox {
+    .dijitCheckBox {
+        @include font-family;
+        @include font-smoothing;
+        background: $color__white;
+        border: 2px solid $color__navy-gray-7;
+        height: 15px;
+        width: 15px;
+    
+        input {
+            height: 15px;
+            width: 15px;
+            margin-left: -2.5px;
+            margin-top: -2.5px;
+        }
+    
+        &.dijitCheckBoxChecked {
+            // Force use of retina icons to help reduce pixelation.
+            background-image: url('../../images/icons/glyphs_2x_spritesheet.png');
+            background-repeat: no-repeat;
+            background-size: 251px 237px;
+            border-color: #3d70b2;
+            width: 15px;
+            height: 15px;
+            background-position: -188.5px -6px;
+        }
+    
+        &.dijitCheckBoxFocused {
+            box-shadow: 0 0 5px 2px $color__blue-20;
+        }
+    
+        &.dijitCheckBoxDisabled {
+            opacity: 0.5;
+        }
+    }
+    
+    .dojoxTriStateCheckBox {
+      border: solid 2px #3d70b2;
+      width: 15px;
+      height: 15px;
+      margin-left: 2px;
+      margin-bottom: 2px;
+      background-repeat: no-repeat;
+      background-size: 251px 237px;
+      .dojoxTriStateCheckBoxInner {
+        display:none;
+      }
+      .dojoxTriStateCheckBoxInput {
+        width: 15px;
+        height: 15px;
+        opacity: 0.01;
+      }
+      &.dojoxTriStateCheckBoxChecked {
+        background-image: url(../../images/icons/glyphs_2x_spritesheet.png);
+        background-position: -188.5px -6px;
+      }
+      &.dojoxTriStateCheckBoxMixed {
+        background-image: url(../../images/icons/glyphs_2x_spritesheet.png);
+        background-position: -211px -196px;
+      }
+    }
+}
+
+@include exports('checkBox') {
+    @include checkBox;
+}

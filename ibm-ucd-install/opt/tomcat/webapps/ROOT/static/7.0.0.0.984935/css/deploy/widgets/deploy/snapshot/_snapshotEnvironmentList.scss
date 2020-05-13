@@ -1,0 +1,11 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin snapshotEnvironmentList {
+    .snapshot-environment-list .environment-list-help-text {
+        margin-top: 30px;
+    }
+}
+
+@include exports('snapshotEnvironmentList') {
+    @include snapshotEnvironmentList;
+}

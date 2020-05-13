@@ -1,0 +1,3 @@
+//>>built
+define("idx/form/_InputListItemMixin",["dojo/_base/declare","dojo/_base/lang"],function(b,c){return b("idx.form._InputListItemMixin",null,{widgetsInTemplate:!0,option:null,parent:null,disabled:!1,readOnly:!1,postCreate:function(){this.inherited(arguments);this.focusNode.onClick=c.hitch(this,"_changeBox");this.labelNode.innerHTML=this.option.label;this._updateBox()},_updateBox:function(){this.focusNode.set("checked",!!this.option.selected)},_setDisabledAttr:function(a){this.disabled=a;this.focusNode.set("disabled",
+this.disabled)},_setReadOnlyAttr:function(a){this.readOnly=a;this.focusNode.set("readOnly",a)},focus:function(){this.focusNode.focus()}})});

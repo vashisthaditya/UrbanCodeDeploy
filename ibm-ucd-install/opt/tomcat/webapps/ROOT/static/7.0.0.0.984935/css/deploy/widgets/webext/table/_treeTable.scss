@@ -1,0 +1,507 @@
+@import "../../dijit/form/button";
+@import "../../dijit/form/select";
+@import "../../dijit/form/smallInputMixins";
+@import '../../../carbon/globals/import-once';
+
+@mixin treeTable {
+    
+    $treeTable-border: 1px solid $ui-04;
+    $treeTable-gutter: 12px;
+    $treeTable-header-row-height: 46px;
+    $treeTable-row-height: 30px;
+    $treeTable-th-line-height: 16px;
+    
+    .aboveTreeOptions {
+      & {
+        @include display-flex;
+      }
+    
+      >div {
+        @include display-flex;
+        @include align-items(center);
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    
+      .tableTitle {
+        font-size: 18px;
+        line-height: 23px;
+        font-weight: 600;
+      }
+    
+      .expandCollapse {
+        margin-left: auto;
+      }
+    }
+    
+    .treeTable {
+      .inlineBlock{
+        display: inline-block;
+      }
+    
+      .collapseSpace {
+        width: 17px;
+        height: 21px;
+        margin: -4px 0px;
+        position: absolute;
+      }
+    
+      td {
+        cursor: default;
+        vertical-align: middle;
+      }
+    
+      .collapseSpace.collapseImage {
+        background: url(../../images/webext/sprites/misc-arrow-retina-sprite.png) top no-repeat;
+        background-position: 4px -84px;
+        background-size: 9px 128px;
+      }
+    
+      .collapsedRow .collapseSpace.expandImage {
+        background: url(../../images/webext/sprites/misc-arrow-retina-sprite.png) top no-repeat;
+        background-position: 4px -54px;
+        background-size: 9px 128px;
+      }
+    
+      .loadingImage .collapseSpace.expandImage {
+        background-image: url(../../images/webext/table/loading.gif);
+        width: 16px;
+        height: 16px;
+        background-size: 16px 16px;
+        background-position: 0px 0px;
+      }
+    
+      td.dojoDndHandle {
+        width: 8px;
+        cursor: move;
+        font-size: 14px;
+        padding: 5px 4px
+      }
+    
+      tr.matchesFilters {
+        background-color: #FFF5CC;
+      }
+    
+      td .linkPointer + .expandableCellContent {
+        margin-left: 17px;
+      }
+
+      td .collapseSpace {
+        display: none;
+      }
+
+      td .collapseSpace.linkPointer {
+        display: inline-block;
+      }
+
+      thead.thead-fixed-position {
+        position: fixed;
+        top: 0px;
+        padding: 10px 2px 0 0;
+        z-index: 800;
+        background: white;
+        border-bottom: $treeTable-border;
+      }
+    
+      td.table-sizer-cell {
+        height: 0px;
+        margin: 0px;
+        padding: 0px;
+        border: none;
+      }
+    
+      tfoot {
+        background: $ui-01;
+      }
+    
+      tfoot.tfoot-fixed-position {
+        position: fixed;
+        bottom: 0;
+        z-index: 800;
+        background: $ui-01;
+        border: $treeTable-border
+      }
+    }
+    
+    .webextTable .no-items-in-table {
+    
+      .tableFilterRow {
+        display: none;
+      }
+    
+      tfoot {
+    
+        background: initial;
+    
+        .noDataRow {
+          background: $ui-01;
+    
+          span {
+            line-height: 32px;
+          }
+        }
+    
+        .webextTableFooter {
+          border: 1px transparent;
+        }
+    
+        a.linkPointer {
+          line-height: 32px;
+        }
+      }
+    }
+    
+    
+    .webextTable > table > tbody > tr.dojoDndItem.dojoDndItemSelected,
+    .treeTable tr.dojoDndItemSelected, .treeTable tr.dojoDndItemAnchor {
+      background-color: #D4E6FF;
+    }
+    
+    .webextTable .pageNumbers .dijitTextBox .dijitInputField {
+      padding: 3px 0px;
+    }
+    
+    .webextTable .webextTableFooter .pageNumbers .dijitTextBox .dijitInputField {
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+    
+    .oneui.dojoDndMove .treeTable .validDropTarget,
+    .oneui.dojoDndMove .treeTable .validDropTarget *,
+    .oneui.dojoDndCopy .treeTable .validDropTarget,
+    .oneui.dojoDndCopy .treeTable .validDropTarget * {
+      background-color: #E3FFC0;
+      color: #008A52;
+    }
+    .oneui.dojoDndMove .treeTable .validDropTarget.dojoDndItemOver,
+    .oneui.dojoDndMove .treeTable .validDropTarget.dojoDndItemOver *,
+    .oneui.dojoDndCopy .treeTable .validDropTarget.dojoDndItemOver,
+    .oneui.dojoDndCopy .treeTable .validDropTarget.dojoDndItemOver * {
+      background-color: #ADDD6D;
+      color: #FFF;
+    }
+    .oneui.dojoDndMove .treeTable .invalidDropTarget,
+    .oneui.dojoDndCopy .treeTable .invalidDropTarget {
+      opacity: 0.5;
+    }
+    .oneui.dojoDndMove .treeTable .validDropTarget.dojoDndItemAfter,
+    .oneui.dojoDndMove .treeTable .invalidDropTarget.dojoDndItemAfter {
+      border: none;
+    }
+    
+    
+    .treeTableCont {
+        border: $treeTable-border;
+        display: inline-block;
+        white-space:nowrap;
+    }
+    
+    .treeTableHeader {
+      height:18px;
+      display:block;
+    }
+    .treeTableHeader .th, .headerTreeRow .th {
+      font-size:12px;
+      font-weight:normal;
+      padding: 2px 5px;
+      border:none;
+      border-right: $treeTable-border;
+      border-bottom:$treeTable-border;
+      background-color:#3D5B81;
+      height:15px;
+      letter-spacing:0.03em;
+      white-space:nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+      display:inline-block;
+      color:#ffffff;
+    }
+    .treeTableHeader .th:last-child, .treeTableCell:last-child {
+      border-right:none;
+    }
+    
+    .webextTable {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    
+    /* all maring border etc should go on containing div,
+       width: 100% doesn't play nice with padding/margin/border */
+    .webextTable > table {
+      border-collapse: collapse;
+      border-spacing: 0px;
+      width: 100%;
+    }
+    
+    .webextTable > table > tbody > tr {
+      background-color: #FFF;
+      border: $treeTable-border;
+    }
+    
+    .webextTable > table > tbody > tr > td {
+      border-collapse: collapse;
+      border: none;
+    }
+    
+    .webextTable > table > tbody > tr .cellWrapper {
+      position: relative;
+      height: 100%;
+      padding: (($treeTable-row-height - 14px) / 2) $treeTable-gutter;
+    }
+    
+    .webextTable > table > thead > tr {
+      border: $treeTable-border;
+    }
+    
+    .webextTable > table > thead > tr > td {
+        background-color: $ui-02;
+        padding: 4px $treeTable-gutter;
+    }
+    
+    
+    .webextTable > table .tableFilterRow {
+      @include smallInputs;
+    
+      .filterField, .dijitDateTextBox {
+        max-width: 7em;
+      }
+    
+      .filterField {
+        margin-left: 4px;
+    
+        &:first-of-type {
+          margin-left: 0px;
+        }
+      }
+    }
+    
+    
+    .webextTable th {
+      background: $ui-02;
+      border-bottom: $treeTable-border;
+      padding-top: (($treeTable-header-row-height - $treeTable-th-line-height) / 2);
+      padding-bottom: (($treeTable-header-row-height - $treeTable-th-line-height) / 2);
+      padding-left: $treeTable-gutter;
+      font-weight: bold;
+    }
+    
+    .webextTable > table > tbody > tr:hover,
+    .webextTable > table > tbody > tr.selected {
+      background-color: transparentize($brand-02, 0.9);
+    }
+    
+    /*
+    .tableHoverActions {
+      display: none;
+    }
+    .webextTable .tableHoverActions {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      display: none;
+    }
+    
+    .webextTable tr:hover .tableHoverActions, .webextTable tr.selected .tableHoverActions {
+      display: inline;
+    }
+    
+    .webextTable td .tableHoverActions {
+      vertical-align: top;
+    }
+    .webextTable td .tableHoverActions .dijitButton,
+    .webextTable td .tableHoverActions .dijitDropDownButton {
+      margin: 0px;
+      height: 100%;
+    }
+    .webextTable td .tableHoverActions .dijitButtonNode {
+      border: none;
+    
+      height: 100%;
+      min-width: 0px;
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
+    }
+    .webextTable td .tableHoverActions .dijitButtonNode {
+      border-left: $treeTable-border;
+    }
+    .webextTable td .tableHoverActions .dijitButtonText {
+      padding-right: 0.3em;
+    }
+    .webextTable td .tableHoverActions .dijitButtonContents {
+      margin-top: 6px;
+    }
+    .webextTable td .tableHoverActions .dijitDropDownButton .dijitButtonContents {
+      margin-top: 5px;
+    }
+    */
+    
+    
+    .webextTable td .tableHoverActions {
+      @include smallInputs;
+      display: none;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+    
+      .dijitButton {
+        margin: 0;
+        background-color: transparent;
+        transform-duration: 0;
+        :hover {
+          background-color: transparent;
+        }
+    
+        .dijitButtonNode {
+          border: none;
+        }
+    
+        .dijitButtonContents {
+          width: 16px;
+        }
+    
+        .editIcon {
+          @extend .glyph-Glyph_edit__ui-05;
+
+          &:hover {
+          @extend .glyph-Glyph_edit__brand-01;
+          }
+        }
+      }
+    
+      .dijitDropDownButton {
+        margin: 0;
+    
+        .dijitButtonContents::before {
+          @extend .icon-Icon_overflow-menu_horizontal__ui-05;
+          
+          &:hover {
+            @extend .icon-Icon_overflow-menu_horizontal__brand-01;
+          }
+        }
+    
+        .dijitButtonNode {
+          background: transparent;
+        }
+    
+        .dijitButtonContents {
+          &::before {
+            content: "";
+          }
+    
+          .dijitButtonText, .dijitArrowButtonInner, .dijitArrowButtonChar {
+            display: none !important;
+          }
+        }
+      }
+    
+    }
+    
+    .webextTable tr:hover .tableHoverActions, .webextTable tr.selected .tableHoverActions {
+      display: inline;
+    }
+    
+    .webextTable .sortableColumn {
+      cursor: pointer;
+    }
+    
+    .webextTable .sortImageWrapper {
+      position: absolute;
+      top: 5px;
+    }
+    
+    .webextTable .noDataRow {
+      border: $treeTable-border;
+      color: #777777;
+    }
+    .webextTable .noDataRow td {
+      text-align: center;
+      padding-top: 7px;
+      padding-bottom: 6px;
+      font-weight: bold;
+    }
+    
+    .cjk .webextTable .webextTableFooter {
+      word-break: keep-all;
+    }
+    
+    .webextTable .webextTableFooter {
+      @include smallInputs;
+      border: $treeTable-border;
+      a, span {
+        margin: 0px 4px;
+        position: relative;
+      }
+    
+      span {
+        color: #777;
+        text-align: left;
+      }
+    
+      .numberOfItemsContainer {
+        float: left;
+      }
+    
+      > div {
+        @include display-flex;
+        @include flex-direction(row-reverse);
+        padding: 0;
+      }
+    
+      .perPage {
+        margin-left: $treeTable-gutter;
+        margin-right: auto;
+    
+        .dijitSelect {
+          margin-right:12px;
+        }
+      }
+    
+      .pageNumbers {
+        white-space: nowrap;
+      }
+    }
+    
+    
+    .webextTable .dojoDndItem {
+      -webkit-user-select: text;
+    }
+    .webextTable th .dijitCheckBox,
+    .webextTable td .dijitCheckBox,
+    .webextTable td .dijitRadio {
+      margin-right: 0px;
+    }
+    .webextTable td .dijitCheckBox,
+    .webextTable td .dijitRadio {
+      margin-left: 2px;
+    }
+    
+    /* Need to apply inline block to avoid bad oneui styling as table */
+    .dj_webkit table.dijitSelect {
+      display: inline-block;
+    }
+    
+    .codestationSearchDialog iframe {
+      border: none !important;
+    }
+    
+    .codestationSearchDialog .dijitDialogTitleBar {
+     padding-bottom: 0 !important;
+    }
+    
+    .codestationSearchDialog .dijitDialogPaneContent {
+      padding: 0 !important;
+      border: none !important;
+    }
+    
+    .webextTable .sortableColumn span {
+        display: inline-block;
+        margin-right: 8px;
+    }
+}
+
+@include exports('treeTable') {
+    @include treeTable;
+}

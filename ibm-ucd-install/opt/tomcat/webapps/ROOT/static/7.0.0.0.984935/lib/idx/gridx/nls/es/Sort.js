@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/es/Sort",{helpMsg:"${0} - Pulse para ordenar o realice pulsaci\u00f3n+control para a\u00f1adir a la ordenaci\u00f3n",singleHelpMsg:"${0} - Pulse para ordenar",priorityOrder:"prioridad de ordenaci\u00f3n ${0}"});

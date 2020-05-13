@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<change-set release="1.0">
+  <change number="12">
+    <description>Prepare schema for trace data reformatting</description>
+    <sql separator=";">
+        alter table wf_workflow_trace add column workflow_trace_data oid;
+    </sql>
+  </change>
+  <change number="13">
+    <description>Condense workflow trace data into one table</description>
+    <groovy file="all/upgrade_013_trace_into_clob.groovy" />
+  </change>
+  <change number="14">
+    <description>Remove old trace tables</description>
+    <sql separator=";">
+        drop table wf_activity_trace_start;
+        drop table wf_activity_trace_end;
+        drop table wf_activity_trace_result;
+        drop table wf_activity_trace_status;
+        drop table wf_activity_trace_prop;
+        drop table wf_activity_trace;
+        drop table wf_workflow_trace_root;
+        drop table wf_workflow_trace_pause;
+        alter table wf_workflow_trace drop column created_ts;
+        delete from wf_workflow_trace where workflow_trace_data is null;
+        alter table wf_workflow_trace alter column workflow_trace_data set not null;
+    </sql>
+  </change>
+  <change number="15">
+    <description>Add a method data payload to dispatched tasks. (and )</description>
+    <sql separator=";">
+        alter table wf_dispatched_task add column method_data oid;
+        create rule drop_wf_method_data as on delete to wf_dispatched_task do select lo_unlink(old.method_data);
+        create rule change_wf_method_data as on update to wf_dispatched_task do select lo_unlink(old.method_data) where old.method_data != new.method_data;
+        <!-- Add rules for wf_workflow_trace lob that were missed in change 12. -->
+        create rule drop_wf_workflow_trace_data as on delete to wf_workflow_trace do select lo_unlink(old.workflow_trace_data);
+        create rule change_wf_workflow_trace_data as on update to wf_workflow_trace do select lo_unlink(old.workflow_trace_data) where old.workflow_trace_data != new.workflow_trace_data;
+    </sql>
+  </change>
+  <change number="16">
+    <description>Create the workflow metadata table</description>
+    <sql separator=";">
+        create table wf_workflow_metadata (
+            workflow_trace_id varchar(36) not null primary key,
+            result varchar(32),
+            status varchar(32),
+            start_time bigint,
+            end_time bigint,
+            duration_time bigint,
+            paused varchar(1) not null
+        );
+
+        create index wf_metadata_result on wf_workflow_metadata(result);
+        create index wf_metadata_status on wf_workflow_metadata(status);
+        create index wf_metadata_start_time on wf_workflow_metadata(start_time);
+        create index wf_metadata_end_time on wf_workflow_metadata(end_time);
+        create index wf_metadata_duration_time on wf_workflow_metadata(duration_time);
+        create index wf_metadata_paused on wf_workflow_metadata(paused);
+    </sql>
+  </change>
+  <change number="17">
+    <description>Harvest the workflow data to populate metadata table</description>
+    <groovy file="all/upgrade_017_collecting_trace_metadata.groovy" />
+  </change>
+  <change number="18">
+    <description>MySQL only change</description>
+  </change>
+  <change number="19">
+    <description>Add format column to wf_workflow_trace table</description>
+    <groovy file="all/upgrade_019_add_format_column_to_workflow_trace.groovy" />
+  </change>
+</change-set>

@@ -1,0 +1,142 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin welcomePage {
+    #fdw-welcome {
+        font-family: 'Helvetica-Light', 'Helvetica Light',  'Helvetica';
+        font-size: 14px;
+        line-height: 21px;
+        padding: 0px;
+        margin-top: 15px;
+        height: 660px;
+    }
+    
+    #fdw-welcome ul,
+    #first-day-wizard ul {
+        margin-left: 32px;
+        li {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            list-style: disc;
+        }
+    }
+    
+    #fdw-welcome .inner-link-text {
+        cursor: pointer;
+    }
+    
+    #fdw-welcome .inner-link-text:hover {
+        text-docoration: underline;
+    }
+    
+    #fdw-welcome .idxHeaderHelpIcon {
+        display: inline-block;
+        width: 16px;
+        height: 24px;
+        background-image: url("../../lib/idx/themes/oneui/idx/app/images/headerIcons_TopBanner.png");
+        background-position: -61px 4px;
+    }
+    
+    #first-day-wizard {
+        font-family: 'Helvetica-Light', 'Helvetica Light',  'Helvetica';
+        font-size: 14px;
+        line-height: 21px;
+        padding: 0px;
+        margin-top: 15px;
+    }
+    
+    #first-day-wizard .dojoxWizardButtons {
+        bottom: 25px;
+        right: 25px;
+    }
+
+    #launch-wizard .dijitButton{
+        margin: 32px 0;
+    }
+    
+    
+    .fdw-welcome-page {
+        padding: 24px 110px;
+        width: 638px + 110px + 110px;
+    }
+
+    .fdw-text-column > * {
+        margin-top: 32px;
+        margin-bottom: 32px;
+    }
+
+    .fdw-text-column .fdw-emphasis2 {
+        font-size: 18px;
+    }
+    
+    .fdw-heading1 {
+        margin-bottom: 32px;
+    }
+    
+    .fdw-emphasis1 {
+        font-weight: 300;
+        font-size: 36px;
+        line-height: 45px;
+    }
+    
+    .fdw-emphasis2 {
+        font-weight: bold;
+    }
+    
+    .fdw-page-title {
+        font-family: 'Helvetica-Light', 'Helvetica Light', 'Helvetica';
+        font-weight: 200;
+        font-style: normal;
+    }
+    
+    .fdw-info-column {
+        display: inline-block;
+        width: 25%;
+        position: relative;
+        overflow-y: auto;
+    }
+    
+    .fdw-control-form-column {
+        display: inline-block;
+        width: 74%;
+        float: right;
+    }
+    
+    .fdw-info-title {
+        font-family: 'Helvetica';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 24px;
+    }
+    
+    .fdw-info-text {
+        margin-top: 2px;
+        margin-right: 15px;
+    }
+    
+    .fdw-control-column {
+        display: inline-block;
+        max-width: 200px;
+        width: 20%;
+        min-height: 470px;
+        position: relative;
+        margin-right: 10px;
+        float: left;
+    }
+    
+    .fdw-form-column {
+        display: inline-block;
+        width: 75%;
+        position: relative;
+        height: 500px;
+        overflow-y: auto;
+    }
+    
+    .fdw-control-row {
+        margin-top: 10px;
+    }
+}
+
+@include exports('welcomePage') {
+    @include welcomePage;
+}

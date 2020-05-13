@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/cs/LoginFrame",{loginTitle:"P\u0159ihl\u00e1sit",labelUserName:"Jm\u00e9no u\u017eivatele",labelPassword:"Heslo",invalidMessageTitle:"Neplatn\u00fd pokus o p\u0159ihl\u00e1\u0161en\u00ed",invalidMessage:"V povinn\u00fdch pol\u00edch nebyly zad\u00e1ny platn\u00e9 hodnoty."});

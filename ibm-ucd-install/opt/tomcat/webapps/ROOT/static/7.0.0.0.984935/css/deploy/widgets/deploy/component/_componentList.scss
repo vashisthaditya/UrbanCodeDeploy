@@ -1,0 +1,53 @@
+@import "../../webext/columnForm";
+@import '../../../carbon/globals/import-once';
+
+@mixin componentList {
+    
+    %statCards {
+      .statAttach {
+        background-color: $ui-01;
+        margin: 30px 0;
+        padding: 28px 34px;
+      }
+    
+      .tile {
+        display: inline-block;
+        margin-right: 48px;
+        width: 180px;
+        border-right: 1px solid $ui-04;
+    
+        &:last-of-type {
+          border-right: none;
+        }
+    
+      }
+    
+      .stat-tile-number {
+        font-size: 36px;
+        font-weight: 300;
+        line-height: 45px;
+      }
+    
+      .stat-tile-label {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 18px;
+      }
+    }
+    
+    #componentList {
+      @extend %statCards; 
+    
+      .component-importing-text {
+        float:right;
+        top: 5px;
+        right: 5px;
+        padding-left:10px;
+        font-style: italic;
+      }
+    }
+}
+
+@include exports('componentList') {
+    @include componentList;
+}

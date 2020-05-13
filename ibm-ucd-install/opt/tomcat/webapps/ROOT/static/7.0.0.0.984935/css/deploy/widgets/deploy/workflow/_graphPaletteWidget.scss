@@ -1,0 +1,61 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin graphPaletteWidget {
+    .smallerSearch {
+      @include smallInputs;
+    }
+    
+    .stepPaletteWidget {
+        background-color: $color__white;
+    
+        .dijitTreePalette {
+            .paletteItemContainer {
+                cursor: pointer;
+                position: relative;
+                color: #0e698a;
+                white-space: nowrap;
+                overflow: hidden;
+                padding: 0 0 0 5px;
+                background-color: $color__white;
+            }
+    
+            .paletteItemContainer {
+                color: $brand_01;
+            }
+    
+            .paletteItemContainer:hover {
+                color: black;
+                background-color: darken($color__white, 10);
+            }
+    
+            .dijitTreeNode {
+                .dijitTreeDrawer {
+                    .dijitTreeRow {
+                        background-color: $topPageHeader-background;
+                    }
+    
+                    .dijitTreeRowHover {
+                        background-color: lighten($topPageHeader-background, 10);
+                        color: white;
+                    }
+                }
+    
+                .dijitTreeSubdrawer {
+                    .dijitTreeRow {
+                        background-color: lighten($color__navy-gray-3, 2);
+                    }
+    
+                    .dijitTreeRow.dijitTreeRowHover {
+                        background-color: lighten($color__navy-gray-3, 12);
+                        color: white;
+                        text-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include exports('graphPaletteWidget') {
+    @include graphPaletteWidget;
+}

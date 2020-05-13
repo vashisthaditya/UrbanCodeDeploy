@@ -1,0 +1,2 @@
+//>>built
+define("idx/layout/nls/ja/BorderContainer",{toggleTitleExpand:"\u30bb\u30af\u30b7\u30e7\u30f3\u306e\u5c55\u958b",toggleTitleCollapse:"\u30bb\u30af\u30b7\u30e7\u30f3\u306e\u7701\u7565",toggleTitleRestore:"\u30bb\u30af\u30b7\u30e7\u30f3\u306e\u5fa9\u5143"});

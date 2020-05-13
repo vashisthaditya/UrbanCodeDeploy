@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- UrbanCode Build
+- UrbanCode Release
+- AnthillPro
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<change-set release="1.0">
+  <!-- Upgrades through version 5 are not converted for MySQL -->
+  <change number="6">
+    <description>Added support for values over 4000 characters</description>
+    <sql separator=";">
+        alter table wf_activity_trace_property add property_value_clob longtext;
+        alter table wf_runtime_property add property_value_clob longtext;
+        alter table wf_event_listener_property add property_value_clob longtext;
+    </sql>
+  </change>
+  <change number="7">
+    <description>Add activity reference to workflow.</description>
+    <sql separator=";">
+        alter table wf_activity_trace add column workflow_trace_id varchar(36);
+    </sql>
+    <groovy file="all/upgrade_007_add_workflow_reference.groovy" />
+    <sql separator=";">
+        alter table wf_activity_trace modify column workflow_trace_id varchar(36) not null;
+        alter table wf_workflow_trace modify column root_activity_trace_id varchar(36) null;
+        create index wf_act_trace_wf_trace_id on wf_activity_trace(workflow_trace_id);
+        alter table wf_activity_trace add constraint wf_act_trace_to_wf_trace foreign key(workflow_trace_id) references wf_workflow_trace(id);
+    </sql>
+  </change>
+  <change number="8">
+    <description>Refreshed all foreign keys to ensure they exist</description>
+    <groovy file="all/upgrade_008_drop_foreign_keys_mysql.groovy" />
+    <sql separator=";" file="wf-foreign-keys.ddl" />
+  </change>
+  <change number="9">
+    <description>Blank change</description>
+  </change>
+  <change number="10">
+    <description>Restructured persistence to support active-active</description>
+    <sql separator=";">
+        update wf_activity_trace set execution_status = 'CLOSED', execution_result='FAULTED' where execution_status in ('UNINITIALIZED', 'INITIALIZED', 'EXECUTING', 'CANCELING') and (execution_result is null or execution_result = 'NONE');
+    </sql>
+    <sql separator=";" file="all/upgrade_010_migrate_to_active_active_mysql.sql" />
+    <sql separator=";" file="all/upgrade_010_migrate_to_active_active.sql" />
+    <sql separator=";">
+        alter table wf_activity_trace drop started_on;
+        alter table wf_activity_trace drop ended_on;
+        alter table wf_activity_trace drop execution_result;
+        alter table wf_activity_trace drop execution_status;
+        alter table wf_activity_trace drop child_index_order;
+        
+        alter table wf_workflow_trace drop workflow_state;
+        alter table wf_workflow_trace drop root_activity_trace_id;
+        
+        create index wf_disp_task_wfid on wf_dispatched_task(workflow_id);
+        create index wf_wft_pause_wfid on wf_workflow_trace_pause(workflow_trace_id);
+        create index wf_wft_root_atid on wf_workflow_trace_root(activity_trace_id);
+        create index wf_at_status_atid on wf_activity_trace_status(activity_trace_id);
+        create index wf_at_result_atid on wf_activity_trace_result(activity_trace_id);
+        create index wf_at_start_atid on wf_activity_trace_start(activity_trace_id);
+        create index wf_at_end_atid on wf_activity_trace_end(activity_trace_id);
+    </sql>
+  </change>
+  <change number="11">
+    <description>Use yes_no for bools</description>
+    <sql separator=";">
+        alter table wf_workflow_trace_pause add column pausedtemp varchar(1) default 'P';
+    </sql>
+    <groovy file="all/upgrade_011_yes_no_bools.groovy" />
+    <sql separator=";">
+        alter table wf_workflow_trace_pause drop column paused;
+        alter table wf_workflow_trace_pause change pausedtemp paused varchar(1);
+        alter table wf_workflow_trace_pause alter column paused drop default;
+    </sql>
+  </change>
+  <change number="12">
+    <description>Prepare schema for trace data reformatting</description>
+    <sql separator=";">
+        alter table wf_workflow_trace add workflow_trace_data longtext;
+    </sql>
+  </change>
+  <change number="13">
+    <description>Condense workflow trace data into one table</description>
+    <groovy file="all/upgrade_013_trace_into_clob.groovy" />
+  </change>
+  <change number="14">
+    <description>Remove old trace tables</description>
+    <sql separator=";">
+        drop table wf_activity_trace_start;
+        drop table wf_activity_trace_end;
+        drop table wf_activity_trace_result;
+        drop table wf_activity_trace_status;
+        drop table wf_activity_trace_prop;
+        drop table wf_activity_trace;
+        drop table wf_workflow_trace_root;
+        drop table wf_workflow_trace_pause;
+        alter table wf_workflow_trace drop column created_ts;
+        delete from wf_workflow_trace where workflow_trace_data is null;
+        alter table wf_workflow_trace modify column workflow_trace_data longtext not null;
+    </sql>
+  </change>
+  <change number="15">
+    <description>Add a method data payload to dispatched tasks.</description>
+    <sql separator=";">
+        alter table wf_dispatched_task add method_data longblob;
+    </sql>
+  </change>
+  <change number="16">
+    <description>Create the workflow metadata table</description>
+    <sql separator=";">
+        create table wf_workflow_metadata (
+            workflow_trace_id varchar(36) not null primary key,
+            result varchar(32),
+            status varchar(32),
+            start_time bigint,
+            end_time bigint,
+            duration_time bigint,
+            paused varchar(1) not null
+        ) engine = innodb;
+
+        create index wf_metadata_result on wf_workflow_metadata(result);
+        create index wf_metadata_status on wf_workflow_metadata(status);
+        create index wf_metadata_start_time on wf_workflow_metadata(start_time);
+        create index wf_metadata_end_time on wf_workflow_metadata(end_time);
+        create index wf_metadata_duration_time on wf_workflow_metadata(duration_time);
+        create index wf_metadata_paused on wf_workflow_metadata(paused);
+    </sql>
+  </change>
+  <change number="17">
+    <description>Harvest the workflow data to populate metadata table</description>
+    <groovy file="all/upgrade_017_collecting_trace_metadata.groovy" />
+  </change>
+  <change number="18">
+    <description>Use binary collation for wf_workflow_metadata trace ID column</description>
+    <sql separator=";">
+      alter table wf_workflow_metadata modify workflow_trace_id varchar(36) binary;
+    </sql>
+  </change>
+  <change number="19">
+    <description>Add format column to wf_workflow_trace table</description>
+    <groovy file="all/upgrade_019_add_format_column_to_workflow_trace.groovy" />
+  </change>
+<!-- 
+  <change number="##">
+    <description>Description</description>
+    <sql separator=";">
+        statement;
+    </sql>
+  </change>
+-->
+</change-set>

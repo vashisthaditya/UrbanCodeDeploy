@@ -1,0 +1,22 @@
+#!/bin/sh
+# Licensed Materials - Property of IBM Corp.
+# IBM UrbanCode Build
+# IBM UrbanCode Deploy
+# IBM UrbanCode Release
+# IBM AnthillPro
+# (c) Copyright IBM Corporation 2002, 2014. All Rights Reserved.
+#
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+# GSA ADP Schedule Contract with IBM Corp.
+
+SERVER_HOME="@SERVER_HOME@"
+. "$SERVER_HOME/bin/set_env"
+
+cd "$SERVER_HOME/bin"
+javacmd="$JAVA_HOME/bin/java"
+command_line="exec \"$javacmd\" "$REPL_TOOL_JAVA_OPTS" -jar \
+    \"$SERVER_HOME/bin/launcher.jar\" \"$SERVER_HOME/bin/classpath.conf\" \
+    com.urbancode.ds.repl.tool.Tool $*"
+
+eval $command_line
+ 

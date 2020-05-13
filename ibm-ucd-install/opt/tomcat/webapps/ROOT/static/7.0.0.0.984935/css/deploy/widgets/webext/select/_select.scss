@@ -1,0 +1,57 @@
+@import "../../../carbon/globals/colors";
+@import "../../../carbon/globals/vars";
+@import '../../../carbon/globals/import-once';
+
+@mixin select {
+    
+    .webext-select, .webext-multi-select {
+        @include reset;
+        @include font-family;
+        @include font-smoothing;
+        @include letter-spacing;
+    
+        width: fit-content !important;
+    
+        .dijitComboBox {
+            border: 1px solid transparent;
+            width: fit-content !important;
+        }
+    
+        .dijitComboBoxOpened {
+            border: 1px solid $color__blue-51;
+        }
+    
+        .dijitTextBox {
+            line-height: 40px;
+            color: black;
+            width: 100%;
+        }
+    
+        .dijitValidationInner {
+            display: none;
+        }
+    
+        .dijitArrowButtonContainer {
+            margin: 14px 10px 14px 0px;
+        }
+    
+        .webext-spinner {
+            position: absolute;
+            right: -17px;
+            top: -12px;
+            z-index: 1;
+        }
+        
+        .allowsNone {
+          .dijitTextBox {
+            .dijitInputContainer {
+                margin-right: 45px;
+            }
+          }
+        }
+    }
+}
+
+@include exports('select') {
+    @include select;
+}

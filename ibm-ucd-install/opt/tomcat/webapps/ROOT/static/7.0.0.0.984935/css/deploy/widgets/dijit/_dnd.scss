@@ -1,0 +1,56 @@
+@import '../../carbon/globals/import-once';
+
+@mixin dnd {
+    $dnd-background-color: #e5edf8;
+    
+    .dojoDndAvatar {
+        background-color: $dnd-background-color;
+    }
+    
+    .dojoDndMove .dojoDndAvatarHeader, .dojoDndCopy .dojoDndAvatarHeader {
+        background-image: url("../../images/webext/icons/dnd-avatar-icons.png");
+        background-repeat: no-repeat;
+        background-position: 5px 0;
+    }
+    
+    .dojoDndMove .dojoDndAvatarHeader {
+        background-color: $topPageHeader-background;
+    }
+    .dojoDndCopy .dojoDndAvatarHeader {
+        background-color: $topPageHeader-background;
+    }
+    .dojoDndMove .dojoDndAvatarCanDrop .dojoDndAvatarHeader {
+        background-position: 5px -32px;
+    }
+    .dojoDndCopy .dojoDndAvatarCanDrop .dojoDndAvatarHeader {
+        background-position: 5px -64px;
+    }
+    
+    .dojoDndAvatarHeader td {
+        height: 32px;
+        padding-left: 36px;
+        line-height: 32px;
+        color: #FFF;
+        font-size: 1.4em;
+    }
+    
+    .dojoDndAvatarItem td {
+        padding-left: 12px;
+    }
+    
+    table.dojoDndAvatar {
+        border: 1px solid $brand-01;
+    }
+    
+    table.dojoDndAvatar .dndCopyHint {
+        display: none;
+    }
+    .dojoDndMove table.dojoDndAvatar .dndCopyHint {
+        display: inline-block;
+        margin-left: 10px;
+    }
+}
+
+@include exports('dnd') {
+    @include dnd;
+}

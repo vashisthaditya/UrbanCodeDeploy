@@ -1,0 +1,184 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="header">
+  <div class="logoHeaderLevel">
+    <div id="_logout"></div>
+    <img id="_webext_logo" alt="Logo"/>
+    <div id="_webext_top_level_tabs"></div>
+  </div>
+  <div class="breadcrumbHeaderLevel">
+    <div id="_webext_breadcrumbs" class="breadcrumbsCont"></div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    /*global require*/
+    require([
+             "dojo/_base/config",
+             "dojo/dom",
+             "dojo/dom-attr",
+             "dojo/dom-construct",
+             "dojo/dom-style",
+             "dojo/on",
+             "js/webext/widgets/NavigationBar"
+    ], function(
+            dojoConfig,
+            dom,
+            domAttr,
+            domConstruct,
+            domStyle,
+            on,
+            NavigationBar
+    ) {
+        if (bootstrap.logoutUrl) {
+            var logoutLink = domConstruct.create("a");
+            logoutLink.style.cssFloat = "right";
+            logoutLink.style.styleFloat = "right";
+            logoutLink.style.color = "white";
+            logoutLink.style.marginRight = "10px";
+            logoutLink.style.marginTop = "4px";
+            logoutLink.innerHTML = i18n("Logout");
+            logoutLink.href = bootstrap.logoutUrl;
+            dom.byId("_logout").appendChild(logoutLink);
+        }
+        if (bootstrap.helpUrl) {
+            var helpSpacer = domConstruct.create("span");
+            helpSpacer.style.cssFloat = "right";
+            helpSpacer.style.styleFloat = "right";
+            helpSpacer.style.color = "white";
+            helpSpacer.style.marginRight = "10px";
+            helpSpacer.style.marginTop = "4px";
+            helpSpacer.innerHTML = "|";
+            dom.byId("_logout").appendChild(helpSpacer);
+
+            var helpLink = domConstruct.create("a");
+            helpLink.style.cssFloat = "right";
+            helpLink.style.styleFloat = "right";
+            helpLink.style.color = "white";
+            helpLink.style.marginRight = "10px";
+            helpLink.style.marginTop = "4px";
+            helpLink.innerHTML = i18n("Help");
+            helpLink.target = "_blank";
+            helpLink.href = bootstrap.helpUrl;
+            dom.byId("_logout").appendChild(helpLink);
+        }
+        if (bootstrap.toolsUrl) {
+            var toolsSpacer = domConstruct.create("span");
+            toolsSpacer.style.cssFloat = "right";
+            toolsSpacer.style.styleFloat = "right";
+            toolsSpacer.style.color = "white";
+            toolsSpacer.style.marginRight = "10px";
+            toolsSpacer.style.marginTop = "4px";
+            toolsSpacer.innerHTML = "|";
+            dom.byId("_logout").appendChild(toolsSpacer);
+
+            var toolsLink = domConstruct.create("a");
+            toolsLink.style.cssFloat = "right";
+            toolsLink.style.styleFloat = "right";
+            toolsLink.style.color = "white";
+            toolsLink.style.marginRight = "10px";
+            toolsLink.style.marginTop = "4px";
+            toolsLink.innerHTML = i18n("Tools");
+            toolsLink.href = bootstrap.toolsUrl;
+            dom.byId("_logout").appendChild(toolsLink);
+        }
+        if (bootstrap.preferencesUrl) {
+            var preferencesUrl = domConstruct.create("span");
+            preferencesUrl.style.cssFloat = "right";
+            preferencesUrl.style.styleFloat = "right";
+            preferencesUrl.style.color = "white";
+            preferencesUrl.style.marginRight = "10px";
+            preferencesUrl.style.marginTop = "4px";
+            preferencesUrl.innerHTML = "|";
+            dom.byId("_logout").appendChild(preferencesUrl);
+
+            var preferencesLink = domConstruct.create("a");
+            preferencesLink.style.cssFloat = "right";
+            preferencesLink.style.styleFloat = "right";
+            preferencesLink.style.color = "white";
+            preferencesLink.style.marginRight = "10px";
+            preferencesLink.style.marginTop = "4px";
+            preferencesLink.innerHTML = i18n("Preferences");
+            preferencesLink.href = bootstrap.preferencesUrl;
+            dom.byId("_logout").appendChild(preferencesLink);
+        }
+        if (bootstrap.userFullName) {
+            var helloLabel = domConstruct.create("span");
+            helloLabel.style.cssFloat = "right";
+            helloLabel.style.styleFloat = "right";
+            helloLabel.style.color = "white";
+            helloLabel.style.marginRight = "10px";
+            helloLabel.style.marginTop = "4px";
+            helloLabel.innerHTML = i18n("Hello %s", bootstrap.userFullName)+" &nbsp; |";
+            dom.byId("_logout").appendChild(helloLabel);
+        }
+
+        var topLevelTabLinks = [];
+        var mainTabSet = config.getTabSet("main");
+        if (mainTabSet && !bootstrap.initialState.disableHome) {
+
+            var mainTabsUl = domConstruct.create("ul");
+            mainTabsUl.className = "topLevelTabs";
+            
+            var preventNav = function(event) {
+                if (navBar.checkPreventPageChange()) {
+                    event.preventDefault();
+                }
+            };
+
+            // Iterate backwards so that the tabs show in the correct order while floating right.
+            var i = null;
+            for (i = mainTabSet.tabs.length-1; i >= 0; i--) {
+                var tab = mainTabSet.tabs[i];
+
+                var tabHash = "main/"+tab.id;
+
+                var tabLink = domConstruct.create("a");
+                tabLink.innerHTML = tab.label;
+                tabLink.href = "#"+tabHash;
+                on(tabLink, "click", preventNav);
+                tabLink.tab = tab;
+                topLevelTabLinks.push(tabLink);
+
+                var tabLi = domConstruct.create("li");
+                tabLi.appendChild(tabLink);
+                tabLi.forTab = tab.id;
+
+                mainTabsUl.appendChild(tabLi);
+
+                if (tab.isVisible !== undefined && !tab.isVisible()) {
+                    domStyle.set(tabLi, "display", "none");
+                }
+            }
+
+            dom.byId("_webext_top_level_tabs").appendChild(mainTabsUl);
+        }
+
+        navBar = new NavigationBar();
+        navBar.topLevelTabLinks = topLevelTabLinks;
+        navBar.startup();
+        if (window.location.hash.length === 0) {
+            if (bootstrap.initialState.initialize) {
+                bootstrap.initialState.initialize(navBar);
+            }
+        }
+
+        navBar.startManager();
+
+        var blankGif = (dojoConfig.blankGif || require.toUrl("dojo/resources/blank.gif")).toString();
+        domAttr.set(dom.byId("_webext_logo"), "src", blankGif);
+    });
+    /* ]]> */
+</script>

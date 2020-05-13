@@ -1,0 +1,449 @@
+@import '../carbon/globals/import-once';
+
+@mixin navIcons {
+    .navIcon {
+        background-image: url('../../images/icons/navigation_spritesheet.png');
+        background-repeat: no-repeat;
+        display: block;
+    }
+    
+    .navIcon-Icon_arrow--down__brand-01 {
+        @extend .navIcon;
+        width: 14px;
+        height: 16px;
+        background-position: -5px -5px;
+    }
+    
+    .navIcon-Icon_arrow--down__brand-02 {
+        @extend .navIcon;
+        width: 14px;
+        height: 16px;
+        background-position: -29px -5px;
+    }
+    
+    .navIcon-Icon_arrow--down__ui-05 {
+        @extend .navIcon;
+        width: 14px;
+        height: 16px;
+        background-position: -53px -5px;
+    }
+    
+    .navIcon-Icon_arrow--left__brand-01 {
+        @extend .navIcon;
+        width: 16px;
+        height: 14px;
+        background-position: -77px -5px;
+    }
+    
+    .navIcon-Icon_arrow--left__brand-02 {
+        @extend .navIcon;
+        width: 16px;
+        height: 14px;
+        background-position: -77px -29px;
+    }
+    
+    .navIcon-Icon_arrow--left__ui-05 {
+        @extend .navIcon;
+        width: 16px;
+        height: 14px;
+        background-position: -5px -53px;
+    }
+    
+    .navIcon-Icon_arrow--right__brand-01 {
+        @extend .navIcon;
+        width: 16px;
+        height: 14px;
+        background-position: -31px -53px;
+    }
+    
+    .navIcon-Icon_arrow--right__brand-02 {
+        @extend .navIcon;
+        width: 16px;
+        height: 14px;
+        background-position: -57px -53px;
+    }
+    
+    .navIcon-Icon_arrow--right__ui-05 {
+        @extend .navIcon;
+        width: 16px;
+        height: 14px;
+        background-position: -83px -53px;
+    }
+    
+    .navIcon-Icon_arrow--up__brand-01 {
+        @extend .navIcon;
+        width: 14px;
+        height: 16px;
+        background-position: -5px -77px;
+    }
+    
+    .navIcon-Icon_arrow--up__brand-02 {
+        @extend .navIcon;
+        width: 14px;
+        height: 16px;
+        background-position: -29px -77px;
+    }
+    
+    .navIcon-Icon_arrow--up__ui-05 {
+        @extend .navIcon;
+        width: 14px;
+        height: 16px;
+        background-position: -53px -77px;
+    }
+    
+    .navIcon-Icon_caret--down__brand-01 {
+        @extend .navIcon;
+        width: 10px;
+        height: 5px;
+        background-position: -103px -5px;
+    }
+    
+    .navIcon-Icon_caret--down__ui-05 {
+        @extend .navIcon;
+        width: 10px;
+        height: 5px;
+        background-position: -103px -20px;
+    }
+    
+    .navIcon-Icon_caret--left__brand-01 {
+        @extend .navIcon;
+        width: 5px;
+        height: 10px;
+        background-position: -77px -77px;
+    }
+    
+    .navIcon-Icon_caret--left__ui-05 {
+        @extend .navIcon;
+        width: 5px;
+        height: 10px;
+        background-position: -92px -77px;
+    }
+    
+    .navIcon-Icon_caret--right__brand-01 {
+        @extend .navIcon;
+        width: 5px;
+        height: 10px;
+        background-position: -107px -77px;
+    }
+    
+    .navIcon-Icon_caret--right__ui-05 {
+        @extend .navIcon;
+        width: 5px;
+        height: 10px;
+        background-position: -77px -97px;
+    }
+    
+    .navIcon-Icon_caret--up__brand-01 {
+        @extend .navIcon;
+        width: 10px;
+        height: 5px;
+        background-position: -5px -35px;
+    }
+    
+    .navIcon-Icon_caret--up__ui-05 {
+        @extend .navIcon;
+        width: 10px;
+        height: 5px;
+        background-position: -25px -35px;
+    }
+    
+    .navIcon-Icon_chevron--down__brand-01 {
+        @extend .navIcon;
+        width: 12px;
+        height: 8px;
+        background-position: -92px -97px;
+    }
+    
+    .navIcon-Icon_chevron--down__ui-05 {
+        @extend .navIcon;
+        width: 12px;
+        height: 8px;
+        background-position: -123px -5px;
+    }
+    
+    .navIcon-Icon_chevron--left__brand-01 {
+        @extend .navIcon;
+        width: 8px;
+        height: 12px;
+        background-position: -123px -23px;
+    }
+    
+    .navIcon-Icon_chevron--left__text-01 {
+        @extend .navIcon;
+        width: 8px;
+        height: 12px;
+        background-position: -109px -45px;
+    }
+    
+    .navIcon-Icon_chevron--left__ui-05 {
+        @extend .navIcon;
+        width: 8px;
+        height: 12px;
+        background-position: -127px -45px;
+    }
+    
+    .navIcon-Icon_chevron--right__brand-01 {
+        @extend .navIcon;
+        width: 8px;
+        height: 12px;
+        background-position: -122px -67px;
+    }
+    
+    .navIcon-Icon_chevron--right__text-01 {
+        @extend .navIcon;
+        width: 8px;
+        height: 12px;
+        background-position: -122px -89px;
+    }
+    
+    .navIcon-Icon_chevron--right__ui-05 {
+        @extend .navIcon;
+        width: 8px;
+        height: 12px;
+        background-position: -5px -111px;
+    }
+    
+    .navIcon-Icon_chevron--up__brand-01 {
+        @extend .navIcon;
+        width: 12px;
+        height: 8px;
+        background-position: -23px -111px;
+    }
+    
+    .navIcon-Icon_chevron--up__ui-05 {
+        @extend .navIcon;
+        width: 12px;
+        height: 8px;
+        background-position: -45px -111px;
+    }
+    
+    @media (min-resolution: 144dppx),
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (min--moz-device-pixel-ratio: 1.5),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min-device-pixel-ratio: 1.5),
+    (min-resolution: 1.5dppx) {
+    
+        .navIcon-retina {
+            background-image: url('../../images/icons/navigation_2x_spritesheet.png');
+            background-repeat: no-repeat;
+            display: block;
+            background-size: 120px 97px;
+        }
+    
+        .navIcon-Icon_arrow--down__brand-01 {
+            @extend .navIcon-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -5px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--down__brand-02 {
+            @extend .navIcon-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -43px * 0.5 -5px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--down__ui-05 {
+            @extend .navIcon-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -81px * 0.5 -5px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--left__brand-01 {
+            @extend .navIcon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -119px * 0.5 -5px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--left__brand-02 {
+            @extend .navIcon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -119px * 0.5 -43px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--left__ui-05 {
+            @extend .navIcon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -5px * 0.5 -81px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--right__brand-01 {
+            @extend .navIcon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -47px * 0.5 -81px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--right__brand-02 {
+            @extend .navIcon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -89px * 0.5 -81px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--right__ui-05 {
+            @extend .navIcon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -131px * 0.5 -81px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--up__brand-01 {
+            @extend .navIcon-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -119px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--up__brand-02 {
+            @extend .navIcon-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -43px * 0.5 -119px * 0.5;
+        }
+    
+        .navIcon-Icon_arrow--up__ui-05 {
+            @extend .navIcon-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -81px * 0.5 -119px * 0.5;
+        }
+    
+        .navIcon-Icon_caret--down__brand-01 {
+            @extend .navIcon-retina;
+            width: 20px * 0.5;
+            height: 10px * 0.5;
+            background-position: -119px * 0.5 -119px * 0.5;
+        }
+    
+        .navIcon-Icon_caret--down__ui-05 {
+            @extend .navIcon-retina;
+            width: 20px * 0.5;
+            height: 10px * 0.5;
+            background-position: -149px * 0.5 -119px * 0.5;
+        }
+    
+        .navIcon-Icon_caret--left__brand-01 {
+            @extend .navIcon-retina;
+            width: 10px * 0.5;
+            height: 20px * 0.5;
+            background-position: -161px * 0.5 -5px * 0.5;
+        }
+    
+        .navIcon-Icon_caret--left__ui-05 {
+            @extend .navIcon-retina;
+            width: 10px * 0.5;
+            height: 20px * 0.5;
+            background-position: -161px * 0.5 -35px * 0.5;
+        }
+    
+        .navIcon-Icon_caret--right__brand-01 {
+            @extend .navIcon-retina;
+            width: 10px * 0.5;
+            height: 20px * 0.5;
+            background-position: -119px * 0.5 -139px * 0.5;
+        }
+    
+        .navIcon-Icon_caret--right__ui-05 {
+            @extend .navIcon-retina;
+            width: 10px * 0.5;
+            height: 20px * 0.5;
+            background-position: -139px * 0.5 -139px * 0.5;
+        }
+    
+        .navIcon-Icon_caret--up__brand-01 {
+            @extend .navIcon-retina;
+            width: 20px * 0.5;
+            height: 10px * 0.5;
+            background-position: -181px * 0.5 -5px * 0.5;
+        }
+    
+        .navIcon-Icon_caret--up__ui-05 {
+            @extend .navIcon-retina;
+            width: 20px * 0.5;
+            height: 10px * 0.5;
+            background-position: -181px * 0.5 -25px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--down__brand-01 {
+            @extend .navIcon-retina;
+            width: 24px * 0.5;
+            height: 16px * 0.5;
+            background-position: -181px * 0.5 -45px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--down__ui-05 {
+            @extend .navIcon-retina;
+            width: 24px * 0.5;
+            height: 16px * 0.5;
+            background-position: -173px * 0.5 -71px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--left__brand-01 {
+            @extend .navIcon-retina;
+            width: 16px * 0.5;
+            height: 24px * 0.5;
+            background-position: -179px * 0.5 -97px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--left__text-01 {
+            @extend .navIcon-retina;
+            width: 16px * 0.5;
+            height: 24px * 0.5;
+            background-position: -179px * 0.5 -131px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--left__ui-05 {
+            @extend .navIcon-retina;
+            width: 16px * 0.5;
+            height: 24px * 0.5;
+            background-position: -5px * 0.5 -165px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--right__brand-01 {
+            @extend .navIcon-retina;
+            width: 16px * 0.5;
+            height: 24px * 0.5;
+            background-position: -31px * 0.5 -165px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--right__text-01 {
+            @extend .navIcon-retina;
+            width: 16px * 0.5;
+            height: 24px * 0.5;
+            background-position: -57px * 0.5 -165px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--right__ui-05 {
+            @extend .navIcon-retina;
+            width: 16px * 0.5;
+            height: 24px * 0.5;
+            background-position: -83px * 0.5 -165px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--up__brand-01 {
+            @extend .navIcon-retina;
+            width: 24px * 0.5;
+            height: 16px * 0.5;
+            background-position: -159px * 0.5 -165px * 0.5;
+        }
+    
+        .navIcon-Icon_chevron--up__ui-05 {
+            @extend .navIcon-retina;
+            width: 24px * 0.5;
+            height: 16px * 0.5;
+            background-position: -211px * 0.5 -5px * 0.5;
+        }
+    
+    }
+}
+
+@include exports('navIcons') {
+    @include navIcons;
+}

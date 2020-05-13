@@ -1,0 +1,3 @@
+//>>built
+define("idx/form/_ComboBoxMenu",["dojo/_base/declare","dojo/_base/event","dojo/dom-class","dojo/query","dijit/form/_ComboBoxMenu"],function(c,d,e,f,g){return c("idx.form._ComboBoxMenu",[g],{_onMouseUp:function(a){this.readOnly||this.inherited(arguments)},_onMouseDown:function(a,b){d.stop(a);if(this._hoveredNode)this.onUnhover(this._hoveredNode),this._hoveredNode=null;this._isDragging=!0;this._setSelectedAttr(b);if(b&&b.parentNode==this.containerNode)this.onMouseDown(b)},onMouseDown:function(a){e.add(a,
+"dijitMenuItemActive")},onUnMouseDown:function(){f(".dijitMenuItemActive",this.domNode).removeClass("dijitMenuItemActive")}})});

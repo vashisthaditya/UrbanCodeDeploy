@@ -1,0 +1,139 @@
+@import '../carbon/globals/import-once';
+
+@mixin iconsrtl {
+    /*
+    * Licensed Materials - Property of IBM* and/or HCL**
+    * UrbanCode Deploy
+    * (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+    * (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+    *
+    * U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+    * GSA ADP Schedule Contract with IBM Corp.
+    *
+    * * Trademark of International Business Machines
+    * ** Trademark of HCL Technologies Limited
+    */
+    
+    .rtl-ui .folderIcon, .rtl-ui .activityTreeIcon {
+        margin: 0 0 -3px 5px;
+    }
+    
+    .rtl-ui .folderGearIcon {
+        margin-bottom: -4px;
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .failed-icon {
+        margin-bottom: -4px;
+    }
+    
+    .rtl-ui .cellWrapper .failed-icon {
+        margin-right: 0;
+        margin-left: 6px;
+    }
+    
+    .rtl-ui .twoPaneEntry .failed-icon {
+        margin-left: 0;
+        margin-right: 6px;
+    }
+    
+    .rtl-ui .componentIcon {
+        margin: -2px 0 -4px 5px;
+    }
+    
+    .rtl-ui .agentIcon {
+        margin-bottom: -4px;
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .agentPlaceholderIcon {
+        margin-bottom: -3px;
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .agentPoolIcon {
+        margin-bottom: -4px;
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .editIcon {
+        margin-right: -2px;
+        margin-left: -8px;
+    }
+    
+    .rtl-ui .tagIconSizer {
+        margin-bottom: -10px;
+        margin-right: -2px;
+        margin-left: -8px;
+    }
+    
+    .rtl-ui .tagIcon {
+        margin-bottom: -12px;
+    }
+    
+    .rtl-ui .removeIcon {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .origProcessIcon {
+        margin-top: -3px;
+    }
+    
+    .rtl-ui .jobIcon {
+        margin-top: -3px;
+    }
+    
+    .rtl-ui .completeIcon {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .incompleteIcon {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .pageIcon, .rtl-ui .artifactIcon {
+        margin: -3px 0 -1px 5px;
+    }
+    
+    .rtl-ui .pageIconRed {
+        margin: -3px 0 -1px 5px;
+    }
+    
+    .rtl-ui .consoleIcon {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .settings-icon {
+        float: right;
+    }
+    
+    .rtl-ui .settings-icon.settings-category-icon {
+        margin: 0 auto 10px;
+        float: none;
+    }
+    
+    .rtl-ui .recurring-entry-icon-dark, .rtl-ui .dojoxCalendarLabel.child .endTime, .rtl-ui .dojoxCalendarVertical.child .afterIcon {
+        margin-bottom: -2px;
+    }
+    
+    .rtl-ui .dojoxCalendarVertical.child .afterIcon {
+        right: auto;
+        left: 3px;
+    }
+    
+    .rtl-ui .dw-icon {
+        margin: 10px 0 0 0;
+    }
+}
+
+@include exports('iconsrtl') {
+    @include iconsrtl;
+}

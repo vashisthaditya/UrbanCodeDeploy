@@ -1,0 +1,1080 @@
+/*
+* Licensed Materials - Property of IBM* and/or HCL**
+* UrbanCode Deploy
+* (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+* (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+*
+* U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+* GSA ADP Schedule Contract with IBM Corp.
+*
+* * Trademark of International Business Machines
+* ** Trademark of HCL Technologies Limited
+*/
+
+@import '../carbon/globals/vars';
+@import '../carbon/globals/import-once';
+
+@mixin webextWidgets {
+    
+    /* ***************************************************************** */
+    /*    Overridden styles from standard Dojo CSS                       */
+    /* ***************************************************************** */
+    
+    .dijitTimeTextBox, .dijitDateTextBox {
+      width: 9em; /* Default is 8em which cuts off text in IE with Chinese as the locale */
+    }
+    
+    /* ***************************************************************** */
+    /*    Icon classes that show an icon next to something               */
+    /* ***************************************************************** */
+    .iconPencil, .iconPlus, .iconMinus {
+      background-image: url(../../images/webext/icons/general-sprite.png);
+      background-repeat: no-repeat;
+      width: 18px;
+      height: 18px;
+    }
+    
+    .iconPencil {
+      background-position: 0 0;
+    }
+    .iconPencil:hover {
+      background-position: -27px 0;
+    }
+    .iconPencil:active {
+      background-position: -54px 0;
+    }
+    
+    .iconPlus {
+      background-position: 0 -100px;
+    }
+    .iconPlus:hover {
+      background-position: -27px -100px;
+    }
+    .iconPlus:active {
+      background-position: -54px -100px;
+    }
+    
+    .iconMinus {
+      background-position: 0 -250px;
+    }
+    .iconMinus:hover {
+      background-position: -27px -250px;
+    }
+    .iconMinus:active {
+      background-position: -54px -250px;
+    }
+    
+    .iconMoveUp, .iconMoveUpDisabled, .iconMoveDown, .iconMoveDownDisabled {
+      background-image: url(../../images/webext/icons/misc-arrow-sprite.png);
+      background-repeat: no-repeat;
+      width: 16px;
+      height: 18px;
+    }
+    
+    .iconMoveUp {
+      background-position: 0 -210px;
+    }
+    .iconMoveUp:hover {
+      background-position: -16px -210px;
+    }
+    .iconMoveUp:active {
+      background-position: -32px -210px;
+    }
+    
+    .iconMoveUpDisabled {
+      background-position: -48px -210px;
+    }
+    
+    .iconMoveDown {
+      background-position: 0 -240px;
+    }
+    .iconMoveDown:hover {
+      background-position: -16px -240px;
+    }
+    .iconMoveDown:active {
+      background-position: -32px -240px;
+    }
+    
+    .iconMoveDownDisabled {
+      background-position: -48px -240px;
+    }
+    
+    .icon_check_green {
+      background: url(../../images/webext/icons/icon_check_green.png) no-repeat;
+      width: 16px;
+      height: 16px;
+    }
+    
+    .icon_check_gray {
+      background: url(../../images/webext/icons/icon_check_gray.png) no-repeat;
+      width: 16px;
+      height: 16px;
+    }
+    
+    .monospace {
+      font-family:  monospace !important;
+    }
+    
+    .logContainer {
+      position: absolute;
+      top: 0px;
+      bottom: 40px;
+      left: 0px;
+      right: 0px;
+      font-size: 12px;
+      overflow: auto;
+    }
+    
+    .linesContainer {
+      position: absolute;
+      padding: 6px 0px;
+      font-family:  monospace !important;
+      width: 47px;
+      background-color: $ui-03;
+      border-right: 1px solid #444488;
+      border-top: 1px solid #444488;
+      border-bottom: 1px solid #444488;
+    }
+    
+    .linesContainer>div {
+      padding: 0px 6px;
+    }
+    
+    .logText {
+      border-top: 1px solid #444488;
+      border-bottom: 1px solid #444488;
+      position: absolute;
+      left: 49px;
+      padding: 6px 0px;
+      padding-left: 0px;
+      font-family:  monospace !important;
+      white-space: pre;
+    }
+    
+    .logText>div {
+      padding: 0px 6px;
+    }
+    
+    .dj_ie .logText {
+      white-space: no-wrap;
+    }
+    
+    .logButtons {
+      position: absolute;
+      bottom: 4px;
+      width: 100%;
+    }
+    
+    .logButtons .pageNumbers .dijitTextBox .dijitInputField {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    
+    .mainContainer {
+        padding:10px 20px 20px 20px;
+        background:url(../../images/webext/borderBead.gif) top repeat-x;
+    }
+    .dj_ie7 .mainContainer {
+        padding-top: 1px;
+    }
+    
+    
+    .bgFiller {
+        background: #e2e2e3;
+    }
+    .popupBody {
+        font-size: 11px;
+    }
+    .navLink {
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+    .navLinkActive {
+        font-decoration: none;
+        color: #000000;
+    }
+    .navLinkSeparator {
+        font-size: 12px;
+        padding: 0px 4px;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+    
+    div.hr {
+        /*background:url(../dojo/themes/images/bg_hr.gif);*/
+        height:15px;
+    }
+    iframe {
+        border:none;
+    }
+    
+    .filterBox {
+        background:url(../dojo/themes/images/inset_BG.gif) repeat-x top #e2e2e3;
+        float: left;
+        padding:10px 15px;
+      margin-right: 18px;
+    }
+    .filterBox .dijitTextBox {
+        color:orange !important;
+        font-style:italic !important;
+    }
+    .filterBox input {
+        background:#fff !important;
+        border:none !important;
+    }
+    .filterBox .dijitTextBox input {
+        text-transform:uppercase;
+        color:#000;
+        background:purple;
+    }
+    
+    .noDropDown .dijitDownArrowButton {
+        display: none;
+    }
+    
+    .stackedLabel {
+        padding:6px 0 1px 0;
+    }
+    
+    .deleteIcon {
+        display: inline-block;
+        position: relative;
+        left: 2px;
+        top: 3px;
+        height: 14px;
+        width: 14px;
+    }
+    
+    .editDependency .dijitSelect {
+        margin: 0px;
+    }
+    .editDependency .dijitButton .dijitButtonNode {
+        margin-top: 0px;
+    }
+    .editDependency .dijitContentPane {
+        top: 2px !important;
+    }
+    .required {
+        color: red;
+        font-size: 13px;
+        margin-left: 3px;
+    }
+    .wideFormLabel {
+        font-size: 16px;
+        font-weight: bold;
+        padding-left: 20px;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+    .wideFormSubLabel {
+        font-size: 13px;
+        font-weight: bold;
+        padding-left: 30px;
+        margin-top: 8px;
+        margin-bottom: 3px;
+    }
+    
+    .raisedFormElement {
+        margin: 0px 2px !important;
+    }
+    
+    .dj_ie7 .raisedFormElement {
+        top: 0px;
+    }
+    
+    .raisedFormElement .dijitButtonNode {
+        margin-top: 0px !important;
+    }
+    
+    .actionsLink {
+        margin-right: 8px;
+        text-decoration: underline;
+    }
+    
+    
+    .radioButtonGroup .dijitRadio {
+      vertical-align: top;
+    }
+    .radioButtonGroup .radioButtonLabel {
+      width: 358px;
+      margin-bottom: 4px;
+    }
+    
+    .last {
+        clear: right;
+    }
+    .first {
+        clear: left;
+    }
+    .clearFloats {
+        clear: both;
+    
+    }
+    
+    #popupContainer {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 3;
+    }
+    
+    .upperTabs {
+        height: 29px;
+        margin-left:2px;
+    }
+    .dijitTabPaneWrapper {
+    }
+    /* ------------------------------------------------------------------- */
+    
+    .footerContainer, #_webext_footer {
+        overflow: hidden;
+    }
+    .footer {
+        color: #888888;
+        font-size: 10px;
+        letter-spacing: 0.04em;
+        line-height: 12px;
+        text-align: center;
+    }
+    div.clear {
+        clear:both;
+    }
+    .exp, .col {
+        background:url(../dojo/images/sprite_expCol.png) no-repeat;
+        height:10px;
+        width:10px;
+        overflow:hidden;
+        vertical-align:middle;
+        float:left;
+        margin:2px 5px 0 0;
+        cursor:pointer;
+    }
+    .exp {
+        background-position:top;
+    }
+    .col {
+        background-position:bottom;
+    }
+    .noBorder {
+        border:none !important;
+    }
+    .headerTreeRow {
+        background:url(../dojo/images/table_header.png) repeat-x top #cde4f4 !important;
+    }
+    .evenTreeRow {
+        background-color:#f3f6fb !important;
+        border-bottom: solid 1px #d7e3f7 !important;
+    }
+    .oddTreeRow {
+        background: #d7e3f7 !important;
+        border-bottom: solid 1px #f3f6fb !important;
+    }
+    .emptyTree {
+        text-align: center;
+        padding: 10px 0px;
+    }
+    
+    .loadingBox {
+        width: 200px;
+        margin: 10px auto;
+        text-align: center;
+    }
+    
+    .loadingBoxBorder {
+        width: 200px;
+        margin: 10px auto;
+        text-align: center;
+        padding: 10px;
+        background-color: #F3F6FB;
+        border: 1px solid #AEC0D6;
+    }
+    
+    :focus { outline:none }
+    
+    /* ***************************************************************** */
+    /*    JsonRestTree                                                   */
+    /* ***************************************************************** */
+    
+    /* hide tree icons (folder/files) unless in a .fileTree element */
+    .jsonRestTree.treeTableCont .dijitTreeIcon {
+        display: none;
+    }
+    
+    
+    /* re-show tree icons (folder/files) when in a .fileTree element */
+    .fileTree .jsonRestTree.treeTableCont .dijitTreeIcon {
+        display: inline;
+        display: inline-block;
+    }
+    
+    .jsonRestTree .helpImage {
+      height: 12px;
+    }
+    
+    .jsonRestTree .treeTableRow {
+        min-height:18px;
+        display: inline;
+        zoom: 1;
+    }
+    
+    .jsonRestTree .treeTableCell {
+        padding:5px 5px 1px 5px;
+        display: inline-block;
+        font-size:11px;
+        letter-spacing:0.01em;
+        border-right:solid 1px #fff;
+        white-space:nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        text-overflow: ellipsis;
+        vertical-align: top;
+    }
+    
+    /* ***************************************************************** */
+    
+    .successAlert {
+        width: 100%;
+        padding: 5px;
+        text-align: center;
+    }
+    .errorText, .genericDetail .detailField.errorText {
+        color: red;
+        padding: 4px;
+        font-weight: bold;
+    }
+    .helpImage {
+      margin-left: 3px;
+    }
+    
+    .container { width: 200px; display: block; background: #white; border: 3px solid #ccc; padding: 1em 1em; height: 250px; overflow: auto;}
+    .clear { clear: both }
+    .container .dojoDndItem { background: #efefef; }
+    .container .dojoDndItem.dojoDndItemOver { background: #ef9f9f; }
+    .container .dojoDndItem.dojoDndItemAnchor { background: #9fef9f; }
+    .container .dojoDndItem.dojoDndItemSelected { background: #9f9fef; }
+    
+    /* ------------------ login table -------------------- */
+    table.login {
+        margin-left:auto;
+        margin-right:auto;
+    }
+    table.login td.label {
+        text-align:right;
+        margin-right:20px;
+    }
+    
+    .dojoBlockOverlay {
+        background:url('../../images/webext/loading.gif') no-repeat center center;
+    }
+    
+    #tabManagerContainerId {
+        margin:0 13px;
+    }
+    
+    .pagerItem {
+      margin: 0px 4px;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .errorBox {
+        background-color: #FFA0A0;
+        white-space: pre-wrap;
+    }
+    
+    .noPadding {
+        padding: 0px !important;
+    }
+    
+    .noMargin {
+        margin: 0px !important;
+    }
+    
+    
+    
+    
+    /*
+    a:link - a normal, unvisited link
+    a:visited - a link the user has visited
+    a:hover - a link when the user mouses over it
+    a:active - a link the moment it is clicked
+    */
+    
+    .link {
+        cursor: pointer;
+        color:#076ebd;
+    }
+    
+    .link.disabled {
+        cursor: auto;
+        color: black;
+    }
+    
+    .linkPointer {
+      color: #00649d;
+      cursor: pointer;
+    }
+    
+    .pointer {
+        cursor: pointer;
+    }
+    
+    .wordBreakerTable>table {
+        table-layout: fixed;
+    }
+    
+    .wordBreakerTable>table td,
+    .wordBreakerTable>table th {
+        word-wrap: break-word;
+    }
+    
+    /* ***************************************************************** */
+    /*    Source Browser                                                 */
+    /* ***************************************************************** */
+    
+    .sourceBrowser .icon_select_row {
+      background: url(../../images/webext/icons/icon_check_gray.png) no-repeat;
+      width: 16px;
+      height: 16px;
+    }
+    
+    .sourceBrowser .dijitTreeRowSelected .icon_select_row {
+      background: url(../../images/webext/icons/icon_check_green.png) no-repeat;
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* ***************************************************************** */
+    /*    Table.js                                                       */
+    /* ***************************************************************** */
+    
+    .helpImage {
+        background: url(../../images/webext/icon_help.png);
+        width: 16px;
+        height: 16px;
+    }
+    
+    .arrow_fastBackwards,
+    .arrow_fastBackwards_grey,
+    .arrow_fastForward,
+    .arrow_fastForward_grey {
+        width: 13px;
+        height: 14px;
+        background-image: url(../../images/webext/icons/misc-arrow-sprite.png);
+        background-repeat: no-repeat;
+        position: relative;
+        top: 3px;
+        cursor: pointer;
+    }
+    
+    .arrow_backwards,
+    .arrow_backwards_grey,
+    .arrow_forward,
+    .arrow_forward_grey {
+        width: 14px;
+        height: 14px;
+        background-image: url(../../images/webext/icons/misc-arrow-sprite.png);
+        background-repeat: no-repeat;
+        position: relative;
+        top: 3px;
+        cursor: pointer;
+    }
+    
+    .arrow_fastBackwards {
+        background-position: 0 -177px;
+    }
+    .arrow_fastBackwards:hover {
+        background-position: -16px -177px;
+    }
+    .arrow_fastBackwards:active {
+        background-position: -32px -177px;
+    }
+    
+    .arrow_fastBackwards_grey,
+    .arrow_fastBackwards.arrow_disabled {
+        background-position: -48px -177px;
+        cursor: default;
+    }
+    
+    .arrow_backwards {
+        background-position: 4px -87px;
+    }
+    .arrow_backwards:hover {
+        background-position: -12px -87px;
+    }
+    .arrow_backwards:active {
+        background-position: -28px -87px;
+    }
+    
+    .arrow_backwards_grey,
+    .arrow_backwards.arrow_disabled {
+        background-position: -44px -87px;
+        cursor: default;
+    }
+    
+    .arrow_forward {
+        background-position: 4px -57px;
+    }
+    .arrow_forward:hover {
+        background-position: -12px -57px;
+    }
+    .arrow_forward:active {
+        background-position: -28px -57px;
+    }
+    
+    .arrow_forward_grey,
+    .arrow_forward.arrow_disabled {
+        background-position: -44px -57px;
+        cursor: default;
+    }
+    
+    .arrow_fastForward {
+        background-position: 0 -147px;
+    }
+    .arrow_fastForward:hover {
+        background-position: -16px -147px;
+    }
+    .arrow_fastForward:active {
+        background-position: -32px -147px;
+    }
+    
+    .arrow_fastForward_grey,
+    .arrow_fastForward.arrow_disabled {
+        background-position: -48px -147px;
+        cursor: default;
+    }
+    
+    .icon_delete {
+        background: url(../../images/webext/icons/general-sprite.png) no-repeat 0 -350px;
+        width: 14px;
+        height: 14px;
+    }
+    .icon_delete:hover {
+        background-position: -27px -350px;
+    }
+    .icon_delete:active {
+        background-position: -54px -350px;
+    }
+    
+    .icon_delete_red {
+        background: url(../../images/webext/icons/general-sprite.png) no-repeat 0 -375px;
+        width: 14px;
+        height: 14px;
+    }
+    .icon_delete_red:hover {
+        background-position: -27px -375px;
+    }
+    .icon_delete_red:active {
+        background-position: -54px -375px;
+    }
+    
+    .arrow_asc,
+    .arrow_desc {
+        width: 9px;
+        height: 6px;
+        background-image: url(../../images/webext/icons/misc-arrow-sprite.png);
+        background-repeat: no-repeat;
+    }
+    
+    .arrow_asc {
+        background-position: 0 -30px;
+    }
+    
+    .arrow_desc {
+        background-position: 0 0;
+    }
+    
+    /* ***************************************************************** */
+    /*    DialogMultiSelect.js                                           */
+    /* ***************************************************************** */
+    
+    .partialSelect {
+        background-image:url('../../images/webext/checkboxStates_alt.png') !important;
+    }
+    
+    .dialogMultiSelectDialog label {
+        display: block;
+        margin: 2px;
+        white-space: nowrap;
+    }
+    
+    .dialogMultiSelectDialog label.hidden {
+        display: none;
+    }
+    
+    /* ***************************************************************** */
+    /*    CheckboxGroup.js                                                   */
+    /* ***************************************************************** */
+    
+    .checkBoxGroup .groupOption {
+        display: inline-block;
+        margin-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    
+    /* ***************************************************************** */
+    /*    PopDown.js                                                     */
+    /* ***************************************************************** */
+    .popDown .popDownHeader {
+      margin-bottom: 6px;
+      padding-left: 14px;
+      font-size: 16px;
+      width: 0px;
+      height: 14px;
+      background: url(../../images/webext/icons/misc-arrow-sprite.png) no-repeat;
+      background-position: 0 -270px;
+      white-space: nowrap;
+    }
+    .popDown .popDownHeader:hover {
+        background-position: -16px -270px;
+    }
+    .popDown .popDownHeader:active {
+        background-position: -32px -270px;
+    }
+    .popDownCollapsed .popDownHeader {
+      background: url(../../images/webext/icons/misc-arrow-sprite.png) no-repeat;
+      background-position: 0 -330px;
+    }
+    .popDownCollapsed .popDownHeader:hover {
+      background-position: -16px -330px;
+    }
+    .popDownCollapsed .popDownHeader:active {
+      background-position: -32px -330px;
+    }
+    
+    .popDownCollapsed .popDownContent {
+      display: none;
+    }
+    
+    
+    /* ***************************************************************** */
+    /*    TwoPaneManager                                                 */
+    /* ***************************************************************** */
+
+    .innerContainer .twoPaneManager .twoPaneContainer {
+      border: 1px solid #666666;
+    }
+    
+    .twoPaneManager .twoPaneList {
+      float: left;
+      width: 225px;
+      min-height: 380px;
+      border-right: 2px solid #d2d2d2;
+    }
+    .innerContainer .twoPaneManager .twoPaneContainer {
+      border-right: 2px solid #666666;
+    }
+    
+    .innerContainer .twoPaneManager .twoPaneDetail {
+      border-left: 2px solid #666666;
+    }
+    .twoPaneManager .twoPaneDetailPadding {
+      padding: 0 20px 20px;
+    }
+    .twoPaneManager .twoPaneDetailPadding .containerLabel {
+      padding-left: 0px !important;
+    }
+    .twoPaneManager .twoPaneEntry {
+      position: relative;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .twoPaneManager .twoPaneEntry .twoPaneEntryLabel {
+      overflow-x: hidden;
+      word-wrap: break-word;
+    }
+    
+    .twoPaneManager .twoPaneEntry .twoPaneActionIcons {
+      float: right;
+      display: inline-block;
+      height: 16px;
+      padding-right: 7px;
+    }
+    
+    .twoPaneManager .twoPaneEntry .twoPaneArrow {
+      background-image: url(../../images/webext/icons/misc-arrow-sprite.png);
+      background-repeat: no-repeat;
+      background-position: 0 -60px;
+      height: 10px;
+      width: 7px;
+      position: absolute;
+      right: 4px;
+      top: 7px;
+      display: none;
+    }
+    .twoPaneManager .twoPaneSelectedEntry .twoPaneArrow,
+    .twoPaneManager .twoPaneEntry:hover .twoPaneArrow {
+      display: block;
+    }
+    
+    /** For a two-pane manager inside a two-pane manager */
+    .twoPaneManager .twoPaneManager {
+      padding-top: 20px;
+    }
+    .twoPaneManager .twoPaneManager .twoPaneContainer {
+      margin: 0;
+    }
+    .twoPaneManager .twoPaneManager .twoPaneContainer .twoPaneList {
+      background-color: #ffffff;
+    }
+    
+    
+    /**************************************************************************************************
+     * Color Picker
+     **************************************************************************************************/
+    .color-picker {
+        vertical-align: top;
+    }
+    
+    .color-picker.simple-colors, .color-picker.basic-colors {
+        width: 176px;
+    }
+    .color-picker.standard-colors, .color-picker.full-colors {
+        width: 264px;
+    }
+    .color-picker > .color-picker-boxes-container > .color-boxes-container {
+        background-color: #F0F0F0;
+    }
+    .color-picker > .color-picker-boxes-container > .color-boxes-container > .color-boxes-column {
+        width: 44px;
+    }
+    .color-picker > .color-picker-boxes-container > .color-boxes-container > .color-boxes-column > .color-box {
+        height: 44px;
+        width: 44px;
+        border-radius: 0;
+        border: none;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+    .color-picker > .color-picker-boxes-container > .color-boxes-container > .color-boxes-column > .color-box:hover,
+    .color-picker > .color-picker-boxes-container > .color-boxes-container > .color-boxes-column > .color-box:focus {
+        border: 4px solid #333;
+    }
+    .color-picker.color-picker-disabled > .color-picker-boxes-container > .color-boxes-container > .color-boxes-column > .color-box:hover {
+        border: none;
+    }
+    .color-picker > .color-picker-boxes-container > .color-boxes-container > .color-boxes-column > .color-box.selected-color,
+    .color-picker.color-picker-disabled > .color-picker-boxes-container > .color-boxes-container > .color-boxes-column > .color-box.selected-color {
+        border-radius: 100%;
+        border: 4px solid #F0F0F0;
+    }
+    
+    .color-picker > .selected-color-box-container {
+        margin-top: 10px;
+    }
+    
+    .color-picker > .selected-color-box-container .selected-color-box {
+        background-color: #FFF;
+        box-sizing: border-box;
+        height: 100%;
+        position: relative;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper {
+        min-height: 30px;
+        padding: 5px 0;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper div {
+        text-align: center;
+        color: #FFF;
+        font-size: 1em;
+        margin: 5px 10px;
+        line-height: 1;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper > .selected-color-box-text {
+        font-size: 1.1em;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box.light-color > .selected-color-box-text-wrapper div {
+        color: #333;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper .selected-color-box-text-hex-value,
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper > .selected-color-box-converted-from-container {
+        display: none;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper.show-color-hex-value .selected-color-box-text-hex-value,
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper.show-color-hex-value > .selected-color-box-converted-from-container {
+        display: block;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper > .selected-color-box-converted-from-container > .color-converted-name {
+        border-top: 1px solid #FFF;
+        padding-top: 5px;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box.light-color > .selected-color-box-text-wrapper > .selected-color-box-converted-from-container > .color-converted-name {
+        border-top-color: #333;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box > .selected-color-box-text-wrapper > .selected-color-box-converted-from-container > .color-converted-color {
+        height: 20px;
+        width: 20px;
+        margin: 5px auto;
+        border-radius: 100%;
+        border: 2px solid #FFF;
+    }
+    .color-picker > .selected-color-box-container .selected-color-box.light-color > .selected-color-box-text-wrapper > .selected-color-box-converted-from-container > .color-converted-color {
+        border-color: #333;
+    }
+    
+    .color-picker.color-picker-disabled > .color-picker-boxes-container > .color-boxes-container > .color-boxes-column > .color-box {
+        cursor: default;
+    }
+    .color-picker.color-picker-disabled > .color-picker-boxes-container > .color-boxes-container  > .color-boxes-column > .color-box {
+        opacity: 0.5;
+    }.color-picker.color-picker-disabled > .color-picker-boxes-container > .color-boxes-container  > .color-boxes-column > .color-box.selected-color {
+        opacity: 1;
+        border-radius: 0;
+    }
+    
+    /***********************************
+     * InfiniteScrollMixin
+     ***********************************/
+    .infinite-scroll-loading-more-container {
+        height: 50px;
+        width: 100%;
+        text-align: center;
+        background-color: #EEE;
+        margin-bottom: 400px;
+    }
+    .infinite-scroll-loading-more-container > .infinite-scroll-loading-more-container-text {
+        position: relative;
+        top: 12px;
+        font-size: 1.5em;
+        font-weight: 300;
+    }
+    
+    /***********************************
+     * Loading Spinner
+     ***********************************/
+    .webext-spinner, .webext-spinner.hide-spinner {
+        opacity: 0;
+        zoom: 0;
+        visibility: hidden;
+        -webkit-transition: opacity 0.25s 0s ease, zoom 0.25s 0s ease, visibility 0.25s 0s ease;
+        -moz-transition: opacity 0.25s 0s ease, zoom 0.25s 0s ease, visibility 0.25s 0s ease;
+        transition: opacity 0.25s 0s ease, zoom 0.25s 0s ease, visibility 0.25s 0s ease;
+    }
+    .webext-spinner.show-spinner {
+        opacity: 1;
+        zoom: 1;
+        visibility: visible;
+    }
+    .webext-spinner > div {
+        background-image: url("../../images/webext/loading/loading-spinner-64px.png");
+        height: 64px;
+        width: 64px;
+    }
+    .dj_ie7 .webext-spinner > div,
+    .dj_ie8 .webext-spinner > div {
+        background-image: url("../../images/webext/loading/loading-spinner-64px.gif");
+        height: 64px;
+        width: 64px;
+    }
+    .webext-spinner > .black-spinner {
+        background-position: 0 0;
+    }
+    .webext-spinner > .white-spinner {
+        background-position: 0 -64px;
+    }
+    .webext-spinner > .blue-spinner {
+        background-position: -64px -64px;
+    }
+    .webext-spinner > .darkblue-spinner {
+        background-position: -64px -64px;
+    }
+    
+    /***********************************
+     * GenericConfirm
+     ***********************************/
+    .webext-generic-confirm .confirm-message {
+      max-width: 500px;
+    }
+    
+    /***********************************
+     * Icons (High Resolution)
+     ***********************************/
+    @media (min-resolution: 144dpi),
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (min--moz-device-pixel-ratio: 1.5),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min-device-pixel-ratio: 1.5),
+    (min-resolution: 1.5dppx) {
+        .iconPencil, .iconPlus, .iconMinus, .labelsAndValues-helpCell, .icon_delete, .icon_delete_red {
+            background-image: url(../../images/webext/icons/general-retina-sprite.png);
+            background-size: 81px 400px ;
+        }
+    
+        .arrow_fastBackwards, .arrow_fastBackwards_grey, .arrow_fastForward, .arrow_fastForward_grey,
+        .arrow_backwards, .arrow_backwards_grey, .arrow_forward, .arrow_forward_grey, .arrow_asc, .arrow_desc,
+        .iconMoveUp, .iconMoveUpDisabled, .iconMoveDown, .iconMoveDownDisabled,
+        .popDown .popDownHeader, .popDownCollapsed .popDownHeader, .twoPaneManager .twoPaneEntry .twoPaneArrow {
+            background-image: url(../../images/webext/icons/misc-arrow-retina-sprite.png);
+            background-size: 64px 374px;
+        }
+    
+        .oneui.dojoDndMove .dojoDndAvatarHeader, .oneui.dojoDndCopy .dojoDndAvatarHeader {
+            background-image: url("../../images/webext/icons/dnd-avatar-retina-icons.png");
+            background-size: 24px 128px ;
+        }
+    
+        .webext-spinner > div {
+            background-image: url("../../images/webext/loading/loading-spinner-128px.png");
+            background-size: 128px 128px ;
+        }
+    }
+    
+    /***********************************
+     * Progress Bars
+     ***********************************/
+    
+    .webext.progressBar
+    {
+        background-color: #22b0e5;
+        color: #191919;
+        font-size: .75rem;
+    }
+    
+    .webext.progressBar .progressIndicator,
+    .webext.progressBar .progressIndicator .progressIndicatorFill
+    {
+        height: 5px;
+    }
+    
+    .webext.progressBar .caption  {
+        margin-top: 14px;
+    }
+    
+    .webext.progressBar .caption .label {
+        margin-left: 30px;
+        font-weight: 600;
+    }
+    
+    .webext.progressBar .caption .progressDetailsProgressCount {
+        margin-left: 30px;
+    }
+    
+    .webext.progressBar .progressIndicator {
+        position: relative;
+        margin: 10px 30px;
+        background-color: #d9d9d9;
+    }
+    
+    .webext.progressBar .progressIndicator .progressIndicatorFill {
+        background-color: #264a60;
+        width: 0px;
+    }
+    
+    .webext.progressBar .caption .progressDetailsTimeInfo {
+        float:right;
+        padding-right: 30px;
+    }
+}
+
+@include exports('webextWidgets') {
+    @include webextWidgets;
+}

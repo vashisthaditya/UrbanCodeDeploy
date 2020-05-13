@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/hu/_DateTimeTextBox",{idxTimeIconTitle:"Kattintson ide az id\u0151v\u00e1laszt\u00f3 megnyit\u00e1s\u00e1hoz",idxDateIconTitle:"Kattintson ide a d\u00e1tumv\u00e1laszt\u00f3 megnyit\u00e1s\u00e1hoz"});

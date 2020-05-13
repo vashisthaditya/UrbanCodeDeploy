@@ -1,0 +1,202 @@
+@import "button";
+@import '../../../carbon/globals/import-once';
+
+@mixin dijitSelect-small {
+
+    .dijitButtonContents {
+        line-height: 32px;
+
+        .dijitSelectLabel {
+            margin: 7px 10px 7px 10px;
+        }
+    }
+
+    .dijitArrowButtonContainer {
+        margin: 9px 10px 9px 0px;
+    }
+}
+
+@mixin webext-select-small {
+    .dijit .dijitArrowButtonContainer {
+        margin: 9px 10px 9px 0px;
+    }
+
+    .dijit .clear-container {
+        padding: 2px 1px 3px 3px;
+    }
+}
+
+@mixin dijit-select {
+    
+    %dijitSelect-base {
+        @include reset;
+        @include font-family;
+        @include font-smoothing;
+        @include letter-spacing;
+    
+        border: 1px solid transparent;
+        box-sizing: border-box !important;
+        background-color: $field-01;
+        color: $color__navy-gray-6;
+    }
+    
+    .dijitSelect {
+        @extend %dijitSelect-base;
+        
+        .dijitButtonContents {
+            border: none;
+            color: black;
+            line-height: 40px;
+    
+            .dijitSelectLabel {
+                margin: 11px 15px 11px 15px;
+            }
+        }
+    
+        &.dijitSelectDisabled {
+            .dijitButtonContents {
+                color: $color__navy-gray-6;
+            }
+        }
+         
+        .dijitArrowButtonContainer  {
+            padding-right: 10px;
+        }
+    }
+    
+    .dijitSelectOpened {
+        border: 1px solid $color__blue-51;
+    }
+    
+    .dijitDropDownButton {
+        @include reset;
+        @include font-family;
+        @include font-smoothing;
+        @include letter-spacing;
+    
+        .dijitButtonNode {
+            @extend %dijitSelect-base;
+            @include button-base;
+            border: 1px solid transparent;
+            transition: none;
+            font-weight: 400;
+        }
+    
+        &.dijitOpened {
+            .dijitButtonNode {
+                border: 1px solid $color__blue-51;
+            }
+        }
+    
+        &.dijitDropDownButtonDisabled {
+            @include disabled-button;
+        }
+    }
+    
+    
+    .filtering-scroll-select .combo-box-attach {
+        position: relative;
+    }
+    
+    .filtering-scroll-select .dijitComboBox {
+        position: relative; /* So we can absolutely position the clear-container in it */
+    }
+    
+    .filtering-scroll-select .clear-container {
+        position: absolute;
+        top: 8px;
+        right: 30px;
+        width: 15px;
+        height: 14px;
+        padding: 5px 1px 3px 3px;
+        display: none;
+    }
+    .filtering-scroll-select.has-value .clear-container {
+        display: inline-block;
+    }
+    
+    .filtering-scroll-select .selected-items-list {
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin-bottom: 4px;
+    }
+    .filtering-scroll-select .selected-items-list.selected-items-list-empty {
+        margin-bottom: 0px;
+    }
+    .selected-item-container {
+        position: relative;
+        margin: 0 0 4px 0;
+        background-color: #00B2EF;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color: #FFF;
+    }
+    
+    .filtering-scroll-select .clear-selected-items {
+        text-align: center;
+        margin: 4px 0;
+        color: #00B2EF;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        display: none;
+    }
+    .filtering-scroll-select .clear-selected-items:hover {
+        text-decoration: underline;
+    }
+    .filtering-scroll-select.has-value .clear-selected-items {
+        display: block;
+    }
+    
+    .selected-item-container {
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    
+    .dojoDndAvatarItem .selected-item-container .remove-selected-item {
+        display: none;
+    }
+    .selected-item-container .selected-item-orderable-handle {
+        float: left;
+        border-right-style: solid;
+        border-right-width: 1px;
+        padding-bottom: 1px;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 0px;
+        margin-right: 4px;
+    }
+    .dojoDndAvatarItem .selected-item-container .selected-item-orderable-handle {
+        display: none;
+    }
+    .selected-item-container .remove-selected-item:hover {
+        cursor: pointer;
+        -moz-border-top-right-radius: 2px;
+        -moz-border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom-right-radius: 2px;
+    }
+    .webext-multi-select.orderable-multi-select .dojoDndItem {
+      border-style: solid;
+      border-color: transparent;
+      border-right-width: 0px;
+      border-left-width: 0px;
+      border-top-width: 2px;
+      border-bottom-width: 2px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+    }
+    .webext-multi-select.orderable-multi-select .dojoDndItemBefore{
+      border-top-color: rgb(51, 102, 153);
+    }
+    .webext-multi-select.orderable-multi-select .dojoDndItemAfter{
+      border-bottom-color: rgb(51, 102, 153);
+    }
+    .webext-multi-select.orderable-multi-select .dojoDndItem .selected-item-container {
+      border-top-width: 0px;
+      border-bottom-width: 0px;
+    }
+}
+
+@include exports('dijit-select') {
+    @include dijit-select;
+}

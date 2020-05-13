@@ -1,0 +1,172 @@
+#!/bin/sh
+# Licensed Materials - Property of IBM Corp.
+# IBM UrbanCode Build
+# IBM UrbanCode Deploy
+# IBM UrbanCode Release
+# IBM AnthillPro
+# (c) Copyright IBM Corporation 2002, 2013. All Rights Reserved.
+#
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+# GSA ADP Schedule Contract with IBM Corp.
+#
+# == BEGIN INSTALL MODIFICATIONS ===============================================
+#
+# Startup script for the @SERVER_PROG@
+#
+# chkconfig: 345 80 20
+# description: @SERVER_PROG@ process
+# processname: @SERVER_PROG@
+### BEGIN INIT INFO
+# Provides: @SERVER_PROG@
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Required-Start: $remote_fs $syslog $network
+# Required-Stop: $remote_fs $syslog $network
+# Short-Description: @SERVER_PROG@ process
+# Description: @SERVER_PROG@ process
+### END INIT INFO
+
+prog=$(basename $0)
+# Strip off the startup/stop level prefix
+SERVER_PROG=`echo $prog | sed -s s/ˆ[SK][0-9][0-9]//`
+SERVER_HOME="@SERVER_HOME@"
+SERVER_USER="@SERVER_USER@"
+SERVER_GROUP="@SERVER_GROUP@"
+
+# == END INSTALL MODIFICATIONS =================================================
+
+SCRIPT="$SERVER_HOME/bin/server"
+
+# detect lock dir
+if [ -d /run/lock ]; then
+  agent_lock=/run/lock/$SERVER_PROG
+elif [ -f /etc/redhat-release ]; then
+  agent_lock=/var/lock/subsys/$SERVER_PROG
+elif [ -f /etc/debian_version ]; then
+  agent_lock=/var/lock/$SERVER_PROG
+fi
+
+# detect pid dir
+if [ -d /run ]; then
+  agent_pid=/run/$SERVER_PROG.pid
+else
+  agent_pid=/var/run/$SERVER_PROG.pid
+fi
+
+# Source function library.
+if [ -r /etc/rc.d/init.d/functions ]; then
+  . /etc/rc.d/init.d/functions
+fi
+
+retval=0
+
+# -- Option Implementations ----------------------------------------------------
+
+start() {
+  touch $agent_pid
+  echo -n "Starting $SERVER_PROG: "
+
+# AMD -- Made lock location variable.
+  if [ -f $agent_lock ]; then
+    if [ -f $agent_pid ]; then
+      read kpid < $agent_pid
+      if checkpid $kpid 2>&1; then
+        echo "process already running"
+        return -1
+      else
+        echo "lock file found but no process running for pid $kpid, continuing"
+      fi
+    fi
+  fi
+
+  if [ ! -z "$SERVER_GROUP" ]; then
+    chown "$SERVER_USER:$SERVER_GROUP" $agent_pid
+  else
+    chown "$SERVER_USER" $agent_pid
+  fi
+
+  if [ -r /etc/rc.d/init.d/functions ]; then
+    daemon --user "$SERVER_USER" "$SCRIPT" start $agent_pid
+  elif [ -x /sbin/start-stop-daemon ]; then
+    usergroup="$SERVER_USER"
+    if [ ! -z "$SERVER_GROUP" ]; then
+      usergroup="$usergroup:$SERVER_GROUP"
+    fi
+    start-stop-daemon --start --oknodo --chuid "$usergroup" --pidfile "$agent_pid" --startas "$SCRIPT" -- start "$agent_pid"
+  else
+    su - "$SERVER_USER" -c "\"$SCRIPT\" start $agent_pid"
+  fi
+
+  retval=$?
+  echo
+  [ $retval = 0 ] && touch $agent_lock
+  return $retval
+}
+
+stop() {
+  shutdown_wait=5
+  echo -n "Stopping $SERVER_PROG: "
+
+  if [ -f $agent_lock ] ; then
+    if [ -r /etc/rc.d/init.d/functions ]; then
+      daemon --force --user "$SERVER_USER" "$SCRIPT" stop $agent_pid
+    elif [ -x /sbin/start-stop-daemon ]; then
+      start-stop-daemon --stop --oknodo --pidfile "$agent_pid" --retry 5
+    else
+      su - "$SERVER_USER" -c "\"$SCRIPT\" stop $agent_pid"
+    fi
+    retval=$?
+
+    sleep 3
+
+    if [ $retval = 0 ]; then
+      count=0;
+
+      if [ -f $agent_pid ]; then
+
+        read kpid < $agent_pid
+        kwait=$shutdown_wait
+
+        until [ `ps --pid $kpid | grep -c $kpid` = '0' ] || [ $count -gt $kwait ]; do
+          echo "waiting for processes to exit";
+          sleep 2
+          count=`expr $count + 1`;
+        done
+
+        if [ $count -gt $kwait ]; then
+          echo "didn't stop after $((shutdown_wait*2)) seconds; force killing process"
+          kill -9 $kpid
+        fi
+      fi
+      rm -f "$agent_lock" "$agent_pid"
+    fi
+  fi
+  echo
+}
+
+# -- Execute -------------------------------------------------------------------
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    sleep 2
+    start
+    ;;
+  condrestart)
+    if [ -f $agent_pid ]; then
+      stop
+      start
+    fi
+    ;;
+  *)
+    echo "Usage: $SERVER_PROG {start|stop|restart|condrestart}"
+    exit 1
+esac
+
+exit $retval

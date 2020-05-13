@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/zh-tw/HoverHelp",{defaultHrefLabel:"\u9032\u4e00\u6b65\u77ad\u89e3",defaultMessage:"[\u672a\u5b9a\u7fa9\u8aaa\u660e\u6587\u5b57]\u200e",defaultTitle:"\u79fb\u81f3\u5716\u793a\u6216\u6309\u4e00\u4e0b\u4ee5\u986f\u793a\u8aaa\u660e"});

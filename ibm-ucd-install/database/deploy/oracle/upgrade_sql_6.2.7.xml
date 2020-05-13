@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.2.7.x.
+-->
+
+<change-set release="n1_6.2.7">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/oracle/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/oracle/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/oracle/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/oracle/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <description>Delete unneeded and hash remaining auth tokens</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_001_hash_old_auth_tokens.groovy"/>
+    </change>
+    <change number="2">
+        <description>Add ability to only use plugin step auth tokens on particular urls</description>
+        <sql separator=";">
+            alter table sec_auth_token add metadata clob;
+        </sql>
+    </change>
+    <change number="3">
+        <description>Ghost resource roles of ghosted components</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_003_ghosed_roles_of_ghosted_components.groovy"/>
+    </change>
+    <change number="4">
+        <description>Create upgrade Agent permission</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_004_create_agent_upgrade_permission.groovy"/>
+    </change>
+    <change number="5">
+        <description>Add new agent communication</description>
+        <sql separator=";">
+            alter table ds_agent add comm_version integer default 0 not null;
+            alter table ds_agent add property_cookie varchar2(255);
+
+            create table rt_command(
+                id varchar2(36) not null primary key,
+                version integer not null,
+                command_state varchar2(64) not null,
+                command_state_version integer not null,
+                command_outcome varchar2(64) not null,
+                command_type varchar2(64) not null,
+                agent_id varchar2(64) not null,
+                log_streaming_mode varchar2(1) not null,
+                command_data blob not null
+            );
+
+            create table ds_server (
+                id varchar2(36) not null primary key,
+                version int not null,
+                sec_resource_id varchar2(36) not null,
+                name varchar2(255) not null,
+                created_date numeric not null,
+                modified_date numeric not null,
+                ghosted_date numeric not null,
+                server_id varchar2(64) not null,
+                server_uri varchar2(255) not null,
+                server_cert clob,
+                server_cert_modified_date numeric not null,
+                server_pubkey_modified_date numeric not null,
+                client_cert clob,
+                client_cert_modified_date numeric not null,
+                client_pubkey_modified_date numeric not null
+            );
+
+            create unique index ds_server_uci on ds_server(server_id, ghosted_date);
+
+            insert into sec_resource_type (id, version, name, enabled)
+            values ('20000000000000000000000000000115', 0, 'Server', 'Y');
+        </sql>
+    </change>
+    <change number="6">
+      <description>Insert new Nobody user into DB</description>
+      <sql separator=";">
+        insert into sec_user (id, version, name, enabled, sec_authentication_realm_id, is_system)
+        values ('20000000000000000000011111000000', 0, 'INTERNAL NOBODY USER FOR IBM URBANCODE DEPLOY', 'Y', '20000000000000000000000000000001', 'Y');
+      </sql>
+    </change>
+    <change number="7">
+        <description>Add table storage for auth token endpoint restrictions</description>
+        <sql separator=";">
+            create table sec_auth_token_restriction (
+                id varchar2(36) not null,
+                version numeric default 0 not null,
+                name varchar2(255) not null,
+                description varchar2(1024),
+                ghosted_date numeric default 0 not null
+            );
+
+            create table sec_verb_to_url (
+                id varchar2(36) not null,
+                version numeric default 0 not null,
+                restriction_id varchar2(36) not null,
+                verb varchar2(10) not null,
+                url varchar2(1024) not null
+            );
+
+            create unique index sec_token_restriction_name_uci
+                on sec_auth_token_restriction(name, ghosted_date);
+
+            insert into sec_auth_token_restriction(id, version, name, description, ghosted_date) values
+                ('20000001-0001-0001-0001-000000000000', 0, 'System Default', 'Used by default for any plugin steps without a specified token restriction', 0);
+            insert into sec_verb_to_url(id, version, restriction_id, verb, url) values
+                ('20000001-0001-0001-0001-000000000001', 0, '20000001-0001-0001-0001-000000000000', 'ALL', '/*');
+        </sql>
+    </change>
+    <change number="8">
+        <description>Add permissions for auth token endpoint restrictions</description>
+        <sql separator=";">
+            insert into sec_action(id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('200000000000000000000000001b0006', 0, 'Manage Auth Token Restrictions', 'Create and edit all auth token restrictions', 'Y', 'Y', '20000000000000000000000000000201', null);
+        </sql>
+    </change>
+    <change number="9">
+        <description>Add permissions for view and edit basic system settings</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_009_create_view_and_edit_basic_settings_permission.groovy"/>
+    </change>
+    <change number="10">
+        <description>Add manage permission for post processing scripts</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_010_manage_post_processing_permission.groovy"/>
+    </change>
+    <change number="11">
+        <description>Add table to track database version.</description>
+        <sql separator=";">
+            create table ds_database_version (
+                id varchar2(36) not null primary key,
+                stamp varchar2(36) not null
+            );
+            insert into ds_database_version (id, stamp)
+                values ('00000000-0000-0000-0000-000000000000', 'NO_CONFIG');
+        </sql>
+    </change>
+    <change number="12">
+        <description>Add permission for installing agents remotely</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_012_install_remote_agents.groovy"/>
+    </change>
+    <change number="13">
+        <description>Add permission for viewing and releasing locks</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_013_view_and_release_locks_permissions.groovy"/>
+    </change>
+    <change number="14">
+        <description>Add permission for manage diagnostics</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_014_manage_diagnostics_permission.groovy"/>
+    </change>
+    <change number="15">
+        <description>Add permission for managing notification schemes</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_015_manage_notification_schemes_permission.groovy"/>
+    </change>
+    <change number="16">
+        <description>Add permission for managing statuses</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_016_manage_statuses_permission.groovy"/>
+    </change>
+    <change number="17">
+        <description>Add permission for network settings tab</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_017_network_tab_permission.groovy"/>
+    </change>
+    <change number="18">
+        <description>Correct permission Ids 1/2</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_018_correct_view_basic_setting_permission_ids.groovy" />
+    </change>
+    <change number="19">
+        <description>Correct permission Ids 2/2</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_019_correct_edit_basic_setting_permission_ids.groovy" />
+    </change>
+    <change number="20">
+        <description>Remove locked column from vc in favor of HALock</description>
+        <changeref library="vc" change="11"/>
+    </change>
+    <change number="21">
+        <description>Create index across vc_persistent_record commit_id and path</description>
+        <changeref library="vc" change="12"/>
+    </change>
+    <change number="22">
+        <description>Add permissions for managing audit log</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_022-create_manage_audit_log_permission.groovy" />
+    </change>
+    <change number="23">
+        <description>Add permissions for viewing the server output log</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_023_output_log_permission.groovy" />
+    </change>
+    <change number="24">
+        <description>Add permission for managing blueprint design integrations</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_024_create_manage_blueprint_integration_permission.groovy" />
+    </change>
+    <change number="25">
+        <description>Create tsk_promotion table</description>
+        <sql separator=";">
+            create table tsk_promotion (
+                id varchar2(36) not null primary key,
+                version integer default 0 not null,
+                component_process_id varchar2(36) not null,
+                draft_process_version integer default 0 not null,
+                requested_by_user varchar2(36) not null,
+                completed_by_user varchar2(36),
+                date_requested numeric not null,
+                date_ended numeric,
+                result varchar2(64)
+            );
+            create unique index tsk_promotion_proc_date_ended on tsk_promotion(component_process_id, date_ended);
+        </sql>
+    </change>
+    <change number="26">
+        <description>Add permission for managing log4j logging</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_026_create_manage_logging_permission.groovy" />
+    </change>
+    <change number="27">
+        <description>Add permission for managing system properties</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_027_create_manage_system_properties_permission.groovy" />
+    </change>
+    <change number="28">
+        <description>Add permission for managing system properties</description>
+        <groovy file="all/upgrade-scripts-627/upgrade_028_create_delete_snapshots_permission.groovy" />
+    </change>
+<!--
+- REMINDER: Upgrades for product version 6.2.7.x. Place additions above this comment.
+-->
+</change-set>

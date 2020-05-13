@@ -1,0 +1,39 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="innerContainer">
+    <div id="executionLog"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "deploy/widgets/process/request/ExecutionLog"
+        ],
+    function(
+        ExecutionLog
+    ) {
+        var approval = appState.applicationProcessRequest.approval;
+        var approvalId;
+        if (approval) {
+            approvalId = approval.id;
+        }
+        var executionLog = new ExecutionLog({
+            approvalId: approvalId,
+            requestTraceUrl: bootstrap.restUrl+"workflow/applicationProcessRequest/"+appState.applicationProcessRequest.id
+        });
+        executionLog.placeAt("executionLog");
+    });
+    /* ]]> */
+</script>

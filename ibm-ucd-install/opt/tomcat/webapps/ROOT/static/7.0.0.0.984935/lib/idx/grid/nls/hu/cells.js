@@ -1,0 +1,2 @@
+//>>built
+define("idx/grid/nls/hu/cells",{rowCheckBoxLabel:"A sor kijel\u00f6l\u00e9s\u00e9nek megford\u00edt\u00e1sa",headerCheckBoxLabel:"Az \u00f6sszes sor kijel\u00f6l\u00e9s\u00e9nek megford\u00edt\u00e1sa"});

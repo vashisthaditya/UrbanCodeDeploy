@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/hu/ModalDialog",{Error:"Hiba",Warning:"Figyelmeztet\u00e9s",Information:"Inform\u00e1ci\u00f3k",Success:"Sikeres",Confirmation:"Meger\u0151s\u00edt\u00e9s",Question:"K\u00e9rd\u00e9s",closeButtonLabel:"Bez\u00e1r\u00e1s",cancelButtonLabel:"M\u00e9gse",executeButtonLabel:"OK",checked:"Ne k\u00e9rdezze meg \u00fajra"});

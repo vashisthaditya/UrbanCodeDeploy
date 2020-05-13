@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/sk/SingleMessage",{viewAll:"Zobrazi\u0165 v\u0161etk\u00fdch ({num})",viewDetails:"Viac podrobnost\u00ed",refresh:"Obnovi\u0165",showDetails:"Zobrazi\u0165 podrobnosti",hideDetails:"Skry\u0165 podrobnosti"});

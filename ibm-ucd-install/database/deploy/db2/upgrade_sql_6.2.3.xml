@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.2.3.x.
+-->
+
+<change-set release="n1_6.2.3">
+  <library name="workflow"
+           release="1.0"
+           base-dir="../workflow"
+           file="../workflow/db2/upgrade_sql_1.0.xml"
+           version-table="wf_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="vc"
+           release="1.0"
+           base-dir="../vc"
+           file="../vc/db2/upgrade_sql_1.0.xml"
+           version-table="vc_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="property-sheets"
+           release="1.0"
+           base-dir="../property-sheets"
+           file="../property-sheets/db2/upgrade_sql_1.0.xml"
+           version-table="ps_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="inventory"
+           release="1.0"
+           base-dir="../inventory"
+           file="../inventory/db2/upgrade_1.0.xml"
+           version-table="inv_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <change number="1">
+    <description>Create temporary table for deleted environment cleanup</description>
+    <sql separator=";">
+      create table brg_env_id_to_pr_id (
+        pr_id varchar(36) not null,
+        env_id varchar(36) not null
+      );
+      create index bridge_ids on brg_env_id_to_pr_id(pr_id, env_id);
+    </sql>
+  </change>
+  <change number="2">
+    <description>Inserting deleted rows in vc for objects which are associated with deleted environments</description>
+    <groovy file="all/upgrade-scripts-623/upgrade_002_db2_add_deleted_version_in_vc_for_objects_associated_with_deleted_environments.groovy" />
+  </change>
+  <change number="3">
+    <description>Removing temporary table used in deleted environment cleanup</description>
+    <sql separator=";">
+      drop table brg_env_id_to_pr_id;
+    </sql>
+  </change>
+  <change number="4">
+    <description>Add relative_version, deleted, directory, commit_id to LatestVersionEntry table</description>
+    <changeref library="vc" change="9"/>
+  </change>
+  <change number="5">
+    <description>Populate relative_version, deleted, directory, commit_id values in LatestVersionEntry table</description>
+    <changeref library="vc" change="10"/>
+  </change>
+  <change number="6">
+      <description>Create users for running version import, auto discovery, auto configure</description>
+    <groovy file="all/upgrade-scripts-623/upgrade_006_create_user_for_internal_plugin_steps.groovy" />
+  </change>
+  <change number="7">
+    <description>Added Automation Engineer Role</description>
+    <groovy file="all/upgrade-scripts-623/upgrade_007_automation_engineer_role.groovy"/>
+  </change>
+  <change number="8">
+    <description>Update ds_snapshot_config indexes</description>
+    <sql separator=";">
+      create unique index ds_scv_alldata on ds_snapshot_config_version(snapshot_id, path, persistent_version);
+      drop index ds_scv_uci;
+      drop index ds_scv_to_snapshot;
+    </sql>
+  </change>
+  <change number="9">
+    <description>Add ResourceInventoryEntry index</description>
+    <changeref library="inventory" change="9"/>
+  </change>
+  <change number="10">
+    <description>Adding last login date to users</description>
+    <sql separator=";">
+        alter table sec_user add column last_login_date bigint;
+        call sysproc.admin_cmd('reorg table sec_user');
+    </sql>
+  </change>
+  <change number="11">
+    <description>Move cleanup.archive.path from installed.properties to database</description>
+    <groovy file="all/upgrade-scripts-623/upgrade_011_move_cleanup_archive_path_to_propsheet.groovy" />
+  </change>
+  <change number="12">
+    <description>Race Condition causes duplicate entry in inv_desired_inventory</description>
+    <changeref library="inventory" change="10"/>
+  </change>
+  <change number="13">
+    <description>Add ds_agent index for agent status queries</description>
+    <sql separator=";">
+      create index ds_agent_ghoststatus on ds_agent(ghosted_date, last_status, id);
+    </sql>
+  </change>
+<!--
+- REMINDER: Upgrades for product version 6.2.3.x. Place additions above this comment.
+-->
+</change-set>

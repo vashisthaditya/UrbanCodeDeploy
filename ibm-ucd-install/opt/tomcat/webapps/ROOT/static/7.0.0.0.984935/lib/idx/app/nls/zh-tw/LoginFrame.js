@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/zh-tw/LoginFrame",{loginTitle:"\u767b\u5165",labelUserName:"\u4f7f\u7528\u8005\u540d\u7a31",labelPassword:"\u5bc6\u78bc",invalidMessageTitle:"\u7121\u6548\u7684\u767b\u5165\u5617\u8a66",invalidMessage:"\u5169\u500b\u5fc5\u8981\u6b04\u4f4d\u5747\u672a\u8f38\u5165\u6709\u6548\u7684\u503c\u3002"});

@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/sk/_Launcher",{tooManyOpenWorkspaces:'Nemo\u017eno otvori\u0165 viac ako ${maxOpen} pracovn\u00fdch priestorov "${workspaceTypeName}"\u200e.  Ak to je mo\u017en\u00e9, zatvorte pracovn\u00e9 priestory "${workspaceTypeName}"\u200e, ktor\u00e9 u\u017e s\u00fa otvoren\u00e9.'});

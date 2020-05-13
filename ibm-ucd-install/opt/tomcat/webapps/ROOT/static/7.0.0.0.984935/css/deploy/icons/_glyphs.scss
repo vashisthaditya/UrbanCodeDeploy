@@ -1,0 +1,1522 @@
+@import '../carbon/globals/import-once';
+
+@mixin glyphs {
+    .glyph {
+        background-image: url('../../images/icons/glyphs_spritesheet.png');
+        background-repeat: no-repeat;
+        display: block;
+    }
+    
+    .glyph-Glyph_add__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -5px;
+    }
+    
+    .glyph-Glyph_add__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -31px -5px;
+    }
+    
+    .glyph-Glyph_add__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -57px -5px;
+    }
+    
+    .glyph-Glyph_calendar__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -83px -5px;
+    }
+    
+    .glyph-Glyph_calendar__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -109px -5px;
+    }
+    
+    .glyph-Glyph_calendar__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -135px -5px;
+    }
+    
+    .glyph-Glyph_camera__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -161px -5px;
+    }
+    
+    .glyph-Glyph_camera__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -187px -5px;
+    }
+    
+    .glyph-Glyph_camera__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -213px -5px;
+    }
+    
+    .glyph-Glyph_checkmark__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -239px -5px;
+    }
+    
+    .glyph-Glyph_checkmark__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -31px;
+    }
+    
+    .glyph-Glyph_checkmark__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -31px -31px;
+    }
+    
+    .glyph-Glyph_close__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -57px -31px;
+    }
+    
+    .glyph-Glyph_close__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -83px -31px;
+    }
+    
+    .glyph-Glyph_close__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -109px -31px;
+    }
+    
+    .glyph-Glyph_cloud__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -135px -31px;
+    }
+    
+    .glyph-Glyph_cloud__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -161px -31px;
+    }
+    
+    .glyph-Glyph_cloud__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -187px -31px;
+    }
+    
+    .glyph-Glyph_component__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -213px -31px;
+    }
+    
+    .glyph-Glyph_component__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -239px -31px;
+    }
+    
+    .glyph-Glyph_component__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -57px;
+    }
+    
+    .glyph-Glyph_copy__brand-01 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -31px -57px;
+    }
+    
+    .glyph-Glyph_copy__brand-02 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -55px -57px;
+    }
+    
+    .glyph-Glyph_copy__ui-05 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -79px -57px;
+    }
+    
+    .glyph-Glyph_database__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -103px -57px;
+    }
+    
+    .glyph-Glyph_database__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -129px -57px;
+    }
+    
+    .glyph-Glyph_database__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -155px -57px;
+    }
+    
+    .glyph-Glyph_delete__brand-01 {
+        @extend .glyph;
+        width: 12px;
+        height: 16px;
+        background-position: -181px -57px;
+    }
+    
+    .glyph-Glyph_delete__ui-01 {
+        @extend .glyph;
+        width: 12px;
+        height: 16px;
+        background-position: -203px -57px;
+    }
+    
+    .glyph-Glyph_delete__ui-05 {
+        @extend .glyph;
+        width: 12px;
+        height: 16px;
+        background-position: -225px -57px;
+    }
+    
+    .glyph-Glyph_download__brand-01 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -5px -83px;
+    }
+    
+    .glyph-Glyph_download__ui-01 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -29px -83px;
+    }
+    
+    .glyph-Glyph_download__ui-05 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -53px -83px;
+    }
+    
+    .glyph-Glyph_edit__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -77px -83px;
+    }
+    
+    .glyph-Glyph_edit__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -103px -83px;
+    }
+    
+    .glyph-Glyph_edit__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -129px -83px;
+    }
+    
+    .glyph-Glyph_error__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -155px -83px;
+    }
+    
+    .glyph-Glyph_error__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -181px -83px;
+    }
+    
+    .glyph-Glyph_error__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -207px -83px;
+    }
+    
+    .glyph-Glyph_filter__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -233px -83px;
+    }
+    
+    .glyph-Glyph_filter__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -109px;
+    }
+    
+    .glyph-Glyph_filter__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -31px -109px;
+    }
+    
+    .glyph-Glyph_folder__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -57px -109px;
+    }
+    
+    .glyph-Glyph_folder__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -83px -109px;
+    }
+    
+    .glyph-Glyph_folder__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 12px;
+        background-position: -109px -109px;
+    }
+    
+    .glyph-Glyph_grid__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -135px -109px;
+    }
+    
+    .glyph-Glyph_grid__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -161px -109px;
+    }
+    
+    .glyph-Glyph_grid__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -187px -109px;
+    }
+    
+    .glyph-Glyph_group__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -213px -109px;
+    }
+    
+    .glyph-Glyph_group__brand-02 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -239px -109px;
+    }
+    
+    .glyph-Glyph_group__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -135px;
+    }
+    
+    .glyph-Glyph_help__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -31px -135px;
+    }
+    
+    .glyph-Glyph_help__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -57px -135px;
+    }
+    
+    .glyph-Glyph_help__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -83px -135px;
+    }
+    
+    .glyph-Glyph_info__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -109px -135px;
+    }
+    
+    .glyph-Glyph_info__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -135px -135px;
+    }
+    
+    .glyph-Glyph_info__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -161px -135px;
+    }
+    
+    .glyph-Glyph_launch__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -187px -135px;
+    }
+    
+    .glyph-Glyph_launch__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -213px -135px;
+    }
+    
+    .glyph-Glyph_launch__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -239px -135px;
+    }
+    
+    .glyph-Glyph_pause__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -161px;
+    }
+    
+    .glyph-Glyph_pause__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -31px -161px;
+    }
+    
+    .glyph-Glyph_pause__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -57px -161px;
+    }
+    
+    .glyph-Glyph_play__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -83px -161px;
+    }
+    
+    .glyph-Glyph_play__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -109px -161px;
+    }
+    
+    .glyph-Glyph_play__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -135px -161px;
+    }
+    
+    .glyph-Glyph_print__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -161px -161px;
+    }
+    
+    .glyph-Glyph_print__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -187px -161px;
+    }
+    
+    .glyph-Glyph_print__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -213px -161px;
+    }
+    
+    .glyph-Glyph_question__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -239px -161px;
+    }
+    
+    .glyph-Glyph_question__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -187px;
+    }
+    
+    .glyph-Glyph_question__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -31px -187px;
+    }
+    
+    .glyph-Glyph_recurring--small__brand-01 {
+        @extend .glyph;
+        width: 12px;
+        height: 12px;
+        background-position: -247px -57px;
+    }
+    
+    .glyph-Glyph_recurring--small__text-01 {
+        @extend .glyph;
+        width: 12px;
+        height: 12px;
+        background-position: -57px -187px;
+    }
+    
+    .glyph-Glyph_recurring--small__ui-01 {
+        @extend .glyph;
+        width: 12px;
+        height: 12px;
+        background-position: -79px -187px;
+    }
+    
+    .glyph-Glyph_recurring--small__ui-05 {
+        @extend .glyph;
+        width: 12px;
+        height: 12px;
+        background-position: -101px -187px;
+    }
+    
+    .glyph-Glyph_recurring__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -123px -187px;
+    }
+    
+    .glyph-Glyph_recurring__text-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -149px -187px;
+    }
+    
+    .glyph-Glyph_recurring__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -175px -187px;
+    }
+    
+    .glyph-Glyph_recurring__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -201px -187px;
+    }
+    
+    .glyph-Glyph_restart__brand-01 {
+        @extend .glyph;
+        width: 12px;
+        height: 16px;
+        background-position: -227px -187px;
+    }
+    
+    .glyph-Glyph_restart__ui-01 {
+        @extend .glyph;
+        width: 12px;
+        height: 16px;
+        background-position: -5px -213px;
+    }
+    
+    .glyph-Glyph_restart__ui-05 {
+        @extend .glyph;
+        width: 12px;
+        height: 16px;
+        background-position: -27px -213px;
+    }
+    
+    .glyph-Glyph_search__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -49px -213px;
+    }
+    
+    .glyph-Glyph_search__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -75px -213px;
+    }
+    
+    .glyph-Glyph_search__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -101px -213px;
+    }
+    
+    .glyph-Glyph_settings__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -127px -213px;
+    }
+    
+    .glyph-Glyph_settings__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -153px -213px;
+    }
+    
+    .glyph-Glyph_settings__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -179px -213px;
+    }
+    
+    .glyph-Glyph_stop__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -205px -213px;
+    }
+    
+    .glyph-Glyph_stop__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -231px -213px;
+    }
+    
+    .glyph-Glyph_stop__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -5px -239px;
+    }
+    
+    .glyph-Glyph_subtract__brand-02 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -31px -239px;
+    }
+    
+    .glyph-Glyph_subtract__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -57px -239px;
+    }
+    
+    .glyph-Glyph_subtract__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -83px -239px;
+    }
+    
+    .glyph-Glyph_tag__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -109px -239px;
+    }
+    
+    .glyph-Glyph_tag__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -135px -239px;
+    }
+    
+    .glyph-Glyph_tag__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -161px -239px;
+    }
+    
+    .glyph-Glyph_user__brand-01 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -187px -239px;
+    }
+    
+    .glyph-Glyph_user__ui-01 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -211px -239px;
+    }
+    
+    .glyph-Glyph_user__ui-05 {
+        @extend .glyph;
+        width: 14px;
+        height: 16px;
+        background-position: -235px -239px;
+    }
+    
+    .glyph-Glyph_zoom--in__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -265px -5px;
+    }
+    
+    .glyph-Glyph_zoom--in__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -265px -31px;
+    }
+    
+    .glyph-Glyph_zoom--in__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -269px -57px;
+    }
+    
+    .glyph-Glyph_zoom--out__brand-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -259px -83px;
+    }
+    
+    .glyph-Glyph_zoom--out__ui-01 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -265px -109px;
+    }
+    
+    .glyph-Glyph_zoom--out__ui-05 {
+        @extend .glyph;
+        width: 16px;
+        height: 16px;
+        background-position: -265px -135px;
+    }
+    
+    /***********************************
+     * High Resolution
+     ***********************************/
+    
+    @media (min-resolution: 144dppx),
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (min--moz-device-pixel-ratio: 1.5),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min-device-pixel-ratio: 1.5),
+    (min-resolution: 1.5dppx) {
+        .glyph-retina {
+            background-image: url('../../images/icons/glyphs_2x_spritesheet.png');
+            background-repeat: no-repeat;
+            display: block;
+            background-size: 231px 210px
+        }
+    
+        .glyph-Glyph_add__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_add__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -47px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_calendar__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -89px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_calendar__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -131px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_calendar__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -173px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_camera__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -215px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_camera__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -257px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_camera__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -299px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_checkmark__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -341px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_checkmark__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -383px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_checkmark__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_close__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -47px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_close__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -89px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_close__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -131px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_cloud__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -173px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_cloud__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -215px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_cloud__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -257px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_component__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -299px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_component__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -341px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_component__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -383px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_copy__brand-01 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_copy__brand-02 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -43px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_copy__ui-05 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -81px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_database__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -119px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_database__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -161px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_database__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -203px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_delete__brand-01 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 32px * 0.5;
+            background-position: -245px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_delete__ui-01 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 32px * 0.5;
+            background-position: -279px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_delete__ui-05 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 32px * 0.5;
+            background-position: -313px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_download__brand-01 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -347px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_download__ui-01 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -385px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_download__ui-05 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_edit__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -43px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_edit__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -85px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_edit__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -127px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_error__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -169px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_error__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -211px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_error__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -253px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_filter__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -295px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_filter__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -337px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_filter__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -379px * 0.5 -131px * 0.5;
+        }
+    
+        .glyph-Glyph_folder__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -5px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_folder__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -47px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_folder__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 24px * 0.5;
+            background-position: -89px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_grid__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -131px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_grid__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -173px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_grid__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -215px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_group__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -257px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_group__brand-02 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -299px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_group__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -341px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_help__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -383px * 0.5 -173px * 0.5;
+        }
+    
+        .glyph-Glyph_help__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_help__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -47px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_info__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -89px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_info__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -131px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_info__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -173px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_launch__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -215px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_launch__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -257px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_launch__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -299px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_pause__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -341px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_pause__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -383px * 0.5 -215px * 0.5;
+        }
+    
+        .glyph-Glyph_pause__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_play__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -47px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_play__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -89px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_play__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -131px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_print__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -173px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_print__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -215px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_print__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -257px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_question__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -299px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_question__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -341px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_question__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -383px * 0.5 -257px * 0.5;
+        }
+    
+        .glyph-Glyph_recurring--small__brand-01 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 24px * 0.5;
+            background-position: -5px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_recurring--small__text-01 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 24px * 0.5;
+            background-position: -39px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_recurring--small__ui-01 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 24px * 0.5;
+            background-position: -73px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_recurring--small__ui-05 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 24px * 0.5;
+            background-position: -107px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_recurring__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -141px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_recurring__text-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -183px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_recurring__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -225px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_recurring__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -267px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_restart__brand-01 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 32px * 0.5;
+            background-position: -309px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_restart__ui-01 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 32px * 0.5;
+            background-position: -343px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_restart__ui-05 {
+            @extend .glyph-retina;
+            width: 24px * 0.5;
+            height: 32px * 0.5;
+            background-position: -377px * 0.5 -299px * 0.5;
+        }
+    
+        .glyph-Glyph_search__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_search__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -47px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_search__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -89px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_settings__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -131px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_settings__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -173px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_settings__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -215px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_stop__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -257px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_stop__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -299px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_stop__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -341px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_subtract__brand-02 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -383px * 0.5 -341px * 0.5;
+        }
+    
+        .glyph-Glyph_subtract__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -5px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_subtract__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -47px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_tag__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -89px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_tag__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -131px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_tag__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -173px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_user__brand-01 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -215px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_user__ui-01 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -253px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_user__ui-05 {
+            @extend .glyph-retina;
+            width: 28px * 0.5;
+            height: 32px * 0.5;
+            background-position: -291px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_zoom--in__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -329px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_zoom--in__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -371px * 0.5 -383px * 0.5;
+        }
+    
+        .glyph-Glyph_zoom--in__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -425px * 0.5 -5px * 0.5;
+        }
+    
+        .glyph-Glyph_zoom--out__brand-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -425px * 0.5 -47px * 0.5;
+        }
+    
+        .glyph-Glyph_zoom--out__ui-01 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -423px * 0.5 -89px * 0.5;
+        }
+    
+        .glyph-Glyph_zoom--out__ui-05 {
+            @extend .glyph-retina;
+            width: 32px * 0.5;
+            height: 32px * 0.5;
+            background-position: -421px * 0.5 -131px * 0.5;
+        }
+    }
+}
+
+@include exports('glyphs') {
+    @include glyphs;
+}

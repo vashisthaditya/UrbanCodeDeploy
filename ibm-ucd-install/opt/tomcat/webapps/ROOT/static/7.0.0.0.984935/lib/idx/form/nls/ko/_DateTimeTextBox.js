@@ -1,0 +1,2 @@
+//>>built
+define("idx/form/nls/ko/_DateTimeTextBox",{idxTimeIconTitle:"\uc2dc\uac04 \uc120\ud0dd\ub3c4\uad6c\ub97c \uc5f4\ub824\uba74 \ud074\ub9ad",idxDateIconTitle:"\ub0a0\uc9dc \uc120\ud0dd\ub3c4\uad6c\ub97c \uc5f4\ub824\uba74 \ud074\ub9ad"});

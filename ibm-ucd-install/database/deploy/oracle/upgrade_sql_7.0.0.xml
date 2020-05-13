@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 7.0.0.x.
+-->
+
+<change-set release="n1_7.0.0">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/oracle/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/oracle/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/oracle/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/oracle/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <description>Cleanup Security Objects for Agent Comm Beta 1/5</description>
+        <sql separator=";">
+            alter table ds_server drop column sec_resource_id;
+        </sql>
+    </change>
+    <change number="2">
+        <description>Cleanup Security Objects for Agent Comm Beta 2/5</description>
+        <sql separator=";">
+            alter table ds_server drop column name;
+        </sql>
+    </change>
+    <change number="3">
+        <description>Cleanup Security Objects for Agent Comm Beta 3/5</description>
+        <sql separator=";">
+            delete from sec_resource_for_team
+            where sec_resource_id in
+                (select id from sec_resource
+                 where sec_resource_type_id = '20000000000000000000000000000115');
+         </sql>
+    </change>
+    <change number="4">
+        <description>Cleanup Security Objects for Agent Comm Beta 4/5</description>
+        <sql separator=";">
+            delete from sec_resource
+            where sec_resource_type_id = '20000000000000000000000000000115';
+        </sql>
+    </change>
+    <change number="5">
+        <description>Cleanup Security Objects for Agent Comm Beta 5/5</description>
+        <sql separator=";">
+            delete from sec_resource_type
+            where id = '20000000000000000000000000000115';
+        </sql>
+    </change>
+    <change number="6">
+        <description>Create table for locking component processes</description>
+        <sql separator=";">
+            create table ds_process_lock (
+                id varchar2(36) not null primary key,
+                version integer default 0 not null,
+                process_id varchar2(36) not null,
+                user_id varchar2(36) not null
+            );
+            create unique index ds_proc_lock_uci on ds_process_lock(process_id);
+        </sql>
+    </change>
+    <change number="7">
+        <description>Add allow draft process column to ds_environment</description>
+        <sql separator=";">
+            alter table ds_environment add allow_process_drafts varchar2(1) default 'N' not null;
+        </sql>
+    </change>
+    <change number="8">
+        <description>Add ability to select components to use drafts for on each environment</description>
+        <sql separator=";">
+            create table ds_environment_draft_usage (
+                environment_id varchar2(36) not null,
+                component_id varchar2(36) not null
+            );
+        </sql>
+    </change>
+    <change number="9">
+        <description>Add ability to track component process requests that were drafts</description>
+        <sql separator=";">
+            alter table rt_comp_process_request add  is_draft varchar2(1) default 'N' not null
+        </sql>
+    </change>
+<!--
+- REMINDER: Upgrades for product version 7.0.0.x. Place additions above this comment.
+-->
+</change-set>

@@ -1,0 +1,2 @@
+//>>built
+define("idx/grid/nls/ko/cells",{rowCheckBoxLabel:"\uc774 \ud589\uc758 \uc120\ud0dd\uc0ac\ud56d \ud1a0\uae00",headerCheckBoxLabel:"\ubaa8\ub4e0 \ud589\uc758 \uc120\ud0dd\uc0ac\ud56d \ud1a0\uae00"});

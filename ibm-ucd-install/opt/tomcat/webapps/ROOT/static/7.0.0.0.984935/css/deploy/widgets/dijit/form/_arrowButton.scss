@@ -1,0 +1,40 @@
+@import "../../../carbon/globals/colors";
+@import '../../../carbon/globals/import-once';
+
+@mixin arrowButton {
+    
+    %arrowButton-inner-style {
+      font-size: 10px;
+      color: $color__blue-51;
+    }
+    
+    .dijitArrowButton.dijitButtonNode {
+      border-width: 0px 0px 0px 0px !important;
+    }
+    
+    .dijitArrowButtonContainer {
+      .dijitArrowButtonInner {
+        display: none;
+      }
+    
+      &::after {
+        @extend %arrowButton-inner-style;
+        content: "▼";
+      }
+    }
+    
+    .dijitDisabled {
+      .dijitArrowButtonContainer {
+        display: none;
+      }
+    }
+    
+    .dijitArrowButtonChar {
+      @extend %arrowButton-inner-style;
+      display: initial !important;
+    }
+}
+
+@include exports('arrowButton') {
+    @include arrowButton;
+}

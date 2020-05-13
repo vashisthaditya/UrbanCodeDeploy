@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/ru/EditController",{editLabel:"\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c",saveLabel:"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c",cancelLabel:"\u041e\u0442\u043c\u0435\u043d\u0430"});

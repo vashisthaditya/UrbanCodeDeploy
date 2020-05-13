@@ -1,0 +1,11 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin singleComponentSelector {
+    .addAppComponentsDialog {
+        min-width: 310px;
+    }
+}
+
+@include exports('singleComponentSelector') {
+    @include singleComponentSelector;
+}

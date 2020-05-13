@@ -1,0 +1,19 @@
+@import "../../webext/dialog";
+@import '../../../carbon/globals/import-once';
+
+@mixin resourceSelector {
+    
+    .dijitDialog .resourceList {
+        margin: 0 $dialog-gutter $dialog-gutter/2 $dialog-gutter;
+        
+        .bottom-buttons {
+            @include display-flex;
+            @include flex-direction(row-reverse);
+            margin: $dialog-gutter/2 0;
+        }
+    }
+}
+
+@include exports('resourceSelector') {
+    @include resourceSelector;
+}

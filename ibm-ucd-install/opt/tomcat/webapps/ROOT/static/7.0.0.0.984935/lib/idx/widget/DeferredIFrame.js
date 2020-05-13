@@ -1,0 +1,3 @@
+//>>built
+define("idx/widget/DeferredIFrame",["dojo/_base/declare","dijit/_Widget","dijit/_TemplatedMixin","dojo/dom-attr","../string"],function(a,d,e,b,c){return a("idx.widget.DeferredIFrame",[d,e],{templateString:"<iframe></iframe>",href:"",startup:function(){c.nullTrim(this.href)?b.set(this.domNode,"src",this.href):domAttr.remove(this.domNode,"src");this.inherited("startup",arguments);this._started=!0},_setHrefAttr:function(a){this.href=a;this._started&&(c.nullTrim(this.href)?b.set(this.domNode,"src",this.href):
+domAttr.remove(this.domNode,"src"))}})});

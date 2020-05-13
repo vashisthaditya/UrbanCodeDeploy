@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/sl/_Launcher",{tooManyOpenWorkspaces:'Ni mogo\u010de odpreti ve\u010d kot ${maxOpen} "${workspaceTypeName}"\u200e delovna prostora.  \u010ce je mo\u017eno, zaprite "${workspaceTypeName}"\u200e delovne prostore, ki so \u017ee odprti.'});

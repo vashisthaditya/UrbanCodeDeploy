@@ -1,0 +1,31 @@
+@import "select";
+@import "button";
+@import "textinput";
+@import '../../../carbon/globals/import-once';
+
+@mixin smallInputs {
+  .dijitSelect {
+    @include dijitSelect-small;
+  }
+
+  .webext-select{
+    @include webext-select-small;
+  }
+
+  .dijitTextBox {
+    @include dijitTextBox-small;
+  }
+
+  .dijitTextArea {
+    @include dijitTextArea-small;
+  }
+
+  .dijitButton, 
+  .dijitDropDownButton {
+    @include button-small();
+  }
+}
+
+@include exports('smallInputs') {
+    @include smallInputs;
+}

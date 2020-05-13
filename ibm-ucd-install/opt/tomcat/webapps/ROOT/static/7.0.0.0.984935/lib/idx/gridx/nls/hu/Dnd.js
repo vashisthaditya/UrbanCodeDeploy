@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/hu/Dnd",{moveRow:"${0} sor \u00e1thelyez\u00e9se",moveColumn:"${0} oszlop \u00e1thelyez\u00e9se",copyRow:"${0} sor m\u00e1sol\u00e1sa",copyColumn:"${0} oszlop m\u00e1sol\u00e1sa",moveOneRow:"1 sor \u00e1thelyez\u00e9se",moveOneColumn:"1 oszlop \u00e1thelyez\u00e9se",copyOneRow:"1 sor m\u00e1sol\u00e1sa",copyOneColumn:"1 oszlop m\u00e1sol\u00e1sa"});

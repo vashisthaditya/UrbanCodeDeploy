@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/de/HoverHelp",{defaultHrefLabel:"Weitere Informationen",defaultMessage:"[Kein Hilfetext definiert]\u200e",defaultTitle:"Zum Anzeigen der Hilfe Mauszeiger \u00fcber das Element bewegen oder Element anklicken"});

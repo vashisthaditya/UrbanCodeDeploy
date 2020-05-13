@@ -1,0 +1,3 @@
+//>>built
+define("idx/context",["dojo/_base/lang","idx/main","./util"],function(f,g,e){var d=f.getObject("context",!0,g);d._globalContext=[];d.get=function(a,b){var c=d._getContextScope(a,b);return c?!b?c:c._idx_getContextAttribute(b):!b?null:d._globalContext[b]};d.set=function(a,b,c){(a=d._getContextScope(a))?a._idx_setContextAttribute(b,c):d._globalContext[b]=c;return a};d._getContextScope=function(a,b){if(null==a)return null;if(null!=a&&a._idx_hasContextAttribute&&(!b||a._idx_hasContextAttribute(b)))return a;
+for(var c=e.getParentWidget(a);null!=c&&(!c._idx_hasContextAttribute||b&&!c._idx_hasContextAttribute(b));)c=e.getParentWidget(c);return c};return d});

@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<change-set release="n1_6.2.5">
+  <library name="workflow"
+           release="1.0"
+           base-dir="../workflow"
+           file="../workflow/sqlserver/upgrade_sql_1.0.xml"
+           version-table="wf_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="security"
+           release="1.0"
+           base-dir="../security"
+           file="../security/sqlserver/upgrade_1.0.xml"
+           version-table="sec_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="vc"
+           release="1.0"
+           base-dir="../vc"
+           file="../vc/sqlserver/upgrade_sql_1.0.xml"
+           version-table="vc_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="property-sheets"
+           release="1.0"
+           base-dir="../property-sheets"
+           file="../property-sheets/sqlserver/upgrade_sql_1.0.xml"
+           version-table="ps_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <library name="inventory"
+           release="1.0"
+           base-dir="../inventory"
+           file="../inventory/sqlserver/upgrade_1.0.xml"
+           version-table="inv_db_version"
+           release-column="release_name"
+           version-column="ver"/>
+  <change number="1">
+    <description>Add setting to enable/disable READ entries in audit log</description>
+    <sql separator=";">
+        insert into ps_prop_value (id, version, name, value, long_value, description, secure, prop_sheet_id)
+            values ('00000000-0000-0000-0000-000000000016', 0, 'auditLogReadEntriesEnabled', 'true', null, null, 'N', '00000000-0000-0000-0000-000000000001');
+    </sql>
+  </change>
+  <change number="2">
+    <description>Create Resource and Agent Execute Actions</description>
+    <groovy file="all/upgrade-scripts-625/upgrade_001_create_resource_agent_execute.groovy"/>
+  </change>
+  <change number="3">
+    <description>Add snapshot cleanup columns</description>
+    <sql separator=";">
+      alter table ds_environment add snapshot_days_to_keep bigint default 0 not null;
+    </sql>
+  </change>
+  <change number="4">
+    <description>Set all Security Resources to Enabled state</description>
+    <sql separator=";">
+      update sec_resource set enabled = 'Y';
+    </sql>
+  </change>
+  <change number="5">
+    <description>Clean up bad resource data</description>
+    <groovy file="all/upgrade-scripts-625/upgrade_005_delete_resource_bad_data.groovy"/>
+  </change>
+  <change number="6">
+    <description> Add Process Plugin Usage Metadata Table</description>
+    <sql separator=";">
+        create table ds_plugin_usage_metadata (
+           id nvarchar(36) primary key not null,
+           persistent_record_id nvarchar(36) not null,
+           persistent_record_commit bigint not null,
+           command_id nvarchar(36) not null,
+           process_name nvarchar(255) not null,
+           process_id nvarchar(36) not null,
+           component_id nvarchar(36),
+           component_template_id nvarchar(36),
+           component_template_name nvarchar(255),
+           process_type nvarchar(64) not null
+       );
+
+       create index ds_ppum_command_id on ds_plugin_usage_metadata(command_id);
+       create index ds_ppum_component_id on ds_plugin_usage_metadata(component_id);
+       create index ds_ppum_temp_proc_names on ds_plugin_usage_metadata(component_template_name, process_name);
+       create index ds_ppum_process_name on ds_plugin_usage_metadata(process_name);
+    </sql>
+  </change>
+  <change number="7">
+    <description>Add ghosted_date to ds_resource_role and index to role id in pl_plugin_role</description>
+    <sql separator=";">
+      alter table ds_resource_role add ghosted_date bigint default 0 not null;
+      create index pl_plg_role_role_id on pl_plugin_role(role_id);
+    </sql>
+  </change>
+  <change number="8">
+    <description>Optional adding of agents to teams</description>
+    <groovy file="all/upgrade-scripts-625/upgrade_008_add_agents_to_team_on_related_resources.groovy" />
+  </change>
+<!--
+- REMINDER: Upgrades for product version 6.2.5.x. Place additions above this comment.
+-->
+</change-set>

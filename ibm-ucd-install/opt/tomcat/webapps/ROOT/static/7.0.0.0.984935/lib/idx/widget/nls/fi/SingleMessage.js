@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/fi/SingleMessage",{viewAll:"N\u00e4yt\u00e4 kaikki ({num})",viewDetails:"Lis\u00e4\u00e4 tietoja",refresh:"P\u00e4ivit\u00e4",showDetails:"N\u00e4yt\u00e4 tiedot",hideDetails:"Piilota tiedot"});

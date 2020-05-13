@@ -1,0 +1,2 @@
+//>>built
+define("idx/dnd/Manager",["dojo/main","dojo/dnd/Manager","./Avatar"],function(a,b,c){a=a.declare("idx.dnd.Manager",[b],{makeAvatar:function(){return new c(this)}});idx.dnd._manager=null;a.manager=idx.dnd.manager=function(){if(!idx.dnd._manager)idx.dnd._manager=new idx.dnd.Manager;return idx.dnd._manager};return a});

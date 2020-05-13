@@ -1,0 +1,2 @@
+//>>built
+define("idx/layout/nls/ko/BorderContainer",{toggleTitleExpand:"\uc139\uc158 \ud3bc\uce58\uae30",toggleTitleCollapse:"\uc139\uc158 \uc811\uae30",toggleTitleRestore:"\uc139\uc158 \ubcf5\uc6d0"});

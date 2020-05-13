@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<web-app version="2.4"
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+  <display-name>uDeploy</display-name>
+
+  <!-- The Usual Welcome File List -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <error-page>
+    <error-code>400</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>401</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>402</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>405</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+
+  <!-- =====================================================================
+        Filters - Order Matters!! outermost filters are listed first
+       ===================================================================== -->
+
+  <filter>
+    <description>Disable specific urls</description>
+    <filter-name>DisablingURLFilter</filter-name>
+    <filter-class>com.urbancode.ds.web.filter.DisablingURLFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>DisablingURLFilter</filter-name>
+    <url-pattern>/security/team/*</url-pattern>
+  </filter-mapping>
+
+  <!-- Disable jsessionId URL parameter -->
+  <filter>
+    <filter-name>DisableSessionUrlFilter</filter-name>
+    <filter-class>com.urbancode.commons.web.filter.DisableSessionUrlFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>DisableSessionUrlFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>FrameOptionsFilter</filter-name>
+    <filter-class>com.urbancode.commons.web.filter.FrameOptionsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FrameOptionsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <description>This filter handles all exceptions which may occur within the application by logging them and forwarding to the appropriate error page.</description>
+    <filter-name>ExceptionHandlingFilter</filter-name>
+    <filter-class>com.urbancode.commons.web.filter.ExceptionHandlingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ExceptionHandlingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <description>The filter adds HTTP headers to cacheable resources (like images).</description>
+    <filter-name>CachingFilter</filter-name>
+    <filter-class>com.urbancode.commons.web.filter.CachingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CachingFilter</filter-name>
+    <url-pattern>*.css</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+    <filter-name>CachingFilter</filter-name>
+    <url-pattern>*.js</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CachingFilter</filter-name>
+    <url-pattern>*.gif</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CachingFilter</filter-name>
+    <url-pattern>*.png</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CachingFilter</filter-name>
+    <url-pattern>*.jpg</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <description>The filter adds HTTP headers to prevent caching dynamic resources (like REST services).</description>
+    <filter-name>AntiCachingFilter</filter-name>
+    <filter-class>com.urbancode.commons.web.filter.AntiCachingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AntiCachingFilter</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AntiCachingFilter</filter-name>
+    <url-pattern>/property/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AntiCachingFilter</filter-name>
+    <url-pattern>/security/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AntiCachingFilter</filter-name>
+    <url-pattern>/cli/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AntiCachingFilter</filter-name>
+    <url-pattern>/cli-internal/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AntiCachingFilter</filter-name>
+    <url-pattern>/codestation/v1/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AntiCachingFilter</filter-name>
+    <url-pattern>/tasks/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AntiCachingFilter</filter-name>
+	<url-pattern>/static/dev/*</url-pattern><!-- don't cache in development -->
+  </filter-mapping>
+
+  <!--  AuthenticationFilter for login and security enforcement -->
+  <filter>
+    <description>Deploy Server Authentication Filter</description>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>com.urbancode.ds.web.filter.AuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/property/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/security/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/cli/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/cli-internal/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/codestation/v1/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/tasks/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/index.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <description>This filter is using for automated committing/rolling back Hibernate transactions</description>
+    <filter-name>HibernateTransactionFilter</filter-name>
+    <filter-class>com.urbancode.ds.web.filter.HibernateSessionRequestFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HibernateTransactionFilter</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>HibernateTransactionFilter</filter-name>
+    <url-pattern>/security/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>HibernateTransactionFilter</filter-name>
+    <url-pattern>/property/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>HibernateTransactionFilter</filter-name>
+    <url-pattern>/cli/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>HibernateTransactionFilter</filter-name>
+    <url-pattern>/cli-internal/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>HibernateTransactionFilter</filter-name>
+    <url-pattern>/tasks/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>HibernateTransactionFilter</filter-name>
+    <url-pattern>/index.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <description>Create a JSON cache around requests.</description>
+    <filter-name>JSONCache</filter-name>
+    <filter-class>com.urbancode.ds.web.filter.JSONCacheFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>JSONCache</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- This filter logs any URLs accessed for rest services. -->
+  <filter>
+    <description>Logs URLs accessed</description>
+    <filter-name>LoggingFilter</filter-name>
+    <filter-class>com.urbancode.ds.web.filter.LoggingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoggingFilter</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoggingFilter</filter-name>
+    <url-pattern>/property/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoggingFilter</filter-name>
+    <url-pattern>/cli/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoggingFilter</filter-name>
+    <url-pattern>/cli-internal/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoggingFilter</filter-name>
+    <url-pattern>/tasks/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoggingFilter</filter-name>
+    <url-pattern>/security/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <description>Ensures requests and responses default to UTF-8</description>
+    <filter-name>CharSetFilter</filter-name>
+    <filter-class>com.urbancode.ds.web.filter.CharSetFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharSetFilter</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CharSetFilter</filter-name>
+    <url-pattern>/property/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CharSetFilter</filter-name>
+    <url-pattern>/cli/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CharSetFilter</filter-name>
+    <url-pattern>/cli-internal/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CharSetFilter</filter-name>
+    <url-pattern>/tasks/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CharSetFilter</filter-name>
+    <url-pattern>/codestation/v1/*</url-pattern>
+  </filter-mapping>
+
+
+  <!-- =====================================================================
+        Servlets
+       ===================================================================== -->
+
+  <servlet>
+    <servlet-name>ControllerServlet</servlet-name>
+    <servlet-class>com.urbancode.ds.web.tasks.DeployServerControllerServlet</servlet-class>
+    <init-param>
+      <param-name>TASK_PACKAGE_PREFIX</param-name>
+      <param-value>com.urbancode.ds.web.tasks</param-value>
+    </init-param>
+    <init-param>
+      <param-name>TASK_URL_BASE</param-name>
+      <param-value>/tasks/</param-value><!-- used for constructing Task URLs -->
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerServlet</servlet-name>
+    <url-pattern>/tasks/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Jersey -->
+  <servlet>
+    <servlet-name>Jersey</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.urbancode.ds.web.rest</param-value>
+    </init-param>
+    <init-param>
+      <!-- support PUT and DELETE methods via header X-HTTP-Method-Override  -->
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Jersey for Command Line Client -->
+  <servlet>
+    <servlet-name>Jersey-CLI</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.urbancode.ds.web.cli.rest</param-value>
+    </init-param>
+    <init-param>
+      <!-- support PUT and DELETE methods via header X-HTTP-Method-Override  -->
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.WadlGeneratorConfig</param-name>
+      <param-value>com.urbancode.ds.web.wadl.DeployWadlGeneratorConfig</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey-CLI</servlet-name>
+    <url-pattern>/cli/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Jersey for Command Line Client - Internal services -->
+  <servlet>
+    <servlet-name>Jersey-CLI-Internal</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.urbancode.ds.web.cli.internal.rest</param-value>
+    </init-param>
+    <init-param>
+      <!-- support PUT and DELETE methods via header X-HTTP-Method-Override  -->
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey-CLI-Internal</servlet-name>
+    <url-pattern>/cli-internal/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Jersey for Codestation -->
+  <servlet>
+    <servlet-name>Jersey-Codestation</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.ibm.uclab.csrepl.rest</param-value>
+    </init-param>
+    <init-param>
+      <!-- support PUT and DELETE methods via header X-HTTP-Method-Override  -->
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey-Codestation</servlet-name>
+    <url-pattern>/codestation/v1/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Jersey for properties -->
+  <servlet>
+    <servlet-name>Jersey-Property</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.urbancode.air.property.web.rest</param-value>
+    </init-param>
+    <init-param>
+      <!-- support PUT and DELETE methods via header X-HTTP-Method-Override  -->
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey-Property</servlet-name>
+    <url-pattern>/property/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- @@SECURE_START@@
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>HTTPSOnly</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  @@SECURE_END@@ -->
+
+  <!-- Jersey for security -->
+  <servlet>
+    <servlet-name>Jersey-Security</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.urbancode.security.rest</param-value>
+    </init-param>
+    <init-param>
+      <!-- support PUT and DELETE methods via header X-HTTP-Method-Override  -->
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey-Security</servlet-name>
+    <url-pattern>/security/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- @@SECURE_START@@
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>HTTPSOnly</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  @@SECURE_END@@ -->
+
+
+
+  <!-- Jersey for plugin downloads -->
+  <servlet>
+    <servlet-name>Jersey-Plugin-Repo</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.urbancode.ds.web.plugins</param-value>
+    </init-param>
+    <init-param>
+      <!-- support PUT and DELETE methods via header X-HTTP-Method-Override  -->
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey-Plugin-Repo</servlet-name>
+    <url-pattern>/plugins/*</url-pattern>
+  </servlet-mapping>
+
+</web-app>

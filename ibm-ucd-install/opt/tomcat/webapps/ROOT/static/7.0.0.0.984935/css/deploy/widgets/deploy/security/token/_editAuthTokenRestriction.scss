@@ -1,0 +1,19 @@
+@import '../../../../carbon/globals/import-once';
+
+@mixin editAuthTokenRestriction {
+    .authTokenRestriction-plusIcon {
+        background: url('../../images/icons/general-sprite.png') -96px -64px no-repeat;
+        width: 16px;
+        height: 16px;
+        margin-top: 4px;
+        background-repeat: none;
+    }
+    
+    .authTokenRestriction-plusIcon:hover {
+        cursor:pointer;
+    }
+}
+
+@include exports('editAuthTokenRestriction') {
+    @include editAuthTokenRestriction;
+}

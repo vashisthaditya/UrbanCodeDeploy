@@ -1,0 +1,314 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin firstDayWizard {
+    #hide-welcome-tab-launch-wizard-container {
+        position: relative;
+    }
+    
+    #fdw-title-paginator {
+        padding: 23px;
+        padding-left: 0;
+        font-size: 36px;
+        line-height: 45px;
+        font-weight: 300px;
+    }
+    
+    #fdw-title, #fdw-paginator {
+        display: inline;
+    }
+    
+    #fdw-paginator {
+        position: absolute;
+        right: 58px;
+    }
+    
+    
+    .fdw-list-column {
+        background-color: #ffffff;
+        min-height: 470px;
+        height: 100%;
+        margin-top:35px;
+        overflow-y: auto;
+    }
+    
+    #first-day-wizard .controls {
+        float: right;
+    }
+    
+    #first-day-wizard .controls {
+        width: 100%;
+        vertical-align: middle;
+        position: relative;
+        margin: 1px;
+    }
+    
+    #first-day-wizard .button-container {
+        float: right;
+        height: 100%;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        display: inline-flex;
+    }
+    
+    #first-day-wizard .icon-button {
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        margin-top: 1px;
+        background-repeat: none;
+        display: inline-block;
+    }
+    
+    #first-day-wizard .add-button {
+        background-image: url('../../images/wizard/environment/add.png');
+    }
+    #first-day-wizard .add-button:hover {
+        background-image: url('../../images/wizard/environment/add-hov.png');
+        cursor: pointer;
+    }
+    
+    #first-day-wizard .remove-button {
+        background-image: url('../../images/wizard/environment/remove.png');
+        margin-right: 5px;
+    }
+    #first-day-wizard .remove-button-disabled {
+        background-image: url('../../images/wizard/environment/remove-gray.png');
+        margin-right: 5px;
+    }
+    #first-day-wizard .remove-button:hover {
+        background-image: url('../../images/wizard/environment/remove-hov.png');
+        cursor: pointer;
+    }
+    
+    #first-day-wizard .selected {
+        background-color: #aaccff;
+    }
+    
+    #first-day-wizard .general-icon {
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+    
+    #first-day-wizard .component-processes {
+        margin-left: 10px;
+    }
+    
+    #first-day-wizard .designer-launch {
+        margin-top: 10px;
+        width: 300px;
+        height: 183px;
+        background-color: $brand-01;
+        cursor: pointer;
+        background-image: url('../../images/deploy/processEditorSmall.png');
+        border: 1px solid #000;
+    }
+
+    .fdw-create-an-app-title {
+        font-size: 36px;
+        line-height: 45px;
+        margin-bottom: 15px;
+        font-weight: 300;
+    }
+    
+    .fullScreen {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+    }
+    
+    .fdw-process-dialog .dijitDialogTitleBar {
+        border: none;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    
+    .fdw-process-dialog .dijitDialogTitleBar .dijitButton {
+        font-size: 12px;
+    }
+    
+    .fdw-process-dialog .dijitDialogTitleBar .fdw-designer-done-btn {
+        margin-left: 50px;
+    }
+    
+    .fdw-process-dialog .dijitDialogPaneContent {
+        padding: 0;
+    }
+    
+    .fdw-process-dialog.dijitDialog {
+        border: none;
+    }
+    
+    .fdw-process-dialog.dijitDialog .close-popup-button {
+        background-image: url("../../lib/idx/themes/oneui/idx/widget/images/popupClose.png");
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        width: 29px;
+        height: 28px;
+        z-index: 1004;
+        cursor: pointer;
+    }
+    
+    .fdw-svg-mapping-widget {
+        display: inline-block;
+        width: 74%;
+        float: right;
+        position: relative;
+        height: 505px;
+        overflow-y: auto;
+    }
+    
+    .fdw-designer-choice-section {
+        margin-left: 252px;
+        font-weight: bold;
+    }
+    
+    .fdw-designer-choice-section .dijitButton {
+      margin-top: 20px;
+    }
+    
+    .designer-help-link {
+        position: absolute;
+        top: 10px;
+        right: 40px;
+    }
+    
+    .designer-help {
+        display: none;
+        position: absolute;
+        top: 30px;
+        right: 0px;
+        background-color: #dfe9e9;
+        height: 100%;
+        width: 30%;
+        padding: 20px;
+        overflow-y: auto;
+        border-left: 1px solid #cccccc;
+    }
+    
+    #fdw-wizard .labelsAndValues-labelCell {
+        font-weight: 300;
+    }
+    
+    #fdw-wizard .radioButtonGroup .dijitRadio {
+        vertical-align: middle;
+    }
+    
+    #fdw-wizard .radioButtonGroup .radioButtonLabel {
+        display: inline;
+        font-weight: 300;
+    }
+    
+    #fdw-wizard .entry {
+        margin-bottom: 5px;
+        height: 20px;
+    }
+    
+    #fdw-wizard .agent-filter {
+      margin-left: 14px;
+      width: 20%;
+      position: absolute;
+      top: 20px;
+    }
+    
+    #fdw-wizard .name-container {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 70%;
+    }
+    
+    #fdw-wizard .component-name-container {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 70%;
+        vertical-align: bottom;
+    }
+    
+    #fdw-wizard .process-anchor-entry {
+        margin-bottom: 5px;
+    }
+    
+    #fdw-wizard .fdw-svg {
+      height:470px;
+    }
+    
+    #fdw-wizard .fdw-mapping-agent-title{
+      padding-left:15px;
+      width:30%;
+    }
+    
+    #fdw-wizard .fdw-mapping-title {
+      display:inline-block;
+      float:left;
+    }
+    
+    #fdw-wizard .ticks {
+      font: 10px sans-serif;
+    }
+    
+    #fdw-wizard .track,
+    #fdw-wizard .track-inset,
+    #fdw-wizard .track-handle,
+    #fdw-wizard .track-overlay {
+      stroke-linecap: round;
+    }
+    
+    #fdw-wizard .track {
+      stroke: #000;
+      stroke-opacity: 0.3;
+      stroke-width: 10px;
+    }
+    
+    #fdw-wizard .track-inset {
+      stroke: #ddd;
+      stroke-width: 8px;
+    }
+    
+    #fdw-wizard .track-overlay {
+      pointer-events: stroke;
+      stroke-width: 10px;
+      cursor: pointer;
+      stroke: #ccc;
+      stroke-opacity: 0.01;
+    }
+    
+    #fdw-wizard .track-handle {
+      pointer-events: stroke;
+      stroke-width: 6px;
+      cursor: pointer;
+      stroke: #999;
+    }
+    
+    #fdw-wizard .handle {
+      fill: #fff;
+      stroke: #000;
+      stroke-opacity: 0.5;
+      stroke-width: 1.25px;
+    }
+    
+    .fdw-svg {
+      overflow: hidden;
+    }
+    
+    .agent-mapping-dialog-comp-name {
+      vertical-align: top;
+      margin-left: 5px;
+      font-size: 15px;
+    }
+}
+
+@include exports('firstDayWizard') {
+    @include firstDayWizard;
+}
+

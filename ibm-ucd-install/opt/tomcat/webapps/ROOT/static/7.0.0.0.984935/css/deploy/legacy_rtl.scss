@@ -1,0 +1,1980 @@
+/*
+* Licensed Materials - Property of IBM* and/or HCL**
+* UrbanCode Deploy
+* (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+* (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+*
+* U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+* GSA ADP Schedule Contract with IBM Corp.
+*
+* * Trademark of International Business Machines
+* ** Trademark of HCL Technologies Limited
+*/
+
+@import "legacy/webextCommon_rtl";
+@import "legacy/webextWidgets_rtl";
+@import "legacy/icons_rtl";
+@import 'carbon/globals/import-once';
+
+@mixin legacyrtl {
+    
+    .rtl-ui .breadcrumb-arrow {
+        margin: 0px 9px;
+    }
+    
+    .rtl-ui ._webext_detail_header .detailDiv {
+        padding: 3px 0px;
+    }
+    
+    .rtl-ui div.hr {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    
+    .rtl-ui .align-top {
+        margin: 5px;
+    }
+    
+    .rtl-ui .listTopButtons {
+        margin: 14px -5px 14px 0;
+    }
+    
+    .rtl-ui .tabManager .tab.configurationTab {
+        background-image: url('../../images/icons/pencil-sprite_rtl.png');
+        background-position: right 0;
+        padding-left: 14px;
+        padding-right: 30px;
+    }
+    .rtl-ui .tabManager .tab.configurationTab:hover {
+        background-position: right -30px;
+    }
+    .rtl-ui .tabManager .tab.configurationTab:active {
+        background-position: right -60px;
+    }
+    .rtl-ui .tabManager .tab.configurationTab.selected {
+        background-position: right 8px;
+    }
+    .rtl-ui .tabManager .tab.configurationTab.selected:hover {
+        background-position: right -22px;
+    }
+    .rtl-ui .tabManager .tab.configurationTab.selected:active {
+        background-position: right -52px;
+    }
+    
+    .rtl-ui .about-popup.dijitDialog .close-popup-button {
+        right: auto;
+        left: -14px;
+    }
+    
+    .rtl-ui .about-popup .dijitDialogPaneContent {
+        padding: 20px 50px 50px;
+    }
+    
+    .rtl-ui .about-popup .product-name {
+        padding-bottom: 20px;
+    }
+    
+    .rtl-ui .about-popup .product-version {
+        padding-bottom: 20px;
+    }
+    
+    .rtl-ui .versionFileCompare .title {
+        text-align: right;
+        margin-left: 0;
+        margin-right: 1%;
+    }
+    
+    .rtl-ui .versionFileCompare .titleContainer {
+        padding: 5px;
+    }
+    
+    .rtl-ui .versionFileCompare .ellipsisContainer {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    
+    .rtl-ui .versionFileCompare .leftEll {
+        text-align: center;
+        padding-bottom: 6px;
+    }
+    
+    .rtl-ui .versionFileCompare .rightEll {
+        text-align: center;
+        padding-bottom: 6px;
+    }
+    
+    .rtl-ui .versionFileCompare .originalContainer {
+        border-right: none;
+        border-left: 1px solid #A3A3A3;
+    }
+    
+    .rtl-ui .versionFileCompare .original {
+        margin-right: 9px;
+        margin-left: 9px;
+    }
+    
+    .rtl-ui .versionFileCompare .change {
+        margin-right: 9px;
+        margin-left: 9px;
+    }
+    
+    .rtl-ui .versionWarning {
+        padding-left: 0;
+        padding-right: 30px;
+    }
+    
+    .rtl-ui .filter {
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .tagSelector .columnForm .underField {
+        margin: 24px -4px -4px  !important;
+    }
+    
+    .rtl-ui .tagSelect .tag-select-drop-down, .rtl-ui .version-select-drop-down {
+        padding: 8px;
+        border-right: none;
+        border-left: 1px solid #CCC;
+    }
+    
+    .rtl-ui .new-tag-link, .rtl-ui .latest-version-link {
+        padding: 14px;
+        margin-left: 0;
+        margin-right: -1px;
+        border-left: none;
+        border-right: 1px solid #CCC;
+    }
+    
+    .rtl-ui .versionSelector .tagDisplay .tagDelete, .rtl-ui .roleSelector .tagDisplay .tagDelete {
+        border-left: none;
+        border-right: 1px solid #00649D;
+    }
+    
+    .rtl-ui .roleSelector {
+        margin-top: 2px;
+    }
+    
+    .rtl-ui .teamSelectorComponent {
+        margin-bottom: -9px;
+    }
+    
+    .rtl-ui .team-selector {
+        margin: 5px 10px 15px;
+    }
+    
+    .rtl-ui .team-selector-buttons {
+        text-align: left;
+        padding: 8px 5px 3px;
+        margin: 5px -5px 0;
+    }
+    
+    .rtl-ui .teamForm {
+        padding: 5px;
+        margin: 5px 0;
+    }
+    
+    .rtl-ui .version-secetion-checkbox-option {
+        margin: 8px 0 0;
+    }
+    
+    .rtl-ui .version-secetion-checkbox-option .labelsAndValues-helpCell {
+        margin: -2px 10px 0 40px;
+    }
+    
+    @media only screen and (max-width: 800px) {
+        .rtl-ui {
+            left: auto;
+            right: 0;
+        }
+    }
+    
+    .rtl-ui .tagDisplay .tagContainer {
+        margin-left: 0;
+        margin-right: 20px;
+    }
+    
+    .rtl-ui .tagDisplay .tagBox {
+        margin: 0px 0 -4px 4px;
+    }
+    
+    .rtl-ui .tagDisplay .tagBox .tagName {
+        margin: 1px 4px;
+    }
+    
+    .rtl-ui .tagDisplay .tagDelete {
+        border-left-width: none;
+        border-right-width: 1px;
+        border-left-color: none;
+        border-right-color: #EEEEEE;
+        padding: 1px 4px 2px;
+    }
+    
+    .rtl-ui .tagDisplay .tagDelete:hover {
+        -moz-border-top-right-radius: none;
+        -moz-border-top-left-radius: 2px;
+        -moz-border-bottom-right-radius: none;
+        -moz-border-bottom-left-radius: 2px;
+        border-top-right-radius: none;
+        border-top-left-radius: 2px;
+        border-bottom-right-radius: none;
+        border-bottom-left-radius: 2px;
+    }
+    
+    .rtl-ui .resourceRolePropertyEditor {
+        margin: 10px 0px;
+        padding: 10px;
+    }
+    
+    .rtl-ui .resourceRolePropertyEditorTitle {
+        margin-bottom: 12px;
+    }
+    
+    .rtl-ui .componentGroupList .componentGroupListContainer, .rtl-ui .configurationTree .configurationTreeContainer, .rtl-ui .resourceConfigurationTree .resourceConfigurationTreeContainer, .rtl-ui .resourceGroupTree .resourceGroupTreeContainer {
+        margin-top: 10px;
+    }
+    
+    .rtl-ui .componentGroupList .componentList, .rtl-ui .configurationTree .configurationTreeDiv, .rtl-ui .resourceConfigurationTree .resourceConfigurationTreeDiv, .rtl-ui .resourceGroupTree .resourceGroupTreeDiv {
+        float: right;
+    }
+    
+    .rtl-ui .componentGroupList .componentDetail, .rtl-ui .configurationTree .configurationDetail, .rtl-ui .resourceConfigurationTree .resourceConfigurationDetail, .rtl-ui .resourceGroupTree .resourceGroupDetail {
+        margin-left: 0;
+        margin-right: 225px;
+        border-left: none;
+        border-right: 1px solid #AAA;
+        padding: 0px 20px;
+    }
+    
+    .rtl-ui .resourceConfigurationTree .resourceConfigurationDetail, .rtl-ui .resourceGroupTree .resourceGroupDetail {
+        margin-left: 0;
+        margin-right: 425px;
+    }
+    
+    .rtl-ui .configurationTree .configurationDetail {
+        margin-left: 0;
+        margin-right: 280px;
+    }
+    
+    .rtl-ui .componentGroupList .componentEntry {
+        padding: 4px 10px;
+    }
+    
+    .rtl-ui .componentGroupList .componentEntry .componentArrow {
+        right: auto;
+        left: 4px;
+    }
+    
+    .rtl-ui .resourceSelector .resourceSelectorValue {
+        padding: 4px;
+    }
+    
+    .rtl-ui .edit-resource-condition > div {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .dijitTextBox textarea {
+        padding: 3px 10px;
+    }
+    
+    .rtl-ui .environmentSummary {
+        padding: 0px;
+        margin-bottom: 10px;
+    }
+    
+    .rtl-ui .environmentSummary.dojoDndItemBefore {
+        padding-top: 5px  !important;
+        margin-top: -5px;
+    }
+    
+    .rtl-ui .environmentSummary.dojoDndItemAfter {
+        padding-bottom: 5px  !important;
+        margin-bottom: 5px;
+    }
+    
+    .rtl-ui .snapshotEnvironmentSummaries {
+        margin-top: 10px;
+    }
+    
+    .rtl-ui .environmentSummary .environmentName, .rtl-ui .environmentSummary .environmentLatestSnapshot, .rtl-ui .environmentSummary .externalBlueprint, .rtl-ui .environmentSummary .environmentCompliancy {
+        padding: 3px;
+        padding-left: 0;
+        padding-right: 8px;
+    }
+    
+    .rtl-ui .environmentSummary .environmentName {
+        float: right;
+    }
+    
+    .rtl-ui .environmentSummary .environmentName.dojoDndHandle {
+        float: right;
+    }
+    
+    .rtl-ui .environmentSummary .externalBlueprint {
+        border-left: none;
+        border-right: 1px solid #AAA;
+    }
+    
+    .rtl-ui .environmentSummary .environmentInnerContainer {
+        margin-right: 251px;
+        margin-left: 251px;
+    }
+    
+    .rtl-ui .environmentSummary.snapshotEnvironmentSummary .environmentInnerContainer {
+        margin-right: 351px;
+        margin-left: 433px;
+    }
+    
+    .rtl-ui .environmentSummary .buttonContainer {
+        border-right: none;
+        border-left: 1px solid #999999;
+    }
+    
+    .rtl-ui .environmentSummary .buttonContainer .dijitButton, .rtl-ui .environmentSummary .buttonContainer .dijitDropDownButton {
+        margin: 0px;
+    }
+    
+    .rtl-ui .environmentSummary .buttonContainer .dijitButtonNode {
+        padding-top: 5px  !important;
+        padding-bottom: 0px  !important;
+    }
+    
+    .rtl-ui .environmentSummary .environmentActions .dijitButtonText {
+        padding-right: 0;
+        padding-left: 5px;
+    }
+    
+    .rtl-ui .executeIcon {
+        margin-left: 0;
+        margin-right: 2px;
+    }
+    
+    .rtl-ui .environmentSummary .expandNode {
+        margin-right: 0;
+        margin-left: 4px;
+        background-position: 0 -360px;
+    }
+    .rtl-ui .environmentSummary .dark-colored-environment .expandNode {
+      background-position: -48px -360px;
+    }
+    .rtl-ui .environmentSummary .expandNode:hover {
+      background-position: -16px -360px;
+    }
+    .rtl-ui .environmentSummary .expandNode:active {
+      background-position: -32px -360px;
+    }
+    
+    .rtl-ui .environmentSummary .environmentLatestSnapshot {
+        border-right: none;
+        border-left: none;
+    }
+    
+    .rtl-ui .environmentSummary .environmentCompliancy {
+        right: auto;
+        left: 0px;
+        text-align: center;
+        float: left;
+    }
+    
+    .rtl-ui .environmentSummary .environmentCompliancy .successMeter, .rtl-ui .environmentSummary .environment-compliancy .successMeter {
+        left: auto;
+        right: 0px;
+    }
+    
+    .rtl-ui .environmentSummary .environmentCompliancy .failMeter, .rtl-ui .environmentSummary .environment-compliancy .failMeter {
+        right: auto;
+        left: 0px;
+    }
+    
+    .rtl-ui .environmentSummary .environmentCompliancy .noMeter {
+        left: auto;
+        right: 0px;
+    }
+    
+    .rtl-ui .environmentSummary.expanded .environmentDetails {
+        padding: 15px;
+        padding-top: 2px;
+    }
+    
+    .rtl-ui .environmentCompliancy .compliancyHeader, .rtl-ui .snapshotCompliancy {
+        padding: 5px 15px;
+    }
+    
+    .rtl-ui .snapshotCompliancy {
+        padding: 5px 7px;
+    }
+    
+    .rtl-ui .roleLabel, .rtl-ui .statusLabel {
+        margin-left: 0;
+        margin-right: 3px;
+        padding: 0px 2px;
+    }
+    
+    .rtl-ui .version-history-calendar {
+        margin-bottom: 40px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar {
+        padding-bottom: 50px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-buttons {
+        text-align: center;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-buttons .today-link {
+        margin-top: -5px;
+        padding: 5px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-buttons .calendar-button-container {
+        padding: 4px;
+        margin-bottom: 10px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-buttons .calendar-expander {
+        left: auto;
+        right: -15px;
+        margin-top: 30px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-buttons .calendar-expander .environment-expander {
+        margin: 0 6px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-buttons.calendar-fixed-control .calendar-expander {
+        margin-top: 95px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-buttons .calendar-arrow {
+        margin: 0 7px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-buttons .calendar-arrow.back-month .arrow.back-arrow, .rtl-ui .version-history-calendar .version-calendar-buttons .calendar-arrow.forward-month .arrow.forward-arrow {
+        margin: 0 -1px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header {
+        margin-left: 0;
+        margin-right: 150px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column .version-date-label {
+        text-align: center;
+        padding: 5px 0;
+        margin-top: -10px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column .version-date-month {
+        padding: 4px 4px 4px 8px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column .version-date-month-header {
+        border-left: none;
+        border-right: 2px solid #CCC;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column .version-date-number {
+        text-align: center;
+        padding: 4px 0 8px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column .version-date-contents {
+        border-left-style: none;
+        border-right-style: dashed;
+        border-right-width: 1px;
+        border-left-width: 0px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column.tomorrow-day .version-date-contents {
+        border-left-style: none;
+        border-right-style: none;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column.current-month .version-date-contents {
+        border-left-style: none;
+        border-right-style: solid;
+        border-left-width: none;
+        border-right-width: 2px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column.current-day .version-date-contents, .rtl-ui .version-history-calendar .version-calendar-header .version-date-column.current-day .version-date-number, .rtl-ui .version-history-calendar .version-calendar-header .version-date-column.current-day .version-date-label.bottom-date-label {
+        border-right: 2px solid #7DEAFF;
+        border-left: 2px solid #7DEAFF;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-header .version-date-column .version-date-label.bottom-date-label {
+        margin-top: 0;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar .version-calendar-environment {
+        left: auto;
+        right: 0;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar .version-calendar-environment .environment-name {
+        padding: 1px 5px;
+        margin-left: 0;
+        margin-right: 2px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar .version-calendar-version {
+        padding: 4px 0;
+        margin-bottom: 4px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-row .version-calendar-version.same-version {
+        margin-top: -26px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-row.environment-collapsed .version-calendar-version.same-version {
+        margin-top: -8px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-row .version-calendar-version.same-version.same-day {
+        margin-top: -3px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-row .version-calendar-version.same-version.same-day .mouse-over-popup {
+        margin-top: 12px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar .version-calendar-version.current-version {
+        border-right: none;
+        border-left: 10px solid #FFF;
+        border-bottom-right-radius: none;
+        border-bottom-left-radius: 8px;
+        border-top-right-radius: none;
+        border-top-left-radius: 8px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-key {
+        right: auto;
+        left: -10px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-key .version-calendar-key-label {
+        margin: 3px 0 0 8px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar .version-calendar-version .calendar-popup .version-date-label {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-row {
+        margin: 0 -20px 14px 0;
+        padding: 5px 170px 1px 0;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-row.environment-collapsed {
+        margin-bottom: 10px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-row.environment-collapsed .version-calendar-version {
+        padding: 2px 0;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-row .environment-expander {
+        margin: 0 5px -5px;
+    }
+    
+    .rtl-ui .version-history-calendar .version-calendar-right-blocker {
+        right: auto;
+        left: -41px;
+        border-left: none;
+        border-right: 1px solid #CCC;
+    }
+    
+    .rtl-ui .mouse-over-popup {
+        margin-top: 8px;
+    }
+    
+    .rtl-ui .mouse-over-popup .popup-container {
+        padding: 4px 8px;
+        margin-top: -2px;
+    }
+    
+    .rtl-ui .mouse-over-popup .popup-pointer {
+        margin: -5px -9px 0px 0px;
+    }
+    
+    .rtl-ui .inventory-popup .inventory-popup-contents {
+        text-align: center;
+    }
+    
+    .rtl-ui .inventory-popup .inventory-popup-contents div {
+        margin-bottom: 10px;
+    }
+    
+    .rtl-ui .inventory-popup .inventory-popup-contents div:last-child {
+        margin-bottom: 0px;
+    }
+    
+    .rtl-ui .team-member-selector {
+        padding: 0px 7px 7px 7px;
+    }
+    
+    .rtl-ui .edit-user.right-panel-show .team-member-selector, .rtl-ui .edit-user.minimize-roles .columnForm {
+        margin-right: 0;
+        margin-left: 540px;
+    }
+    
+    .rtl-ui .edit-user.right-panel-show.right-panel-top .team-member-selector {
+        margin-right: 0;
+        margin-left: 520px;
+    }
+    
+    .rtl-ui .edit-user.panel-with-scroll-bars.right-panel-show .team-member-selector {
+        margin-right: 0;
+        margin-left: 560px;
+    }
+    
+    .rtl-ui .edit-user.panel-with-scroll-bars.right-panel-show.right-panel-top .team-member-selector {
+        margin-right: 0;
+        margin-left: 540px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-header-container .selector-header {
+        padding: 11px 12px;
+        margin-left: 0;
+        margin-right: 5px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-header-container .selector-button {
+        float: left;
+        margin: 4px -4px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-header-container .selector-button .member-select-button-compact .dijitButtonNode {
+        margin-top: 3px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-member-container .selector-label {
+        padding: 2px 4px;
+        margin: 4px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-header-container .selector-header-expand {
+        left: auto;
+        right: 15px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-header-container .selector-header-expand .team-expander {
+        margin: 15px 15px 15px 10px;
+    }
+    .rtl-ui .team-member-selector .selector-header-container .selector-header-expand .team-expander.team-collapsed {
+      background-position: 5px -90px;
+    }
+    .rtl-ui .team-member-selector .selector-header-container .selector-header-expand:hover .team-expander.team-collapsed {
+      background-position: -11px -90px;
+    }
+    .rtl-ui .team-member-selector .selector-header-container .selector-header-expand:active .team-expander.team-collapsed {
+      background-position: -27px -90px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-member-container .selector-users, .rtl-ui .team-member-selector .selector-member-container .selector-groups {
+        padding: 4px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-member-container .team-member-block {
+        padding: 2px 5px;
+        margin: 3px 4px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-member-container .selector-groups .team-member-block .group-popup-title {
+        margin-bottom: 2px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-member-container .team-member-block.hidden {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .rtl-ui .team-member-selector .selector-member-container .team-member-block .remove-team-member {
+        margin: -8px -11px 0 0;
+    }
+    /* Mirroring support for .icon_delete_red in webext-widgets.css */
+    .rtl-ui .team-member-selector .selector-member-container .team-member-block .remove-team-member.icon_delete_red {
+        background-position: 6px -375px;
+    }
+    .rtl-ui .team-member-selector .selector-member-container .team-member-block .remove-team-member.icon_delete_red:hover {
+        background-position: -21px -375px;
+    }
+    .rtl-ui .team-member-selector .selector-member-container .team-member-block .remove-team-member.icon_delete_red:active {
+        background-position: -38px -375px;
+    }
+    /* end */
+    
+    .rtl-ui .team-member-selector .selector-permission-container .edit-role-permissions-note {
+        text-align: center;
+        padding: 5px;
+    }
+    
+    .rtl-ui .team-member-selector .selector-permission-container .twoPaneManager {
+        margin: 0;
+    }
+    
+    .rtl-ui .team-member-selector .selector-permission-container .twoPaneManager .twoPaneContainer {
+        margin: 0;
+    }
+    
+    .rtl-ui .team-member-selector .selector-permission-container .twoPaneManager .twoPaneDetail {
+        margin-left: 0;
+        margin-right: 160px;
+    }
+    
+    .rtl-ui .edit-user .columnForm {
+        margin-top: -20px;
+    }
+    
+    .rtl-ui .edit-user.edit-team-read-only .columnForm {
+        margin-top: 9px;
+    }
+    
+    .rtl-ui .edit-user .columnForm .labelsAndValues-row {
+        margin-bottom: 20px;
+    }
+    
+    .rtl-ui .edit-user .columnForm .labelsAndValues-labelCell {
+        text-align: right;
+    }
+    
+    .rtl-ui .edit-user .columnForm .labelsAndValues-valueCell {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .rtl-ui .edit-user .columnForm .selector-permission-container .labelsAndValues-row {
+        margin-bottom: 10px;
+    }
+    
+    .rtl-ui .edit-user .columnForm .selector-permission-container .labelsAndValues-labelCell {
+        left: auto;
+        right: 0px;
+        text-align: left;
+    }
+    
+    .rtl-ui .edit-user .columnForm .selector-permission-container .labelsAndValues-valueCell {
+        padding-left: 0;
+        padding-right: 15px;
+        padding-left: 0;
+        padding-right: 15px;
+    }
+    
+    .rtl-ui .edit-user .team-list .team-save-button {
+        left: auto;
+        right: 315px;
+        margin: 0  !important;
+    }
+    
+    .rtl-ui .edit-user .add-members-button {
+        left: auto;
+        right: 430px;
+    }
+    
+    .rtl-ui .edit-user.edit-team-read-only .add-members-button {
+        left: auto;
+        right: 330px;
+    }
+    
+    .rtl-ui .edit-user .right-panel-container .right-panel .right-panel-groups {
+        margin-bottom: 400px;
+    }
+    
+    .rtl-ui .edit-user .right-panel .dnd-handle-text {
+        padding: 0 2px 3px;
+        margin-left: 0;
+        margin-right: 4px;
+    }
+    
+    .rtl-ui .edit-user .right-panel-role-minimizer-text.containerLabel {
+        margin: 8px 12px;
+        padding: 8px 10px;
+        padding-left: 0;
+        padding-right: 10px !important;
+    }
+    
+    .rtl-ui .edit-user .right-panel-role-minimizer-container {
+        text-align: left;
+        margin-left: 0;
+        margin-right: -400px;
+    }
+    
+    .rtl-ui .edit-user .right-panel-top .right-panel-role-minimizer {
+        margin-left: 0;
+        margin-right: -100px;
+    }
+    
+    .rtl-ui .edit-user.minimize-roles .team-member-selector, .rtl-ui .edit-user.minimize-roles.right-panel-show.right-panel-top .team-member-selector {
+        padding: 0;
+        margin: 0 0 0 6px;
+        text-align: center;
+    }
+    
+    .rtl-ui .edit-user.minimize-roles .columnForm .team-role-row {
+        margin-bottom: 0;
+    }
+    
+    .rtl-ui .team-object-mapping-divider {
+        margin: 0 -20px;
+    }
+    
+    .rtl-ui .manage-teams-button {
+        margin: 14px 20px 0 0;
+    }
+    
+    .rtl-ui .right-panel-container {
+        right: auto;
+        left: 0;
+    }
+    
+    .rtl-ui .right-panel {
+        border-left: none;
+        border-right: 1px solid #CCC;
+        padding: 0 20px;
+    }
+    
+    .rtl-ui .right-panel .panel-header {
+        padding-top: 15px;
+    }
+    
+    .rtl-ui .right-panel .panel-close-button {
+        float: left;
+    }
+    
+    .rtl-ui .right-panel .panel-header .panel-subtitle {
+        float: right;
+    }
+    
+    .rtl-ui .right-panel .panel-header .panel-title-contents {
+        float: right;
+        text-align: left;
+    }
+    
+    .rtl-ui .resourceList .right-panel .panel-content .webextTable .tableFilterRow .icon_delete {
+        margin-left: 0;
+        margin-right: -22px;
+    }
+    
+    .rtl-ui .webextTable .sortableColumn span {
+        margin-right: 0;
+        margin-left: 18px;
+    }
+    
+    .rtl-ui .mxWindowPane .listTopButtons {
+        margin: 0px;
+    }
+    
+    .rtl-ui .activityTreeCell .expandableCellContent>div .processActivityName {
+        margin-right: 22px;
+        margin-left: 15px;
+    }
+    
+    .rtl-ui .executionLog .progressCell, .rtl-ui .executionLog .executionSummaryRow td.progressCell {
+        padding: 0px 0px 0px 0px;
+    }
+    
+    .rtl-ui .executionLog .webextTable > table > tbody > tr td.progressCell .cellWrapper, .rtl-ui .executionLog .webextTable > table > tr td.progressCell .cellWrapper, .rtl-ui .executionLog .executionSummaryRow td.progressCell .cellWrapper {
+        padding: 4px;
+        left: 0px;
+        right: 0px;
+    }
+    
+    .rtl-ui .executionLog .progressCell .progressLabel {
+        text-align: center;
+    }
+    
+    .rtl-ui .executionLog .progressCell .progressMeter {
+        margin-bottom: -17px;
+    }
+    
+    .rtl-ui .dj_gecko .executionLog .progressCell .progressLabel {
+        margin-top: -17px;
+    }
+    
+    .rtl-ui .dj_gecko .executionLog .progressCell .progressMeter {
+        margin-bottom: 0;
+    }
+    
+    .rtl-ui .executionLog .executionSummaryRow td {
+        padding: 5px 3px;
+        text-align: right;
+    }
+    
+    .rtl-ui .executionLog .executionSummaryRow td .cellWrapper {
+        padding: 3px;
+    }
+    
+    .rtl-ui .timeline-dock-checkbox-container {
+        float: left;
+    }
+    
+    .rtl-ui .timeline-fixed-position .timeline-dock-checkbox-container {
+        right: auto;
+        left: 30px;
+    }
+    
+    .rtl-ui .executionLog .containerLabel {
+        padding-left: 0;
+        padding-right: 0px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-container {
+        margin: 0 30px 30px 0;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-collapsed .timeline-container {
+        margin-bottom: 22px;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-fixed-position {
+        left: auto;
+        right: 0;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-fixed-position .timeline-container {
+        margin: 0 60px 20px 30px;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-fixed-position .containerLabel {
+        padding: 20px 30px 0;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-collapsed.timeline-fixed-position .containerLabel {
+        padding: 10px 30px 0;
+        margin-bottom: -10px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-time-container {
+        margin-top: 20px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-time-container .timeline-header-box-time-left {
+        left: auto;
+        right: 0;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-time-container .timeline-header-box-time-right {
+        right: auto;
+        left: 0;
+        text-align: left;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-time-container .timeline-header-box {
+        text-align: center;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-time-container .timeline-header-box-summary {
+        text-align: center;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-time-container.timeline-background {
+        margin-top: 3px;
+        margin-right: 0;
+        margin-left: -2px;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-collapsed .timeline-time-container.timeline-background {
+        margin-top: 5px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-time-container.timeline-background .timeline-section .timeline-icon-section {
+        right: auto;
+        left: 24px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-container .timeline-step .timeline-step-border-left {
+        float: right;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-container .timeline-step .timeline-step-border-right {
+        float: left;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-container .status-container {
+        margin: -3px 4px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-container .icon-container .general-icon {
+        margin: 0;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-container .timeline-length {
+        margin-top: 5px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-expander {
+        margin: -34px -15px 0 0;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-collapsed.timeline-fixed-position .timeline-expander {
+        left: auto;
+        right: 30px;
+        margin-top: -5px;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-fixed-position .timeline-expander {
+        left: auto;
+        right: 30px;
+        margin-top: -14px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-step .mouse-over-popup {
+        margin-top: 15px;
+    }
+    
+    .rtl-ui .execution-log-timeline.timeline-collapsed .timeline-step .mouse-over-popup {
+        margin-top: 9px;
+    }
+    
+    .rtl-ui .execution-log-timeline .timeline-step .mouse-over-popup .popup-contents-container {
+        margin: 2px 8px;
+    }
+    
+    .rtl-ui .execution-log-timeline .mouse-over-popup .popup-label {
+        text-align: left;
+        margin: 0 4px 0 2px;
+    }
+    
+    .rtl-ui .execution-log-timeline .mouse-over-popup .popup-text {
+        text-align: right;
+        margin: 0 2px 0 4px;
+    }
+    
+    .rtl-ui .execution-log-timeline .mouse-over-popup .name-label {
+        margin-bottom: 20px;
+    }
+    
+    .rtl-ui .execution-log-timeline .mouse-over-popup .popup-line {
+        margin-bottom: 4px;
+    }
+    
+    .rtl-ui .execution-log-timeline .icon-container .mouse-over-popup {
+        margin-top: 6px;
+    }
+    
+    .rtl-ui .executionLog .status-color-block {
+        margin: -3px 0 -3px 6px;
+    }
+    
+    .rtl-ui .executionLog .timeline-header-box .status-color-block {
+        margin: -1px 0 -3px 4px;
+    }
+    
+    .rtl-ui .executionLog .webextTable .cellWrapper .mouse-over-popup {
+        margin-top: 4px;
+    }
+    
+    .rtl-ui .executionLog .webextTable .tableHoverActions, .rtl-ui .executionLog .webextTable tr:hover .tableHoverActions .table-actions-container, .rtl-ui .executionLog .webextTable td.drop-down-button-visible .tableHoverActions .table-actions-container, .rtl-ui .executionLog .webextTable tr.selected .tableHoverActions .table-actions-container {
+        padding: 8px 5px;
+    }
+    
+    .rtl-ui .executionLog .webextTable .tableHoverActions.always-show-actions .table-actions-container {
+        padding-right: 0;
+        padding-left: 5px;
+    }
+    
+    .rtl-ui .report-page, .rtl-ui .reportPage {
+        margin-top: 10px;
+    }
+    
+    .rtl-ui .report-sidebar {
+        float: right;
+    }
+    
+    .rtl-ui .report-sidebar .report-accordion .dijitTitlePaneTitle, .rtl-ui .report-sidebar .report-accordion .dijitTitlePaneTitle .dijitTitlePaneTitleFocus, .rtl-ui .report-form-table .report-column-edit-button.dijitButton .dijitButtonNode, .rtl-ui .mxWindow td.mxWindowTitle {
+        padding: 4px 0px 4px 10px;
+    }
+    
+    .rtl-ui .report-sidebar .report-accordion .dijitTitlePaneContentInner {
+        padding: 0;
+    }
+    
+    .rtl-ui .report-link-div .linkPointer, .rtl-ui .report-link-div-selected .linkPointer {
+        padding: 10px 25px;
+    }
+    
+    .rtl-ui .report-link-div .iconMinus, .rtl-ui .report-link-div-selected .iconMinus {
+        right: auto;
+        left: 10px;
+    }
+    
+    .rtl-ui .report-main {
+        margin-left: 0;
+        margin-right: 280px;
+    }
+    
+    .rtl-ui .report-main .report-table .chart-help-link-container {
+        text-align: left;
+        margin: -20px 0 20px 8px;
+    }
+    
+    .rtl-ui .report-form-table .report-form .report-date-picker .date-range-selector, .rtl-ui .report-form-table .report-form .report-button-span .report-button, .rtl-ui .report-form-table .report-form .report-form-field .report-form-field .dialogMultiSelect, .rtl-ui .report-form-table .report-form .report-form-field .report-form-field .dijitSelect {
+        margin-bottom: 10px;
+    }
+    
+    .rtl-ui .report-form-table .has-form-widget {
+        margin-bottom: 15px;
+    }
+    
+    .rtl-ui .report-form-table .report-form .report-date-picker .date-range-selector .date-range-wrapper .selectedDate .dijitTextBox {
+        margin-left: 0;
+        margin-right: 7px;
+    }
+    
+    .rtl-ui .report-form-table .report-form .report-form-field {
+        padding: 0 0 0 10px;
+    }
+    
+    .rtl-ui .report-main .report-table .webextTableFooter {
+        right: 306px;
+        left: 30px;
+    }
+    
+    .rtl-ui .report-breadcrumb-container {
+        padding: 10px 15px;
+        margin-bottom: 10px;
+    }
+    
+    .rtl-ui .report-breadcrumb-container img {
+        margin: auto 3px auto 2px;
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
+    
+    .rtl-ui .report-breadcrumb-container .report-link {
+        float: left;
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    
+    .rtl-ui .dialogMultiSelect .dijitButtonNode, .rtl-ui .dijitPopup .dijitDateTextBox .dijitInputContainer {
+        padding: 3px 6px 4px 6px  !important;
+    }
+    
+    .rtl-ui .customDateRangeSelector {
+        padding: 15px;
+        margin-top: -3px;
+    }
+    
+    .rtl-ui .customDateRangeSelector .dijitButton {
+        left: auto;
+        right: 14px;
+    }
+    
+    .rtl-ui .highcharts-outer-container {
+        margin-right: auto;
+        margin-left: auto;
+        padding-bottom: 20px;
+    }
+    
+    .rtl-ui .dj_gecko .highcharts-outer-container {
+        margin-top: 1px;
+    }
+    
+    .rtl-ui .applicationList, .rtl-ui .processList {
+        margin-top: -6px;
+    }
+    
+    .rtl-ui .dj_ie7 .report-definition-list .sideBar {
+        margin-right: -27px;
+        margin-left: 27px;
+    }
+    
+    .rtl-ui .popupContent .popupTitle {
+        margin: 5px;
+    }
+    
+    .rtl-ui .popupContent .popupMessage {
+        margin: 10px 5px 15px 5px;
+    }
+    
+    .rtl-ui .popupContent .popupButtons {
+        text-align: left;
+    }
+    
+    .rtl-ui .securityAddMember {
+        float: left;
+        padding-right: 0;
+        padding-left: 10px;
+    }
+    
+    .rtl-ui .securityMember {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    
+    .rtl-ui.dijitTooltipABRight .dijitTooltipConnector {
+        right: auto;
+        left: 8px;
+    }
+    
+    .rtl-ui .roleActions {
+        margin-left: 0;
+        margin-right: 20px;
+    }
+    
+    .rtl-ui .mxWindowPane .centered-expand-collapse {
+        left: auto;
+        right: 0;
+        margin-top: 7px;
+        text-align: center;
+    }
+    
+    .rtl-ui .mxWindowPane .left-align-expand-collapse {
+        left: auto;
+        right: 0;
+    }
+    
+    .rtl-ui .mxWindowPane .fileTree {
+        padding: 4px;
+        margin-top: -15px;
+    }
+    
+    .rtl-ui .mxWindowPane .toolbar-container {
+        padding: 4px;
+        text-align: center;
+    }
+    
+    .rtl-ui .mxWindow td.mxWindowTitle {
+        padding: 4px 0;
+    }
+    
+    .rtl-ui .process-save-dialog {
+        padding: 10px;
+    }
+    
+    .rtl-ui .process-save-dialog {
+        padding: 10px;
+        margin: 90px 11px 0 0;
+        text-align: center;
+    }
+    
+    .rtl-ui .settings-index {
+        margin: 10px 0 0;
+    }
+    
+    .rtl-ui .settings-index .category {
+        margin-right: 0;
+        margin-left: -1px;
+    }
+    
+    .rtl-ui .settings-index .category-wrapper {
+        padding-left: 0;
+        padding-right: 15px;
+    }
+    
+    .rtl-ui .settings-index .category-label {
+        text-align: center;
+        margin-bottom: 16px;
+    }
+    
+    .rtl-ui .settings-index .category-divider {
+        margin: 0 1%;
+    }
+    
+    .rtl-ui .settings-index .link-container {
+        margin: 8px 0;
+    }
+    
+    .rtl-ui .settings-index .link-container .output-log-download-link {
+        left: auto;
+        right: 8px;
+    }
+    
+    .rtl-ui .settings-index .link-container .inner-link-text {
+        padding: 10px 42px 12px 0;
+    }
+    
+    .rtl-ui .logButtons {
+        margin-bottom: -5px;
+    }
+    
+    .rtl-ui .rolePermissions .expandNode {
+        margin-right: 0;
+        margin-left: 4px;
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter: "FlipH";
+    }
+    
+    .rtl-ui .rolePermissions > .subActionContainer {
+        padding-top: 7px;
+        padding-left: 0;
+        padding-right: 18px;
+    }
+    
+    .rtl-ui .rolePermissions > .subActionContainer.collapsedRolePermissions {
+        padding-top: 0px;
+    }
+    
+    .rtl-ui .rolePermissions .subAction {
+        margin-bottom: 3px;
+    }
+    
+    .rtl-ui .form-container, .rtl-ui .systemSettings .underField {
+        margin: 10px auto 20px;
+    }
+    
+    .rtl-ui .systemSettings .underField {
+        padding: 15px 0;
+        margin: 0 auto  !important;
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui .systemSettings .underField .dijitButton {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    
+    .rtl-ui .settings-section-inner {
+        margin: 10px;
+        padding: 5px 15px 15px;
+    }
+    
+    .rtl-ui .settings-section .labelsAndValues-row {
+        margin-bottom: 15px;
+    }
+    
+    .rtl-ui .settings-section .labelsAndValues-row:last-child {
+        margin-bottom: 0px;
+    }
+    
+    .rtl-ui .settings-section .sectionLabel {
+        margin-top: 0  !important;
+    }
+    
+    .rtl-ui .settings-section .labelsAndValues-labelCell {
+        text-align: right;
+        margin: 0 0 3px 0;
+    }
+    
+    .rtl-ui .settings-section .labelsAndValues-valueCell .domNode {
+        margin-top: 0  !important;
+    }
+    
+    .rtl-ui .settings-section .labelsAndValues-valueCell {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .rtl-ui .settings-section .dijitButton {
+        margin: 0;
+    }
+    
+    .rtl-ui .calendar, .rtl-ui #calendarContainer {
+        padding-top: 10px;
+    }
+    
+    .rtl-ui .calendar .calendar-sidebar {
+        float: right;
+    }
+    
+    .rtl-ui .calendar .calendar-title {
+        float: left;
+        margin: 3px 0 0 10px;
+    }
+    
+    .rtl-ui .calendar .dojoxCalendar {
+        margin-left: 0;
+        margin-right: 260px;
+    }
+    
+    .rtl-ui .dojoxCalendar .buttonContainer {
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui.dojoxCalendar .buttonContainer .dijitToolbarSeparator {
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendar .viewContainer {
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendar .view {
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui .calendar-sidebar-tabs {
+        margin-bottom: -1px;
+    }
+    
+    .rtl-ui .calendar-sidebar-tab {
+        padding: 8px 0 4px;
+        text-align: center;
+        margin-right: 0;
+        margin-left: 2px;
+    }
+    
+    .rtl-ui .current-calendar-tab {
+        border-right-color: #CCC;
+        border-left-color: #CCC;
+        padding-bottom: 5px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel {
+        padding: 10px;
+        margin-top: -1px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel-title {
+        padding-bottom: 5px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel-section {
+        margin-bottom: 10px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel-filters .calendar-sidebar-panel-section .dijitValidationTextBox {
+        margin-top: 2px;
+    }
+    
+    .rtl-ui .calendar-sidebar-environment-color {
+        margin: 2px 0 0 5px;
+    }
+    
+    .rtl-ui .calendar-sidebar-create-button-container {
+        padding: 0 10px 10px 10px;
+        margin: 0 -10px 10px;
+        text-align: center;
+    }
+    
+    .rtl-ui .calendar-sidebar-button-link {
+        margin-right: 0;
+        margin-left: 10px;
+    }
+    
+    .rtl-ui.dijitButton.calendar-sidebar-button {
+        margin-left: 5px;
+        margin-right: 0px;
+        text-align: center;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel-filters {
+        padding: 0 10px 10px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel .calendar-filter-section {
+        padding: 10px;
+        margin: 0 -10px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel .add-filter-container {
+        padding: 10px;
+        margin: -11px 0 0 -10px;
+        border-right: 1px solid #CCC;
+        border-left: none;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel .add-filter-icon {
+        margin: 0;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel .add-filter-container, .rtl-ui .calendar-sidebar-panel .remove-filter-icon {
+        float: left;
+    }
+    
+    .rtl-ui .calendar-sidebar-save-message, .rtl-ui .calendar-sidebar-hover-container {
+        padding: 10px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel-filters .calendar-sidebar-save-message {
+        margin-top: 10px;
+    }
+    
+    .rtl-ui .calendar-sidebar-save-message {
+        margin-top: -1px;
+        text-align: center;
+    }
+    
+    .rtl-ui.calendar-sidebar-panel-section .dijitComboBox .dijitInputField .dijitInputInner {
+        right: auto;
+        left: 5px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel-section .calendar-date-drop-down {
+        margin-right: 0;
+        margin-left: 4px;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel-section .versionSelector .dijitSelect {
+        margin: 0 0 4px 4px;
+    }
+    
+    .rtl-ui .calendar-sidebar-bottom-filter-container {
+        padding: 0px 10px;
+        margin: 0 -10px;
+    }
+    
+    .rtl-ui .calendar-sidebar-modify-button-container, .rtl-ui .calendar-sidebar-filter-button-container {
+        text-align: center;
+    }
+    
+    .rtl-ui .calendar-sidebar-panel .calendar-update-button, .rtl-ui .calendar-sidebar-panel .calendar-cancel-button {
+        margin-top: 10px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarEvent {
+        text-align: right;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarEvent.dojoxCalendarHorizontal .bg {
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent .bg {
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarEvent.dojoxCalendarHorizontal .labels {
+        right: 3px;
+        left: 1px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarEvent.dojoxCalendarLabel .labels {
+        right: 2px;
+        left: 2px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarEvent.dojoxCalendarLabel .labels .startTime span {
+        margin: 0 4px;
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarEvent .moveHandle {
+        left: auto;
+        right: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarEvent .resizeEndHandle {
+        right: auto;
+        left: 0px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGrid {
+        right: 50px;
+        left: 0px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGridTable {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGridTable td {
+        text-align: left;
+        padding: 0 1px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGridTable td span {
+        margin-bottom: 2px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGridTable td span span {
+        margin: -1px 4px 0;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGridTable td.dojoxCalendarWeekend span span, .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGridTable td.first-child span span, .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGridTable td.last-child span span, .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarGridTable td.dojoxCalendarToday span span {
+        margin: -1px 0px 0;
+        padding-right: 0;
+        padding-left: 2px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarYearColumnHeader {
+        left: auto;
+        right: 0px;
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarYearColumnHeader table td {
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarColumnHeader {
+        right: 50px;
+        left: 0px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarColumnHeaderTable td {
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarRowHeader {
+        left: auto;
+        right: 0px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarRowHeaderTable {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarRowHeaderTable td {
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarContainer {
+        right: 50px;
+        left: 0px;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarContainerTable {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarContainerTable td {
+        border-right: none;
+        border-left: solid 1px transparent;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarExpand {
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarMatrixView .dojoxCalendarExpand .bg {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarHeader {
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarScrollContainer {
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarGrid {
+        right: 70px;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarGridTable {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarGridTable td {
+        border-left: 4px solid #FFF;
+        border-right: 4px solid #FFF;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarGridTable .dojoxCalendarToday {
+        border-right: none;
+        border-left: none;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .current-time-bar {
+        left: auto;
+        right: -100px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarContainer {
+        right: 70px;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarContainerTable {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarContainerTable td {
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarContainerColumn {
+        margin-right: 2px;
+        margin-left: 9px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarYearColumnHeader {
+        left: auto;
+        right: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarYearColumnHeader table td {
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarColumnHeader {
+        right: 70px;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarColumnHeaderTable {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarColumnHeaderTable td {
+        text-align: center;
+        border-right: 4px solid #FFF;
+        border-left: 4px solid #FFF;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarColumnHeaderTable .dojoxCalendarToday span {
+        padding: 2px 7px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarRowHeaderTable {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarRowHeaderTable td {
+        text-align: left;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarRowHeaderTable td span {
+        padding-right: 0;
+        padding-left: 4px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent {
+        text-align: right;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent .startTime {
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-top-left-radius: 5px;
+        -moz-border-top-left-radius: 5px;
+        -moz-border-top-right-radius: 5px;
+        padding: 1px 3px 2px 2px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent.Focused .startTime {
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-top-left-radius: 5px;
+        -moz-border-top-left-radius: 5px;
+        -moz-border-top-right-radius: 5px;
+        padding: 1px 3px 2px 2px;
+        border-right: dashed 1px #ffffff;
+        border-left: dashed 1px #ffffff;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent.Edited .startTime {
+        border-right: dashed 1px #ffffff;
+        border-left: dashed 1px #ffffff;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent .endTime {
+        left: auto;
+        right: 6px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent .beforeIcon {
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent .afterIcon {
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent dl {
+        margin: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarEvent dd {
+        margin: 0;
+        padding: 0 3px;
+        text-align: right;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView {
+        right: 0;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarGrid {
+        right: 70px;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarContainer {
+        right: 70px;
+        left: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarRowHeader {
+        left: auto;
+        right: 0;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarGridTable td {
+        text-align: left;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarEvent .moveHandle {
+        left: auto;
+        right: 0;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarEvent.dojoxCalendarHorizontal .labels {
+        right: 3px;
+        left: 1px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarEvent .resizeEndHandle {
+        right: auto;
+        left: 0px;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarEvent .endTime {
+        left: auto;
+        right: auto;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarExpand {
+        text-align: center;
+    }
+    
+    .rtl-ui .dojoxCalendarColumnView .dojoxCalendarMatrixView .dojoxCalendarExpand .bg {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    
+    .rtl-ui .artifactProgressBarText {
+        margin-top: 20px;
+        margin-right: 0;
+        margin-left: 10px;
+    }
+    
+    .rtl-ui .artifactDescription {
+        padding: 10px;
+    }
+    
+    .rtl-ui .combo-check-box-select .selected-items-list .selected-item-container .filter-dropdown-color {
+        margin: 0 0 -2px 5px;
+    }
+    
+    .rtl-ui .filter-dropdown-color {
+        margin: 0 0 -4px 5px;
+    }
+    
+    .rtl-ui ._blocker_mask {
+        left: auto;
+        right: 0px;
+    }
+    
+    .rtl-ui.dijitDialogPaneContent .columnForm {
+        padding: 0 0 10px;
+    }
+    
+    .rtl-ui.showTeam .dijitButton .dijitButtonNode {
+        padding: 0px;
+    }
+    
+    .rtl-ui #_webext_logo {
+        margin: 15px 20px;
+    }
+    
+    .rtl-ui div.header {
+        padding-bottom: 3px;
+    }
+    
+    .rtl-ui .logHeader {
+        padding: 5px 0px;
+    }
+    
+    .rtl-ui .failureBox {
+        padding: 5px;
+    }
+    
+    .rtl-ui .savedNotification {
+        padding: 2px 5px;
+        margin: 3px;
+    }
+    
+    .rtl-ui .lifecycleStageBox {
+        padding: 3px 6px;
+        margin: 0px 5px;
+    }
+    
+    .rtl-ui .log-viewer-dialog {
+        padding: 0px;
+    }
+    
+    .rtl-ui .versionArtifacts .archiveAttach {
+        margin-top: 5px;
+        padding-left: 0;
+        padding-right: 5px;
+    }
+    
+    .rtl-ui .versionLinks img {
+        margin: 3px;
+    }
+    
+    .rtl-ui .iconBlank {
+        margin-right: 0;
+        margin-left: 5px;
+    }
+    
+    .rtl-ui .iconWizardPage1 {
+        margin: -6px 110px 0 0;
+    }
+    
+    .rtl-ui .iconWizardPage2 {
+        margin: -6px 110px 0 0;
+    }
+    
+    .rtl-ui .iconCloud {
+        margin: 0 0 -4px 5px;
+    }
+    
+    .rtl-ui .environment-error-container {
+        margin: 3px 20px 10px 20px;
+        padding: 10px 15px;
+    }
+    
+    .rtl-ui .environment-error-detail {
+        padding: 3px 50px 0px 0px;
+    }
+    
+    .rtl-ui .agent-list .agent-version-container {
+        margin-right: 0;
+        margin-left: 6px;
+        float: left;
+    }
+    
+    .rtl-ui .agent-list .agent-version-container div {
+        padding: 3px;
+    }
+    
+    .rtl-ui .agent-list .agent-version-container div:first-child {
+        border-right: none;
+        border-left: 2px solid #666;
+    }
+    
+}
+
+@include exports('legacyrtl') {
+    @include legacyrtl;
+}

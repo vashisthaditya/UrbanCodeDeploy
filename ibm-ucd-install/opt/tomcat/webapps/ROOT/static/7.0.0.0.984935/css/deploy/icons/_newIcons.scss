@@ -1,0 +1,1543 @@
+@import '../carbon/globals/import-once';
+
+@mixin newIcons {
+    .icon {
+        background-image: url('../../images/icons/icons_spritesheet.png');
+        background-repeat: no-repeat;
+        display: block;
+    }
+    
+    .icon-Icon_add--outline__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -5px -5px;
+    }
+    
+    .icon-Icon_add--outline__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -39px -5px;
+    }
+    
+    .icon-Icon_add--outline__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -73px -5px;
+    }
+    
+    .icon-Icon_add__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -107px -5px;
+    }
+    
+    .icon-Icon_add__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -141px -5px;
+    }
+    
+    .icon-Icon_add__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -175px -5px;
+    }
+    
+    .icon-Icon_arrows__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 22px;
+        background-position: -209px -5px;
+    }
+    
+    .icon-Icon_arrows__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 22px;
+        background-position: -243px -5px;
+    }
+    
+    .icon-Icon_arrows__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 22px;
+        background-position: -277px -5px;
+    }
+    
+    .icon-Icon_camera__brand-01 {
+        @extend .icon;
+        width: 22px;
+        height: 18px;
+        background-position: -209px -37px;
+    }
+    
+    .icon-Icon_camera__brand-02 {
+        @extend .icon;
+        width: 22px;
+        height: 18px;
+        background-position: -241px -37px;
+    }
+    
+    .icon-Icon_camera__ui-05 {
+        @extend .icon;
+        width: 22px;
+        height: 18px;
+        background-position: -273px -37px;
+    }
+    
+    .icon-Icon_checkmark--outline__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -5px -65px;
+    }
+    
+    .icon-Icon_checkmark--outline__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -39px -65px;
+    }
+    
+    .icon-Icon_checkmark--outline__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -73px -65px;
+    }
+    
+    .icon-Icon_checkmark__brand-01 {
+        @extend .icon;
+        width: 12px;
+        height: 9px;
+        background-position: -311px -5px;
+    }
+    
+    .icon-Icon_checkmark__ui-05 {
+        @extend .icon;
+        width: 12px;
+        height: 9px;
+        background-position: -311px -24px;
+    }
+    
+    .icon-Icon_close--outline__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -107px -65px;
+    }
+    
+    .icon-Icon_close--outline__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -141px -65px;
+    }
+    
+    .icon-Icon_close--outline__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -175px -65px;
+    }
+    
+    .icon-Icon_close__brand-01 {
+        @extend .icon;
+        width: 10px;
+        height: 10px;
+        background-position: -5px -43px;
+    }
+    
+    .icon-Icon_close__brand-02 {
+        @extend .icon;
+        width: 10px;
+        height: 10px;
+        background-position: -25px -43px;
+    }
+    
+    .icon-Icon_close__ui-04 {
+        @extend .icon;
+        width: 10px;
+        height: 10px;
+        background-position: -45px -43px;
+    }
+    
+    .icon-Icon_close__ui-05 {
+        @extend .icon;
+        width: 10px;
+        height: 10px;
+        background-position: -65px -43px;
+    }
+    
+    .icon-Icon_copy__brand-01 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -305px -43px;
+    }
+    
+    .icon-Icon_copy__brand-02 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -209px -77px;
+    }
+    
+    .icon-Icon_copy__ui-05 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -237px -77px;
+    }
+    
+    .icon-Icon_delete__brand-01 {
+        @extend .icon;
+        width: 16px;
+        height: 24px;
+        background-position: -265px -77px;
+    }
+    
+    .icon-Icon_delete__brand-02 {
+        @extend .icon;
+        width: 16px;
+        height: 24px;
+        background-position: -291px -77px;
+    }
+    
+    
+    .icon-Icon_delete__ui-05 {
+        @extend .icon;
+        width: 16px;
+        height: 24px;
+        background-position: -5px -111px;
+    }
+    
+    .icon-Icon_download__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -31px -111px;
+    }
+    
+    .icon-Icon_download__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -65px -111px;
+    }
+    
+    .icon-Icon_download__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -99px -111px;
+    }
+    
+    .icon-Icon_error__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -133px -111px;
+    }
+    
+    .icon-Icon_error__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -167px -111px;
+    }
+    
+    .icon-Icon_error__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -201px -111px;
+    }
+    
+    .icon-Icon_filter__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -235px -111px;
+    }
+    
+    .icon-Icon_filter__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -269px -111px;
+    }
+    
+    .icon-Icon_filter__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -5px -145px;
+    }
+    
+    .icon-Icon_group__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -39px -145px;
+    }
+    
+    .icon-Icon_group__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -73px -145px;
+    }
+    
+    .icon-Icon_group__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -107px -145px;
+    }
+    
+    .icon-Icon_help__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -141px -145px;
+    }
+    
+    .icon-Icon_help__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -175px -145px;
+    }
+    
+    .icon-Icon_help__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -209px -145px;
+    }
+    
+    .icon-Icon_info__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -243px -145px;
+    }
+    
+    .icon-Icon_info__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -277px -145px;
+    }
+    
+    .icon-Icon_info__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -5px -179px;
+    }
+    
+    .icon-Icon_launch__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 20px;
+        background-position: -39px -179px;
+    }
+    
+    .icon-Icon_launch__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 20px;
+        background-position: -73px -179px;
+    }
+    
+    .icon-Icon_launch__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 20px;
+        background-position: -107px -179px;
+    }
+    
+    .icon-Icon_link__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -141px -179px;
+    }
+    
+    .icon-Icon_link__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -175px -179px;
+    }
+    
+    .icon-Icon_link__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -209px -179px;
+    }
+    
+    .icon-Icon_locked__brand-01 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -303px -111px;
+    }
+    
+    .icon-Icon_locked__brand-02 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -243px -179px;
+    }
+    
+    .icon-Icon_locked__ui-05 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -271px -179px;
+    }
+    
+    .icon-Icon_menu__brand-01 {
+        @extend .icon;
+        width: 20px;
+        height: 14px;
+        background-position: -299px -179px;
+    }
+    
+    .icon-Icon_menu__brand-02 {
+        @extend .icon;
+        width: 20px;
+        height: 14px;
+        background-position: -299px -203px;
+    }
+    
+    .icon-Icon_menu__ui-05 {
+        @extend .icon;
+        width: 20px;
+        height: 14px;
+        background-position: -5px -227px;
+    }
+    
+    .icon-Icon_overflow-menu_horizontal__brand-01 {
+        @extend .icon;
+        width: 20px;
+        height: 4px;
+        background-position: -35px -227px;
+    }
+    
+    .icon-Icon_overflow-menu_horizontal__ui-05 {
+        @extend .icon;
+        width: 20px;
+        height: 4px;
+        background-position: -65px -227px;
+    }
+    
+    .icon-Icon_overflow-menu_vertical__brand-01 {
+        @extend .icon;
+        width: 4px;
+        height: 20px;
+        background-position: -317px -77px;
+    }
+    
+    .icon-Icon_overflow-menu_vertical__ui-05 {
+        @extend .icon;
+        width: 4px;
+        height: 20px;
+        background-position: -311px -145px;
+    }
+    
+    .icon-Icon_pause__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -95px -227px;
+    }
+    
+    .icon-Icon_pause__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -129px -227px;
+    }
+    
+    .icon-Icon_pause__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -163px -227px;
+    }
+    
+    .icon-Icon_play__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -197px -227px;
+    }
+    
+    .icon-Icon_play__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -231px -227px;
+    }
+    
+    .icon-Icon_play__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -265px -227px;
+    }
+    
+    .icon-Icon_restart__brand-01 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -299px -227px;
+    }
+    
+    .icon-Icon_restart__brand-02 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -5px -261px;
+    }
+    
+    .icon-Icon_restart__ui-05 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -33px -261px;
+    }
+    
+    .icon-Icon_search__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 25px;
+        background-position: -61px -261px;
+    }
+    
+    .icon-Icon_search__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 25px;
+        background-position: -95px -261px;
+    }
+    
+    .icon-Icon_settings__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -129px -261px;
+    }
+    
+    .icon-Icon_settings__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -163px -261px;
+    }
+    
+    .icon-Icon_settings__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -197px -261px;
+    }
+    
+    .icon-Icon_stop__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -231px -261px;
+    }
+    
+    .icon-Icon_stop__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -265px -261px;
+    }
+    
+    .icon-Icon_stop__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -299px -261px;
+    }
+    
+    .icon-Icon_unlocked__brand-01 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -5px -295px;
+    }
+    
+    .icon-Icon_unlocked__brand-02 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -33px -295px;
+    }
+    
+    .icon-Icon_unlocked__ui-05 {
+        @extend .icon;
+        width: 18px;
+        height: 24px;
+        background-position: -129px -295px;
+    }
+    
+    .icon-Icon_upload__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -157px -295px;
+    }
+    
+    .icon-Icon_upload__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -191px -295px;
+    }
+    
+    .icon-Icon_upload__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -225px -295px;
+    }
+    
+    .icon-Icon_user2__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -259px -295px;
+    }
+    
+    .icon-Icon_user2__ui-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -293px -295px;
+    }
+    
+    .icon-Icon_user2__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -333px -5px;
+    }
+    
+    .icon-Icon_user__brand-01 {
+        @extend .icon;
+        width: 20px;
+        height: 24px;
+        background-position: -333px -39px;
+    }
+    
+    .icon-Icon_user__brand-02 {
+        @extend .icon;
+        width: 20px;
+        height: 24px;
+        background-position: -333px -73px;
+    }
+    
+    .icon-Icon_user__ui-05 {
+        @extend .icon;
+        width: 20px;
+        height: 24px;
+        background-position: -331px -107px;
+    }
+    
+    .icon-Icon_zoom--to--fit__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -331px -141px;
+    }
+    
+    .icon-Icon_zoom--to--fit__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -329px -175px;
+    }
+    
+    .icon-Icon_zoom--to--fit__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -329px -209px;
+    }
+    
+    .icon-Icon_zoom--to--selected__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -333px -243px;
+    }
+    
+    .icon-Icon_zoom--to--selected__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -333px -277px;
+    }
+    
+    .icon-Icon_zoom--to--selected__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -61px -311px;
+    }
+    
+    .icon-Icon_zoom-in__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -95px -311px;
+    }
+    
+    .icon-Icon_zoom-in__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -327px -311px;
+    }
+    
+    .icon-Icon_zoom-in__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -367px -5px;
+    }
+    
+    .icon-Icon_zoom-out__brand-01 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -363px -39px;
+    }
+    
+    .icon-Icon_zoom-out__brand-02 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -363px -73px;
+    }
+    
+    .icon-Icon_zoom-out__ui-05 {
+        @extend .icon;
+        width: 24px;
+        height: 24px;
+        background-position: -361px -107px;
+    }
+    
+    /***********************************
+     * High Resolution
+     ***********************************/
+    @media (min-resolution: 144dppx),
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (min--moz-device-pixel-ratio: 1.5),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min-device-pixel-ratio: 1.5),
+    (min-resolution: 1.5dppx) {
+        .icon-retina {
+            background-image: url('../../images/icons/icons_2x_spritesheet.png');
+            background-repeat: no-repeat;
+            display: block;
+            background-size: 337px 290px;
+        }
+    
+        .icon-Icon_add--outline__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_add--outline__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -63px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_add--outline__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -121px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_add__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -179px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_add__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -237px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_add__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -295px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_arrows__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 44px * 0.5;
+            background-position: -353px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_arrows__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 44px * 0.5;
+            background-position: -411px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_arrows__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 44px * 0.5;
+            background-position: -469px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_camera__brand-01 {
+            @extend .icon-retina;
+            width: 44px * 0.5;
+            height: 36px * 0.5;
+            background-position: -353px * 0.5 -59px * 0.5;
+        }
+    
+        .icon-Icon_camera__brand-02 {
+            @extend .icon-retina;
+            width: 44px * 0.5;
+            height: 36px * 0.5;
+            background-position: -407px * 0.5 -59px * 0.5;
+        }
+    
+        .icon-Icon_camera__ui-05 {
+            @extend .icon-retina;
+            width: 44px * 0.5;
+            height: 36px * 0.5;
+            background-position: -461px * 0.5 -59px * 0.5;
+        }
+    
+        .icon-Icon_checkmark--outline__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -105px * 0.5;
+        }
+    
+        .icon-Icon_checkmark--outline__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -63px * 0.5 -105px * 0.5;
+        }
+    
+        .icon-Icon_checkmark--outline__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -121px * 0.5 -105px * 0.5;
+        }
+    
+        .icon-Icon_checkmark__brand-01 {
+            @extend .icon-retina;
+            width: 24px * 0.5;
+            height: 18px * 0.5;
+            background-position: -527px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_checkmark__ui-05 {
+            @extend .icon-retina;
+            width: 24px * 0.5;
+            height: 18px * 0.5;
+            background-position: -527px * 0.5 -33px * 0.5;
+        }
+    
+        .icon-Icon_close--outline__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -179px * 0.5 -105px * 0.5;
+        }
+    
+        .icon-Icon_close--outline__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -237px * 0.5 -105px * 0.5;
+        }
+    
+        .icon-Icon_close--outline__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -295px * 0.5 -105px * 0.5;
+        }
+    
+        .icon-Icon_close__brand-01 {
+            @extend .icon-retina;
+            width: 20px * 0.5;
+            height: 20px * 0.5;
+            background-position: -515px * 0.5 -61px * 0.5;
+        }
+    
+        .icon-Icon_close__brand-02 {
+            @extend .icon-retina;
+            width: 20px * 0.5;
+            height: 20px * 0.5;
+            background-position: -515px * 0.5 -91px * 0.5;
+        }
+    
+        .icon-Icon_close__ui-04 {
+            @extend .icon-retina;
+            width: 20px * 0.5;
+            height: 20px * 0.5;
+            background-position: -353px * 0.5 -121px * 0.5;
+        }
+    
+        .icon-Icon_close__ui-05 {
+            @extend .icon-retina;
+            width: 20px * 0.5;
+            height: 20px * 0.5;
+            background-position: -383px * 0.5 -121px * 0.5;
+        }
+    
+        .icon-Icon_copy__brand-01 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -413px * 0.5 -121px * 0.5;
+        }
+    
+        .icon-Icon_copy__brand-02 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -459px * 0.5 -121px * 0.5;
+        }
+    
+        .icon-Icon_copy__ui-05 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -505px * 0.5 -121px * 0.5;
+        }
+    
+        .icon-Icon_delete__brand-01 {
+            @extend .icon-retina;
+            width: 32px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_delete__brand-02 {
+            @extend .icon-retina;
+            width: 32px * 0.5;
+            height: 48px * 0.5;
+            background-position: -47px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_delete__ui-05 {
+            @extend .icon-retina;
+            width: 32px * 0.5;
+            height: 48px * 0.5;
+            background-position: -89px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_download__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -131px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_download__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -189px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_download__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -247px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_error__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -305px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_error__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -363px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_error__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -421px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_filter__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -479px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_filter__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_filter__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -63px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_group__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -121px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_group__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -179px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_group__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -237px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_help__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -295px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_help__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -353px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_help__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -411px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_info__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -469px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_info__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_info__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -63px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_launch__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 40px * 0.5;
+            background-position: -121px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_launch__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 40px * 0.5;
+            background-position: -179px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_launch__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 40px * 0.5;
+            background-position: -237px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_link__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -295px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_link__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -353px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_link__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -411px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_list__brand-01 {
+            @extend .icon-retina;
+            width: 16px * 0.5;
+            height: 14px * 0.5;
+            background-position: -537px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_list__brand-01 {
+            @extend .icon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -469px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_list__brand-02 {
+            @extend .icon-retina;
+            width: 16px * 0.5;
+            height: 14px * 0.5;
+            background-position: -537px * 0.5 -203px * 0.5;
+        }
+    
+        .icon-Icon_list__brand-02 {
+            @extend .icon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -511px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_list__ui-05 {
+            @extend .icon-retina;
+            width: 16px * 0.5;
+            height: 14px * 0.5;
+            background-position: -537px * 0.5 -227px * 0.5;
+        }
+    
+        .icon-Icon_list__ui-05 {
+            @extend .icon-retina;
+            width: 32px * 0.5;
+            height: 28px * 0.5;
+            background-position: -469px * 0.5 -333px * 0.5;
+        }
+    
+        .icon-Icon_locked__brand-01 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -511px * 0.5 -333px * 0.5;
+        }
+    
+        .icon-Icon_locked__brand-02 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_locked__ui-05 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -51px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_menu__brand-01 {
+            @extend .icon-retina;
+            width: 40px * 0.5;
+            height: 28px * 0.5;
+            background-position: -97px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_menu__brand-02 {
+            @extend .icon-retina;
+            width: 40px * 0.5;
+            height: 28px * 0.5;
+            background-position: -147px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_menu__ui-05 {
+            @extend .icon-retina;
+            width: 40px * 0.5;
+            height: 28px * 0.5;
+            background-position: -197px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_pause__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -247px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_pause__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -305px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_pause__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -363px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_play__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -421px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_play__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -479px * 0.5 -391px * 0.5;
+        }
+    
+        .icon-Icon_play__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_restart__brand-01 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -63px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_restart__brand-02 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -109px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_restart__ui-05 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -155px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_search__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 50px * 0.5;
+            background-position: -201px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_search__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 50px * 0.5;
+            background-position: -259px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_settings__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -317px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_settings__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -375px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_settings__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -433px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_stop__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -491px * 0.5 -449px * 0.5;
+        }
+    
+        .icon-Icon_stop__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -5px * 0.5 -507px * 0.5;
+        }
+    
+        .icon-Icon_stop__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -63px * 0.5 -507px * 0.5;
+        }
+    
+        .icon-Icon_unlocked__brand-01 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -121px * 0.5 -507px * 0.5;
+        }
+    
+        .icon-Icon_unlocked__brand-02 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -317px * 0.5 -507px * 0.5;
+        }
+    
+        .icon-Icon_unlocked__ui-05 {
+            @extend .icon-retina;
+            width: 36px * 0.5;
+            height: 48px * 0.5;
+            background-position: -363px * 0.5 -507px * 0.5;
+        }
+    
+        .icon-Icon_upload__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -409px * 0.5 -507px * 0.5;
+        }
+    
+        .icon-Icon_upload__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -467px * 0.5 -507px * 0.5;
+        }
+    
+        .icon-Icon_upload__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -561px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_user2__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -545px * 0.5 -63px * 0.5;
+        }
+    
+        .icon-Icon_user2__ui-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -551px * 0.5 -121px * 0.5;
+        }
+    
+        .icon-Icon_user2__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -563px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_user__brand-01 {
+            @extend .icon-retina;
+            width: 40px * 0.5;
+            height: 48px * 0.5;
+            background-position: -563px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_user__brand-02 {
+            @extend .icon-retina;
+            width: 40px * 0.5;
+            height: 48px * 0.5;
+            background-position: -557px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_user__ui-05 {
+            @extend .icon-retina;
+            width: 40px * 0.5;
+            height: 48px * 0.5;
+            background-position: -557px * 0.5 -353px * 0.5;
+        }
+    
+        .icon-Icon_zoom--to--fit__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -549px * 0.5 -411px * 0.5;
+        }
+    
+        .icon-Icon_zoom--to--fit__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -549px * 0.5 -469px * 0.5;
+        }
+    
+        .icon-Icon_zoom--to--fit__ui-05- {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -167px * 0.5 -527px * 0.5;
+        }
+    
+        .icon-Icon_zoom--to--selected__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -225px * 0.5 -527px * 0.5;
+        }
+    
+        .icon-Icon_zoom--to--selected__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -525px * 0.5 -527px * 0.5;
+        }
+    
+        .icon-Icon_zoom--to--selected__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -619px * 0.5 -5px * 0.5;
+        }
+    
+        .icon-Icon_zoom-in__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -603px * 0.5 -63px * 0.5;
+        }
+    
+        .icon-Icon_zoom-in__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -609px * 0.5 -121px * 0.5;
+        }
+    
+        .icon-Icon_zoom-in__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -621px * 0.5 -179px * 0.5;
+        }
+    
+        .icon-Icon_zoom-out__brand-01 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -613px * 0.5 -237px * 0.5;
+        }
+    
+        .icon-Icon_zoom-out__brand-02 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -607px * 0.5 -295px * 0.5;
+        }
+    
+        .icon-Icon_zoom-out__ui-05 {
+            @extend .icon-retina;
+            width: 48px * 0.5;
+            height: 48px * 0.5;
+            background-position: -607px * 0.5 -353px * 0.5;
+        }
+    
+        .icon-icon_overflow-menu_horizontal__brand-01 {
+            @extend .icon-retina;
+            width: 40px * 0.5;
+            height: 8px * 0.5;
+            background-position: -5px * 0.5 -63px * 0.5;
+        }
+    
+        .icon-icon_overflow-menu_horizontal__ui-05 {
+            @extend .icon-retina;
+            width: 40px * 0.5;
+            height: 8px * 0.5;
+            background-position: -55px * 0.5 -63px * 0.5;
+        }
+    
+        .icon-icon_overflow-menu_vertical__brand-01 {
+            @extend .icon-retina;
+            width: 8px * 0.5;
+            height: 40px * 0.5;
+            background-position: -661px * 0.5 -63px * 0.5;
+        }
+    
+        .icon-icon_overflow-menu_vertical__ui-05 {
+            @extend .icon-retina;
+            width: 8px * 0.5;
+            height: 40px * 0.5;
+            background-position: -607px * 0.5 -411px * 0.5;
+        }
+    }
+}
+
+@include exports('newIcons') {
+    @include newIcons;
+}

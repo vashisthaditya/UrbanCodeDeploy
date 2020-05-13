@@ -1,0 +1,2 @@
+//>>built
+define("idx/templates/nls/ja/ConsoleLayout",{about:"\u60c5\u5831",help:"\u30d8\u30eb\u30d7",logout:"\u30ed\u30b0\u30a2\u30a6\u30c8",login:"\u30ed\u30b0\u30a4\u30f3",userNameMessage:"\u3088\u3046\u3053\u305d ${username} \u3055\u3093"});

@@ -1,0 +1,11 @@
+@import '../../carbon/globals/import-once';
+
+@mixin wizardContainer {
+    .dojoxWizardContainer > * {
+        margin-bottom: 58px;
+    }
+}
+
+@include exports('wizardContainer') {
+    @include wizardContainer;
+}

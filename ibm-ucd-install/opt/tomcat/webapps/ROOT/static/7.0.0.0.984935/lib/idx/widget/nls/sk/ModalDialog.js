@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/sk/ModalDialog",{Error:"Chyba",Warning:"Varovanie",Information:"Inform\u00e1cia",Success:"\u00daspech",Confirmation:"Potvrdenie",Question:"Ot\u00e1zka",closeButtonLabel:"Zatvori\u0165",cancelButtonLabel:"Zru\u0161i\u0165",executeButtonLabel:"OK",checked:"U\u017e sa nep\u00fdta\u0165"});

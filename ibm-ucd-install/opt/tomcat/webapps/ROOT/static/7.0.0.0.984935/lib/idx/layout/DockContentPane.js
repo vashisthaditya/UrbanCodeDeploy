@@ -1,0 +1,3 @@
+//>>built
+define("idx/layout/DockContentPane","dojo/_base/declare,dojo/_base/lang,dojo/_base/array,dojo/_base/window,dojo/_base/html,dojo/_base/event,dojo/_base/connect,dojo/keys,dijit/registry,dijit/layout/ContentPane,idx/html,idx/util,idx/layout/_DockAreaMixin".split(","),function(d,i,e,j,a,k,l,m,n,f,o,p,g){return d("idx.layout.DockContentPane",[f,g],{resize:function(){this.inherited(arguments);var h=this.getChildren(),b=a.contentBox(this.domNode).w;e.forEach(h,function(c){c.resize?c.resize({w:b}):a.marginBox(c.domNode,
+{w:b})})},dock:function(a,b){this.inherited(arguments);this.resize()}})});

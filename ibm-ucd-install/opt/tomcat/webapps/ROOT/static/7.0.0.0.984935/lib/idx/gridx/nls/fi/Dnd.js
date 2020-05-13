@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/fi/Dnd",{moveRow:"Siirr\u00e4 ${0} rivi\u00e4",moveColumn:"Siirr\u00e4 ${0} saraketta",copyRow:"Kopioi ${0} rivi\u00e4",copyColumn:"Kopioi ${0} saraketta",moveOneRow:"Siirr\u00e4 1 rivi",moveOneColumn:"Siirr\u00e4 1 sarake",copyOneRow:"Kopioi 1 rivi",copyOneColumn:"Kopioi 1 sarake"});

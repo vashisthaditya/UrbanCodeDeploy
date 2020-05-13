@@ -1,0 +1,127 @@
+@import "../widgets/dijit/form/smallInputMixins";
+@import '../carbon/globals/import-once';
+
+@mixin baseView {
+    
+    // Most views in the UCD use these styles.
+    .masterContainer {
+      margin-top: 40px;
+      background: $ui-02;
+    
+      .columnForm {
+        margin-left: 100px;
+      }
+    }
+    
+    .innerContainer {
+      margin: 0 $mainGutter;
+    }
+    
+    .containerLabel {
+      padding-left: $mainGutter;
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #152935;
+      line-height: 23px;
+    }
+    
+    .innerContainer .description {
+      margin-bottom: 5px;
+      margin-left: 3px;
+    }
+    
+    .innerContainerLabel {
+      margin:0 0 3px 0;
+      font:bold 15px Arial, Helvetica, sans-serif;
+    }
+    
+    .listTopButtons {
+      @include display-flex;
+      @include flex-direction(row-reverse);
+      @include align-items(center);
+      @include smallInputs;
+      margin: 16px 0 16px 16px;
+    }
+    .listTopButtons:empty {
+        display: none;
+    }
+    
+    .secondary-nav {
+        position: relative;
+    }
+    
+    .breadcrumb-arrow {
+      margin: 0px 9px;
+    }
+    
+    .inline-block, .inlineBlock {
+      display: inline-block;
+    }
+    
+    .dj_iequirks .inlineBlock {
+      display: inline;
+      zoom: 1;
+    }
+    
+    .clearfix {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .description-text {
+        color: #777;
+        font-family: Georgia;
+        font-style: italic;
+    }
+    
+    div.hr {
+        background-image: none;
+        border-top: 1px solid #CCC;
+        height: 0px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    
+    .align-top {
+      vertical-align: top;
+      margin: 5px;
+    }
+    
+    .webextTable .actionsPlaceholder {
+        width: 78px;
+    }
+    
+    .no-double-click-select {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: moz-none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .one-line-overflow-text, .one-line-overflow-text-click-to-show {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .one-line-overflow-text-click-to-show:active {
+        text-overflow: normal;
+        white-space: normal;
+        overflow: visible;
+    }
+    
+    .idxResizeHandleText {
+      display: none;
+    }
+}
+
+@include exports('baseView') {
+    @include baseView;
+}

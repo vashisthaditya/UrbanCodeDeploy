@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+
+<!--
+- Upgrades for product version 6.2.0.x.
+-->
+
+<change-set release="n1_6.2">
+    <library name="workflow"
+             release="1.0"
+             base-dir="../workflow"
+             file="../workflow/derby/upgrade_sql_1.0.xml"
+             version-table="wf_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="vc"
+             release="1.0"
+             base-dir="../vc"
+             file="../vc/derby/upgrade_sql_1.0.xml"
+             version-table="vc_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="property-sheets"
+             release="1.0"
+             base-dir="../property-sheets"
+             file="../property-sheets/derby/upgrade_sql_1.0.xml"
+             version-table="ps_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <library name="inventory"
+             release="1.0"
+             base-dir="../inventory"
+             file="../inventory/derby/upgrade_1.0.xml"
+             version-table="inv_db_version"
+             release-column="release_name"
+             version-column="ver"/>
+    <change number="1">
+        <description>Add security for Application Templates</description>
+        <sql separator=";">
+            insert into sec_resource_type (id, version, name, enabled)
+            values ('20000000000000000000000000000112', 0, 'Application Template', 'Y');
+
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000200001', 0, 'Create Application Templates', 'Create new application templates for this team.', 'Y', 'Y', '20000000000000000000000000000112', null);
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000200002', 0, 'View Application Templates', 'View application templates in this team.', 'Y', 'Y', '20000000000000000000000000000112', null);
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000200006', 0, 'Delete', 'Delete application templates.', 'Y', 'Y', '20000000000000000000000000000112', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000200007', 0, 'Edit Basic Settings', 'Edit basic settings for application templates.', 'Y', 'Y', '20000000000000000000000000000112', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000200008', 0, 'Manage Blueprints', 'Manage blueprints for applications.', 'Y', 'Y', '20000000000000000000000000000112', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000200009', 0, 'Manage Component Tags', 'Manage component tags required for applications.', 'Y', 'Y', '20000000000000000000000000000112', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('2000000000000000000000000020000a', 0, 'Manage Environment Templates', 'Manage environments templates for application templates.', 'Y', 'Y', '20000000000000000000000000000112', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('2000000000000000000000000020000b', 0, 'Manage Processes', 'Manage processes for application templates.', 'Y', 'Y', '20000000000000000000000000000112', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('2000000000000000000000000020000c', 0, 'Manage Properties', 'Manage properties for application templates.', 'Y', 'Y', '20000000000000000000000000000112', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('2000000000000000000000000020000d', 0, 'Manage Teams', 'Manage teams for application templates.', 'Y', 'Y', '20000000000000000000000000000112', 'Edit');
+        </sql>
+    </change>
+    <change number="2">
+        <description>Add security for Environment Templates</description>
+        <sql separator=";">
+            insert into sec_resource_type (id, version, name, enabled)
+            values ('20000000000000000000000000000113', 0, 'Environment Template', 'Y');
+
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000210001', 0, 'Create Environment Templates', 'Create new environments for this team.', 'Y', 'Y', '20000000000000000000000000000113', null);
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000210002', 0, 'View Environment Templates', 'View environments in this team.', 'Y', 'Y', '20000000000000000000000000000113', null);
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000210005', 0, 'Delete', 'Delete Environment Templates.', 'Y', 'Y', '20000000000000000000000000000113', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000210006', 0, 'Edit Basic Settings', 'Edit basic settings for environment templates.', 'Y', 'Y', '20000000000000000000000000000113', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000210007', 0, 'Manage Approval Processes', 'Manage approval processes for environment templates.', 'Y', 'Y', '20000000000000000000000000000113', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('20000000000000000000000000210009', 0, 'Manage Properties', 'Manage properties for environment templates.', 'Y', 'Y', '20000000000000000000000000000113', 'Edit');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('2000000000000000000000000021000a', 0, 'Manage Teams', 'Manage teams for environment templates.', 'Y', 'Y', '20000000000000000000000000000113', 'Edit');
+        </sql>
+    </change>
+    <change number="3">
+        <description>Add ability to set Application Template on Applications</description>
+        <sql separator=";">
+            alter table ds_application add template_id varchar(36);
+            alter table ds_application add template_version bigint;
+            create index ds_application_template_id on ds_application(template_id);
+        </sql>
+    </change>
+    <change number="4">
+        <description>Add ability to set Environment Template on Environments</description>
+        <sql separator=";">
+            alter table ds_environment add template_id varchar(36);
+            alter table ds_environment add template_version bigint;
+            create index ds_environment_template_id on ds_environment(template_id);
+        </sql>
+    </change>
+    <change number="5">
+        <description>Increase column length for object ID in the audit log</description>
+        <sql separator=";">
+            alter table ds_audit_entry alter column obj_id set data type varchar(255);
+        </sql>
+    </change>
+    <change number="6">
+        <description>Add "Create From Template" permission for applications, components and environments</description>
+        <sql separator=";">
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('2000000000000000000000000016000b', 0, 'Create Environments From Template', 'Create environments from an environment template', 'Y', 'Y', '20000000000000000000000000000103', 'Create');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('2000000000000000000000000013000e', 0, 'Create Applications From Template', 'Create applications from an application template', 'Y', 'Y', '20000000000000000000000000000100', 'Create');
+            insert into sec_action (id, version, name, description, enabled, cascading, sec_resource_type_id, category)
+            values ('2000000000000000000000000014000b', 0, 'Create Components From Template', 'Create components from a component template', 'Y', 'Y', '20000000000000000000000000000101', 'Create');
+
+            update sec_action set category = 'Create' where id = '20000000000000000000000000160001';
+            update sec_action set category = 'Create' where id = '20000000000000000000000000130001';
+            update sec_action set category = 'Create' where id = '20000000000000000000000000140001';
+        </sql>
+    </change>
+    <change number="7">
+        <description>Fix workflow metadata trace ID collation</description>
+        <changeref library="workflow" change="18"/>
+    </change>
+    <change number="8">
+        <description>Allow ghosting of security role</description>
+        <sql separator=";">
+            alter table sec_role
+            add column ghosted_date bigint default 0 not null;
+
+            drop index sec_role_name;
+            create unique index sec_role_name
+                    on sec_role(name, ghosted_date);
+        </sql>
+    </change>
+    <change number="9">
+        <description>Changes to indices to help with database performance</description>
+        <sql separator=";">
+          create index ds_res_sec_res on ds_resource(ghosted_date, active, resource_template_id, parent_id, name, sec_resource_id);
+          create index ds_res_sec_res_no_templ on ds_resource(ghosted_date, active, parent_id, sec_resource_id);
+          drop index rt_pcgm_pc_id;
+          create index rt_pcgm_pc_id on rt_property_context_group_map(property_context_id, index_order);
+        </sql>
+    </change>
+    <change number="10">
+      <description>Adding indices from the security project</description>
+      <sql separator=";">
+          create unique index action_resource_role_map
+                  on sec_role_action(sec_action_id, sec_resource_role_id, sec_role_id);
+          create unique index sec_user_role_on_team_map
+                  on sec_user_role_on_team(sec_team_space_id, sec_role_id, sec_user_id);
+          create unique index sec_user_group_map
+                  on sec_user_to_group(sec_group_id, sec_user_id);
+          create unique index team_resource_team_map
+                  on sec_resource_for_team(sec_team_space_id, sec_resource_role_id, sec_resource_id);
+      </sql>
+    </change>
+    <change number="11">
+      <description>Adding indices from the inventory project</description>
+      <changeref library="inventory" change="7"/>
+    </change>
+    <change number="12">
+      <description>Adding indices from the property-sheets project</description>
+      <changeref library="property-sheets" change="13"/>
+    </change>
+    <change number="13">
+        <description>Give "Create From Template" permission for applications, components and environments to all roles that have "Create" permission for that type of entity</description>
+        <sql separator=";">
+            -- create temporary action mapping table
+            CREATE TABLE create_temp_action_map (
+                create_entity varchar(36) NOT NULL,
+                create_from_template varchar(36) NOT NULL
+            );
+            INSERT INTO create_temp_action_map (create_entity, create_from_template) VALUES
+                ('20000000000000000000000000130001', '2000000000000000000000000013000e'),
+                ('20000000000000000000000000160001', '2000000000000000000000000016000b'),
+                ('20000000000000000000000000140001', '2000000000000000000000000014000b');
+
+            -- create temporary UUID mapping table
+            CREATE TABLE uuid_map (
+                original_id varchar(36) NOT NULL,
+                new_id varchar(36) NOT NULL
+            );
+        </sql>
+        <groovy file="all/upgrade-scripts-62/upgrade_009_give_create_from_template_permissions.groovy" />
+        <sql separator=";">
+            -- delete the temporary action mapping table
+            DROP TABLE create_temp_action_map;
+            -- delete the temporary UUID mapping table
+            DROP TABLE uuid_map;
+        </sql>
+    </change>
+    <change number="14">
+        <description>Changing environment instance ID from integer to string (DB2 only)</description>
+    </change>
+
+<!--
+- REMINDER: Upgrades for product version 6.2.0.x. Place additions above this comment.
+-->
+</change-set>

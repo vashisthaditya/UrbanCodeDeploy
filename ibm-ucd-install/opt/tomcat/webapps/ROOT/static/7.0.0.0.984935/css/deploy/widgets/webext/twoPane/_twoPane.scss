@@ -1,0 +1,74 @@
+@import "../../../carbon/globals/colors";
+@import '../../../carbon/globals/import-once';
+
+@mixin twoPane {
+    
+    $twoPaneDetail-padding: 30px;
+    
+    .twoPaneContainer {
+    
+        background-color: white;
+        border: 1px solid #dfe3e6;
+        margin: 0% 5%;
+    
+        .twoPaneList {
+            @include reset;
+            @include font-family;
+            @include font-smoothing;
+            @include letter-spacing;
+            width: 200px;
+            border: none;
+            margin-top: 16px;
+        
+            .twoPaneEntry {
+                color: $color__blue-90;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: left;
+                padding: 10px 20px 10px 20px;
+        
+                &.twoPaneSelectedEntry {
+                    background-color: inherit;
+                    color: $color__blue-51;
+                    font-weight: 700;
+                    box-shadow:inset 4px 0px 0px 0px $color__blue-51;
+                }
+        
+                .twoPaneArrow {
+                    display: none;
+                }
+            }
+        }
+    
+        .twoPaneDetail {
+            background-color: white;
+            margin-left: 225px;
+            border-left: 1px solid #dfe3e6;
+            position: relative;
+    
+            .twoPaneDetailPadding {
+                padding: $twoPaneDetail-padding;
+            }
+            
+            .containerLabel {
+                font-size: 28px;
+                font-weight: 100;
+                color: $color__navy-gray-6;
+                line-height: 35px;
+                margin-top: 47px - $twoPaneDetail-padding;
+                margin-bottom: 32px;
+                margin-left: 68px - $twoPaneDetail-padding;
+            }
+    
+            .columnForm {
+                margin-left: 100px - $twoPaneDetail-padding;
+            }
+    
+        }
+    }
+}
+
+@include exports('twoPane') {
+    @include twoPane;
+}

@@ -1,0 +1,1 @@
+.mblProgressIndicator .mblProgContainer {background-image: url(images/loadingIndicatorWhite.gif); background-repeat: no-repeat;}.mblProgressIndicator.mblIdxLoadingIndicatorBlack .mblProgContainer {background-image: url(images/loadingIndicatorBlack.gif);}.mblProgressIndicator .mblProg {display: none;}

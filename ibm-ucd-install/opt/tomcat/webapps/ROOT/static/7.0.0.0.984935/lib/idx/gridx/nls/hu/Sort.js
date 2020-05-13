@@ -1,0 +1,2 @@
+//>>built
+define("idx/gridx/nls/hu/Sort",{helpMsg:"${0} - Kattintson ide a rendez\u00e9shez, vagy haszn\u00e1lja a Ctrl-kattint\u00e1s kombin\u00e1ci\u00f3t a rendez\u00e9shez hozz\u00e1ad\u00e1shoz",singleHelpMsg:"${0} - Kattintson ide a rendez\u00e9shez",priorityOrder:"rendez\u00e9si priorit\u00e1s: ${0}"});

@@ -1,0 +1,86 @@
+@import '../../carbon/globals/import-once';
+
+$columnForm-vertical-space: 24px;
+$columnForm-sectionHeader-vertical-space: 48px;
+
+@mixin columnForm {
+    
+    // We left margin-left as 0px (implied) here, and let parent elements decide
+    // what they want.
+    .labelsAndValues-row {
+      margin-top: $columnForm-vertical-space;
+    
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+    
+    .labelsAndValues-row > div {
+      vertical-align: middle;
+    }
+    
+    .labelsAndValues-labelCell {
+      font-weight: 600;
+      margin-bottom: 0px;
+    
+      .labelsAndValues-labelCell {
+        display: inline-block;
+        margin-bottom: 8px;
+        &:empty {
+          margin-bottom: 0px;
+        }
+      }
+    }
+    
+    .labelsAndValues-row.help-toolip-on-hover .labelsAndValues-helpCell {
+      cursor: help;
+      -webkit-transition: visibility 0.25s, opacity 0.25s;
+      -moz-transition: visibility 0.25s, opacity 0.25s;
+      transition: visibility 0.25s, opacity 0.25s;
+      visibility: hidden;
+      opacity: 0;
+    }
+    .labelsAndValues-row.help-toolip-on-hover:hover .labelsAndValues-helpCell {
+      visibility: visible;
+      opacity: 1;
+    }
+    .cjk .labelsAndValues-labelCell {
+      word-break: keep-all;
+    }
+    
+    .labelsAndValues-valueCell {
+      vertical-align: top;
+    }
+    
+    .labelsAndValues-helpCell {
+      display: inline-block;
+      vertical-align: middle;
+      background-image: url(../../images/webext/icons/general-sprite.png);
+      background-repeat: no-repeat;
+      width: 25px;
+      height: 25px;
+      background-position: 0 -325px;
+      margin: 1px 0 0 8px;
+    }
+    
+    .invisibleLabels-labelCell label {
+      display: none;
+    }
+    
+    .sectionLabel {
+      font-size: 20px;
+      line-height: 25px;
+      color: $text-02;
+      margin-top: $columnForm-sectionHeader-vertical-space - $columnForm-vertical-space;
+    }
+    
+    
+    .underField {
+      @include display-flex();
+      @include flex-direction(row-reverse);
+    }
+}
+
+@include exports('columnForm') {
+    @include columnForm;
+}

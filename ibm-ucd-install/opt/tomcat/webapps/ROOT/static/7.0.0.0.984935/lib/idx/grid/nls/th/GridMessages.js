@@ -1,0 +1,2 @@
+//>>built
+define("idx/grid/nls/th/GridMessages",{idxGridIconTextValid:"\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07",idxGridIconTextInvalid:"\u0e44\u0e21\u0e48\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07"});

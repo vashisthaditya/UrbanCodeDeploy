@@ -1,0 +1,41 @@
+<!--
+- Licensed Materials - Property of IBM* and/or HCL**
+- UrbanCode Deploy
+- (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+- (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+-
+- U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+- GSA ADP Schedule Contract with IBM Corp.
+-
+- * Trademark of International Business Machines
+- ** Trademark of HCL Technologies Limited
+-->
+<div class="masterContainer">
+  <div class="containerLabel"></div>
+  <div class="innerContainer">
+    <div id="requestConfigurationChanges" style="min-height: 200px;"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    /* <![CDATA[ */
+    require([
+        "deploy/widgets/applicationProcessRequest/RequestConfigurationChanges",
+        "dojo/dom"
+        ],
+    function(
+        RequestConfigurationChanges,
+        dom
+    ) {
+        if (appState.applicationProcessRequest.result) {
+            dom.byId("requestConfigurationChanges").innerHTML = i18n("This application process request has already been completed. Please go to the Log tab to view execution details.")
+        }
+        else {
+            var requestConfigurationChanges = new RequestConfigurationChanges({
+                applicationProcessRequest: appState.applicationProcessRequest
+            });
+            requestConfigurationChanges.placeAt("requestConfigurationChanges");
+        }
+    });
+    /* ]]> */
+</script>

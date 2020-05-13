@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/sk/HoverHelp",{defaultHrefLabel:"Viac inform\u00e1ci\u00ed",defaultMessage:"[Nie je definovan\u00fd \u017eiadny text pomoci]\u200e",defaultTitle:"Uk\u00e1zan\u00edm alebo kliknut\u00edm zobraz\u00edte pomoc"});

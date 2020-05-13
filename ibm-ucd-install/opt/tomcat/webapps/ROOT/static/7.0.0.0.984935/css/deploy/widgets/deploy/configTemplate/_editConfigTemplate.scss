@@ -1,0 +1,12 @@
+@import '../../../carbon/globals/import-once';
+
+@mixin editConfigTemplate {
+    .editConfigTemplate .versionToggle {
+        margin-left: 48px;
+        margin-bottom: 15px;
+    }
+}
+
+@include exports('editConfigTemplate') {
+    @include editConfigTemplate;
+}

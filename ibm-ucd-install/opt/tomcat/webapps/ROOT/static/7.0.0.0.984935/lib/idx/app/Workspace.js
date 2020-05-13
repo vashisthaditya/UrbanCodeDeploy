@@ -1,0 +1,3 @@
+//>>built
+define("idx/app/Workspace",["dojo/_base/declare","idx/layout/ContentPane"],function(c,d){return c("idx.app.Workspace",[d],{workspaceID:"",workspaceTypeID:"",workspaceArgs:null,workspaceDirty:!1,open:!1,baseTitle:"",titleSuffixIndex:0,constructor:function(){},resize:function(a,b){if(this.open)return this.inherited(arguments);this._pendingResize={changeSize:a,resultSize:b}},_setOpenAttr:function(a){if(a&&!this.open){if(this.open=!0,this._pendingResize){var a=this._pendingResize.changeSize,b=this._pendingResize.resultSize;
+this._pendingResize=null;this.resize(a,b)}}else if(!a&&this.open)this.open=!1}})});

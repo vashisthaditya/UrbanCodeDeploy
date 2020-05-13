@@ -1,0 +1,1240 @@
+@import '../carbon/globals/import-once';
+
+@mixin icons {
+    /*
+    * Licensed Materials - Property of IBM* and/or HCL**
+    * UrbanCode Deploy
+    * (c) Copyright IBM Corporation 2011, 2017. All Rights Reserved.
+    * (c) Copyright HCL Technologies Ltd. 2018. All Rights Reserved.
+    *
+    * U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+    * GSA ADP Schedule Contract with IBM Corp.
+    *
+    * * Trademark of International Business Machines
+    * ** Trademark of HCL Technologies Limited
+    */
+    .general-icon, .folderIcon, .componentIcon, .agentIcon, .agentPlaceholderIcon, .agentPoolIcon, .editIcon, .tagIcon .applicationIcon, processIcon, environmentIcon {
+        background-image: url(../../images/icons/general-sprite.png);
+        background-repeat: no-repeat;
+    }
+    
+    .folderIcon, .activityTreeIcon {
+        background-position: -120px -98px;
+        height: 15px;
+        width: 22px;
+        margin: 0 6px -3px 0;
+    }
+    .collapsedRow .folderIcon, tr.collapsedRow .activityTreeIcon {
+        background-position: -96px -98px;
+    }
+    
+    .folderGearIcon {
+      background-position: -120px -122px;
+      background-repeat: no-repeat;
+      height: 17px;
+      width: 22px;
+      margin-bottom: -4px;
+      margin-right: 6px;
+    }
+    .collapsedRow .folderGearIcon {
+      background-position: -96px -122px;
+    }
+    
+    .failed-icon {
+      height: 16px;
+      width: 16px;
+      margin-bottom: -4px;
+      background-position: -160px -48px;
+    }
+    .cellWrapper .failed-icon {
+      margin-right: 6px;
+    }
+    .twoPaneEntry .failed-icon {
+      margin-left: 6px;
+    }
+    
+    .componentIcon {
+        background-position: -96px -144px;
+        height: 19px;
+        width: 19px;
+        margin: -2px 6px -4px 0;
+    }
+    
+    .agentIcon {
+      background-position: -144px -96px;
+      height: 17px;
+      width: 14px;
+      margin-bottom: -4px;
+      margin-right: 5px;
+    }
+    
+    .agentPlaceholderIcon {
+      background-position: -142px -143px;
+      background-color: #eeeeee;
+      height: 16px;
+      width: 15px;
+      border: 1px dotted #555555;
+      margin-bottom: -3px;
+      margin-right: 5px;
+    }
+    
+    .agentPoolIcon {
+      background-position: -144px -120px;
+      height: 17px;
+      width: 14px;
+      margin-bottom: -4px;
+      margin-right: 5px;
+    }
+    
+    .applicationIcon {
+      background-position: -2px -262px;
+      height: 20px;
+      width: 18px;
+    }
+    
+    .processIcon {
+      background-position: -27px -265px;
+      width: 21px;
+      height: 20px;
+    }
+    
+    .environmentIcon {
+      background-position: -51px -265px;
+      width: 21px;
+      height: 20px;
+    }
+    
+    .editIcon {
+      background-position: -176px 0px;
+      width: 14px;
+      height: 14px;
+      margin-left: -2px;
+      margin-right: -8px;
+    }
+    .editIcon:hover, .dijitButtonHover .editIcon {
+      background-position: -176px -16px;
+    }
+    .editIcon:active, .dijitButtonActive .editIcon {
+      background-position: -176px 0px;
+    }
+    
+    .websphere-icon {
+      background-position: -96px -192px;
+      height: 18px;
+      width: 18px;
+      margin-bottom: -6px;
+      margin-right: 4px;
+    }
+    
+    .zosmfservice-icon {
+      background-position: -98px -266px;
+      height: 18px;
+      width: 18px;
+      margin-bottom: -6px;
+      margin-right: 4px;
+    }
+    
+    .zosmfsoftwareinstance-icon {
+      background-position: -74px -266px;
+      height: 18px;
+      width: 18px;
+      margin-bottom: -6px;
+      margin-right:  4px;
+    }
+    
+    .snapshotIcon {
+        background-position: -48px -24px;
+    }
+    .executeIcon {
+        background-position: -24px -24px;
+    }
+    .more-actions-icon {
+        background-position: 0px -24px;
+    }
+    .preview-icon {
+        background-position: 0px -72px;
+    }
+    
+    .cloud-icon {
+        width: 24px;
+        height: 24px;
+        background-position: -72px -26px !important;
+        margin: 0 5px -8px 0;
+    }
+    .cloud-icon.dark-cloud-icon {
+        background-position: -72px 0px !important;
+    }
+    .dijitMenuItem .cloud-icon.dark-cloud-icon {
+        background-position: -72px -1px !important;
+        margin: -5px 5px -6px 0;
+        height: 22px;
+    }
+    
+    .check-icon-large {
+        height: 32px;
+        width: 32px;
+        background-position: -96px -32px !important;
+    }
+    .warning-icon-large {
+        height: 32px;
+        width: 32px;
+        background-position: -128px -32px !important;
+    }
+    
+    .removeIcon {
+      background-image: url('../../images/icon_delete.png');
+      background-repeat: no-repeat;
+      height: 16px;
+      width: 16px;
+      margin-right: 5px;
+    }
+    
+    .gearIcon {
+      background-image: url('../../images/icons/mxgraph/process_step.png');
+      background-repeat: no-repeat;
+      width: 36px;
+      height: 36px;
+      background-size: 36px 36px;
+    }
+    
+    .warningIcon {
+      background-image: url('../../images/icons/warning.gif');
+      background-repeat: no-repeat;
+      width: 16px;
+      height: 16px;
+      background-size: 16px 16px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    
+    .errorIcon {
+      background-image: url('../../images/icons/error.gif');
+      background-repeat: no-repeat;
+      width: 16px;
+      height: 16px;
+      background-size: 16px 16px !important;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    
+    .origProcessIcon {
+      background-position: -95px -168px;
+      width: 19px;
+      height: 17px;
+      margin-top: -6px;
+      position: relative;
+      top: 3px;
+    }
+    
+    .jobIcon {
+      background-position: -120px -144px;
+      width: 24px;
+      height: 16px;
+      margin-top: -3px;
+      position: relative;
+      top: 3px;
+    }
+    
+    .completeIcon {
+      background-position: -144px -168px;
+      width: 16px;
+      height: 16px;
+      vertical-align: bottom;
+      margin-right: 5px;
+    }
+    
+    .incompleteIcon {
+      background-position: -144px -192px;
+      width: 16px;
+      height: 16px;
+      vertical-align: bottom;
+      margin-right: 5px;
+    }
+    
+    .pageIcon, .artifactIcon {
+      background-position: -120px -168px;
+      width: 16px;
+      height: 19px;
+      vertical-align: bottom;
+      margin: -3px 5px -2px 0;
+    }
+    
+    .pageIconRed {
+      background-position: -120px -192px;
+      width: 16px;
+      height: 19px;
+      vertical-align: bottom;
+      margin: -3px 5px -2px 0;
+    }
+    
+    .consoleIcon {
+      background-position: -168px -168px;
+      width: 18px;
+      height: 15px;
+      vertical-align: bottom;
+      margin-right: 5px;
+    }
+    
+    .extraLogIcon {
+      background-position: -168px -192px;
+      width: 16px;
+      height: 19px;
+      vertical-align: bottom;
+      margin: -3px 5px -2px 0;
+    }
+    
+    .compareIcon {
+      background-position: -74px -192px;
+      width: 16px;
+      height: 19px;
+      vertical-align: bottom;
+      margin: -3px 5px -2px 0;
+    }
+    
+    .mxToolbarItem.general-icon {
+        cursor: pointer;
+        background-color: transparent !important;
+        opacity: 1;
+        height: 24px;
+        width: 24px;
+        margin: 0 3px;
+        -webkit-transition: opacity 0.25s;
+        -moz-transition: opacity 0.25s;
+        transition: opacity 0.25s;
+    }
+    .mxToolbarItem.general-icon:hover {
+        opacity: 0.6;
+    }
+    .mxToolbarItem.general-icon:active {
+        opacity: 1;
+    }
+    
+    .mxToolbarSmallerItem.mxToolbarItem {
+        height: 22px;
+    }
+    
+    .zoom-in-icon {
+        background-position: -24px -72px;
+    }
+    .zoom-in-icon:hover {
+        background-position: -24px -48px;
+    }
+    
+    .zoom-out-icon {
+        background-position: -48px -72px;
+    }
+    .zoom-out-icon:hover {
+        background-position: -48px -48px;
+    }
+    
+    .zoom-select-icon {
+        background-position: -168px -237px;
+    }
+    .zoom-select-icon:hover {
+        background-position: -144px -237px;
+    }
+    
+    .zoom-fit-icon {
+        background-position: -72px -72px;
+    }
+    .zoom-fit-icon:hover {
+        background-position: -72px -48px;
+    }
+    
+    .new-step-icon {
+        background-position: -24px -168px;
+    }
+    .new-step-icon:hover {
+        background-position: -24px -144px;
+    }
+    
+    .print-icon {
+        background-position: 0px -96px;
+    }
+    .print-icon:hover {
+        background-position: 0px -96px;
+    }
+    .print-icon:active {
+        background-position: 0px -120px;
+    }
+    
+    .poster-print-icon {
+        background-position: -24px -96px;
+    }
+    .poster-print-icon:hover {
+        background-position: -24px -96px;
+    }
+    .poster-print-icon:active {
+        background-position: -24px -120px;
+    }
+    
+    .explorer-icon {
+        background-position: -24px -191px;
+    }
+    .explorer-icon:hover {
+        background-position: 0 -191px;
+    }
+    
+    .undo-icon {
+        background-position: -24px -212px;
+    }
+    .undo-icon:hover {
+        background-position: 0 -212px;
+    }
+    
+    .redo-icon {
+        background-position: -72px -212px;
+    }
+    .redo-icon:hover {
+        background-position: -48px -212px;
+    }
+    
+    .find-icon {
+        background-position: -120px -212px;
+    }
+    .find-icon:hover {
+        background-position: -96px -212px;
+    }
+    
+    .replace-icon {
+        background-position: -168px -212px;
+    }
+    .replace-icon:hover {
+        background-position: -144px -212px;
+    }
+    
+    .copy-icon {
+        background-position: -24px -238px;
+    }
+    .copy-icon:hover {
+        background-position: 0 -238px;
+    }
+    
+    .cut-icon {
+        background-position: -72px -238px;
+    }
+    .cut-icon:hover {
+        background-position: -48px -238px;
+    }
+    
+    .paste-icon {
+        background-position: -120px -238px;
+    }
+    .paste-icon:hover {
+        background-position: -96px -238px;
+    }
+    
+    .comment-icon {
+        background-position: -168px -238px;
+    }
+    .comment-icon:hover {
+        background-position: -144px -238px;
+    }
+    
+    @-webkit-keyframes pulse {
+        0% { box-shadow: 0 0 0px #FFF; border-color: #82D1F5; }
+        25% { box-shadow: 0 0 3px #00648D; border-color: #00B2EF; }
+        50% { box-shadow: 0 0 6px #00648D; border-color: #00B2EF; }
+        75% { box-shadow: 0 0 3px #00648D; border-color: #00B2EF; }
+        100% { box-shadow: 0 0 0px #FFF; border-color: #82D1F5; }
+    }
+    @-moz-keyframes pulse {
+        0% { box-shadow: 0 0 0px #FFF; border-color: #82D1F5; }
+        25% { box-shadow: 0 0 3px #00648D; border-color: #00B2EF; }
+        50% { box-shadow: 0 0 6px #00648D; border-color: #00B2EF; }
+        75% { box-shadow: 0 0 3px #00648D; border-color: #00B2EF; }
+        100% { box-shadow: 0 0 0px #FFF; border-color: #82D1F5; }
+    }
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0px #FFF; border-color: #82D1F5; }
+        25% { box-shadow: 0 0 3px #00648D; border-color: #00B2EF; }
+        50% { box-shadow: 0 0 6px #00648D; border-color: #00B2EF; }
+        75% { box-shadow: 0 0 3px #00648D; border-color: #00B2EF; }
+        100% { box-shadow: 0 0 0px #FFF; border-color: #82D1F5; }
+    }
+    .save-icon {
+        background-position: -48px -96px;
+        -webkit-transition: border 3s;
+        -moz-transition: border 3s;
+        transition: border 3s;
+    }
+    .save-icon:hover {
+        background-position: -48px -96px;
+    }
+    .save-icon:active {
+        background-position: -48px -120px;
+    }
+    .save-icon.save-icon-pending-changes {
+        border-radius: 3px;
+        box-shadow: 0 0 6px #00648D;
+        border-color: #00B2EF;
+        -webkit-animation: pulse 3s infinite ease-in-out;
+        -moz-animation: pulse 3s infinite ease-in-out;
+        animation: pulse 3s infinite ease-in-out;
+    }
+    
+    
+    .discard-changes-icon {
+        background-position: -72px -96px;
+    }
+    .discard-changes-icon:hover {
+        background-position: -72px -96px;
+    }
+    .discard-changes-icon:active {
+        background-position: -72px -120px;
+    }
+    
+    .delete-icon {
+        height: 16px;
+        width: 16px;
+    }
+    .delete-icon {
+        background-position: -144px -64px;
+    }
+    .delete-icon:hover {
+        background-position: -160px -64px;
+    }
+    .delete-icon:active {
+        background-position: -176px -64px;
+    }
+    
+    .add-item-icon {
+        background-position: -24px -144px;
+        height: 24px;
+        width: 24px;
+        opacity: 1;
+    }
+    .add-item-icon:hover {
+        background-position: -24px -144px;
+        opacity: 0.75;
+    }
+    .add-item-icon:active {
+        background-position: -24px -168px;
+        opacity: 1;
+    }
+    
+    .settings-icon {
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+        background-image: url('../../images/icons/settings-sprite.png');
+        float: left;
+    }
+    
+    .settings-icon.automated-plugins-icon {
+        background-position: 0 0;
+    }
+    .settings-icon.source-config-plugins-icon {
+        background-position: -32px 0;
+    }
+    .settings-icon.running-source-configs-icon {
+        background-position: -64px 0;
+    }
+    .settings-icon.locks-icon {
+        background-position: -96px 0;
+    }
+    .settings-icon.post-processing-scripts-icon {
+        background-position: -128px 0;
+    }
+    .settings-icon.statuses-icon {
+        background-position: -160px 0;
+    }
+    
+    .settings-icon.authentication-icon {
+        background-position: 0 -32px;
+    }
+    .settings-icon.authorization-icon {
+        background-position: -32px -32px;
+    }
+    .settings-icon.teams-icon {
+        background-position: -64px -32px;
+    }
+    .settings-icon.tokens-icon {
+        background-position: -96px -32px;
+    }
+    .settings-icon.role-configuration-icon {
+        background-position: -128px -32px;
+    }
+    .settings-icon.type-configuration-icon {
+        background-position: -160px -32px;
+    }
+    
+    .settings-icon.key-configuration-icon {
+        background-position: -160px -96px;
+    }
+    
+    .settings-icon.logging-icon {
+        background-position: 0 -64px;
+    }
+    .settings-icon.network-icon {
+        background-position: -32px -64px;
+    }
+    .settings-icon.notification-schemes-icon {
+        background-position: -64px -64px;
+    }
+    .settings-icon.output-log-icon {
+        background-position: -96px -64px;
+    }
+    .settings-icon.audit-log-icon {
+        background-position: -128px -64px;
+    }
+    .settings-icon.blueprint-designer-integrations-icon {
+        background-position: -96px -96px;
+    }
+    .settings-icon.patches-icon {
+        background-position: -160px -64px;
+    }
+    .settings-icon.properties-icon {
+        background-position: 0 -96px;
+    }
+    .settings-icon.artifact-repo-icon {
+        background-position: -32px -96px;
+    }
+    .settings-icon.system-settings-item-icon {
+        background-position: -64px -96px;
+    }
+    .settings-icon.diagnostics-icon {
+        background-position: -128px -96px;
+    }
+    
+    .settings-icon.general-settings-icon,
+    .settings-icon.legacy-configuration-icon {
+        background-position: 0px -128px;
+    }
+    .settings-icon.artifact-cleanup-icon {
+        background-position: -32px -128px;
+    }
+    .settings-icon.security-general-settings-icon {
+        background-position:-64px -128px;
+    }
+    .settings-icon.winrs-agent-install-icon {
+        background-position: -96px -128px;
+    }
+    .settings-icon.mail-server-icon {
+        background-position: -128px -128px;
+    }
+    .settings-icon.licensing-icon {
+        background-position: -160px -128px;
+    }
+    .settings-icon.general-settings-section-header {
+        position: relative;
+        left: -6px;
+        top: -5px;
+    }
+    
+    .settings-icon.settings-category-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 10px;
+        float: none;
+    }
+    .settings-icon.settings-category-icon.automation-settings-icon {
+        background-position: -128px -128px;
+    }
+    .settings-icon.settings-category-icon.security-settings-icon {
+        background-position: -64px -128px;
+    }
+    .settings-icon.settings-category-icon.system-settings-settings-icon {
+        background-position: 0 -128px;
+    }
+    
+    .recurring-entry-icon-dark,
+    .dojoxCalendarLabel.child .endTime,
+    .dojoxCalendarVertical.child .afterIcon {
+        display: inline-block !important;
+        height: 11px;
+        width: 12px !important;
+        margin-bottom: -2px;
+        background-position: -161px -33px;
+        font-size: 0px !important;
+    }
+    .recurring-entry-icon-light, .dojoxCalendarLabel.child.Selected .endTime,
+    .dojoxCalendarVertical.child.Selected .afterIcon {
+        background-position: -77px -33px;
+    }
+    .dojoxCalendarVertical.child .afterIcon {
+        font-size: 0;
+        top: 3px;
+        right: 3px;
+    }
+    .dojoxCalendarVertical.blackout .general-icon {
+        background-image: none;
+    }
+    
+    .dw-icon {
+        background-position: -160px -96px;
+        height: 20px;
+        width: 30px;
+    }
+    .dw-icon:hover {
+        background-position: -160px -120px;
+    }
+    .dw-icon:active {
+        background-position: -160px -144px;
+    }
+    
+    .closeStepIcon {
+        background-image: url('../../images/icons/process/close_step.png');
+        background-repeat: no-repeat;
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px !important;
+    }
+    
+    .report-page-container .general-icon:hover {
+        opacity: 0.75;
+    }
+    .report-page-container .general-icon,
+    .report-page-container .general-icon:active {
+        height: 24px;
+        width: 24px;
+        opacity: 1;
+    }
+    
+    .download-icon {
+        background-position: -72px -144px;
+    }
+    .download-icon:hover {
+        background-position: -72px -144px;
+    }
+    .download-icon:active {
+        background-position: -72px -168px;
+    }
+    
+    .schedule-icon {
+        background-position: -48px -144px;
+    }
+    .schedule-icon:hover {
+        background-position: -48px -144px;
+    }
+    .schedule-icon:active {
+        background-position: -48px -168px;
+    }
+    
+    .activityTreeCell .process-icon {
+        margin: -4px 0;
+    }
+    .process-icon {
+        background-image: url('../../images/icons/process/process-icons.png');
+        background-repeat: none;
+        height: 24px;
+        width: 24px;
+    }
+    body > .process-icon {
+        background-color: #FFF;
+        border: 4px solid #FFF;
+        border-radius: 5px;
+        height: 56px;
+        width: 56px;
+        background-image: url('../../images/icons/process/process-2x-icons.png');
+        opacity: 0.8 !important;
+    }
+    .process-folder-icon {
+        background-position: -24px -24px;
+    }
+    .collapsedRow .process-folder-icon {
+        background-position: 0 -24px;
+    }
+    .finish-step-icon {
+        background-position: 0 -48px;
+    }
+    .acquireLock-step-icon {
+        background-position: -24px -72px;
+    }
+    .releaseLock-step-icon {
+        background-position: -24px -96px;
+    }
+    .switch-step-icon {
+        background-position: -48px -48px;
+    }
+    .join-step-icon {
+        background-position: -72px -48px;
+    }
+    .manualTask-step-icon, .applicationManualTask-step-icon, .componentManualTask-step-icon {
+        background-position: -48px -96px;
+    }
+    .note-step-icon {
+        background-position: -24px -48px;
+    }
+    .runProcess-step-icon, .forEachVersionContainer-step-icon, .forEachTouchedResourceContainer-step-icon,
+    .componentProcess-step-icon {
+        background-position: -24px 0px;
+    }
+    .setStatus-step-icon, .applicationApprovalTask-step-icon,
+    .environmentApprovalTask-step-icon, .componentApprovalIterator-step-icon {
+        background-position: -96px -72px;
+    }
+    .check-step-icon {
+        background-position: -72px -72px;
+    }
+    .shell-step-icon {
+        background-position: 0px -72px;
+    }
+    .shellArgs-step-icon {
+        background-position: 0px -96px;
+    }
+    
+    /***************************************
+     Pattern process icons
+    ****************************************/
+    .execution-log-process-icon.pattern-process-icon {
+        margin: -4px 4px -8px 0;
+    }
+    .pattern-process-icon{
+        width: 35px !important;
+        height: 24px !important;
+        background-repeat: no-repeat !important;
+    }
+    .autoscale-step-icon {
+      background-image: url('../../images/icons/patternprocess/AutoscalingPolicy.gif');
+    }
+    .configuration-step-icon {
+      background-image: url('../../images/icons/patternprocess/Configuration_icon.png');
+    }
+    
+    .elasticCache-step-icon {
+      background-image: url('../../images/icons/patternprocess/Elastic_Cache.gif');
+    }
+    
+    .elasticIp-step-icon {
+      background-image: url('../../images/icons/patternprocess/ElasticIP.gif');
+    }
+    
+    .server-step-icon {
+      background-image: url('../../images/icons/patternprocess/Instance_Generic.gif');
+    }
+    
+    .loadbalancer-step-icon {
+      background-image: url('../../images/icons/patternprocess/LoadBalancer_icon.gif');
+    }
+    
+    .mime-step-icon {
+      background-image: url('../../images/icons/patternprocess/Mime_icon.gif');
+    }
+    
+    .network-step-icon {
+      background-image: url('../../images/icons/patternprocess/Network_Internal.gif');
+    }
+    
+    .port-step-icon {
+      background-image: url('../../images/icons/patternprocess/Port_icon.gif');
+    }
+    
+    .rdsInstance-step-icon {
+      background-image: url('../../images/icons/patternprocess/RDS_Instance.gif');
+    }
+    
+    .replicationGroup-step-icon {
+      background-image: url('../../images/icons/patternprocess/Replication_Group.gif');
+    }
+    
+    .resourceTree-step-icon {
+      background-image: url('../../images/icons/patternprocess/ResourceTree_icon.gif');
+    }
+    
+    .router-step-icon {
+      background-image: url('../../images/icons/patternprocess/Router.gif');
+    }
+    
+    .scalingGroup-step-icon {
+      background-image: url('../../images/icons/patternprocess/ScalingGroup_icon.gif');
+    }
+    
+    .blueprint-step-icon {
+      background-image: url('../../images/icons/patternprocess/Blueprint_icon.gif');
+    }
+    
+    .scalingPolicy-step-icon {
+      background-image: url('../../images/icons/patternprocess/ScalingPolicy_icon.gif');
+    }
+    
+    .securityGroup-step-icon {
+      background-image: url('../../images/icons/patternprocess/SecurityGroup_Node.gif');
+    }
+    
+    .swConfig-step-icon {
+      background-image: url('../../images/icons/patternprocess/SW_Config.gif');
+    }
+    
+    .swDeploy-step-icon {
+      background-image: url('../../images/icons/patternprocess/Component.gif');
+    }
+    
+    .volumeBlob-step-icon {
+      background-image: url('../../images/icons/patternprocess/Volume_Blob_Node.gif');
+    }
+    
+    .volumeAttachment-step-icon {
+      background-image: url('../../images/icons/patternprocess/Volume_Node_Attachment.gif');
+    }
+    
+    .volume-step-icon {
+      background-image: url('../../images/icons/patternprocess/Volume_Node.gif');
+    }
+    
+    .alarm-step-icon {
+      background-image: url('../../images/icons/patternprocess/Monitor_icon.gif');
+    }
+    
+    .patternResourceDefault-icon {
+      background-image: url('../../images/icons/patternprocess/Gear.gif');
+    }
+    body > .process-folder-icon {
+        background-position: -48px -48px;
+    }
+    body > .collapsedRow .process-folder-icon {
+        background-position: 0 -48px;
+    }
+    body > .finish-step-icon {
+        background-position: 0 -96px;
+    }
+    body > .acquireLock-step-icon {
+        background-position: -48px -144px;
+    }
+    body > .releaseLock-step-icon {
+        background-position: -48px -192px;
+    }
+    body > .switch-step-icon {
+        background-position: -96px -96px;
+    }
+    body > .join-step-icon {
+        background-position: -144px -96px;
+    }
+    body > .manualTask-step-icon, body > .applicationManualTask-step-icon, body > .componentManualTask-step-icon {
+        background-position: -96px -192px;
+    }
+    body > .note-step-icon {
+        background-position: -48px -96px;
+    }
+    body > .runProcess-step-icon, body > .forEachVersionContainer-step-icon, body > .forEachTouchedResourceContainer-step-icon,
+    body > .componentProcess-step-icon {
+        background-position: -48px 0px;
+    }
+    body > .setStatus-step-icon, body > .applicationApprovalTask-step-icon,
+    body > .environmentApprovalTask-step-icon, body > .componentApprovalIterator-step-icon {
+        background-position: -192px -144px;
+    }
+    body > .check-step-icon {
+        background-position: -144px -144px;
+    }
+    body > .shell-step-icon {
+        background-position: 0px -144px;
+    }
+    body > .shellArgs-step-icon {
+        background-position: 0px -192px;
+    }
+    
+    .get-step-icon, .read-step-icon {
+        background-position: -48px 0px;
+    }
+    .set-step-icon, .applyConfiguration-step-icon {
+        background-position: -72px 0px;
+    }
+    body > .get-step-icon, body > .read-step-icon {
+        background-position: -96px 0px;
+    }
+    body > .set-step-icon, body > .applyConfiguration-step-icon {
+        background-position: -144px 0px;
+    }
+    
+    .copy-step-icon {
+        background-position: -48px -24px;
+    }
+    .move-step-icon {
+        background-position: -72px -24px;
+    }
+    body > .copy-step-icon {
+        background-position: -96px -48px;
+    }
+    body > .move-step-icon {
+        background-position: -144px -48px;
+    }
+    
+    .create-step-icon {
+        background-position: -96px 0px;
+    }
+    .cancel-step-icon {
+        background-position: -120px 0px;
+    }
+    .delete-step-icon {
+        background-position: -120px -96px;
+    }
+    body > .create-step-icon {
+        background-position: -192px 0px;
+    }
+    body > .cancel-step-icon {
+        background-position: -240px 0px;
+    }
+    body > .delete-step-icon {
+        background-position: -240px -192px;
+    }
+    
+    .add-step-icon, .addResourceInventory-step-icon {
+        background-position: -96px -24px;
+    }
+    .remove-step-icon, .removeResourceInventory-step-icon {
+        background-position: -120px -24px;
+    }
+    body > .add-step-icon, body > .addResourceInventory-step-icon {
+        background-position: -192px -48px;
+    }
+    body > .remove-step-icon, body > .removeResourceInventory-step-icon {
+        background-position: -240px -48px;
+    }
+    
+    .download-step-icon {
+        background-position: -144px 0px;
+    }
+    .upload-step-icon {
+        background-position: -168px 0px;
+    }
+    body > .download-step-icon {
+        background-position: -288px 0px;
+    }
+    body > .upload-step-icon {
+        background-position: -336px 0px;
+    }
+    
+    .import-step-icon {
+        background-position: -144px -24px;
+    }
+    .export-step-icon {
+        background-position: -168px -24px;
+    }
+    body > .import-step-icon {
+        background-position: -288px -48px;
+    }
+    body > .export-step-icon {
+        background-position: -336px -48px;
+    }
+    
+    .install-step-icon, .installComponent-step-icon, .installMultipleComponents-step-icon {
+        background-position: -96px -48px;
+    }
+    .uninstall-step-icon, .uninstallComponent-step-icon, .uninstallMultipleComponents-step-icon {
+        background-position: -120px -48px;
+    }
+    body > .install-step-icon, body > .installComponent-step-icon, body > .installMultipleComponents-step-icon {
+        background-position: -192px -96px;
+    }
+    body > .uninstall-step-icon, body > .uninstallComponent-step-icon, body > .uninstallMultipleComponents-step-icon {
+        background-position: -240px -96px;
+    }
+    
+    .start-step-icon {
+        background-position: -48px -72px;
+    }
+    .stop-step-icon {
+        background-position: -120px -72px;
+    }
+    body > .start-step-icon {
+        background-position: -96px -144px;
+    }
+    body > .stop-step-icon {
+        background-position: -240px -144px;
+    }
+    
+    .sync-step-icon {
+        background-position: -144px -48px;
+    }
+    .wait-step-icon {
+        background-position: -168px -48px;
+    }
+    body > .sync-step-icon {
+        background-position: -288px -96px;
+    }
+    body > .wait-step-icon {
+        background-position: -336px -96px;
+    }
+    
+    .restart-step-icon {
+        background-position: -144px -72px;
+    }
+    .unzip-step-icon {
+        background-position: -168px -72px;
+    }
+    body > .restart-step-icon {
+        background-position: -288px -144px;
+    }
+    body > .unzip-step-icon {
+        background-position: -336px -144px;
+    }
+    
+    .deploy-step-icon {
+        background-position: -144px -96px;
+    }
+    .undeploy-step-icon {
+        background-position: -168px -96px;
+    }
+    body > .deploy-step-icon {
+        background-position: -288px -192px;
+    }
+    body > .undeploy-step-icon {
+        background-position: -336px -192px;
+    }
+    
+    .receive-step-icon {
+        background-position: -144px -120px;
+    }
+    .send-step-icon {
+        background-position: -168px -120px;
+    }
+    body > .receive-step-icon {
+        background-position: -288px -240px;
+    }
+    body > .send-step-icon {
+        background-position: -336px -240px;
+    }
+    
+    .monitor-step-icon {
+        background-position: 0px -120px;
+    }
+    .upgrade-step-icon {
+        background-position: 0px -144px;
+    }
+    body > .monitor-step-icon {
+        background-position: 0px -240px;
+    }
+    body > .upgrade-step-icon {
+        background-position: 0px -288px;
+    }
+    
+    .modify-step-icon {
+        background-position: -24px -120px;
+    }
+    .replace-step-icon {
+        background-position: -24px -144px;
+    }
+    body > .modify-step-icon {
+        background-position: -48px -240px;
+    }
+    body > .replace-step-icon {
+        background-position: -48px -288px;
+    }
+    
+    .publish-step-icon {
+        background-position: -48px -120px;
+    }
+    .ftp-step-icon {
+        background-position: -48px -144px;
+    }
+    body > .publish-step-icon {
+        background-position: -96px -240px;
+    }
+    body > .ftp-step-icon {
+        background-position: -96px -288px;
+    }
+    
+    .websphere-step-icon {
+        background-position: -72px -96px;
+    }
+    .allocate-step-icon {
+        background-position: -72px -120px;
+    }
+    .configure-step-icon {
+        background-position: -72px -144px;
+    }
+    body > .websphere-step-icon {
+        background-position: -144px -192px;
+    }
+    body > .allocate-step-icon {
+        background-position: -144px -240px;
+    }
+    body > .configure-step-icon {
+        background-position: -144px -288px;
+    }
+    
+    .runScript-step-icon {
+        background-position: -96px -96px;
+    }
+    .revert-step-icon, .rollbackComponent-step-icon, .rollbackMultipleComponents-step-icon {
+        background-position: -96px -120px;
+    }
+    .recycle-step-icon {
+        background-position: -96px -144px;
+    }
+    body > .runScript-step-icon {
+        background-position: -192px -192px;
+    }
+    body > .revert-step-icon, body > .rollbackComponent-step-icon, body > .rollbackMultipleComponents-step-icon {
+        background-position: -192px -240px;
+    }
+    body > .recycle-step-icon {
+        background-position: -192px -288px;
+    }
+    
+    .flip-step-icon {
+        background-position: -120px -120px;
+    }
+    .link-step-icon {
+        background-position: -120px -144px;
+    }
+    body > .flip-step-icon {
+        background-position: -240px -240px;
+    }
+    body > .link-step-icon {
+        background-position: -240px -288px;
+    }
+    
+    .execution-log-process-icon.process-icon {
+        margin: -4px 4px -8px 0;
+    }
+    .execution-timeline-icon.process-icon {
+        zoom: 0.85;
+    }
+    .graph-print-style-container-image,
+    .graph-print-style-container-image-dark {
+        height: 32px;
+        width: 32px;
+        background-size: 32px 32px;
+        background-repeat: no-repeat;
+        margin: auto;
+    }
+    .graph-print-style-container-image {
+        background-image: url('../../images/icons/process/process.png');
+    }
+    .graph-print-style-container-image-dark {
+        background-image: url('../../images/icons/process/process-dark.png');
+    }
+    
+    /***********************************
+     * Icons (High Resolution)
+     ***********************************/
+    @media (min-resolution: 144dppx),
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (min--moz-device-pixel-ratio: 1.5),
+    (-o-min-device-pixel-ratio: 3/2),
+    (min-device-pixel-ratio: 1.5),
+    (min-resolution: 1.5dppx) {
+    
+      .general-icon, .folderIcon, .folderGearIcon, .componentIcon, .agentIcon, .agentPlaceholderIcon,
+      .agentPoolIcon, .editIcon, .tagIcon .applicationIcon, processIcon, environmentIcon {
+        background-image: url('../../images/icons/general-retina-sprite.png');
+        background-size: 191px 288px;
+      }
+    
+      .settings-icon {
+        background-image: url('../../images/icons/settings-sprite-retina.png');
+        background-size: 192px 160px;
+      }
+    
+      .process-icon {
+        background-image: url('../../images/icons/process/process-2x-icons.png');
+        background-size: 192px 168px;
+      }
+    
+      body > .process-icon {
+        background-size: 384px 336px;
+        background-image: url('../../images/icons/process/process-4x-icons.png');
+      }
+    
+      .flag-icon {
+        background-size: 48px 112px;
+        background-image: url('../../images/icons/flags-retina-sprite.png');
+      }
+    }
+}
+
+@include exports('icons') {
+    @include icons;
+}

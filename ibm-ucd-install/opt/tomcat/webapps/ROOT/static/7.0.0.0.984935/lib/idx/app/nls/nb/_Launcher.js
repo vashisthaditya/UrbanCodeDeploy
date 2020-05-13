@@ -1,0 +1,2 @@
+//>>built
+define("idx/app/nls/nb/_Launcher",{tooManyOpenWorkspaces:'Kan ikke \u00e5pne mer enn ${maxOpen} "${workspaceTypeName}"\u200e arbeidsomr\u00e5der.  Lukk "${workspaceTypeName}"\u200e-arbeidsomr\u00e5der som allerede er \u00e5pne.'});

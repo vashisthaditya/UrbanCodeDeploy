@@ -1,0 +1,148 @@
+@import '../../../../carbon/globals/import-once';
+
+@mixin memberSelector {
+    .team-member-selector:hover, .team-member-selector.dojoDndContainerOver {
+        background-color: #BFE2EF;
+        border-color: #53ABCC;
+    }
+    .team-member-selector .selector-header-container .selector-header {
+        padding: 18px 12px;
+        font-size: 1.2em;
+        margin-left: 5px;
+    }
+    .team-member-selector .selector-header-container .selector-button {
+        float: right;
+        margin: 4px -4px;
+    }
+    
+    .team-member-selector .selector-member-container .selector-label {
+        min-width: 40px;
+        color: #888;
+        font-size: 11px;
+        padding: 2px 4px;
+        margin: 4px;
+    }
+    
+    .team-member-selector .selector-header-container .selector-header-expand {
+        position: absolute;
+        left: 95px;
+        margin-top: 5px;
+    }
+    .team-member-selector .selector-header-container .selector-header-expand .team-expander {
+      background: url("../../images/webext/icons/misc-arrow-sprite.png") no-repeat;
+      height: 12px;
+      width: 10px;
+      margin: 15px 10px 15px 15px;
+    }
+    .team-member-selector .selector-header-container .selector-header-expand .team-expander.team-collapsed {
+      background-position: 0 -60px;
+    }
+    .team-member-selector .selector-header-container .selector-header-expand:hover .team-expander.team-collapsed {
+      background-position: -16px -60px;
+    }
+    .team-member-selector .selector-header-container .selector-header-expand:active .team-expander.team-collapsed {
+      background-position: -32px -60px;
+    }
+    .team-member-selector .selector-header-container .selector-header-expand .team-expander.team-expanded {
+      background-position: 0 0;
+    }
+    .team-member-selector .selector-header-container .selector-header-expand:hover .team-expander.team-expanded {
+      background-position: -16px 0;
+    }
+    .team-member-selector .selector-header-container .selector-header-expand:active .team-expander.team-expanded {
+      background-position: -32px 0;
+    }
+    
+    .team-member-selector .selector-member-container .selector-users {
+        border-bottom: 1px dashed #CCC;
+    }
+    .team-member-selector .selector-member-container .selector-users, .team-member-selector .selector-member-container .selector-groups {
+        padding: 4px;
+        min-height: 25px;
+        background-color: #FFF;
+    }
+    
+    .team-member-selector .selector-member-container .team-member-block {
+        padding: 2px 5px;
+        color: #FFF;
+        margin: 3px 4px;
+    }
+    .team-member-selector .selector-member-container .team-member-block:hover,
+    .team-member-selector .selector-member-container .team-member-block.hover {
+      box-shadow: 0px 0px 6px 2px #AAA !important;
+      -moz-box-shadow: 0px 0px 6px 2px #AAA !important;
+      -webkit-box-shadow: 0px 0px 6px 2px #AAA !important;
+    }
+    .team-member-selector .selector-member-container .selector-users .team-member-block {
+        background-color: #53ABCC;
+    }
+    .team-member-selector .selector-member-container .selector-users .team-member-block:hover,
+    .team-member-selector .selector-member-container .selector-users .team-member-block.hover {
+        background-color: #1B6A86;
+    }
+    .team-member-selector .selector-member-container .selector-groups .team-member-block {
+        background-color: #9169BF;
+    }
+    .team-member-selector .selector-member-container .selector-groups .team-member-block:hover,
+    .team-member-selector .selector-member-container .selector-groups .team-member-block.hover {
+        background-color: #4E2C70;
+    }
+    .team-member-selector .selector-member-container .selector-groups .team-member-block .group-popup-title {
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+    .team-member-selector .selector-member-container .team-member-block.hidden {
+        height: 0px;
+        width: 0px;
+        padding: 0;
+        margin: 0;
+        display: none !important;
+    }
+    
+    .team-member-selector .selector-member-container .team-member-block .remove-team-member {
+        position: absolute;
+        margin: -8px 0 0 -11px;
+        height: 0px;
+        width: 20px;
+    }
+    .team-member-selector.team-edit-mode .selector-member-container .team-member-block .remove-team-member,
+    .team-member-selector .selector-member-container .team-member-block:hover .remove-team-member {
+        height: 20px;
+    }
+    
+    .team-member-selector .selector-permission-container .edit-role-permissions-note {
+        border-bottom: 1px dashed #CCC;
+        background-color: #FFF;
+        text-align: center;
+        padding: 5px;
+    }
+    .team-member-selector .selector-permission-container.hide-permissions {
+        display: none;
+    }
+    .team-member-selector .selector-permission-container .twoPaneManager {
+        margin: 0;
+    }
+    .team-member-selector .selector-permission-container .twoPaneManager .twoPaneList {
+        min-height: 265px;
+        width: 160px;
+    }
+    .team-member-selector .selector-permission-container .twoPaneManager .twoPaneList .twoPaneEntry {
+        font-weight: normal;
+    }
+    .team-member-selector .selector-permission-container .twoPaneManager .twoPaneContainer {
+        border: none;
+        border-top: 1px solid #CCC;
+        margin: 0;
+    }
+    .team-member-selector .selector-permission-container .twoPaneManager .twoPaneDetail {
+        background-color: #FFF;
+        margin-left: 160px;
+    }
+    .team-member-selector .selector-permission-container .twoPaneManager .twoPaneDetail h2 {
+        font-weight: normal;
+    }
+}
+
+@include exports('memberSelector') {
+    @include memberSelector;
+}

@@ -1,0 +1,111 @@
+#!/bin/sh
+# Licensed Materials - Property of IBM Corp.
+# IBM UrbanCode Build
+# IBM UrbanCode Deploy
+# IBM UrbanCode Release
+# IBM AnthillPro
+# (c) Copyright IBM Corporation 2002, 2014. All Rights Reserved.
+#
+# U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by
+# GSA ADP Schedule Contract with IBM Corp.
+
+SERVER_HOME=@SERVER_HOME@
+
+# Set environment variables that can be customized after install
+. "$SERVER_HOME/bin/set_env"
+
+javacmd=$JAVA_HOME/bin/java
+start_class=com.urbancode.ds.UDeployServer
+stop_class=com.urbancode.container.tomcat.ContainerShutdown
+
+export JAVA_HOME ANT_HOME GROOVY_HOME
+
+# OS specific support.  $var _must_ be set to either true or false.
+cygwin=false
+os400=false
+case "`uname`" in
+CYGWIN*) cygwin=true;;
+OS400*) os400=true;;
+esac
+
+# For Cygwin, ensure paths are in UNIX format before anything is touched
+if $cygwin; then
+  [ -n "$JAVA_HOME" ] && JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+  [ -n "$SERVER_HOME" ] && SERVER_HOME=`cygpath --unix "$SERVER_HOME"`
+  [ -n "$CLASSPATH" ] && CLASSPATH=`cygpath --path --unix "$CLASSPATH"`
+fi
+
+# For OS400
+if $os400; then
+  # Set job priority to standard for interactive (interactive - 6) by using
+  # the interactive priority - 6, the helper threads that respond to requests
+  # will be running at the same priority as interactive jobs.
+  COMMAND='chgjob job('$JOBNAME') runpty(6)'
+  system $COMMAND
+
+  # Enable multi threading
+  export QIBM_MULTI_THREADED=Y
+fi
+
+# -- Execute -------------------------------------------------------------------
+
+# For Cygwin, switch paths to Windows format before running java
+if $cygwin; then
+  JAVA_HOME=`cygpath --absolute --windows "$JAVA_HOME"`
+  SERVER_HOME=`cygpath --absolute --windows "$SERVER_HOME"`
+  CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
+fi
+
+# -- Run -----------------------------------------------------------------------
+
+if [ "$1" = "run" ]; then
+  shift
+  if [ "$1" = "-debug" ]; then
+    shift
+    JAVA_OPTS=$JAVA_OPTS" "$JAVA_DEBUG_OPTS
+  fi
+  cd "$SERVER_HOME/bin"
+  command_line="exec \"$javacmd\" "$JAVA_OPTS" -Dmin.java.version=1.8.0 -Dserver.log.to.console=y -jar \
+    \"$SERVER_HOME/bin/launcher.jar\" \"$SERVER_HOME/bin/classpath.conf\" \
+    $start_class"
+  eval $command_line
+
+# -- Start ---------------------------------------------------------------------
+
+elif [ "$1" = "start" ] ; then
+  shift
+  if [ "$1" = "-debug" ]; then
+    shift
+    JAVA_OPTS=$JAVA_OPTS" "$JAVA_DEBUG_OPTS
+  fi
+  touch "$SERVER_HOME/var/log/container.out"
+  cd "$SERVER_HOME/bin"
+  command_line="\"$javacmd\" "$JAVA_OPTS" -Dmin.java.version=1.8.0 -jar \
+    \"$SERVER_HOME/bin/launcher.jar\" \"$SERVER_HOME/bin/classpath.conf\" \
+    $start_class >\"$SERVER_HOME/var/log/stdout\" 2>&1 &"
+  eval $command_line
+
+  if [ ! -z "$1" -a -f "$1" ]; then
+    echo $! > "$1"
+  fi
+
+# -- Stop ----------------------------------------------------------------------
+
+elif [ "$1" = "stop" ] ; then
+
+  shift
+  FORCE=0
+  cd "$SERVER_HOME/bin"
+  command_line="exec \"$javacmd\" -Dmin.java.version=1.8.0 -jar \
+    \"$SERVER_HOME/bin/launcher.jar\" \"$SERVER_HOME/bin/classpath.conf\" \
+    $stop_class 2>&1"
+  eval $command_line
+
+# -- Usage ---------------------------------------------------------------------
+
+else
+#	Also, start -debug|run -debug to instruct java to listen on port 10000
+#	for remote JPDA Debugger connections.
+  echo "Usage: container {run|start|stop|stop -force}"
+  exit 1
+fi

@@ -1,0 +1,39 @@
+@import '../../../../carbon/globals/import-once';
+
+@mixin editTeam {
+    
+    .edit-user .team-list .team-save-button {
+        position: relative;
+        top: 65px;
+        left: 415px;
+    }
+    
+    
+    .edit-user .add-members-button {
+        position: absolute;
+        left: 595px;
+        margin-top: 65px;
+    }
+    
+    .edit-team-read-only .add-members-button {
+        position: absolute;
+        left: 515px;
+        margin-top: 19px;
+    }
+    
+    .create-new-team .edit-user .add-members-button {
+        display: none;
+    }
+    
+    .edit-user.edit-team-read-only .columnForm {
+        margin-top: 20px;
+    }
+    
+    .edit-user .columnForm .labelsAndValues-row {
+        margin-bottom: 20px;
+    }
+}
+
+@include exports('editTeam') {
+    @include editTeam;
+}

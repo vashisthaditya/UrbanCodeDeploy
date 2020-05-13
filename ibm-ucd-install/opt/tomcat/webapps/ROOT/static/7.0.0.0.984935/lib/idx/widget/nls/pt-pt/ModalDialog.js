@@ -1,0 +1,2 @@
+//>>built
+define("idx/widget/nls/pt-pt/ModalDialog",{Error:"Erro",Warning:"Aviso",Information:"Informa\u00e7\u00f5es",Success:"\u00caxito",Confirmation:"Confirma\u00e7\u00e3o",Question:"Pergunta",closeButtonLabel:"Fechar",cancelButtonLabel:"Cancelar",executeButtonLabel:"OK",checked:"N\u00e3o perguntar novamente"});
